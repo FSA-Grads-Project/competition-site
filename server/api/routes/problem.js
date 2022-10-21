@@ -1,4 +1,4 @@
-const { models: { Problem } } = require('../../db');
+const { models: { Result, Problem } } = require('../../db');
 const express = require('express');
 const router = express.Router();
 
@@ -17,6 +17,18 @@ router.get('/:id', async (req, res, next) => {
   try {
     const problem = await Problem.findByPk(req.params.id);
     res.json(problem);
+  } catch(ex) {
+    next(ex);
+  }
+});
+
+/* get all results for a problem */
+router.get('/:id/results', async (req, res, next) => {
+  try {
+    const results = await Result.findAll({
+      where: { problemId: req.params.id } 
+    });
+    res.json(results);
   } catch(ex) {
     next(ex);
   }

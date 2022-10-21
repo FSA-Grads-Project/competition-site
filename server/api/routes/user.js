@@ -1,4 +1,4 @@
-const { models: { User } } = require('../../db');
+const { models: { User, Result } } = require('../../db');
 const express = require('express');
 const router = express.Router();
 
@@ -17,6 +17,18 @@ router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
     res.json(user);
+  } catch(ex) {
+    next(ex);
+  }
+});
+
+/* get all results for a user */
+router.get('/:id/results', async (req, res, next) => {
+  try {
+    const results = await Result.findAll({
+      where: { userId: req.params.id }
+    });
+    res.json(results);
   } catch(ex) {
     next(ex);
   }
