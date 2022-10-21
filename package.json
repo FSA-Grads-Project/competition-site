@@ -9,6 +9,7 @@
     "start": "node server",
     "start:dev": "npm run build:dev & npm run start:server",
     "start:server": "nodemon server --ignore public",
+    "seed": "node script/seed",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
