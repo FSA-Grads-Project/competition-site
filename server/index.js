@@ -1,16 +1,22 @@
-const express = require('express');
-const path = require('path');
-const app = express();
+const { connection } = require('./db');
+const app = require('./app');
 
-app.use(express.static('public'));
+const initialization = async () => {
+  try {
 
-app.get('/', (req, res) => {
-  const html = path.join(__dirname, 'index.html');
-  res.sendFile(html);
-});
+    // database connection
+    await connection.sync();
 
-const port = process.env.PORT || 3000;
+    // listen for requests
+    const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`listening on port ${port}`);
-});
+    app.listen(port, () => {
+      console.log(`listening on port ${port}`);
+    });
+
+  } catch(ex) {
+    console.log(ex);
+  }
+};
+
+initialization();
