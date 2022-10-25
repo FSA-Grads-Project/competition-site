@@ -1,13 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-
-const App = () => {
-  return (
-    <h1>FSA-Grads-Project</h1>
-  );
-};
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import store from './store';
+import App from './App';
+import { BrowserRouter } from 'react-router-dom';
 
 const container = document.getElementById('root');
-const root = ReactDOM.createRoot(container);
+const root = createRoot(container);
 
-root.render(<App />);
+root.render(<Provider store={store}><BrowserRouter><App/></BrowserRouter></Provider>);
