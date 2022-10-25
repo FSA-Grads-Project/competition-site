@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 
 const Nav = () => {
     const dispatch = useDispatch();
-    const users = useSelector(state => state.users);
-    const problems = useSelector(state => state.problems);
 
     useEffect(()=> {
         dispatch(fetchUsers());
