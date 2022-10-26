@@ -6,7 +6,7 @@ async () => {
     const response = await axios.get('/api/problems');
     // console.log(response.data)
     return response.data
-})
+});
 
 export const problemSlice = createSlice({
     name: 'problems',
@@ -15,9 +15,6 @@ export const problemSlice = createSlice({
         status: 'idle',
     },
     reducers: {
-        getProblems: (state, action)=>{
-            state.problems = action.payload
-        }
     },
     extraReducers: {
         [fetchProblems.pending]: (state, action) => {
