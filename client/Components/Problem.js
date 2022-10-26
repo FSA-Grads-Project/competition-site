@@ -6,7 +6,7 @@ const Problem = () => {
     const problems = useSelector(state => state.problems);
     
     return (
-      <div>
+      <div className="text-red">
         The Puzzler
       </div>
     )
