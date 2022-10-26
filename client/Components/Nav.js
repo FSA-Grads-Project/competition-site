@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchUsers } from '../store/user';
 import { fetchProblems } from '../store/problem';
 import { Link } from 'react-router-dom';
