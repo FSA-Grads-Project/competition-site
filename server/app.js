@@ -11,6 +11,14 @@ app.use(express.static('public'));
 // require routes
 app.use('/api', require('./api'));
 
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '..', 'public/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+});
+
 app.get('/', (req, res) => {
   const html = path.join(__dirname, 'index.html');
   res.sendFile(html);
