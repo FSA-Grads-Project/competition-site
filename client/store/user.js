@@ -14,9 +14,7 @@ export const userSlice = createSlice({
         users: [],
         status: 'idle',
     },
-    reducers: {
-        
-    },
+    reducers: {},
     extraReducers: {
         [fetchUsers.pending]: (state, action) => {
             state.status = 'loading'
