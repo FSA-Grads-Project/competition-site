@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   entry: [
     './client/index.js'
@@ -18,7 +20,12 @@ module.exports = {
             '@babel/preset-react'
           ]
         }
-      }
+      },
+      {
+        test: /\.css$/i,
+        include: path.resolve(__dirname, 'client'),
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
     ]
   }
 }

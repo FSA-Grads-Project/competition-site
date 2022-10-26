@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import About from './Components/About';
 import Account from './Components/Account';
 import PreviousProblems from './Components/PreviousProblems';
+import './style.css';
 
 const App = () => {
     return (
