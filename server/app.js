@@ -6,7 +6,7 @@ const app = express();
 app.set('json spaces', 2);
 
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // require routes
 app.use('/api', require('./api'));
@@ -17,11 +17,6 @@ app.get('/*', function(req, res) {
       res.status(500).send(err)
     }
   })
-});
-
-app.get('/', (req, res) => {
-  const html = path.join(__dirname, 'index.html');
-  res.sendFile(html);
 });
 
 module.exports = app;
