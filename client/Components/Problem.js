@@ -1,14 +1,17 @@
 import React from 'react';
 import { useSelector } from "react-redux";
+import AppStyles from '../StyledComponents/ProblemStyles.tw';
 
 const Problem = () => {
 
     const problems = useSelector(state => state.problems);
     
     return (
-      <div className="text-red-800">
+      <AppStyles>
+      <div>
         The Puzzler
-      </div>
+        </div>
+      </AppStyles>
     )
 };
 
