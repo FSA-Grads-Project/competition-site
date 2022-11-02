@@ -15,12 +15,10 @@ const Nav = () => {
     
     return (
       <NavMain>
-      <NavText>
-        <Link to='/'>Current Issue</Link>
-        <Link to='/account'>Account</Link>
-        <Link to='/about'>About</Link>
-        <Link to='/pastissues'>Past Issues</Link>
-      </NavText>
+        <NavText><Link to='/'>Current Issue</Link></NavText>
+        <NavText><Link to='/account'>Account</Link></NavText>
+        <NavText><Link to='/about'>About</Link></NavText>
+        <NavText><Link to='/pastissues'>Past Issues</Link></NavText>
       </NavMain>
     )
 };

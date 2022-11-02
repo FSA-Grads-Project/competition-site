@@ -6,11 +6,16 @@ import About from './Components/About';
 import Account from './Components/Account';
 import PreviousProblems from './Components/PreviousProblems';
 import './style.css';
-import AppStyles from './StyledComponents/ProblemStyles.tw';
+import { Logo, Issue, Header, Hidden } from './StyledComponents/AppStyles.tw';
 
 const App = () => {
     return (
      <div>
+        <Header>
+          <Hidden>hidden</Hidden>
+          <Logo>The Puzzler</Logo>
+          <Issue>Issue 1</Issue>
+        </Header> 
         <Nav/>
         <Routes>
             <Route path='/' element={<Problem/>}/>

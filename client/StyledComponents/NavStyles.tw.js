@@ -1,23 +1,19 @@
 import tw from "tailwind-styled-components";
 
 export const NavMain = tw.div`
-    supports-backdrop-blur:bg-white/95 
-    sticky 
-    top-0 
-    z-40 
-    min-h-[72px] 
-    w-full 
+    min-h-[40px] 
     flex
+    justify-evenly
     items-center
-    justify-center
-    border-b 
+    border-b-2
     border-slate-700 
-    backdrop-blur 
-    transition-colors 
-    duration-500
+    border-t-2 
+    mt-1
 `;
 
 export const NavText = tw.div`
+    font-old-standard-tt
+    font-black
     flex
     gap-x-8
 `;
