@@ -9,14 +9,14 @@ export const Header = tw.div`
 `;
 
 export const Logo = tw.div`
-    font-old-standard-tt
+    font-playfair-sc
     font-black
     p-4
     text-5xl
 `;
 
 export const Issue = tw.div`
-    font-old-standard-tt
+    font-playfair-sc
     font-black
     pr-28
     text-xl

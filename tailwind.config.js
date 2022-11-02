@@ -18,6 +18,9 @@ module.exports = {
         fontFamily: {
           'creepster': ['Creepster', 'cursive'],
           'old-standard-tt': ['"Old Standard TT"', 'serif'],
+          'playfair': ['"Playfair Display"', 'serif'],
+          'playfair-sc': ['"Playfair Display SC"', 'serif'],
+          'cormorant-sc': ['"Cormorant SC"', 'serif']
         }
       }
     },

@@ -13,7 +13,7 @@ export const NavMain = tw.div`
 `;
 
 export const NavText = tw.div`
-    font-old-standard-tt
+    font-cormorant-sc
     font-black
     flex
     gap-x-8

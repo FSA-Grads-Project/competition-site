@@ -15,7 +15,7 @@ export const RightDiv = tw.div`
     border-slate-700 
     flex
     justify-center
-    font-old-standard-tt
+    font-playfair
     font-black
     text-3xl
 `;
@@ -25,7 +25,7 @@ export const LeftDiv = tw.div`
     mt-10
     flex
     justify-center
-    font-old-standard-tt
+    font-playfair
     font-black
     text-3xl
 `;
