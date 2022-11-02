@@ -1,17 +1,16 @@
 import React from 'react';
 import { useSelector } from "react-redux";
-import AppStyles from '../StyledComponents/ProblemStyles.tw';
+import { Main, LeftDiv, RightDiv} from '../StyledComponents/ProblemStyles.tw';
 
 const Problem = () => {
 
     const problems = useSelector(state => state.problems);
     
     return (
-      <AppStyles>
-      <div>
-        The Puzzler
-        </div>
-      </AppStyles>
+      <Main>
+        <LeftDiv>Your Treasure Awaits!</LeftDiv>
+        <RightDiv>Leaderboard</RightDiv>
+      </Main>
     )
 };
 

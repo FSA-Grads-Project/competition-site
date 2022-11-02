@@ -1,7 +1,32 @@
 import tw from "tailwind-styled-components";
 
-const ProblemStyles = tw.div`
-    text-red-600
+export const Main = tw.div`
+    flex
+    justify-around
 `;
 
-export default ProblemStyles
+export const RightDiv = tw.div`
+    mr-40
+    mt-10
+    pt-3
+    min-h-[500px] 
+    min-w-[350px] 
+    border-2
+    border-slate-700 
+    flex
+    justify-center
+    font-old-standard-tt
+    font-black
+    text-3xl
+`;
+
+export const LeftDiv = tw.div`
+    ml-40
+    mt-10
+    flex
+    justify-center
+    font-old-standard-tt
+    font-black
+    text-3xl
+`;
+
