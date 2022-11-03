@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { fetchUsers } from '../store/user';
 import { fetchProblems } from '../store/problem';
 import { Link } from 'react-router-dom';
+import { NavText, NavMain } from '../StyledComponents/NavStyles.tw';
 
 const Nav = () => {
     const dispatch = useDispatch();
@@ -13,12 +14,12 @@ const Nav = () => {
     }, [])
     
     return (
-      <div>
-        <Link to='/'>Current Issue</Link>
-        <Link to='/account'>Account</Link>
-        <Link to='/about'>About</Link>
-        <Link to='/pastissues'>Past Issues</Link>
-      </div>
+      <NavMain>
+        <NavText><Link to='/'>Current Issue</Link></NavText>
+        <NavText><Link to='/account'>Account</Link></NavText>
+        <NavText><Link to='/about'>About</Link></NavText>
+        <NavText><Link to='/pastissues'>Past Issues</Link></NavText>
+      </NavMain>
     )
 };
 

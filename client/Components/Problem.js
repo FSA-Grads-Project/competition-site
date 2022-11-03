@@ -1,14 +1,16 @@
 import React from 'react';
 import { useSelector } from "react-redux";
+import { Main, LeftDiv, RightDiv} from '../StyledComponents/ProblemStyles.tw';
 
 const Problem = () => {
 
     const problems = useSelector(state => state.problems);
     
     return (
-      <div className="text-red-800">
-        The Puzzler
-      </div>
+      <Main>
+        <LeftDiv>Your Treasure Awaits!</LeftDiv>
+        <RightDiv>Leaderboard</RightDiv>
+      </Main>
     )
 };
 
