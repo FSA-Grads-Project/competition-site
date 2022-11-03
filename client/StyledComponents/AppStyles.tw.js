@@ -4,7 +4,7 @@ export const Header = tw.div`
     flex
     justify-between
     items-center 
-    border-b-2
+ 
     border-slate-700
 `;
 
