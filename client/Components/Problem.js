@@ -8,18 +8,16 @@ import { defaultKeymap, indentWithTab } from '@codemirror/commands';
 import { javascript } from '@codemirror/lang-javascript';
 
 let baseTheme = EditorView.theme({
+  '.cm-activeLine': {
+    backgroundColor: 'transparent',
+  },
   '.cm-content *': {
-    backgroundColor: '#EDE4C5',
     color: 'black',
     fontSize: '16px',
     lineHeight: '1.5',
     overflowWrap: 'anywhere',
   },
-  '.cm-gutters': {
-    backgroundColor: '#EDE4C5',
-  },
   '.cm-scroller': {
-    backgroundColor: '#EDE4C5',
     'min-height': '350px',
     'max-height': '350px',
     'max-width': '700px'

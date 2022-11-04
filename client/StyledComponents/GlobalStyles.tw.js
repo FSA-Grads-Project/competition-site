@@ -19,12 +19,10 @@ export const ButtonWrapper = tw.div`
 
 export const EditorWrapper = tw.div`
   bg-[#EDE4C5]
-
 `
 
 export const Editor = tw.div`
-
-  scrollbar
+bg-[#EDE4C5]
 `
 
 export const Output = tw.div`

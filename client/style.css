@@ -11,3 +11,7 @@ body {
     background-color: #FDF5E8;
 }
 
+.CodeMirror-selected {
+	/* selected text */
+	 background: #0663d3 !important;
+}
