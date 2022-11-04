@@ -18,8 +18,6 @@ export const problemSlice = createSlice({
         problems: [],
         status: 'idle',
     },
-    reducers: {
-    },
     reducers: {},
     extraReducers: {
         [fetchProblems.pending]: (state, action) => {
