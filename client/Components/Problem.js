@@ -6,7 +6,6 @@ import { EditorState, basicSetup } from '@codemirror/basic-setup';
 import { EditorView, keymap } from '@codemirror/view';
 import { defaultKeymap, indentWithTab } from '@codemirror/commands';
 import { javascript } from '@codemirror/lang-javascript';
-import { oneDark } from '@codemirror/theme-one-dark';
 
 let baseTheme = EditorView.theme({
   '.cm-content *': {
@@ -17,7 +16,7 @@ let baseTheme = EditorView.theme({
     overflowWrap: 'anywhere',
   },
   '.cm-gutters': {
-    backgroundColor: '#EDE4C5'
+    backgroundColor: '#EDE4C5',
   },
   '.cm-scroller': {
     backgroundColor: '#EDE4C5',
@@ -26,7 +25,7 @@ let baseTheme = EditorView.theme({
     'max-width': '700px'
   },
   '.cm-gutter': {
-    backgroundColor: '#EDE4C5'
+    backgroundColor: '#EDE4C5',
   },
   '.cm-gutterElement': {
     backgroundColor: '#EDE4C5'
@@ -48,7 +47,6 @@ export const Problem = () => {
         basicSetup,
         keymap.of([defaultKeymap, indentWithTab]),
         baseTheme,
-        oneDark,
         javascript(),
         onUpdate,
       ],
