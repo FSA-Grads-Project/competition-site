@@ -10,6 +10,8 @@ export const NavMain = tw.div`
     border-t-2 
     mt-1
     mb-10
+    mr-20
+    ml-20
 `;
 
 export const NavText = tw.div`

@@ -6,6 +6,8 @@ export const Header = tw.div`
     items-center 
     border-b-2
     border-slate-700
+    mr-20
+    ml-20
 `;
 
 export const Logo = tw.div`
