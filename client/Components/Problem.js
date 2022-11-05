@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useRef, useEffect, useState } from 'react';
 import { Editor, EditorWrapper, ButtonWrapper, EvaluateButton, SubmitButton, OutputDiv, OutputTitle } from '../StyledComponents/GlobalStyles.tw';
 import { Main, LeftDiv, RightDiv, ProblemTitleSpan, SolutionTitleSpan } from '../StyledComponents/ProblemStyles.tw';
@@ -58,11 +59,21 @@ export const Problem = () => {
   }, []);
 
   const onEvaluate = () => {
-    console.log('Evaluate button works')
+    axios.post('/api/evaluate', {
+      code
+    }).then((res) => {
+      console.log(res.status)
+      console.log('Evaluate button works')
+    })
   };
 
   const onSubmit = () => {
-    console.log('Submit button works')
+    axios.post('/api/submit', {
+      code
+    }).then((res) => {
+      console.log(res.status)
+      console.log('Submit button works')
+    })
   };
 
   return (
