@@ -5,24 +5,36 @@ export const Main = tw.div`
     flex
     justify-center
 `
+export const ProblemTitleSpan = tw.span`
+    inline-block
+    pb-2
+    font-playfair
+    font-black
+    text-4xl
+    relative
+    border-b-2
+    border-black
+`
+
+export const SolutionTitleSpan = tw.span`
+    inline-block
+    pb-2
+    mb-5
+    font-playfair
+    font-black
+    text-4xl
+    border-b-2
+    border-black
+`
 
 export const LeftDiv = tw.div`
     mr-20
-    mt-10
-    pt-3
     min-h-[600px] 
-    min-w-[350px] 
-    border-2
-    border-slate-700 
-    flex
-    justify-center
-    font-playfair
-    font-black
-    text-3xl
+    min-w-[500px] 
 `
 
 export const RightDiv = tw.div`
-    pt-10
-    min-h-[500px] 
-    min-w-[700px] 
+    text-center
+    min-h-[600px] 
+    min-w-[850px]
 `

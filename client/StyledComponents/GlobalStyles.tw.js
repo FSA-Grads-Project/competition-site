@@ -2,14 +2,23 @@ import tw from "tailwind-styled-components";
 
 export const SubmitButton = tw.button`
   bg-[#EDE4C5]
-  p-5
+  p-3
+  pr-10
+  pl-10
   m-5
+  font-cormorant-sc
+  text-2xl
 `;
 
 export const EvaluateButton = tw.button`
   bg-[#EDE4C5]
-  p-5
+  p-3
+  pr-10
+  pl-10
   m-5
+  font-cormorant-sc
+  text-2xl
+
 `;
 
 export const ButtonWrapper = tw.div`
@@ -22,14 +31,18 @@ export const EditorWrapper = tw.div`
 `
 
 export const Editor = tw.div`
-bg-[#EDE4C5]
+  text-left
+  bg-[#EDE4C5]
 `
 
-export const Output = tw.div`
-  flex
-  justify-center
-  items-center
+export const OutputDiv = tw.div`
   min-h-[200px] 
   min-w-[500px] 
   bg-[#EDE4C5]
+`
+
+export const OutputTitle = tw.div`
+  pb-2
+  font-cormorant-sc
+  text-xl
 `

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Editor, EditorWrapper, ButtonWrapper, EvaluateButton, SubmitButton, Output } from '../StyledComponents/GlobalStyles.tw';
-import { Main, LeftDiv, RightDiv } from '../StyledComponents/ProblemStyles.tw';
+import { Editor, EditorWrapper, ButtonWrapper, EvaluateButton, SubmitButton, OutputDiv, OutputTitle } from '../StyledComponents/GlobalStyles.tw';
+import { Main, LeftDiv, RightDiv, ProblemTitleSpan, SolutionTitleSpan } from '../StyledComponents/ProblemStyles.tw';
 
 import { EditorState, basicSetup } from '@codemirror/basic-setup';
 import { EditorView, keymap } from '@codemirror/view';
@@ -18,8 +18,8 @@ let baseTheme = EditorView.theme({
     overflowWrap: 'anywhere',
   },
   '.cm-scroller': {
-    'min-height': '350px',
-    'max-height': '350px',
+    'min-height': '300px',
+    'max-height': '300px',
     'max-width': '700px'
   },
   '.cm-gutter': {
@@ -66,21 +66,25 @@ export const Problem = () => {
   };
 
   return (
-    <Main>
-      <LeftDiv>
-        Problem Goes Here!
-      </LeftDiv>
-      <RightDiv>
-        <EditorWrapper>
-          <Editor ref={editor}></Editor> 
-        </EditorWrapper>
-        <ButtonWrapper>
-          <EvaluateButton onClick={onEvaluate}>Evaluate</EvaluateButton>
-          <SubmitButton onClick={onSubmit}>Submit</SubmitButton>
-        </ButtonWrapper>
-        <Output>Output</Output>
-      </RightDiv>
-    </Main>
+    <div>
+      <Main>
+        <LeftDiv> 
+          <ProblemTitleSpan>Your Treasure Awaits!</ProblemTitleSpan> 
+        </LeftDiv>
+        <RightDiv>
+          <SolutionTitleSpan>Your Solution</SolutionTitleSpan>
+          <EditorWrapper>
+            <Editor ref={editor}></Editor> 
+          </EditorWrapper>
+          <ButtonWrapper>
+            <EvaluateButton onClick={onEvaluate}>Evaluate</EvaluateButton>
+            <SubmitButton onClick={onSubmit}>Submit</SubmitButton>
+          </ButtonWrapper>
+          <OutputTitle>Output</OutputTitle>
+          <OutputDiv></OutputDiv>
+        </RightDiv>
+      </Main>
+    </div>
   );
 };
 
