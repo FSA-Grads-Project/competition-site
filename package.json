@@ -26,8 +26,11 @@
   "homepage": "https://github.com/FSA-Grad-Project/competition-site#readme",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
+    "bcrypt": "^5.1.0",
     "css-loader": "^6.7.1",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.8.0",
     "postcss-loader": "^7.0.1",
     "sequelize": "^6.25.2",

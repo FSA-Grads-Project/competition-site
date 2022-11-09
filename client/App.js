@@ -5,6 +5,8 @@ import { Route, Routes } from "react-router-dom";
 import About from './Components/About';
 import Account from './Components/Account';
 import PreviousProblems from './Components/PreviousProblems';
+import Login from './Components/Login';
+import SignUp from './Components/SignUp';
 import './style.css';
 import { Logo, Issue, Header, Hidden } from './StyledComponents/AppStyles.tw';
 
@@ -22,6 +24,8 @@ const App = () => {
             <Route path='/about' element={<About/>}/>
             <Route path='/account' element={<Account/>}/>
             <Route path='/pastissues' element={<PreviousProblems/>}/>
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/signup' element={<SignUp/>}/>
         </Routes>
      </div>
     );

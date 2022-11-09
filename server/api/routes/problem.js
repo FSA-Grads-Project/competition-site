@@ -2,6 +2,9 @@ const { models: { Result, Problem } } = require('../../db');
 const express = require('express');
 const router = express.Router();
 
+/* middleware for protecting routes */
+const verifyToken = require('./middleware');
+
 /* get all problems */
 router.get('/', async (req, res, next) => {
   try {
@@ -13,7 +16,7 @@ router.get('/', async (req, res, next) => {
 });
 
 /* get problem by id */
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', verifyToken, async (req, res, next) => {
   try {
     const problem = await Problem.findByPk(req.params.id);
     res.json(problem);
@@ -23,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 /* get all results for a problem */
-router.get('/:id/results', async (req, res, next) => {
+router.get('/:id/results', verifyToken, async (req, res, next) => {
   try {
     const results = await Result.findAll({
       where: { problemId: req.params.id } 
@@ -35,7 +38,7 @@ router.get('/:id/results', async (req, res, next) => {
 });
 
 /* create a new problem */
-router.post('/', async (req, res, next) => {
+router.post('/', verifyToken, async (req, res, next) => {
   try {
     const problem = await Problem.create(req.body);
     res.json(problem);
@@ -45,7 +48,7 @@ router.post('/', async (req, res, next) => {
 });
 
 /* update problem by id */
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', verifyToken, async (req, res, next) => {
   try {
     const problem = await Problem.findByPk(req.params.id);
     await problem.update(req.body);
@@ -56,7 +59,7 @@ router.put('/:id', async (req, res, next) => {
 });
 
 /* delete problem by id */
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', verifyToken, async (req, res, next) => {
   try {
     const problem = await Problem.findByPk(req.params.id);
     await problem.destroy();
