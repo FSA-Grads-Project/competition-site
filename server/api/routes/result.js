@@ -2,8 +2,11 @@ const { models: { Result } } = require('../../db');
 const express = require('express');
 const router = express.Router();
 
+/* middleware for protecting routes */
+const verifyToken = require('./middleware');
+
 /* get all results */
-router.get('/', async (req, res, next) => {
+router.get('/', verifyToken, async (req, res, next) => {
   try {
     const results = await Result.findAll();
     res.json(results);
@@ -13,7 +16,7 @@ router.get('/', async (req, res, next) => {
 });
 
 /* get result by id */
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', verifyToken, async (req, res, next) => {
   try {
     const result = await Result.findByPk(req.params.id);
     res.json(result);
@@ -23,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 /* create a new result */
-router.post('/', async (req, res, next) => {
+router.post('/', verifyToken, async (req, res, next) => {
   try {
     const result = await Result.create(req.body);
     res.json(result);
@@ -33,7 +36,7 @@ router.post('/', async (req, res, next) => {
 });
 
 /* update result by id */
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', verifyToken, async (req, res, next) => {
   try {
     const result = await Result.findByPk(req.params.id);
     await result.update(req.body);
@@ -44,7 +47,7 @@ router.put('/:id', async (req, res, next) => {
 });
 
 /* delete result by id */
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', verifyToken, async (req, res, next) => {
   try {
     const result = await Result.findByPk(req.params.id);
     await result.destroy();
