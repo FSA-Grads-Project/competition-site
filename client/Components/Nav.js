@@ -15,7 +15,7 @@ const Nav = () => {
     
     return (
       <NavMain>
-        <NavText><Link to='/'>Current Issue</Link></NavText>
+        <NavText><Link to='/problem'>Current Issue</Link></NavText>
         <NavText><Link to='/account'>Account</Link></NavText>
         <NavText><Link to='/about'>About</Link></NavText>
         <NavText><Link to='/pastissues'>Past Issues</Link></NavText>
