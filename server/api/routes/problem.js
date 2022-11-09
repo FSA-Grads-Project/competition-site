@@ -66,4 +66,24 @@ router.delete('/:id', async (req, res, next) => {
   }
 });
 
+// evaluate problem
+
+router.post('/evaluate', async (req, res, next) => {
+  try {
+    console.log(req.body.code)
+    res.json('success!')
+  } catch(ex) {
+    next(ex);
+  }
+});
+
+router.post('/submit', async (req, res, next) => {
+  try {
+    console.log(req.body.code)
+    res.json('success!')
+  } catch(ex) {
+    next(ex);
+  }
+});
+
 module.exports = router;

@@ -1,4 +1,5 @@
 # competition-site
+
 Data structures and algorithms competition site
 
 ## installation and setup
