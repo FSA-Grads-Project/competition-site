@@ -5,7 +5,7 @@ export const fetchUsers = createAsyncThunk('users/getUsers',
 async () => {
     const response = await axios.get('/api/users');
     // console.log(response.data)
-    return response.data
+    return response.data;
 })
 
 export const userSlice = createSlice({
@@ -22,7 +22,7 @@ export const userSlice = createSlice({
         [fetchUsers.fulfilled]: (state, action) => {
             state.status = 'succeeded';
             state.users = action.payload;
-        }
+        },
     }
 });
 

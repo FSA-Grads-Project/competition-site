@@ -2,6 +2,9 @@ const { models: { User, Result } } = require('../../db');
 const express = require('express');
 const router = express.Router();
 
+/* middleware for protecting routes */
+const verifyToken = require('./middleware');
+
 /* get all users */
 router.get('/', async (req, res, next) => {
   try {
@@ -13,7 +16,7 @@ router.get('/', async (req, res, next) => {
 });
 
 /* get user by id */
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', verifyToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
     res.json(user);
@@ -23,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 /* get all results for a user */
-router.get('/:id/results', async (req, res, next) => {
+router.get('/:id/results', verifyToken, async (req, res, next) => {
   try {
     const results = await Result.findAll({
       where: { userId: req.params.id }
@@ -35,7 +38,7 @@ router.get('/:id/results', async (req, res, next) => {
 });
 
 /* create a user */
-router.post('/', async (req, res, next) => {
+router.post('/', verifyToken, async (req, res, next) => {
   try {
     const user = await User.create(req.body);
     res.json(user);
@@ -45,7 +48,7 @@ router.post('/', async (req, res, next) => {
 });
 
 /* update a user by id */
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', verifyToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
     await user.update(req.body);
@@ -56,7 +59,7 @@ router.put('/:id', async (req, res, next) => {
 });
 
 /* delete a user by id */
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', verifyToken, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
     await user.destroy();
