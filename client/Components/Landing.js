@@ -1,6 +1,9 @@
 import React from 'react';
 import { useSelector } from "react-redux";
-import { Main, LeftDiv, RightDiv } from '../StyledComponents/LandingStyles.tw';
+import { treasureMap } from '../../public/treasureMap';
+import { Main, LeftDiv, RightDiv, Img, LeftDivHeader, IntroDiv, ImgDiv, SignInLink } from '../StyledComponents/LandingStyles.tw';
+import { Link } from 'react-router-dom';
+import SubmissionTimer from './SubmissionTimer';
 
 const Landing = () => {
 
@@ -8,8 +11,30 @@ const Landing = () => {
     
     return (
       <Main>
-        <LeftDiv>Your Treasure Awaits!</LeftDiv>
-        <RightDiv>Leaderboard</RightDiv>
+        <LeftDiv> 
+          
+          <LeftDivHeader> Your Treasure Awaits! </LeftDivHeader>
+
+          <IntroDiv>
+            <p>
+              An acient pirate map has been disovered
+              prompting a community wide search for the 
+              hidden treasure. <SignInLink href='login'> Sign In </SignInLink> to see if 
+              you can be the first to get the loot...if you dare..
+
+            </p>
+          </IntroDiv>
+          <SubmissionTimer />
+      
+        <ImgDiv> 
+         <Img src={treasureMap} />
+         </ImgDiv>
+
+        </LeftDiv>
+
+        <RightDiv> Leaderboard </RightDiv>
+
+
       </Main>
     )
 };

@@ -38,3 +38,4 @@ export const RightDiv = tw.div`
     min-h-[600px] 
     min-w-[850px]
 `
+
