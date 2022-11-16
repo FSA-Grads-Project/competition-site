@@ -4,6 +4,7 @@ import { treasureMap } from '../../public/treasureMap';
 import { Main, LeftDiv, RightDiv, Img, LeftDivHeader, IntroDiv, ImgDiv, SignInLink } from '../StyledComponents/LandingStyles.tw';
 import { Link } from 'react-router-dom';
 import SubmissionTimer from './SubmissionTimer';
+import Leaderboard from './Leaderboard';
 
 const Landing = () => {
 
@@ -32,7 +33,9 @@ const Landing = () => {
 
         </LeftDiv>
 
-        <RightDiv> Leaderboard </RightDiv>
+        <RightDiv> 
+            <Leaderboard />
+           </RightDiv>
 
 
       </Main>

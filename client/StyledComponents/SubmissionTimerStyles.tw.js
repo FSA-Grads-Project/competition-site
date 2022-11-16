@@ -6,10 +6,10 @@ export const TimerDiv = tw.div`
     pt-6
 `
 
-export const TimerH3 = tw.text`
+export const TimerH3 = tw.div`
     font-light
     font-cormorant-sc
-
+    pb-4
 `
 
 export const TimeDisplay = tw.text`
