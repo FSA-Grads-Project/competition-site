@@ -28,6 +28,8 @@ export const LeftDiv = tw.div`
     font-playfair
     font-black
     text-3xl
+    min-h-[500px] 
+    min-w-[350px] 
 `;
 
 export const Img = tw.img`
@@ -64,5 +66,6 @@ export const ImgDiv = tw.div`
 `
 
 export const SignInLink = tw.a`
-    underline hover:decoration-dashed
+    text-blue-600 visited:text-purple-600
+   
 `

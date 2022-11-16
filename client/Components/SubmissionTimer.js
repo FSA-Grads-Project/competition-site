@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import { TimerDiv } from "../StyledComponents/SubmissionTimerStyles.tw";
+import { TimerDiv, TimerH3, TimeDisplay, TimeDisplayContainer, TimeTextDisplay } from "../StyledComponents/SubmissionTimerStyles.tw";
 
 const SubmissionTimer = () => {
     
     let now = new Date();
     
-    const _deadline = new Date('Nov 18 2022 18:49:00');
+    const _deadline = new Date('Nov 18 2022 10:41:00');
 
     let t = _deadline - now;
 
@@ -30,22 +30,27 @@ const SubmissionTimer = () => {
     setTimeout(() => {
         setCounter(counter - 1);
         setSeconds(Math.floor((t % (1000 * 60 )) / 1000))
+        setDays( Math.floor(t / (1000 * 60 * 60 * 24 )))
 
     }, 1000);
     }, [counter]);
     
     
- 
-
-    
-
   
     return (
 
         t > 0 ? (
             <TimerDiv>
-            <p> Enter now before its too late! </p>
-            <p> Only { days } days { _hours } hours { _minutes } minutes and { seconds } seconds remain to join the hunt!! </p>
+            <TimerH3> Enter now before its too late! </TimerH3>
+            <TimeDisplayContainer>
+                <TimeTextDisplay>
+                    Only <TimeDisplay> { days } {days <= 1 ? 'Day' : 'Days'}  </TimeDisplay> 
+                    <TimeDisplay>  { _hours } {_hours <= 1 ? 'Hour' : 'Hours'} </TimeDisplay> 
+                    <TimeDisplay>  { _minutes } {_minutes <= 1 ? 'Minute' : 'Minutes'} </TimeDisplay> 
+                    and 
+                    <TimeDisplay> { seconds } {seconds <= 1 ? 'Second' : 'Seconds'} </TimeDisplay> remain to join the hunt!! 
+                </TimeTextDisplay>
+            </TimeDisplayContainer>
         </TimerDiv>
         ): (
             <div>
