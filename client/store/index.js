@@ -4,12 +4,14 @@ import thunk from 'redux-thunk';
 import authSlice from './auth';
 import userSlice  from './user';
 import problemSlice from './problem';
+import resultsSlice  from './results';
 
 const store = configureStore({
     reducer: {
         auth: authSlice,
         users: userSlice,
-        problems: problemSlice
+        problems: problemSlice,
+        results:resultsSlice
     },
 });
 

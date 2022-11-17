@@ -48,7 +48,7 @@ const SubmissionTimer = () => {
                     <TimeDisplay>  { _hours } {_hours <= 1 ? 'Hour' : 'Hours'} </TimeDisplay> 
                     <TimeDisplay>  { _minutes } {_minutes <= 1 ? 'Minute' : 'Minutes'} </TimeDisplay> 
                     and 
-                    <TimeDisplay> { seconds } {seconds <= 1 ? 'Second' : 'Seconds'} </TimeDisplay> remain to join the hunt!! 
+                    <TimeDisplay> { seconds } {seconds === 1 ? 'Second' : 'Seconds'} </TimeDisplay> remain to join the hunt!! 
                 </TimeTextDisplay>
             </TimeDisplayContainer>
         </TimerDiv>

@@ -8,7 +8,7 @@ export const LeaderboardMainDiv = tw.div`
     text-center
 `
 
-export const Header = tw.text`
+export const Header = tw.div`
     text-xl
 `
 
@@ -26,4 +26,11 @@ export const Intro = tw.div`
     mr-20
     ml-20
     py-3
+`
+
+export const TopScoreDisplay = tw.div`
+    flex-col
+    text-sm
+    font-cormorant-sc
+    font-black
 `
