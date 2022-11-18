@@ -17,9 +17,8 @@ const initialization = async () => {
 
   await connection.sync({ force: true });
   
- 
   await Promise.all(USERS.map(user => User.create(user)));
-  await Promise.all(RESULTS.map(res => Result.create(res)));
+ 
 
 
   // const result1 = await Result.create({
@@ -68,7 +67,8 @@ const initialization = async () => {
     timeWeight: 0.46
   });
 
-  RESULTS.map(res => res.userId = Math.ceil(Math.random() * 10))
+ 
+  await Promise.all(RESULTS.map(res => Result.create(res)));
 
   // result1.userId = user1.id;
   // result1.problemId = problem1.id;

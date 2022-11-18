@@ -8,6 +8,8 @@ const createResults = () => {
         timeElapsed: Math.floor(Math.random() * 100),
         startDatetime: faker.date.recent(),
         completeDatetime: faker.date.future(), 
+        userId: Math.ceil(Math.random() * 10),
+        problemId: Math.ceil(Math.random() * 4)
     }
 };
 

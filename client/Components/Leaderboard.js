@@ -5,11 +5,7 @@ import { useSelector } from "react-redux";
 
 const Leaderboard = () => {
     const users = useSelector(state => state.users).users;
-    const results = useSelector(state => state.results)
-
-    console.log(results, 'results')
-
-
+    const results = useSelector(state => state.results);
     
     
     return (
