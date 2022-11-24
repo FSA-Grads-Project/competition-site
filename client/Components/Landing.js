@@ -9,7 +9,8 @@ import Leaderboard from './Leaderboard';
 const Landing = () => {
 
     const problems = useSelector(state => state.problems);
-    console.log(problems)
+    const results = useSelector(state => state.results);
+
     
     return (
       <Main>

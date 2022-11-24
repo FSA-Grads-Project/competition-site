@@ -6,7 +6,7 @@ const SubmissionTimer = () => {
     
     let now = new Date();
     
-    const _deadline = new Date('Nov 18 2022 10:41:00');
+    const _deadline = new Date('Nov 28 2022 10:41:00');
 
     let t = _deadline - now;
 

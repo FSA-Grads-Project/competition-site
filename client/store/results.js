@@ -6,7 +6,6 @@ import axios from 'axios';
 export const fetchResults = createAsyncThunk('results/getResults',
 async () => {
     const response = await axios.get('/api/results');
-    console.log(response.data, 'DADASDASDASDASDASDASDASDASDASDASD')
     return response.data
 });
 
@@ -23,7 +22,7 @@ export const resultsSlice = createSlice({
         },
         [fetchResults.fulfilled]: (state, action) => {
             state.status = 'succeeded';
-            state.problems = action.payload;
+            state.results = action.payload;
         }
     }
 });

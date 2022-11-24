@@ -74,8 +74,6 @@ const initialization = async () => {
   // result1.problemId = problem1.id;
 
   // await result1.save();
-  console.log(RESULTS)
-
 
 };
 
