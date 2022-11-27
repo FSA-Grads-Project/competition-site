@@ -59,7 +59,7 @@ export const TableHeader = tw.div`
 
 export const LeftTableCell = tw.div`
     table-cell 
-    text-left
+    text-center
 `
 
 export const RightTableCell = tw.div`
