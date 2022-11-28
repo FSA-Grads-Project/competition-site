@@ -8,7 +8,7 @@ export const LeaderboardMainDiv = tw.div`
     text-center
 `
 
-export const Header = tw.text`
+export const Header = tw.div`
     text-xl
 `
 
@@ -26,4 +26,59 @@ export const Intro = tw.div`
     mr-20
     ml-20
     py-3
+`
+
+export const MainDiv = tw.div`
+    flex-col
+    text-sm
+    font-cormorant-sc
+    font-black
+    text-center
+    justify-center
+`
+export const TopScoreDiv = tw.div`
+    p-2
+`
+
+
+export const TableRow = tw.div`
+    table-row
+`
+
+
+export const LeaderboardTable = tw.div`
+    table w-full
+    justify-center
+    place-content-center
+    hidden 
+`
+
+export const TableHeader = tw.div`
+    table-header-group
+`
+
+export const LeftTableCell = tw.div`
+    table-cell 
+    text-center
+`
+
+export const RightTableCell = tw.div`
+    table-cell
+    text-right
+`
+
+export const TableRowGroup = tw.div`
+    table-row-group
+`
+
+export const LeftTableCellHeader = tw.div`
+    underline
+    decoration-dashed
+`
+
+export const RightTableCellHeader = tw.p`
+    underline
+    decoration-dashed
+    table-cell
+    text-right
 `

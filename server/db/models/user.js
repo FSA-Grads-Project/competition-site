@@ -33,6 +33,13 @@ const User = connection.define('user', {
       notEmpty: true
     }
   },
+  birthdate: {
+    type: Sequelize.DATE,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
   country: {
     type: Sequelize.STRING,
     allowNull: false,

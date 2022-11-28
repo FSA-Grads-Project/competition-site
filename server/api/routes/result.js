@@ -6,7 +6,7 @@ const router = express.Router();
 const verifyToken = require('./middleware');
 
 /* get all results */
-router.get('/', verifyToken, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const results = await Result.findAll();
     res.json(results);

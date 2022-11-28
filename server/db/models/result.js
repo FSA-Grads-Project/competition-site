@@ -13,7 +13,7 @@ const Result = connection.define('result', {
   },
   completeDatetime: {
     type: Sequelize.DATE
-  }  
+  }
 });
 
 module.exports = Result;
