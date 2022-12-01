@@ -12,7 +12,7 @@ export const TimerH3 = tw.div`
     pb-4
 `
 
-export const TimeDisplay = tw.text`
+export const TimeDisplay = tw.a`
     font-bold
     font-sans
    
