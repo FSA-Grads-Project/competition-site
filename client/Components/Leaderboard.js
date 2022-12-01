@@ -91,13 +91,13 @@ const Leaderboard = () => {
                                                 <RightTableCellHeader > Rank </RightTableCellHeader>
 
                                                 </TableRow>
-                                            </TableHeader >
+                                            </TableHeader>
                                         <TableRowGroup >
                                         <TableRow>
                                         <LeftTableCell> ALGORITHM EXECUTION TIME: { Math.floor(Math.random() * 5)/5 } seconds </LeftTableCell>
                                         <RightTableCell> { Math.ceil(Math.random() * 10) } </RightTableCell>
                                        
-                                     </TableRow >
+                                     </TableRow>
                                      <TableRow >
                                         <LeftTableCell> ALGORITHM MEMORY USED: {score.spaceUsed} KB </LeftTableCell>
                                         <RightTableCell> { Math.ceil(Math.random() * 10) } </RightTableCell>
