@@ -1,10 +1,10 @@
 import axios from 'axios';
-import * as esbuild from 'esbuild-wasm';
 import React, { useRef, useEffect, useState } from 'react';
-import { Editor, EditorWrapper, ButtonWrapper, EvaluateButton, SubmitButton, OutputDiv, OutputTitle } from '../StyledComponents/GlobalStyles.tw';
+import Output from './Output';
+import bundler from './bundler'; 
+import * as esbuild from 'esbuild-wasm';
+import { Editor, EditorWrapper, ButtonWrapper, EvaluateButton, SubmitButton, OutputTitle } from '../StyledComponents/GlobalStyles.tw';
 import { Main, LeftDiv, RightDiv, ProblemTitleSpan, SolutionTitleSpan } from '../StyledComponents/ProblemStyles.tw';
-import { unpkgPathPlugin } from './bundler/plug-ins/unpkg-path-plugin';
-import { fetchPlugin } from './bundler/plug-ins/fetch-plugin';
 
 import { EditorState, basicSetup } from '@codemirror/basic-setup';
 import { EditorView, keymap } from '@codemirror/view';
@@ -34,10 +34,11 @@ let baseTheme = EditorView.theme({
   },
 });
 
+
 export const Problem = () => {
   const editor = useRef();
   const [input, setInput] = useState("");
-	const [code, setCode] = useState("");
+  const [code, setCode] = useState("");
 
   const onUpdate = EditorView.updateListener.of((v) => {
       setInput(v.state.doc.toString());
@@ -71,39 +72,23 @@ export const Problem = () => {
     })
   };
 
+  // startService function initializes esbuild in our browser once.
+
+  const startService = async () => {
+    await esbuild.initialize({
+      worker: true,
+      wasmURL: 'https://unpkg.com/esbuild-wasm/esbuild.wasm'
+    })
+  }
+  
   useEffect(() => {
-    try {
-      esbuild.build({});
-    } catch (error) {
-      if (error instanceof Error && error.message.includes('initialize')) {
-        esbuild.initialize({
-          worker: false,
-          wasmURL: 'https://unpkg.com/esbuild-wasm/esbuild.wasm',
-        });
-      } else {
-        throw error;
-      }
-    }
-  }, []);
+    startService()
+  }, [])
+
 
   const onSubmit = async () => {
-    // .build attempts to bundle user-created code, using the plugin if necessary
-    // note: in order to handle/bundle imports (like React for example), esBuild wants to look at our file system but we are not utilizing a filesystem because we are trying to bundle w/in the browser, so we need to create a workaround
-    // workaround: we will fetch the files from npm/unpkg ourselves then feed them back to esbuild
-    // note: cannot reach out to npm directly because of CORS error
-   const result = await esbuild
-      .build({
-        entryPoints: ['index.js'],
-        bundle: true,
-        write: false,
-        plugins: [unpkgPathPlugin(), fetchPlugin(input)],
-        define: {
-          'process.env.NODE_ENV': '"production"',
-           global: 'window'
-        }
-      });
-      // console.log(result)
-      setCode(result.outputFiles[0].text)
+      const output = await bundler(input);
+      setCode(output);
   };
 
   return (
@@ -122,7 +107,7 @@ export const Problem = () => {
             <SubmitButton onClick={onSubmit}>Submit</SubmitButton>
           </ButtonWrapper>
           <OutputTitle>Output</OutputTitle>
-          <OutputDiv>{code}</OutputDiv>
+          <Output code={code}/>
         </RightDiv>
       </Main>
     </div>

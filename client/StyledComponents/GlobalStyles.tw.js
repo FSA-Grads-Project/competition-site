@@ -36,8 +36,10 @@ export const Editor = tw.div`
 `
 
 export const OutputDiv = tw.div`
-  min-h-[200px] 
-  min-w-[500px] 
+  bg-[#EDE4C5]
+`
+
+export const OutputIframe = tw.iframe`
   bg-[#EDE4C5]
 `
 
