@@ -41,7 +41,7 @@ export const Problem = () => {
   const [outputCode, setOutputCode] = useState("");
 
   const onUpdate = EditorView.updateListener.of((v) => {
-      setInput(v.state.doc.toString());
+      setRawCode(v.state.doc.toString());
   });
 
   useEffect(() => {
