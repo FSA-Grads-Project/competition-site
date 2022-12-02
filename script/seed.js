@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 
-
 const { 
   connection, 
   models: { 
@@ -16,10 +15,18 @@ const { USERS } = require('./seed-users');
 const initialization = async () => {
 
   await connection.sync({ force: true });
+
+  await User.create({
+    username: 'jimSmith',
+    password: 'password1234',
+    firstName: 'Jim',
+    lastName: 'Smith',
+    birthdate: '01/01/1970',
+    country: 'US',
+    email: 'jim.smith@mail.com'
+  });
   
   await Promise.all(USERS.map(user => User.create(user)));
- 
-
 
   // const result1 = await Result.create({
   //   spaceUsed: 8,
@@ -66,7 +73,6 @@ const initialization = async () => {
     spaceWeight: 0.44,
     timeWeight: 0.46
   });
-
  
   await Promise.all(RESULTS.map(res => Result.create(res)));
 
