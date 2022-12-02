@@ -37,8 +37,8 @@ let baseTheme = EditorView.theme({
 
 export const Problem = () => {
   const editor = useRef();
-  const [input, setInput] = useState("");
-  const [code, setCode] = useState("");
+  const [rawCode, setRawCode] = useState("");
+  const [outputCode, setOutputCode] = useState("");
 
   const onUpdate = EditorView.updateListener.of((v) => {
       setInput(v.state.doc.toString());
@@ -46,7 +46,7 @@ export const Problem = () => {
 
   useEffect(() => {
     const state = EditorState.create({
-      doc: input,
+      doc: rawCode,
       extensions: [
         basicSetup,
         keymap.of([defaultKeymap, indentWithTab]),
@@ -87,8 +87,8 @@ export const Problem = () => {
 
 
   const onSubmit = async () => {
-      const output = await bundler(input);
-      setCode(output);
+      const output = await bundler(rawCode);
+      setOutputCode(output);
   };
 
   return (
@@ -100,14 +100,14 @@ export const Problem = () => {
         <RightDiv>
           <SolutionTitleSpan>Your Solution</SolutionTitleSpan>
           <EditorWrapper>
-            <Editor ref={editor} value={input} onChange={e => setInput(e.target.value)}></Editor> 
+            <Editor ref={editor} value={rawCode} onChange={e => setRawCode(e.target.value)}></Editor> 
           </EditorWrapper>
           <ButtonWrapper>
             <EvaluateButton onClick={onEvaluate}>Evaluate</EvaluateButton>
             <SubmitButton onClick={onSubmit}>Submit</SubmitButton>
           </ButtonWrapper>
           <OutputTitle>Output</OutputTitle>
-          <Output code={code}/>
+          <Output code={outputCode}/>
         </RightDiv>
       </Main>
     </div>
