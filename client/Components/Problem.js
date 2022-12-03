@@ -37,6 +37,7 @@ let baseTheme = EditorView.theme({
 
 export const Problem = () => {
   const editor = useRef();
+  const [err, setErr] = useState('');
   const [rawCode, setRawCode] = useState("");
   const [outputCode, setOutputCode] = useState("");
 
@@ -72,7 +73,7 @@ export const Problem = () => {
     })
   };
 
-  // startService function initializes esbuild in our browser once.
+  // startService function initializes esbuild in our browser once. Move to bundler/index.js
 
   const startService = async () => {
     await esbuild.initialize({
@@ -88,7 +89,8 @@ export const Problem = () => {
 
   const onSubmit = async () => {
       const output = await bundler(rawCode);
-      setOutputCode(output);
+      setOutputCode(output.code);
+      setErr(output.err);
   };
 
   return (
@@ -107,7 +109,7 @@ export const Problem = () => {
             <SubmitButton onClick={onSubmit}>Submit</SubmitButton>
           </ButtonWrapper>
           <OutputTitle>Output</OutputTitle>
-          <Output code={outputCode}/>
+          <Output code={outputCode} bundlingStatus={err}/>
         </RightDiv>
       </Main>
     </div>

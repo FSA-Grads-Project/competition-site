@@ -36,6 +36,8 @@ export const Editor = tw.div`
 `
 
 export const OutputDiv = tw.div`
+  flex
+  justify-start
   bg-[#EDE4C5]
 `
 
@@ -47,4 +49,12 @@ export const OutputTitle = tw.div`
   pb-2
   font-cormorant-sc
   text-xl
+`
+
+export const OutputError = tw.div`
+  text-left
+  top-1.5
+  left-1.5
+  text-red-600
+
 `

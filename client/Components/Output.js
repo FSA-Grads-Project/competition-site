@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import React from "react";
-import { OutputIframe, OutputDiv } from "../StyledComponents/GlobalStyles.tw";
+import { OutputIframe, OutputDiv, OutputError } from "../StyledComponents/GlobalStyles.tw";
+
+// error handling in html variable for synchronous + asynchronous runtime errors
 
 const html = `
     <html>
@@ -8,13 +10,20 @@ const html = `
       <body>
         <div id="root"></div>
         <script>
+        const handleError = (err) => {
+          const root = document.querySelector('#root')
+          root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + err + '</div>'
+          console.error(err);
+        }
+          window.addEventListener('error', (event) => {
+            event.preventDefault();
+            handleError(event.error);
+          });       
           window.addEventListener('message', (ev) => {
             try {
               eval(ev.data)
             } catch(err) {
-              const root = document.querySelector('#root')
-              root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + err + '</div>'
-              console.error(err);
+              handleError(err)
             }
           }, false)
         </script>
@@ -22,23 +31,31 @@ const html = `
     </html>
   `
 
-const Output = ({ code }) => {
+const Output = ({ code, bundlingStatus }) => {
   const iframe = useRef();
-
-  useEffect(() => {
-    // resets iframe contents after each code execution
-    iframe.current.srcdoc = html;
-  }, [code])
 
   const loadHandler = () => {
     // once submitted, the user code is bundled and the line below emits an event into the iframe
     iframe.current.contentWindow.postMessage(code, "*");
   };
 
+  useEffect(() => {
+    // resets iframe contents after each code execution
+    iframe.current.srcdoc = html;
+  }, [code])
+
   return (
-  <OutputDiv>
-    <OutputIframe onLoad={loadHandler} title="output" ref={iframe} srcDoc={html} sandbox="allow-scripts"></OutputIframe> 
-  </OutputDiv>
+    <OutputDiv>
+    {bundlingStatus && <OutputError>{bundlingStatus}</OutputError>}
+      
+      <OutputIframe onLoad={loadHandler} 
+                    title="output" 
+                    ref={iframe} 
+                    srcDoc={html} 
+                    sandbox="allow-scripts"> 
+                    </OutputIframe>   
+  
+    </OutputDiv>
   )
 
 };
