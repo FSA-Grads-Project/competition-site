@@ -9,7 +9,7 @@ const html = `
       <head></head>
       <body>
         <div id="root"></div>
-        <script>
+        <script type="module">
         const handleError = (err) => {
           const root = document.querySelector('#root')
           root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + err + '</div>'
@@ -21,7 +21,15 @@ const html = `
           });       
           window.addEventListener('message', (ev) => {
             try {
-              eval(ev.data)
+              const test = (value) => {
+                const root = document.querySelector('#root');
+                if (typeof value === 'object') {
+                    root.innerHTML = JSON.stringify(value);
+                } else {
+                  root.innerHTML = value;
+                }
+              }
+              eval(ev.data);
             } catch(err) {
               handleError(err)
             }
