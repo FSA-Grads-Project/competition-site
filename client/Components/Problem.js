@@ -34,6 +34,7 @@ let baseTheme = EditorView.theme({
 export const Problem = () => {
   const editor = useRef();
 	const [code, setCode] = useState("Enter Your Solution Here!");
+  const [output, setOutput] = useState("See output here!")
 
   const onUpdate = EditorView.updateListener.of((v) => {
       setCode(v.state.doc.toString());
@@ -71,8 +72,9 @@ export const Problem = () => {
     axios.post('/api/submit', {
       code
     }).then((res) => {
-      console.log(res.status)
-      console.log('Submit button works')
+  
+        setOutput(res.data)
+      
     })
   };
 
@@ -92,7 +94,7 @@ export const Problem = () => {
             <SubmitButton onClick={onSubmit}>Submit</SubmitButton>
           </ButtonWrapper>
           <OutputTitle>Output</OutputTitle>
-          <OutputDiv></OutputDiv>
+          <OutputDiv> { output } </OutputDiv>
         </RightDiv>
       </Main>
     </div>
