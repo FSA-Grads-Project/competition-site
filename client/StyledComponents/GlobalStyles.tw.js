@@ -36,9 +36,19 @@ export const Editor = tw.div`
 `
 
 export const OutputDiv = tw.div`
+  flex
+  justify-evenly
   min-h-[200px] 
   min-w-[500px] 
   bg-[#EDE4C5]
+`
+export const ContextOutput = tw.div`
+
+`
+
+
+export const ConsoleOutput = tw.div`
+  
 `
 
 export const OutputTitle = tw.div`
