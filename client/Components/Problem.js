@@ -84,8 +84,7 @@ export const Problem = () => {
         } else if (res.data.data === 0) {
           setConsoleOutput([])
         }
-        console.log(res)
-    })
+    }).catch(err => console.log(err))
   };
 
   return (

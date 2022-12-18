@@ -23,7 +23,11 @@ router.post('/', async (req, res, next) => {
         // execute file in vm sandbox + capture return value of last line of executable code and assign to contextOutput
           const sandbox = {}
           vm.createContext(sandbox);
-          const contextOutput = vm.runInContext(code,sandbox)
+          let script = new vm.Script(code);
+          const contextOutput = script.runInContext(sandbox, {
+            console: console,
+        });
+          console.log(contextOutput)
           let contextOutputArray = [contextOutput]
 
         // start stream to execute file to capture consoles or error
