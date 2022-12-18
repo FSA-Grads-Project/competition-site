@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useRef, useEffect, useState } from 'react';
-import { Editor, EditorWrapper, ButtonWrapper, EvaluateButton, SubmitButton, OutputDiv, OutputTitle } from '../StyledComponents/GlobalStyles.tw';
+import { Editor, EditorWrapper, ButtonWrapper, EvaluateButton, SubmitButton, OutputDiv, OutputTitle, ConsoleOutput, ContextOutput } from '../StyledComponents/GlobalStyles.tw';
 import { Main, LeftDiv, RightDiv, ProblemTitleSpan, SolutionTitleSpan } from '../StyledComponents/ProblemStyles.tw';
 
 import { EditorState, basicSetup } from '@codemirror/basic-setup';
@@ -34,7 +34,8 @@ let baseTheme = EditorView.theme({
 export const Problem = () => {
   const editor = useRef();
 	const [code, setCode] = useState("Enter Your Solution Here!");
-  const [output, setOutput] = useState("See output here!")
+  const [contextOutput, setContextOutput] = useState("See output here!")
+  const [consoleOutput, setConsoleOutput] = useState([])
 
   const onUpdate = EditorView.updateListener.of((v) => {
       setCode(v.state.doc.toString());
@@ -72,12 +73,11 @@ export const Problem = () => {
     axios.post('/api/submit', {
       code
     }).then((res) => {
-  
-        setOutput(res.data)
-      
+        setContextOutput(res.data.contextOutput)
+        setConsoleOutput([...res.data.data])
     })
   };
-
+console.log(consoleOutput)
   return (
     <div>
       <Main>
@@ -94,7 +94,16 @@ export const Problem = () => {
             <SubmitButton onClick={onSubmit}>Submit</SubmitButton>
           </ButtonWrapper>
           <OutputTitle>Output</OutputTitle>
-          <OutputDiv> { output } </OutputDiv>
+          <OutputDiv> 
+            <ContextOutput> { contextOutput } </ContextOutput>
+            <ConsoleOutput> { consoleOutput === [] ? "See Consoles Here" : consoleOutput.map(console => {
+              return(
+              <ul key={console}>
+              <li> {console} </li>
+              </ul>
+              )
+            })} </ConsoleOutput>
+          </OutputDiv>
         </RightDiv>
       </Main>
     </div>

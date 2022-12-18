@@ -3,63 +3,53 @@ const fs = require('fs');
 const router = express.Router();
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
+const { spawn } = require("child_process")
+const vm = require('vm');
 
 router.post('/', async (req, res, next) => {
   let code = req.body.code
   let fileName = uuidv4() + '.js';
   let filePath = path.join(__dirname, `/temp/${fileName}`);
 
-  try {
-    if (req.body.code){
-    fs.writeFile(filePath, code, async (err)=>{
-      if(err){
-      console.log(err)
-      res.json(String(err))
-      } else {
-          try {
+      try {
+          fs.writeFileSync(filePath, code, (err) => {
+            if (err) {
+              fs.unlinkSync(filePath)
+            }
+          });
 
-            fs.readFile(filePath, "utf8", (er, data) => {
-              if (er) {
-                console.log(er)
-              } else {
-                code = data
-              }
+          const consoleOutput = spawn("node", [filePath]);
 
-              fs.unlink(filePath, function(err){
-                if (err) {
-                  console.log(err)
-                } else {
-                  console.log('file deleted')
-                }
-              })
-            })
+          const sandbox = {}
+          vm.createContext(sandbox);
 
-            const output = eval(code);
-            console.log(String(output));
-          
-            res.json(String(output))
-        
-          } 
-          catch(er){
-            res.json(String(er))
-            next(er)
-        }
-      }
-    });
+          const contextOutput = vm.runInContext(code,sandbox)
+          let consoles = []
+          let result = { contextOutput: "", type: "", data: consoles};
+      
+          consoleOutput.stdout.on('data', function (data) {
+            consoles.push(data.toString().trim());
+            result.contextOutput = contextOutput.toString();
+            result.type = "success";
+            result.data = consoles
+        });
+
+          consoleOutput.stderr.on('data', function (data) {
+            result.type = "error";
+            result.data = data.toString();
+        });
+
+          consoleOutput.on('close', (code) => {
+            fs.unlinkSync(filePath)
+            res.json(result)
+      });
+
+    } catch(er){
+      fs.unlinkSync(filePath)
+      res.json(String(er))
+      next(er)
   }
-  } catch(er) {
-      next(er);
-  } finally {
-      if (fs.existsSync(filePath))
-        fs.unlink(filePath, function(err){
-          if (err) {
-            console.log(err)
-          } else {
-            console.log('file deleted')
-          }
-      })
 
-  }
 });
 
 
