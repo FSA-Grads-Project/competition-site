@@ -12,11 +12,7 @@ router.post('/', async (req, res, next) => {
   let filePath = path.join(__dirname, `/temp/${fileName}`);
 
       try {
-          fs.writeFileSync(filePath, code, (err) => {
-            if (err) {
-              fs.unlinkSync(filePath)
-            }
-          });
+          fs.writeFileSync(filePath, code);
 
           const consoleOutput = spawn("node", [filePath]);
 
@@ -25,18 +21,18 @@ router.post('/', async (req, res, next) => {
 
           const contextOutput = vm.runInContext(code,sandbox)
           let consoles = []
-          let result = { contextOutput: "", type: "", data: consoles};
+          let contextOutputArray = [contextOutput]
+          let result = { contextOutput: contextOutputArray, type: "", data: consoles | [], error: ""};
       
           consoleOutput.stdout.on('data', function (data) {
             consoles.push(data.toString().trim());
-            result.contextOutput = contextOutput.toString();
             result.type = "success";
             result.data = consoles
         });
 
-          consoleOutput.stderr.on('data', function (data) {
+          consoleOutput.stderr.on('data', function (error) {
             result.type = "error";
-            result.data = data.toString();
+            result.error = error.toString();
         });
 
           consoleOutput.on('close', (code) => {
@@ -49,7 +45,6 @@ router.post('/', async (req, res, next) => {
       res.json(String(er))
       next(er)
   }
-
 });
 
 

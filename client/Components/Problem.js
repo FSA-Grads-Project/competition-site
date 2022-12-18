@@ -33,8 +33,8 @@ let baseTheme = EditorView.theme({
 
 export const Problem = () => {
   const editor = useRef();
-	const [code, setCode] = useState("Enter Your Solution Here!");
-  const [contextOutput, setContextOutput] = useState("See output here!")
+	const [code, setCode] = useState("Enter Your Solution Here");
+  const [contextOutput, setContextOutput] = useState("See Output Here")
   const [consoleOutput, setConsoleOutput] = useState([])
 
   const onUpdate = EditorView.updateListener.of((v) => {
@@ -73,11 +73,21 @@ export const Problem = () => {
     axios.post('/api/submit', {
       code
     }).then((res) => {
-        setContextOutput(res.data.contextOutput)
-        setConsoleOutput([...res.data.data])
+        if (!res.data.contextOutput) {
+          setContextOutput(String(res.data))
+          setConsoleOutput([])
+        } else {
+          setContextOutput(res.data.contextOutput)
+        }
+        if (res.data.data) {
+          setConsoleOutput([...res.data.data])
+        } else if (res.data.data === 0) {
+          setConsoleOutput([])
+        }
+        console.log(res)
     })
   };
-console.log(consoleOutput)
+
   return (
     <div>
       <Main>
@@ -95,8 +105,8 @@ console.log(consoleOutput)
           </ButtonWrapper>
           <OutputTitle>Output</OutputTitle>
           <OutputDiv> 
-            <ContextOutput> { contextOutput } </ContextOutput>
-            <ConsoleOutput> { consoleOutput === [] ? "See Consoles Here" : consoleOutput.map(console => {
+            <ContextOutput> { contextOutput[0] === null ? "See Output Here" : contextOutput } </ContextOutput>
+            <ConsoleOutput> { consoleOutput.length < 1 ? "See Consoles Here" : consoleOutput.map(console => {
               return(
               <ul key={console}>
               <li> {console} </li>
