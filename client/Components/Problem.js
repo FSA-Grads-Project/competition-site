@@ -73,6 +73,7 @@ export const Problem = () => {
     axios.post('/api/submit', {
       code
     }).then((res) => {
+      console.log(res)
         if (!res.data.contextOutput) {
           setContextOutput(String(res.data))
           setConsoleOutput([])
@@ -106,12 +107,13 @@ export const Problem = () => {
           <OutputDiv> 
             <ContextOutput> { contextOutput[0] === null ? "See Output Here" : contextOutput } </ContextOutput>
             <ConsoleOutput> { consoleOutput.length < 1 ? "See Consoles Here" : consoleOutput.map(console => {
-              return(
+              return (
               <ul key={console}>
               <li> {console} </li>
               </ul>
               )
-            })} </ConsoleOutput>
+            })} 
+            </ConsoleOutput>
           </OutputDiv>
         </RightDiv>
       </Main>

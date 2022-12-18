@@ -24,10 +24,15 @@ router.post('/', async (req, res, next) => {
           const sandbox = {}
           vm.createContext(sandbox);
           let script = new vm.Script(code);
+          console.time('vm')
           const contextOutput = script.runInContext(sandbox, {
             console: console,
         });
-          console.log(contextOutput)
+          console.timeEnd('vm')
+
+          console.time('eval')
+          eval(code)
+          console.timeEnd('eval')
           let contextOutputArray = [contextOutput]
 
         // start stream to execute file to capture consoles or error
