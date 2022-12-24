@@ -1,11 +1,38 @@
 import axios from 'axios';
 import React, { useRef, useEffect, useState } from 'react';
-import { Editor, EditorWrapper, ButtonWrapper, EvaluateButton, SubmitButton, OutputDiv, OutputTitle, ConsoleOutput, ContextOutput } from '../StyledComponents/GlobalStyles.tw';
-import { Main, LeftDiv, RightDiv, ProblemTitleSpan, SolutionTitleSpan } from '../StyledComponents/ProblemStyles.tw';
+import { useSelector, useDispatch } from 'react-redux';
+import { 
+  Editor, 
+  EditorWrapper, 
+  ButtonWrapper, 
+  EvaluateButton, 
+  SubmitButton, 
+  OutputDiv, 
+  OutputTitle, 
+  ConsoleOutput, 
+  ContextOutput 
+} from '../StyledComponents/GlobalStyles.tw';
+import { 
+  Main, 
+  LeftDiv, 
+  RightDiv, 
+  ProblemTitleSpan, 
+  ProblemStatementSpan,
+  SolutionTitleSpan 
+} from '../StyledComponents/ProblemStyles.tw';
 
-import { EditorState, basicSetup } from '@codemirror/basic-setup';
-import { EditorView, keymap } from '@codemirror/view';
-import { defaultKeymap, indentWithTab } from '@codemirror/commands';
+import { 
+  EditorState, 
+  basicSetup 
+} from '@codemirror/basic-setup';
+import { 
+  EditorView, 
+  keymap 
+} from '@codemirror/view';
+import { 
+  defaultKeymap, 
+  indentWithTab 
+} from '@codemirror/commands';
 import { javascript } from '@codemirror/lang-javascript';
 
 let baseTheme = EditorView.theme({
@@ -19,9 +46,8 @@ let baseTheme = EditorView.theme({
     overflowWrap: 'anywhere',
   },
   '.cm-scroller': {
-    'min-height': '300px',
-    'max-height': '300px',
-    'max-width': '700px'
+    'height': '20vh',
+    'min-height': '200px',
   },
   '.cm-gutter': {
     backgroundColor: '#EDE4C5',
@@ -32,8 +58,12 @@ let baseTheme = EditorView.theme({
 });
 
 export const Problem = () => {
+
+  const { currentProblem } = useSelector(state => state.problems);
+
   const editor = useRef();
-	const [code, setCode] = useState("Enter Your Solution Here");
+
+  const [code, setCode] = useState('');
   const [contextOutput, setContextOutput] = useState("See Output Here")
   const [consoleOutput, setConsoleOutput] = useState([])
 
@@ -42,8 +72,12 @@ export const Problem = () => {
   });
 
   useEffect(() => {
+
+    const initialCode = currentProblem.initialCode || '';
+    setCode(initialCode);
+
     const state = EditorState.create({
-      doc: code,
+      doc: initialCode,
       extensions: [
         basicSetup,
         keymap.of([defaultKeymap, indentWithTab]),
@@ -58,7 +92,8 @@ export const Problem = () => {
     return () => {
       view.destroy();
     };
-  }, []);
+  }, [ currentProblem ]);
+
 
   const onEvaluate = () => {
     axios.post('/api/evaluate', {
@@ -92,7 +127,20 @@ export const Problem = () => {
     <div>
       <Main>
         <LeftDiv> 
-          <ProblemTitleSpan>Your Treasure Awaits!</ProblemTitleSpan> 
+          {
+            currentProblem ? (
+              <>
+                <ProblemTitleSpan>
+                  {currentProblem.title}
+                </ProblemTitleSpan>
+                <ProblemStatementSpan>
+                  {currentProblem.statement}
+                </ProblemStatementSpan>
+              </>
+            ) : (
+              null
+            )
+          }
         </LeftDiv>
         <RightDiv>
           <SolutionTitleSpan>Your Solution</SolutionTitleSpan>

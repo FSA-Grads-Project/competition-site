@@ -6,18 +6,21 @@ export const Main = tw.div`
     justify-center
 `
 export const ProblemTitleSpan = tw.span`
-    inline-block
+    block
     pb-2
     font-playfair
     font-black
     text-4xl
-    relative
     border-b-2
     border-black
 `
+export const ProblemStatementSpan = tw.span`
+    font-cormorant-sc
+    font-black
+`
 
 export const SolutionTitleSpan = tw.span`
-    inline-block
+    block
     pb-2
     mb-5
     font-playfair
@@ -29,13 +32,13 @@ export const SolutionTitleSpan = tw.span`
 
 export const LeftDiv = tw.div`
     mr-20
-    min-h-[600px] 
-    min-w-[500px] 
+    ml-20
+    w-1/2
 `
 
 export const RightDiv = tw.div`
     text-center
-    min-h-[600px] 
-    min-w-[850px]
+    mr-20
+    w-1/2
 `
 

@@ -3,22 +3,19 @@ import tw from "tailwind-styled-components";
 export const SubmitButton = tw.button`
   bg-[#EDE4C5]
   p-3
-  pr-10
-  pl-10
   m-5
   font-cormorant-sc
   text-2xl
+  w-1/3
 `;
 
 export const EvaluateButton = tw.button`
   bg-[#EDE4C5]
   p-3
-  pr-10
-  pl-10
   m-5
   font-cormorant-sc
   text-2xl
-
+  w-1/3
 `;
 
 export const ButtonWrapper = tw.div`
@@ -39,7 +36,6 @@ export const OutputDiv = tw.div`
   flex
   justify-evenly
   min-h-[200px] 
-  min-w-[500px] 
   bg-[#EDE4C5]
 `
 export const ContextOutput = tw.div`

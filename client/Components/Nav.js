@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUser, logout } from '../store/auth';
 import { fetchUsers } from '../store/user';
-import { fetchProblems } from '../store/problem';
+import { fetchCurrentProblem, fetchProblems } from '../store/problem';
 import { fetchResults } from '../store/results';
 import { Link } from 'react-router-dom';
 import { NavText, NavMain } from '../StyledComponents/NavStyles.tw';
@@ -17,6 +17,7 @@ const Nav = () => {
         dispatch(fetchUser());
         dispatch(fetchUsers());
         dispatch(fetchProblems());
+        dispatch(fetchCurrentProblem());
         dispatch(fetchResults());
     }, []);
 
