@@ -29,7 +29,7 @@ const App = () => {
       <Header>
         <Hidden>hidden</Hidden>
         <Logo>
-          <Link to="/">The Puzzler</Link>
+          <Link to="/">The Dispatch</Link>
         </Logo>
         <Issue>
           <Link to="/problem">Issue 1</Link>
