@@ -14,10 +14,10 @@ const Nav = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUser());
-    dispatch(fetchUsers());
-    dispatch(fetchProblems());
-    dispatch(fetchResults());
+    // dispatch(fetchUser());
+    // dispatch(fetchUsers());
+    // dispatch(fetchProblems());
+    // dispatch(fetchResults());
   }, []);
 
   const handleClick = () => {
