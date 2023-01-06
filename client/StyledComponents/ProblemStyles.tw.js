@@ -5,7 +5,7 @@ export const Main = tw.div`
     flex
     justify-center
 `
-export const ProblemTitleSpan = tw.span`
+export const ProblemTitle= tw.div`
     block
     pb-2
     font-playfair
@@ -14,7 +14,7 @@ export const ProblemTitleSpan = tw.span`
     border-b-2
     border-black
 `
-export const ProblemStatementSpan = tw.span`
+export const ProblemStatement = tw.div`
     font-cormorant-sc
     font-black
 `

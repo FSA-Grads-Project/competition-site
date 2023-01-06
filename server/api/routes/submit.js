@@ -6,7 +6,9 @@ const path = require('path');
 const { spawn } = require("child_process")
 const vm = require('vm');
 
-router.post('/', async (req, res, next) => {
+const { models: { Test } } = require('../../db');
+
+router.post('/:id', async (req, res, next) => {
 
   // code is user code
   let code = req.body.code
@@ -17,13 +19,21 @@ router.post('/', async (req, res, next) => {
 
       try {
 
+        let response = await Test.findOne({
+          where: { problemId: req.params.id }
+        });
+
+        let problem = response.dataValues.test;
+ 
         // create new temp file containing user code
           fs.writeFileSync(filePath, code);
+
+          fs.appendFileSync(filePath, problem);
         
         // execute file in vm sandbox + capture return value of last line of executable code and assign to contextOutput
           const sandbox = {}
           vm.createContext(sandbox);
-          let script = new vm.Script(code);
+          let script = new vm.Script(code + problem);
           console.time('vm')
           const contextOutput = script.runInContext(sandbox, {
             console: console,

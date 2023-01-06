@@ -16,23 +16,14 @@ import {
   Main, 
   LeftDiv, 
   RightDiv, 
-  ProblemTitleSpan, 
-  ProblemStatementSpan,
+  ProblemTitle, 
+  ProblemStatement,
   SolutionTitleSpan 
 } from '../StyledComponents/ProblemStyles.tw';
 
-import { 
-  EditorState, 
-  basicSetup 
-} from '@codemirror/basic-setup';
-import { 
-  EditorView, 
-  keymap 
-} from '@codemirror/view';
-import { 
-  defaultKeymap, 
-  indentWithTab 
-} from '@codemirror/commands';
+import { EditorState, basicSetup } from '@codemirror/basic-setup';
+import { EditorView, keymap } from '@codemirror/view';
+import { defaultKeymap, indentWithTab } from '@codemirror/commands';
 import { javascript } from '@codemirror/lang-javascript';
 
 let baseTheme = EditorView.theme({
@@ -104,8 +95,13 @@ export const Problem = () => {
     })
   };
 
+  /* Currently the problem id is appended onto the existing route.
+     As discussed, it may be better to change the route to be 
+     /api/problems/:id/submit. Or, to include the user id it might
+     need to be something like /api/problems/:id/users/:id/submit.*/
+
   const onSubmit = () => {
-    axios.post('/api/submit', {
+    axios.post(`/api/submit/${currentProblem.id}`, {
       code
     }).then((res) => {
       console.log(res)
@@ -130,12 +126,12 @@ export const Problem = () => {
           {
             currentProblem ? (
               <>
-                <ProblemTitleSpan>
+                <ProblemTitle>
                   {currentProblem.title}
-                </ProblemTitleSpan>
-                <ProblemStatementSpan>
+                </ProblemTitle>
+                <ProblemStatement>
                   {currentProblem.statement}
-                </ProblemStatementSpan>
+                </ProblemStatement>
               </>
             ) : (
               null
