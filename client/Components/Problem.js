@@ -1,7 +1,25 @@
 import axios from 'axios';
 import React, { useRef, useEffect, useState } from 'react';
-import { Editor, EditorWrapper, ButtonWrapper, EvaluateButton, SubmitButton, OutputDiv, OutputTitle, ConsoleOutput, ContextOutput } from '../StyledComponents/GlobalStyles.tw';
-import { Main, LeftDiv, RightDiv, ProblemTitleSpan, SolutionTitleSpan } from '../StyledComponents/ProblemStyles.tw';
+import { useSelector, useDispatch } from 'react-redux';
+import { 
+  Editor, 
+  EditorWrapper, 
+  ButtonWrapper, 
+  EvaluateButton, 
+  SubmitButton, 
+  OutputDiv, 
+  OutputTitle, 
+  ConsoleOutput, 
+  ContextOutput 
+} from '../StyledComponents/GlobalStyles.tw';
+import { 
+  Main, 
+  LeftDiv, 
+  RightDiv, 
+  ProblemTitle, 
+  ProblemStatement,
+  SolutionTitleSpan 
+} from '../StyledComponents/ProblemStyles.tw';
 
 import { EditorState, basicSetup } from '@codemirror/basic-setup';
 import { EditorView, keymap } from '@codemirror/view';
@@ -19,9 +37,8 @@ let baseTheme = EditorView.theme({
     overflowWrap: 'anywhere',
   },
   '.cm-scroller': {
-    'min-height': '300px',
-    'max-height': '300px',
-    'max-width': '700px'
+    'height': '20vh',
+    'min-height': '200px',
   },
   '.cm-gutter': {
     backgroundColor: '#EDE4C5',
@@ -32,8 +49,12 @@ let baseTheme = EditorView.theme({
 });
 
 export const Problem = () => {
+
+  const { currentProblem } = useSelector(state => state.problems);
+
   const editor = useRef();
-	const [code, setCode] = useState("Enter Your Solution Here");
+
+  const [code, setCode] = useState('');
   const [contextOutput, setContextOutput] = useState("See Output Here")
   const [consoleOutput, setConsoleOutput] = useState([])
 
@@ -42,8 +63,12 @@ export const Problem = () => {
   });
 
   useEffect(() => {
+
+    const initialCode = currentProblem.initialCode || '';
+    setCode(initialCode);
+
     const state = EditorState.create({
-      doc: code,
+      doc: initialCode,
       extensions: [
         basicSetup,
         keymap.of([defaultKeymap, indentWithTab]),
@@ -58,7 +83,8 @@ export const Problem = () => {
     return () => {
       view.destroy();
     };
-  }, []);
+  }, [ currentProblem ]);
+
 
   const onEvaluate = () => {
     axios.post('/api/evaluate', {
@@ -69,8 +95,13 @@ export const Problem = () => {
     })
   };
 
+  /* Currently the problem id is appended onto the existing route.
+     As discussed, it may be better to change the route to be 
+     /api/problems/:id/submit. Or, to include the user id it might
+     need to be something like /api/problems/:id/users/:id/submit.*/
+
   const onSubmit = () => {
-    axios.post('/api/submit', {
+    axios.post(`/api/submit/${currentProblem.id}`, {
       code
     }).then((res) => {
       console.log(res)
@@ -92,7 +123,20 @@ export const Problem = () => {
     <div>
       <Main>
         <LeftDiv> 
-          <ProblemTitleSpan>Your Treasure Awaits!</ProblemTitleSpan> 
+          {
+            currentProblem ? (
+              <>
+                <ProblemTitle>
+                  {currentProblem.title}
+                </ProblemTitle>
+                <ProblemStatement>
+                  {currentProblem.statement}
+                </ProblemStatement>
+              </>
+            ) : (
+              null
+            )
+          }
         </LeftDiv>
         <RightDiv>
           <SolutionTitleSpan>Your Solution</SolutionTitleSpan>

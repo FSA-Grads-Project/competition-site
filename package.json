@@ -8,7 +8,7 @@
     "build:dev": "npm run build -- --watch --mode=development",
     "start": "node server",
     "start:dev": "npm run build:dev & npm run start:server",
-    "start:server": "nodemon server --ignore public",
+    "start:server": "nodemon server --ignore public --ignore server/api/routes/temp",
     "seed": "node script/seed",
     "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
     "test": "echo \"Error: no test specified\" && exit 1"
