@@ -80,7 +80,9 @@ class binaryTree {
     this.left = null;
     this.right = null; 
   }
-}`,
+}
+findSherman()
+`,
     hint1: `Sherman is a crazy cat that likes to climb the tallest outside
 branches of the tree.`,
     startDate: '2023-01-01 00:00:00',
@@ -91,9 +93,6 @@ branches of the tree.`,
 
   const test1 = await Test.create({ test: `
 
-// generate binary-tree for test
-
-// nodes for binary-tree
 class Node {
   constructor(number, sherman = false) {
     this.number = number;
@@ -103,7 +102,6 @@ class Node {
   }
 }
 
-// nodes for queue
 class NodeQueue {
   constructor(value) {
     this.value = value;
@@ -112,7 +110,6 @@ class NodeQueue {
   }
 }
 
-// class for queue's
 class Queue {
   constructor() {
     this.head = null;

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useRef, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { 
   Editor, 
   EditorWrapper, 
@@ -104,17 +104,13 @@ export const Problem = () => {
     axios.post(`/api/submit/${currentProblem.id}`, {
       code
     }).then((res) => {
-      console.log(res)
-        if (!res.data.contextOutput) {
-          setContextOutput(String(res.data))
-          setConsoleOutput([])
-        } else {
+      console.log(res.data)
+        if (res.data.contextOutput) {
           setContextOutput(res.data.contextOutput)
         }
-        if (res.data.data) {
-          setConsoleOutput([...res.data.data])
-        } else if (res.data.data === 0) {
-          setConsoleOutput([])
+
+        if (res.data.consoleOutput) {
+          setConsoleOutput(res.data.consoleOutput)
         }
     }).catch(err => console.log(err))
   };
@@ -150,9 +146,9 @@ export const Problem = () => {
           <OutputTitle>Output</OutputTitle>
           <OutputDiv> 
             <ContextOutput> { contextOutput[0] === null ? "See Output Here" : contextOutput } </ContextOutput>
-            <ConsoleOutput> { consoleOutput.length < 1 ? "See Consoles Here" : consoleOutput.map(console => {
+            <ConsoleOutput> { consoleOutput.length < 1 ? "See Consoles Here" : consoleOutput.map((console,i) => {
               return (
-              <ul key={console}>
+              <ul key={i}>
               <li> {console} </li>
               </ul>
               )
