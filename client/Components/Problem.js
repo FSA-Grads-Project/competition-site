@@ -87,12 +87,18 @@ export const Problem = () => {
 
 
   const onEvaluate = () => {
-    axios.post('/api/evaluate', {
+    axios.post(`/api/evaluate/${currentProblem.id}`, {
       code
     }).then((res) => {
-      console.log(res.status)
-      console.log('Evaluate button works')
-    })
+      console.log(res.data)
+        if (res.data.contextOutput) {
+          setContextOutput(res.data.contextOutput)
+        }
+
+        if (res.data.consoleOutput) {
+          setConsoleOutput(res.data.consoleOutput)
+        }
+    }).catch(err => console.log(err))
   };
 
   /* Currently the problem id is appended onto the existing route.
