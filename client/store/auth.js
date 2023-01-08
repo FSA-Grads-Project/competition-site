@@ -1,144 +1,108 @@
+// System Library Imports
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { useRevalidator } from "react-router-dom";
+
+// Local Imports
+import axios, { axiosProtected } from "../api/axios";
 import decodeJwt from "../Utils/decodeJwt";
 
-// export const getUser = async () => {
-//   const token = window.localStorage.getItem("token");
-//   if (token) {
-//     const response = await axios.get("/auth/user", {
-//       headers: { authorization: token },
-//     });
-//     return response.data;
-//   }
-//   return {};
-// };
+export const getAccessToken = createAsyncThunk(
+  "/auth/getAccessToken",
+  async () => {
+    try {
+      // Attempt to get a new access token using the refresh token saved in cookies
+      const accessToken = (await axios.get("/sessions/getAccessToken")).data;
 
-// export const login = createAsyncThunk(
-//   "auth/setAuth",
-//   async ({ username, password }, { rejectWithValue }) => {
-//     try {
-//       const response = await axios.post("/auth/login", { username, password });
-//       window.localStorage.setItem("token", response.data.token);
-//       return await getUser();
-//     } catch (ex) {
-//       throw rejectWithValue(ex.response.data);
-//     }
-//   }
-// );
+      const { userId, admin } = decodeJwt(accessToken);
 
-export const login = createAsyncThunk("/auth/getAccessToken", async () => {
-  const accessToken = (
-    await axios.get("/api/sessions/getAccessToken", {
-      withCredentials: true,
-    })
-  ).data;
+      // Returns the userId, admin status and access token to the redux store state
+      return { id: userId, admin, accessToken };
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+);
 
-  console.log("this ran");
+export const clearRefreshToken = createAsyncThunk(
+  "/auth/clearRefreshToken",
+  async () => {
+    try {
+      // Call backend to delete refresh token from user model and cookies to complete logout
+      await axiosProtected.get("/sessions/clearRefreshToken");
+      return {};
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+);
 
-  const { userId, admin } = decodeJwt(accessToken);
-
-  // console.log(data.exp * 1000 - Date.now());
-
-  return { id: userId, admin, accessToken };
+export const fetchUser = createAsyncThunk("/auth/fetchUser", async () => {
+  try {
+    const user = (await axiosProtected.get("/users/user")).data;
+    return user;
+  } catch (err) {
+    throw new Error(err);
+  }
 });
-
-export const logout = createAsyncThunk("/auth/logout", async () => {
-  await axios.get("/api/sessions/clearRefreshToken", {
-    withCredentials: true,
-  });
-
-  console.log("clear refresh token ran");
-
-  // console.log(data.exp * 1000 - Date.now());
-
-  return {};
-});
-
-// export const createUser = createAsyncThunk(
-//   "/auth/createUser",
-//   async (user, { rejectWithValue }) => {
-//     try {
-//       const response = await axios.post("/auth/signup", user);
-//       return response.data;
-//     } catch (ex) {
-//       throw rejectWithValue(ex.response.data);
-//     }
-//   }
-// );
-
-// export const fetchUser = createAsyncThunk("auth/getAuth", async () => {
-//   return await getUser();
-// });
 
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
     auth: {},
+    user: {},
     status: "",
     error: "",
   },
   reducers: {
-    // logout: (state) => {
-    //   window.localStorage.removeItem("token");
-    //   state.auth = {};
-    //   state.status = "";
-    // },
-    updateStatusSignUp: (state) => {
-      state.status = "";
+    logout: (state) => {
+      state.auth = {};
+      state.user = {};
+      state.state = "";
+      state.error = "";
     },
   },
   extraReducers: {
-    [login.pending]: (state, action) => {
+    [getAccessToken.pending]: (state, action) => {
       state.status = "authenticating";
       state.error = "";
     },
-    [login.fulfilled]: (state, action) => {
+    [getAccessToken.fulfilled]: (state, action) => {
       state.status = "authenticated";
       state.auth = action.payload;
       state.error = "";
     },
-    [login.rejected]: (state, action) => {
+    [getAccessToken.rejected]: (state, action) => {
       state.status = "rejected";
-      state.error = action.payload;
+      state.error = action.error;
     },
-    [logout.pending]: (state, action) => {
+    [clearRefreshToken.pending]: (state, action) => {
       state.status = "logging out user";
       state.error = "";
     },
-    [logout.fulfilled]: (state, action) => {
+    [clearRefreshToken.fulfilled]: (state, action) => {
       state.status = "";
       state.auth = action.payload;
       state.error = "";
     },
-    [logout.rejected]: (state, action) => {
+    [clearRefreshToken.rejected]: (state, action) => {
       state.status = "logout failed";
-      state.error = action.payload;
+      state.error = action.error;
     },
-    // [createUser.pending]: (state, action) => {
-    //   state.status = "creating user";
-    //   state.error = "";
-    // },
-    // [createUser.fulfilled]: (state, action) => {
-    //   state.status = "user created";
-    //   state.auth = {};
-    //   state.error = "";
-    // },
-    // [createUser.rejected]: (state, action) => {
-    //   state.status = "rejected";
-    //   state.error = action.payload;
-    // },
-    // [fetchUser.pending]: (state, action) => {
-    //   state.status = "checking authentication";
-    //   state.error = "";
-    // },
-    // [fetchUser.fulfilled]: (state, action) => {
-    //   state.status = "authentication check completed";
-    //   state.auth = action.payload;
-    //   state.error = "";
-    // },
+    [fetchUser.pending]: (state, action) => {
+      state.status = "fetching User";
+      state.error = "";
+    },
+    [fetchUser.fulfilled]: (state, action) => {
+      state.status = "";
+      state.user = action.payload;
+      state.error = "";
+    },
+    [fetchUser.rejected]: (state, action) => {
+      state.status = "fetchUserFailed";
+      state.error = action.error;
+    },
   },
 });
 
-export const { /*logout,*/ updateStatusSignUp } = authSlice.actions;
 export default authSlice.reducer;
+
+export const { logout } = authSlice.actions;

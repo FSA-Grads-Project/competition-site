@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { login } from "../store/auth";
 import {
   ModalBackground,
   DarkButton,
+  ButtonIcon,
 } from "../StyledComponents/GlobalStyles.tw";
 import { closeLoginModal } from "../store/modal";
 import getGoogleOAuthURL from "../Utils/getGoogleUrl";
@@ -11,23 +11,6 @@ import getGoogleOAuthURL from "../Utils/getGoogleUrl";
 const LoginModal = () => {
   const modalOpen = useSelector((state) => state.modals.loginModalOpen);
   const dispatch = useDispatch();
-
-  // const handleSubmit = async (ev) => {
-  //   ev.preventDefault();
-  //   const formElements = ev.currentTarget.elements;
-  //   const formInputs = {
-  //     username: formElements.username.value,
-  //     password: formElements.password.value,
-  //   };
-
-  //   const loginStatus = (await dispatch(login(formInputs))).meta.requestStatus;
-
-  //   if (loginStatus === "fulfilled") {
-  //     dispatch(closeLoginModal());
-  //   }
-
-  //   return;
-  // };
 
   if (!modalOpen) {
     return null;
@@ -52,42 +35,12 @@ const LoginModal = () => {
             window.location.href = URL;
           }}
         >
+          <ButtonIcon src={"/icons/googleLogo.png"} />
           Log In With Google
         </DarkButton>
-
-        <p className="text-center text-md">Don&apos;t have a login?</p>
-        <p className="text-center text-md">
-          Fear not, you can sign up <span className="font-bold">HERE</span>
-        </p>
       </div>
     </ModalBackground>
   );
 };
 
 export default LoginModal;
-
-// <form
-//           className="px-4 [&>div]:m-2 flex flex-col items-center"
-//           onSubmit={(ev) => handleSubmit(ev)}
-//         >
-//           <div className="w-full">
-//             <p className="font-black text-sm p-1 pl-2">Username</p>
-//             <input
-//               className="bg-lightBackground rounded-md p-3 w-full focus:outline-none text-center focus:border-darkFont border-lightBackground border-2"
-//               placeholder="Enter Username Here"
-//               name="username"
-//             />
-//           </div>
-//           <div className="w-full">
-//             <p className="font-black text-sm p-1 pl-2">Password</p>
-//             <input
-//               className="bg-lightBackground rounded-md p-3 w-full focus:outline-none text-center focus:border-darkFont border-lightBackground border-2"
-//               placeholder="Enter Password Here"
-//               type="password"
-//               name="password"
-//             />
-//           </div>
-//           <DarkButton className="m-5" type="submit">
-//             Submit
-//           </DarkButton>
-//         </form>

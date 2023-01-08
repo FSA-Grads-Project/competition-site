@@ -1,58 +1,60 @@
-const { models: { Result } } = require('../../db');
-const express = require('express');
+const {
+  models: { Result },
+} = require("../../db");
+const express = require("express");
 const router = express.Router();
 
 /* middleware for protecting routes */
-const verifyToken = require('./middleware');
+const verifyUser = require("../../services/verifyUser.services");
 
 /* get all results */
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const results = await Result.findAll();
     res.json(results);
-  } catch(ex) {
+  } catch (ex) {
     next(ex);
   }
 });
 
 /* get result by id */
-router.get('/:id', verifyToken, async (req, res, next) => {
+router.get("/:id", verifyUser, async (req, res, next) => {
   try {
     const result = await Result.findByPk(req.params.id);
     res.json(result);
-  } catch(ex) {
+  } catch (ex) {
     next(ex);
   }
 });
 
 /* create a new result */
-router.post('/', verifyToken, async (req, res, next) => {
+router.post("/", verifyUser, async (req, res, next) => {
   try {
     const result = await Result.create(req.body);
     res.json(result);
-  } catch(ex) {
+  } catch (ex) {
     next(ex);
   }
 });
 
 /* update result by id */
-router.put('/:id', verifyToken, async (req, res, next) => {
+router.put("/:id", verifyUser, async (req, res, next) => {
   try {
     const result = await Result.findByPk(req.params.id);
     await result.update(req.body);
     res.json(result);
-  } catch(ex) {
+  } catch (ex) {
     next(ex);
   }
 });
 
 /* delete result by id */
-router.delete('/:id', verifyToken, async (req, res, next) => {
+router.delete("/:id", verifyUser, async (req, res, next) => {
   try {
     const result = await Result.findByPk(req.params.id);
     await result.destroy();
     res.sendStatus(204);
-  } catch(ex) {
+  } catch (ex) {
     next(ex);
   }
 });

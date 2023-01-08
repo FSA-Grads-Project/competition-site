@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../store/auth";
+import { getAccessToken } from "../store/auth";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(login());
+    dispatch(getAccessToken());
     navigate("/");
   }, []);
 

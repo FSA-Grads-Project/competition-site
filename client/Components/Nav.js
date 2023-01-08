@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUser, logout } from "../store/auth";
+import { fetchUser, clearRefreshToken } from "../store/auth";
 import { fetchUsers } from "../store/user";
 import { fetchProblems } from "../store/problem";
 import { fetchResults } from "../store/results";
@@ -21,7 +21,7 @@ const Nav = () => {
   }, []);
 
   const handleClick = () => {
-    dispatch(logout());
+    dispatch(clearRefreshToken());
   };
 
   return (
@@ -44,12 +44,12 @@ const Nav = () => {
             Login
           </p>
         ) : (
-          <>
+          <React.Fragment>
             <Link to="/account">Account</Link>
             <Link to="/" onClick={handleClick}>
               Logout
             </Link>
-          </>
+          </React.Fragment>
         )}
       </NavText>
     </NavMain>

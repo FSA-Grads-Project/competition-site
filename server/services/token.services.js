@@ -1,4 +1,10 @@
+// Third Party Library Imports
 const jwt = require("jsonwebtoken");
+
+// Local Imports
+const {
+  models: { User },
+} = require("../db");
 
 const createRefreshToken = (user, res) => {
   const refreshToken = jwt.sign(
@@ -6,7 +12,7 @@ const createRefreshToken = (user, res) => {
       userId: user.id,
     },
     process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: "1y" }
+    { expiresIn: "90d" }
   );
 
   return refreshToken;
@@ -32,7 +38,7 @@ const createAccessToken = (user) => {
       admin: user.admin,
     },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "5m" }
+    { expiresIn: "10m" }
   );
 
   return accessToken;
@@ -40,7 +46,6 @@ const createAccessToken = (user) => {
 
 const clearRefreshToken = (user, res) => {
   updateUserRefreshToken(user, "");
-
   res.clearCookie("refreshToken", { domain: "localhost", path: "/" });
 };
 
@@ -61,6 +66,40 @@ const updateUserRefreshToken = async (user, refreshToken) => {
   await user.update({ refreshToken: refreshToken });
 };
 
+const verifyToken = async (token, tokenType, res) => {
+  const tokenSecrets = {
+    access: "ACCESS_TOKEN_SECRET",
+    refresh: "REFRESH_TOKEN_SECRET",
+  };
+
+  try {
+    const tokenData = jwt.verify(token, process.env[tokenSecrets[tokenType]]);
+    return tokenData;
+  } catch (err) {
+    if (err.message === "jwt expired" && tokenType === "refresh") {
+      const { userId } = decodeToken(token);
+      const user = await User.findOne({ where: { id: userId } });
+
+      clearRefreshToken(user, res);
+    }
+    throw err;
+  }
+};
+
+const decodeToken = (token) => {
+  let base64Url = token.split(".")[1];
+  let base64 = decodeURIComponent(
+    atob(base64Url)
+      .split("")
+      .map((c) => {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  return JSON.parse(base64);
+};
+
 module.exports = {
   createRefreshToken,
   setRefreshTokenCookie,
@@ -68,4 +107,6 @@ module.exports = {
   clearRefreshToken,
   retrieveCookies,
   updateUserRefreshToken,
+  verifyToken,
+  decodeToken,
 };

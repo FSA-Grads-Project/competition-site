@@ -64,6 +64,15 @@ export const DarkButton = tw.button`
 	rounded-md
 	text-lightBackground
 	text-xl
+	flex
+	flex-row
+	items-center
+`;
+
+export const ButtonIcon = tw.img`
+	p-2
+	w-10
+	h-10
 `;
 
 //modal background

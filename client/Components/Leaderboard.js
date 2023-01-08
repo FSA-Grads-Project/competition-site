@@ -14,9 +14,18 @@ import {
   LeftTableCellHeader,
   RightTableCellHeader,
 } from "../StyledComponents/LeaderboardStyles.tw";
-import { useSelector } from "react-redux";
+import { fetchUsers } from "../store/user";
+import { fetchResults } from "../store/results";
+import { useSelector, useDispatch } from "react-redux";
 
 const Leaderboard = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+    dispatch(fetchResults());
+  }, []);
+
   const [scores, setScores] = useState([]);
 
   const users = useSelector((state) => state.users).users;

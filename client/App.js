@@ -19,10 +19,6 @@ import { login } from "./store/auth";
 const App = () => {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(login());
-  // }, []);
-
   return (
     <div>
       <LoginModal />
