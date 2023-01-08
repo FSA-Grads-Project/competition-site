@@ -2,6 +2,13 @@ const Sequelize = require('sequelize');
 const connection = require('../database');
 
 const Problem = connection.define('problem', {
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
   statement: {
     type: Sequelize.TEXT,
     allowNull: false,
@@ -9,7 +16,7 @@ const Problem = connection.define('problem', {
       notEmpty: true
     }
   },
-  solution: {
+  initialCode: {
     type: Sequelize.TEXT,
     allowNull: false,
     validate: {
@@ -27,6 +34,20 @@ const Problem = connection.define('problem', {
   },
   hint4: {
     type: Sequelize.TEXT
+  },
+  startDate: {
+    type: Sequelize.DATE,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  endDate: {
+    type: Sequelize.DATE,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   spaceWeight: {
     type: Sequelize.FLOAT,
