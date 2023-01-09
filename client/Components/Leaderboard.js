@@ -1,4 +1,8 @@
+// System library imports
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+// Local imports
 import {
   LeaderboardMainDiv,
   Header,
@@ -16,14 +20,17 @@ import {
 } from "../StyledComponents/LeaderboardStyles.tw";
 import { fetchUsers } from "../store/user";
 import { fetchResults } from "../store/results";
-import { useSelector, useDispatch } from "react-redux";
 
 const Leaderboard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUsers());
-    dispatch(fetchResults());
+    const getUsersAndResults = async () => {
+      await dispatch(fetchUsers());
+      await dispatch(fetchResults());
+    };
+
+    getUsersAndResults();
   }, []);
 
   const [scores, setScores] = useState([]);

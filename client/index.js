@@ -5,7 +5,6 @@ import store from "./store";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import "./style.css";
-import { axiosProtected } from "./api/axios";
 
 const container = document.getElementById("root");
 const root = createRoot(container);

@@ -1,29 +1,17 @@
-import React, { useEffect } from "react";
+// System library imports
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUser, clearRefreshToken } from "../store/auth";
-import { fetchUsers } from "../store/user";
-import { fetchCurrentProblem, fetchProblems } from "../store/problem";
-import { fetchResults } from "../store/results";
-import { openLoginModal } from "../store/modal";
 import { Link } from "react-router-dom";
+
+// Local imports
+import { clearRefreshToken } from "../store/auth";
+import { openLoginModal } from "../store/modal";
 import { NavText, NavMain } from "../StyledComponents/NavStyles.tw";
 
 const Nav = () => {
   const { auth } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    // dispatch(fetchUser());
-    // dispatch(fetchUsers());
-    // dispatch(fetchProblems());
-    // dispatch(fetchCurrentPromlem())
-    // dispatch(fetchResults());
-  }, []);
-
-  const handleClick = () => {
-    dispatch(clearRefreshToken());
-  };
 
   return (
     <NavMain>
@@ -47,7 +35,7 @@ const Nav = () => {
         ) : (
           <React.Fragment>
             <Link to="/account">Account</Link>
-            <Link to="/" onClick={handleClick}>
+            <Link to="/" onClick={() => dispatch(clearRefreshToken())}>
               Logout
             </Link>
           </React.Fragment>

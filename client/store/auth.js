@@ -5,11 +5,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { axiosProtected } from "../api/axios";
 import decodeJwt from "../Utils/decodeJwt";
 
+// Retrieves access token using the refresh token passed in via http-only cookie
 export const getAccessToken = createAsyncThunk(
   "/auth/getAccessToken",
   async () => {
     try {
-      // Attempt to get a new access token using the refresh token saved in cookies
       const accessToken = (await axios.get("/sessions/getAccessToken")).data;
 
       const { userId, admin } = decodeJwt(accessToken);
@@ -22,11 +22,11 @@ export const getAccessToken = createAsyncThunk(
   }
 );
 
+// Call backend to delete refresh token from user model and cookies to complete logout
 export const clearRefreshToken = createAsyncThunk(
   "/auth/clearRefreshToken",
   async () => {
     try {
-      // Call backend to delete refresh token from user model and cookies to complete logout
       await axiosProtected.get("/sessions/clearRefreshToken");
       return {};
     } catch (err) {
@@ -35,6 +35,7 @@ export const clearRefreshToken = createAsyncThunk(
   }
 );
 
+// Retrieves user to include the alias but we can merge this with 'getAccessToken' since that gets other user info anyway
 export const fetchUser = createAsyncThunk("/auth/fetchUser", async () => {
   try {
     const user = (await axiosProtected.get("/users/user")).data;

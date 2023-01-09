@@ -1,7 +1,11 @@
+// System library imports
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+
+// Local imports
 import {
   ModalBackground,
+  ModalBox,
   DarkButton,
   ButtonIcon,
 } from "../StyledComponents/GlobalStyles.tw";
@@ -25,7 +29,7 @@ const LoginModal = () => {
         }
       }}
     >
-      <div className="bg-darkBackground p-10 px-15 rounded-xl flex flex-col justify-center font-playfair items-center">
+      <ModalBox>
         <p className="text-center text-3xl">Welcome Back To</p>
         <p className="text-center text-5xl font-black">The Dispatch</p>
         <p className="text-center text-xl p-2 pt-7">Sign In Below</p>
@@ -38,7 +42,7 @@ const LoginModal = () => {
           <ButtonIcon src={"/icons/googleLogo.png"} />
           Log In With Google
         </DarkButton>
-      </div>
+      </ModalBox>
     </ModalBackground>
   );
 };

@@ -1,38 +1,58 @@
-import React from 'react';
-import { useSelector } from "react-redux";
-const { faker } = require('@faker-js/faker');
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchCurrentProblem, fetchProblems } from "../store/problem";
+const { faker } = require("@faker-js/faker");
 
-import { MainDiv, PreviousProblemsDiv, MainHeader, PrevProblem, ProblemsHeader, ProblemStatmentDiv, ProblemLinkDiv, ProblemDetailLink} from '../StyledComponents/PreviousProblems.tw';
+import {
+  MainDiv,
+  PreviousProblemsDiv,
+  MainHeader,
+  PrevProblem,
+  ProblemsHeader,
+  ProblemStatmentDiv,
+  ProblemLinkDiv,
+  ProblemDetailLink,
+} from "../StyledComponents/PreviousProblems.tw";
 
 const PreviousProblems = () => {
-    const problems = useSelector(state => state.problems).problems;
+  const problems = useSelector((state) => state.problems).problems;
 
+  const dispatch = useDispatch();
 
-   
+  useEffect(() => {
+    const getProblems = async () => {
+      await dispatch(fetchProblems());
+      await dispatch(fetchCurrentProblem());
+    };
 
-    return (
-      <MainDiv>
-        <MainHeader> Past Issues </MainHeader>
-        <PreviousProblemsDiv>
-          {
-            problems.map(problem => {
-              return (
-                <PrevProblem key={problem.id}>
-                    <ProblemsHeader> Your Treasure Awaits! </ProblemsHeader>
+    getProblems();
+  }, []);
 
-                    <ProblemStatmentDiv> { faker.lorem.paragraph(1)  } </ProblemStatmentDiv>
-                    <ProblemLinkDiv>
-                       <ProblemDetailLink href={`/problems/${problem.id}`}> Continue here... </ProblemDetailLink>
+  return (
+    <MainDiv>
+      <MainHeader> Past Issues </MainHeader>
+      <PreviousProblemsDiv>
+        {problems.map((problem) => {
+          return (
+            <PrevProblem key={problem.id}>
+              <ProblemsHeader> Your Treasure Awaits! </ProblemsHeader>
 
-                    </ProblemLinkDiv>
-
-                  </PrevProblem>
-              )
-            })
-          }
-        </PreviousProblemsDiv>
-      </MainDiv>
-    )
+              <ProblemStatmentDiv>
+                {" "}
+                {faker.lorem.paragraph(1)}{" "}
+              </ProblemStatmentDiv>
+              <ProblemLinkDiv>
+                <ProblemDetailLink href={`/problems/${problem.id}`}>
+                  {" "}
+                  Continue here...{" "}
+                </ProblemDetailLink>
+              </ProblemLinkDiv>
+            </PrevProblem>
+          );
+        })}
+      </PreviousProblemsDiv>
+    </MainDiv>
+  );
 };
 
-export default PreviousProblems
+export default PreviousProblems;

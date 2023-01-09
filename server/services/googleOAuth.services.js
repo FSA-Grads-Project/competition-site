@@ -1,3 +1,4 @@
+// Function to retrieve id and access tokens from google using the google code & client info
 const getGoogleTokens = async (code, axios) => {
   const url = "https://oauth2.googleapis.com/token";
 
@@ -44,6 +45,7 @@ const refreshGoogleTokens = async (refreshToken, axios) => {
   ).data;
 };
 
+// Function to retrieve user info from googleAPI using the id and access tokens provided by google
 const getUserInfo = async (id_token, access_token, axios) => {
   const res = await axios.get(
     `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${access_token}`,
@@ -53,8 +55,6 @@ const getUserInfo = async (id_token, access_token, axios) => {
       },
     }
   );
-
-  // console.log(res.data);
 
   return res.data;
 };

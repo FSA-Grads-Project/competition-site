@@ -1,4 +1,7 @@
+// System library imports
 import axios from "axios";
+
+// Local imports
 import store from "../store/index";
 import { getAccessToken, logout } from "../store/auth";
 

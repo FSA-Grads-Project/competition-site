@@ -71,7 +71,7 @@ export const ButtonIcon = tw.img`
 	h-10
 `;
 
-//modal background
+// modal background
 export const ModalBackground = tw.div`
 	bg-darkFont
 	fixed
@@ -83,11 +83,15 @@ export const ModalBackground = tw.div`
 	bg-opacity-80
 `;
 
-// fixed
-// inset-0
-// backdrop-blur-sm
-// bg-black
-// bg-opacity-100
-// flex
-// justify-center
-// items-center
+// Modal box container
+export const ModalBox = tw.div`
+	bg-darkBackground 
+	p-10 
+	px-15 
+	rounded-xl 
+	flex 
+	flex-col 
+	justify-center 
+	font-playfair 
+	items-center
+`;

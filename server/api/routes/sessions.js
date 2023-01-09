@@ -3,9 +3,6 @@ const express = require("express");
 const axios = require("axios");
 const router = express.Router();
 
-// Third Party Library Imports
-const jwt = require("jsonwebtoken");
-
 // Local Imports
 const {
   models: { User },
@@ -74,6 +71,8 @@ router.get("/oauth/google", async (req, res, next) => {
   }
 });
 
+/* Route to get new access token from refresh token
+	 Also creates new refresh token as part of refresh token rotation security measures */
 router.get("/getAccessToken", async (req, res, next) => {
   try {
     // Retrieve cookies from request (only cookie we care about is the refresh token)
@@ -123,6 +122,7 @@ router.get("/getAccessToken", async (req, res, next) => {
   }
 });
 
+/* Remove refresh token from user and clear refresh token cookie to sign user out */
 router.get("/clearRefreshToken", async (req, res, next) => {
   try {
     const cookies = retrieveCookies(req);
