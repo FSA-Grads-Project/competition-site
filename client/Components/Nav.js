@@ -1,49 +1,48 @@
-import React, { useEffect } from 'react';
+// System library imports
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUser, logout } from '../store/auth';
-import { fetchUsers } from '../store/user';
-import { fetchCurrentProblem, fetchProblems } from '../store/problem';
-import { fetchResults } from '../store/results';
-import { Link } from 'react-router-dom';
-import { NavText, NavMain } from '../StyledComponents/NavStyles.tw';
+import { Link } from "react-router-dom";
+
+// Local imports
+import { clearRefreshToken } from "../store/auth";
+import { openLoginModal } from "../store/modal";
+import { NavText, NavMain } from "../StyledComponents/NavStyles.tw";
 
 const Nav = () => {
+  const { auth } = useSelector((state) => state.auth);
 
-    const { auth } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-
-    useEffect(()=> {
-        dispatch(fetchUser());
-        dispatch(fetchUsers());
-        dispatch(fetchProblems());
-        dispatch(fetchCurrentProblem());
-        dispatch(fetchResults());
-    }, []);
-
-    const handleClick = () => {
-      dispatch(logout());
-    };
-  
-    return (
-      <NavMain>
-        <NavText><Link to='/problem'>Current Issue</Link></NavText>
-        <NavText><Link to='/pastissues'>Past Issues</Link></NavText>
-        <NavText><Link to='/about'>About</Link></NavText>
-        <NavText>
-          {
-            !auth.id ? (
-              <Link to='/login'>Login</Link>
-            ) : ( 
-              <>
-                <Link to='/account'>Account</Link>
-                <Link to='/' onClick={handleClick}>Logout</Link>
-              </>
-            )
-          }
-        </NavText>
-      </NavMain>
-    )
+  return (
+    <NavMain>
+      <NavText>
+        <Link to="/problem">Current Issue</Link>
+      </NavText>
+      <NavText>
+        <Link to="/pastissues">Past Issues</Link>
+      </NavText>
+      <NavText>
+        <Link to="/about">About</Link>
+      </NavText>
+      <NavText>
+        {!auth.id ? (
+          <p
+            className="cursor-pointer"
+            onClick={() => dispatch(openLoginModal())}
+          >
+            Login
+          </p>
+        ) : (
+          <React.Fragment>
+            <Link to="/account">Account</Link>
+            <Link to="/" onClick={() => dispatch(clearRefreshToken())}>
+              Logout
+            </Link>
+          </React.Fragment>
+        )}
+      </NavText>
+    </NavMain>
+  );
 };
 
-export default Nav
+export default Nav;

@@ -18,5 +18,7 @@ Data structures and algorithms competition site
 2. create pull request in forked repo
 3. each pull request requires two approvers - the second approver merges the changes
 4. pull changes to your local repo (i.e. git pull upstream main)
-5. sync your forked repo on GitHub 
+5. sync your forked repo on GitHub
 6. extra: send a message in slack informing of any pushes or approvals
+
+pw - theDispatchFSA

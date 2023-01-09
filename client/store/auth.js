@@ -1,98 +1,109 @@
-import { createSlice,  createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+// System Library Imports
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getUser = async () => {
-  const token = window.localStorage.getItem('token');
-  if (token) {
-    const response = await axios.get('/auth/user', {
-      headers: { authorization: token }
-    });
-    return response.data;
+// Local Imports
+import axios, { axiosProtected } from "../api/axios";
+import decodeJwt from "../Utils/decodeJwt";
+
+// Retrieves access token using the refresh token passed in via http-only cookie
+export const getAccessToken = createAsyncThunk(
+  "/auth/getAccessToken",
+  async () => {
+    try {
+      const accessToken = (await axios.get("/sessions/getAccessToken")).data;
+
+      const { userId, admin } = decodeJwt(accessToken);
+
+      // Returns the userId, admin status and access token to the redux store state
+      return { id: userId, admin, accessToken };
+    } catch (err) {
+      throw new Error(err);
+    }
   }
-  return {};
-};
+);
 
-export const login = createAsyncThunk('auth/setAuth', 
-async ({ username, password }, { rejectWithValue }) => {
+// Call backend to delete refresh token from user model and cookies to complete logout
+export const clearRefreshToken = createAsyncThunk(
+  "/auth/clearRefreshToken",
+  async () => {
+    try {
+      await axiosProtected.get("/sessions/clearRefreshToken");
+      return {};
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+);
+
+// Retrieves user to include the alias but we can merge this with 'getAccessToken' since that gets other user info anyway
+export const fetchUser = createAsyncThunk("/auth/fetchUser", async () => {
   try {
-    const response = await axios.post('/auth/login', { username, password });
-    window.localStorage.setItem('token', response.data.token);
-    return await getUser();
-  } catch(ex) {
-    throw rejectWithValue(ex.response.data);
+    const user = (await axiosProtected.get("/users/user")).data;
+    return user;
+  } catch (err) {
+    throw new Error(err);
   }
-});
-
-export const createUser = createAsyncThunk('/auth/createUser',
-async (user, { rejectWithValue }) => {
-  try {
-    const response = await axios.post('/auth/signup', user);
-    return response.data;
-  } catch(ex) {
-    throw rejectWithValue(ex.response.data); 
-  }
-});
-
-export const fetchUser = createAsyncThunk('auth/getAuth', 
-async () => {
-  return await getUser();
 });
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
     auth: {},
-    status: '',
-    error: '' 
+    user: {},
+    status: "",
+    error: "",
   },
   reducers: {
     logout: (state) => {
-      window.localStorage.removeItem('token');
       state.auth = {};
-      state.status = '';
+      state.user = {};
+      state.state = "";
+      state.error = "";
     },
-    updateStatusSignUp: (state) => {
-      state.status = '';
-    }
   },
   extraReducers: {
-    [login.pending]: (state, action) => {
-      state.status = 'authenticating';
-      state.error = '';
+    [getAccessToken.pending]: (state, action) => {
+      state.status = "authenticating";
+      state.error = "";
     },
-    [login.fulfilled]: (state, action) => {
-      state.status = 'authenticated';
+    [getAccessToken.fulfilled]: (state, action) => {
+      state.status = "authenticated";
       state.auth = action.payload;
-      state.error = '';
+      state.error = "";
     },
-    [login.rejected]: (state, action) => {
-      state.status = 'rejected';
-      state.error = action.payload;
+    [getAccessToken.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = action.error;
     },
-    [createUser.pending]: (state, action) => {
-      state.status = 'creating user';
-      state.error = '';
+    [clearRefreshToken.pending]: (state, action) => {
+      state.status = "logging out user";
+      state.error = "";
     },
-    [createUser.fulfilled]: (state, action) => {
-      state.status = 'user created';
-      state.auth = {};
-      state.error = '';
+    [clearRefreshToken.fulfilled]: (state, action) => {
+      state.status = "";
+      state.auth = action.payload;
+      state.error = "";
     },
-    [createUser.rejected]: (state, action) => {
-      state.status = 'rejected';
-      state.error = action.payload;
+    [clearRefreshToken.rejected]: (state, action) => {
+      state.status = "logout failed";
+      state.error = action.error;
     },
     [fetchUser.pending]: (state, action) => {
-      state.status = 'checking authentication';
-      state.error = '';
+      state.status = "fetching User";
+      state.error = "";
     },
     [fetchUser.fulfilled]: (state, action) => {
-      state.status = 'authentication check completed';
-      state.auth = action.payload;
-      state.error = '';
-    }
-  }
+      state.status = "";
+      state.user = action.payload;
+      state.error = "";
+    },
+    [fetchUser.rejected]: (state, action) => {
+      state.status = "fetchUserFailed";
+      state.error = action.error;
+    },
+  },
 });
 
-export const { logout, updateStatusSignUp } = authSlice.actions;
 export default authSlice.reducer;
+
+export const { logout } = authSlice.actions;

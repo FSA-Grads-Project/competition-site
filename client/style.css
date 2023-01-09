@@ -3,14 +3,15 @@
 @tailwind utilities;
 
 * {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 body {
-    background-color: #FDF5E8;
+  background-color: #fdf5e8;
+  color: #333333;
 }
 
 .CodeMirror-selected {
-	/* selected text */
-	 background: #0663d3 !important;
+  /* selected text */
+  background: #0663d3 !important;
 }
