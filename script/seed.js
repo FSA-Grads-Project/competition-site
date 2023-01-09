@@ -184,7 +184,7 @@ function runSubmission() {
 
   let result = findSherman(root);
 
-  let resultTest = '';
+  let resultTest = "";
 
   if (result === 49999) {
     resultTest = 'test passed: sherman was at node 49999'; 
