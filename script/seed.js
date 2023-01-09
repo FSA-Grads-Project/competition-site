@@ -78,7 +78,7 @@ class binaryTree {
     this.right = null; 
   }
 }
-findSherman()
+runSubmission()
 `,
     hint1: `Sherman is a crazy cat that likes to climb the tallest outside
 branches of the tree.`,
@@ -192,8 +192,7 @@ function runSubmission() {
 
   return resultTest;
 }
-
-runSubmission();`,
+`,
   });
 
   test1.problemId = problem4.id;

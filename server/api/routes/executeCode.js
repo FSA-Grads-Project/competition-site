@@ -9,6 +9,9 @@ function executeCode (code, problem, res) {
   
   // create filepath in temp folder utilizing random filename 
   let filePath = path.join(__dirname, `/temp/${fileName}`);
+
+	// create problem code to be used for consoleScript
+	const consoleProblem = problem.replace('return resultTest', '//return resultTest')
   
   // create script to pass to docker container that contains code execution process to capture test output + console output
   const runCode = `
@@ -16,11 +19,11 @@ function executeCode (code, problem, res) {
         try {
           const sandbox = {}
           vm.createContext(sandbox);
-          let script = new vm.Script(${JSON.stringify(code + problem)});
+          let script = new vm.Script(${JSON.stringify(problem + code)});
           const contextOutput = script.runInContext(sandbox, {
             console: console,
           });
-          let consoleScript = new vm.Script(eval(${JSON.stringify(code)}));
+          let consoleScript = new vm.Script(eval(${JSON.stringify(consoleProblem + code)}));
           console.log(contextOutput)
         } catch(err) {
         console.log(err)
