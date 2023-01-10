@@ -16,8 +16,11 @@ function executeCode (code, problem, res) {
   // create script to pass to docker container that contains code execution process to capture test output + console output
   const runCode = `
         const vm = require('vm');
+        const process = require('process');
         try {
-          const sandbox = {}
+          const sandbox = {
+            process: process,
+          }
           vm.createContext(sandbox);
           let script = new vm.Script(${JSON.stringify(problem + code)});
           const contextOutput = script.runInContext(sandbox, {

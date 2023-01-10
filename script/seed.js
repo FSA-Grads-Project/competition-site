@@ -179,18 +179,21 @@ function binaryTreeGenerator(N, nodeSherman) {
 function runSubmission() {
 
   const root = binaryTreeGenerator(50000, 50000);
-
+  let start = process.hrtime.bigint();
   let result = findSherman(root);
-
+  let end = process.hrtime.bigint();
   let resultTest = "";
 
   if (result === 49999) {
-    resultTest = 'test passed: sherman was at node 49999'; 
+    resultTest = 'test passed: sherman was at node 49999';
   } else {
     resultTest = 'test failed';
   }
 
-  return resultTest;
+  let resultMemory = process.memoryUsage().heapUsed;
+  let resultTime = end - start;
+
+ return resultTest + ', ' + resultTime + ', ' + resultMemory
 }
 `,
   });
