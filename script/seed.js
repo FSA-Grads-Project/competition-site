@@ -193,7 +193,7 @@ function runSubmission() {
   let resultMemory = process.memoryUsage().heapUsed;
   let resultTime = end - start;
 
- return resultTest + ', ' + resultTime + ', ' + resultMemory
+  return resultTest + ',' + 'resultTime: ' + resultTime + ',' + 'resultMemory: ' + resultMemory
 }
 `,
   });

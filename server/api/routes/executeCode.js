@@ -58,7 +58,7 @@ function executeCode (code, problem, res) {
           // prepare test results + consoles for front end
           stdout = stdout.split('\n')
           stdout = stdout.filter(Boolean)
-          let results = {contextOutput: stdout[stdout.length - 1]}
+          let results = {contextOutput: stdout[stdout.length - 1].split(",")}
           stdout.pop();
           results.consoleOutput = stdout
           console.log(results)
