@@ -55,7 +55,7 @@ export const Problem = () => {
   const editor = useRef();
 
   const [code, setCode] = useState("");
-  const [contextOutput, setContextOutput] = useState("See Output Here");
+  const [contextOutput, setContextOutput] = useState([]);
   const [consoleOutput, setConsoleOutput] = useState([]);
 
   const onUpdate = EditorView.updateListener.of((v) => {
@@ -159,9 +159,15 @@ export const Problem = () => {
           <OutputDiv>
             <ContextOutput>
               {" "}
-              {contextOutput[0] === null
+              {contextOutput.length < 1
                 ? "See Output Here"
-                : contextOutput}{" "}
+                : contextOutput.map((context, i) => {
+                    return (
+                      <ul key={i}>
+                        <li> {context} </li>
+                      </ul>
+                    );
+                  })}{" "}
             </ContextOutput>
             <ConsoleOutput>
               {" "}
