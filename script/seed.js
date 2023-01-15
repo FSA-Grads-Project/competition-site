@@ -183,15 +183,18 @@ function runSubmission() {
   let result = findSherman(root);
   let end = process.hrtime.bigint();
   let resultTest = "";
+  let resultMemory;
+  let resultTime;
 
   if (result === 49999) {
     resultTest = 'test passed: sherman was at node 49999';
+    resultMemory = process.memoryUsage().heapUsed;
+    resultTime = end - start;
   } else {
     resultTest = 'test failed';
+    resultMemory = 'None.'
+    resultTime = 'None.'
   }
-
-  let resultMemory = process.memoryUsage().heapUsed;
-  let resultTime = end - start;
 
   return resultTest + ',' + 'resultTime: ' + resultTime + ',' + 'resultMemory: ' + resultMemory
 }
