@@ -33,4 +33,33 @@ const verifyUser = async (req, res, next) => {
   }
 };
 
-module.exports = verifyUser;
+const softVerifyUser = async (req, res, next) => {
+  try {
+    const refreshToken = retrieveCookies(req).refreshToken;
+
+    const accessToken = req.headers.accesstoken;
+
+    if (!accessToken || !refreshToken) {
+      next();
+      return;
+    }
+
+    await verifyToken(refreshToken, "refresh", res);
+    const { userId } = await verifyToken(accessToken, "access", res);
+
+    req.user = await User.findOne({
+      where: {
+        id: userId,
+      },
+    });
+
+    next();
+  } catch (ex) {
+    if (ex.message === "jwt expired") {
+      res.status(403).send(ex);
+    }
+    next(ex);
+  }
+};
+
+module.exports = { verifyUser, softVerifyUser };

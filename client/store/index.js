@@ -1,11 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import logger from "redux-logger";
-import thunk from "redux-thunk";
 import authSlice from "./auth";
 import userSlice from "./user";
 import problemSlice from "./problem";
 import modalSlice from "./modal";
 import resultsSlice from "./results";
+import solutionSlice from "./solution";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +13,7 @@ const store = configureStore({
     problems: problemSlice,
     results: resultsSlice,
     modals: modalSlice,
+    solution: solutionSlice,
   },
 });
 

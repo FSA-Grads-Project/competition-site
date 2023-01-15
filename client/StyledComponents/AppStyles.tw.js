@@ -1,6 +1,6 @@
 import tw from "tailwind-styled-components";
 
-export const Header = tw.div`
+export const Head = tw.div`
     flex
     justify-between
     items-center 

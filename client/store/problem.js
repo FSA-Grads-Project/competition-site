@@ -1,58 +1,53 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import { axiosProtected } from "../api/axios";
 
 // creating thunk
 
-export const fetchProblems = createAsyncThunk('problems/getProblems',
-async () => {
-    const response = await axios.get('/api/problems');
-    // console.log(response.data)
-    return response.data
-});
+export const fetchProblems = createAsyncThunk(
+  "problems/getProblems",
+  async () => {
+    const response = await axios.get("/api/problems");
+    return response.data;
+  }
+);
 
-export const fetchCurrentProblem = createAsyncThunk('problems/getCurrentProblem',
-async () => {
-    const response = await axios.get('/api/problems');
-    const problems = response.data;
+export const fetchProblem = createAsyncThunk(
+  "problems/getProblem",
+  async (id) => {
+    const response = await axiosProtected.get(`/problems/${id}`);
+    const problem = response.data;
 
-    const currentDate = new Date();
-    const currentDateAsTime = currentDate.getTime();
-
-    const problemsFiltered = problems.filter((problem) => {
-        const startDate = Date.parse(problem.startDate);
-        const endDate = Date.parse(problem.endDate);
-        return startDate < currentDateAsTime && endDate > currentDateAsTime;
-    });
-
-    return problemsFiltered[0];
-});
+    return problem;
+  }
+);
 
 // createSlice creates the action + reducer
 
 export const problemSlice = createSlice({
-    name: 'problems',
-    initialState: {
-        currentProblem: {},
-        problems: [],
-        status: 'idle',
+  name: "problems",
+  initialState: {
+    problem: {},
+    problems: [],
+    status: "idle",
+  },
+  reducers: {},
+  extraReducers: {
+    [fetchProblem.pending]: (state, action) => {
+      state.status = "loading";
     },
-    reducers: {},
-    extraReducers: {
-        [fetchCurrentProblem.pending]: (state, action) => {
-            state.status = 'loading'
-        },
-        [fetchCurrentProblem.fulfilled]: (state, action) => {
-            state.status = 'succeeded';
-            state.currentProblem = action.payload;
-        },
-        [fetchProblems.pending]: (state, action) => {
-            state.status = 'loading'
-        },
-        [fetchProblems.fulfilled]: (state, action) => {
-            state.status = 'succeeded';
-            state.problems = action.payload;
-        }
-    }
+    [fetchProblem.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.problem = action.payload;
+    },
+    [fetchProblems.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [fetchProblems.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.problems = action.payload;
+    },
+  },
 });
 
 export default problemSlice.reducer;
