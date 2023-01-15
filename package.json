@@ -6,11 +6,11 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "build:dev": "npm run build -- --watch --mode=development",
+    "build:dev": "npm run build -- --watch --mode=development & npm run build:image",
     "start": "node server",
     "build:image": "docker inspect --type=image node:18.7.0 --format='ignore_me' || docker pull node:18.7.0",
     "start:dev": "npm run build:dev & npm run start:server",
-    "start:server": "nodemon server --ignore public --ignore server/api/routes/temp & npm run build:image",
+    "start:server": "nodemon server --ignore public --ignore server/api/routes/temp",
     "seed": "node script/seed",
     "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
     "test": "echo \"Error: no test specified\" && exit 1"
