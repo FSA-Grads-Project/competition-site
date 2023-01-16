@@ -56,6 +56,7 @@ export const DarkButton = tw.button`
 	bg-darkFont
 	p-2
 	px-6
+	m-2
 	font-cormorant-sc
 	rounded-md
 	text-lightBackground

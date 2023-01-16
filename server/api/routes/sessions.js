@@ -14,6 +14,16 @@ const {
 } = require("../../services/googleOAuth.services");
 
 const {
+  getGithubTokens,
+  getGithubUserInfo,
+} = require("../../services/githubOAuth.services");
+
+const {
+  getLinkedinTokens,
+  getLinkedinUserInfo,
+} = require("../../services/linkedinOAuth.services");
+
+const {
   createRefreshToken,
   setRefreshTokenCookie,
   createAccessToken,
@@ -49,6 +59,94 @@ router.get("/oauth/google", async (req, res, next) => {
       user = await User.create({
         providerId: googleUser.id,
         provider: "GOOGLE",
+        alias: `anonymousUser${(Math.random() + 1)
+          .toString(36)
+          .substring(2, 10)}`,
+      });
+    }
+
+    // create refresh token
+    const refreshToken = createRefreshToken(user);
+
+    // Update user with refresh token
+    updateUserRefreshToken(user, refreshToken);
+
+    // set cookies
+    setRefreshTokenCookie(refreshToken, res);
+
+    // redirect back to client
+    res.redirect("http://localhost:3000/login");
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+/* Route redirected directly from github -- contains code */
+router.get("/oauth/github", async (req, res, next) => {
+  try {
+    // Get the code from querystring
+    const code = req.query.code;
+
+    // Get the id and access tokens with the code
+    const access_token = await getGithubTokens(code, axios);
+
+    // Get githubUser with tokens
+    const githubUser = await getGithubUserInfo(access_token, axios);
+
+    // Check if user already exists in the User model
+    let user = await User.findOne({
+      where: { providerId: githubUser.id.toString(), provider: "GITHUB" },
+    });
+
+    // If user does not exist, create new user
+    if (!user) {
+      user = await User.create({
+        providerId: githubUser.id.toString(),
+        provider: "GITHUB",
+        alias: `anonymousUser${(Math.random() + 1)
+          .toString(36)
+          .substring(2, 10)}`,
+      });
+    }
+
+    // create refresh token
+    const refreshToken = createRefreshToken(user);
+
+    // Update user with refresh token
+    updateUserRefreshToken(user, refreshToken);
+
+    // set cookies
+    setRefreshTokenCookie(refreshToken, res);
+
+    // redirect back to client
+    res.redirect("http://localhost:3000/login");
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+/* Route redirected directly from linkedin -- contains code */
+router.get("/oauth/linkedin", async (req, res, next) => {
+  try {
+    // Get the code from querystring
+    const code = req.query.code;
+
+    // Get the id and access tokens with the code
+    const access_token = await getLinkedinTokens(code, axios);
+
+    // Get linkedinUser with tokens
+    const linkedinUser = await getLinkedinUserInfo(access_token, axios);
+
+    // Check if user already exists in the User model
+    let user = await User.findOne({
+      where: { providerId: linkedinUser.id.toString(), provider: "LINKEDIN" },
+    });
+
+    // If user does not exist, create new user
+    if (!user) {
+      user = await User.create({
+        providerId: linkedinUser.id.toString(),
+        provider: "LINKEDIN",
         alias: `anonymousUser${(Math.random() + 1)
           .toString(36)
           .substring(2, 10)}`,
