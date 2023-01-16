@@ -7,6 +7,7 @@ export const SubmitButton = tw.button`
   font-cormorant-sc
   text-2xl
   w-1/3
+	disabled:bg-disabledButtonBackground
 `;
 
 export const EvaluateButton = tw.button`
@@ -81,7 +82,8 @@ export const ModalBackground = tw.div`
 	justify-center
 	items-center
 	backdrop-blur-sm
-	bg-opacity-80
+	bg-opacity-70
+	z-10
 `;
 
 // Modal box container

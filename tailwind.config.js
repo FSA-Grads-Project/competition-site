@@ -19,6 +19,7 @@ module.exports = {
       darkBackground: "#EDE4C5",
       darkFont: "#333333",
       blackColor: "#000000",
+      disabledButtonBackground: "#E6E2D8",
     },
     extend: {
       fontFamily: {

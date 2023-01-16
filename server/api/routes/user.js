@@ -5,7 +5,7 @@ const express = require("express");
 const router = express.Router();
 
 /* middleware for protecting routes */
-const verifyUser = require("../../services/verifyUser.services");
+const { verifyUser } = require("../../services/verifyUser.services");
 
 /* get all users */
 router.get("/", async (req, res, next) => {
