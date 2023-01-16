@@ -29,6 +29,7 @@ const initialization = async () => {
   const problem1 = await Problem.create({
     title: "linked list",
     statement: "Find the first null node in the linked list",
+    blurb: "Find the first null node in the linked list",
     initialCode: "no starter code",
     startDate: "2022-10-01 00:00:00",
     endDate: "2022-11-01 00:00:00",
@@ -39,6 +40,7 @@ const initialization = async () => {
   const problem2 = await Problem.create({
     title: "nodes",
     statement: "Find the first null node in ",
+    blurb: "Find the first null node in ",
     initialCode: "no starter code",
     startDate: "2022-11-01 00:00:00",
     endDate: "2022-12-01 00:00:00",
@@ -49,6 +51,7 @@ const initialization = async () => {
   const problem3 = await Problem.create({
     title: "linked list",
     statement: "Find the first null node in the linked list",
+    blurb: "Find the first null node in the linked list",
     initialCode: "no starter code",
     startDate: "2022-12-01 00:00:00",
     endDate: "2023-01-01 00:00:00",
@@ -65,6 +68,7 @@ department put out a four-alarm fire. Your goal is to help the
 firefighters by developing a function that accepts the root
 node of the binary tree as an argument and returns the number
 of the node where Sherman the cat is located.`,
+    blurb: `Local firefighters have been called to rescue a cat named Sherman who's stuck in a tree. Log in for more details to see if you'll be able to help the firefighters get him down safely`,
     initialCode: `function findSherman(root) {
   // write your code here
 }
@@ -83,7 +87,7 @@ runSubmission()
     hint1: `Sherman is a crazy cat that likes to climb the tallest outside
 branches of the tree.`,
     startDate: "2023-01-01 00:00:00",
-    endDate: "2023-02-01 00:00:00",
+    endDate: "2023-01-31T02:47:34.577Z",
     spaceWeight: 0.75,
     timeWeight: 0.25,
   });

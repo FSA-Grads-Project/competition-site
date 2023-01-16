@@ -1,7 +1,12 @@
+// System Library Imports
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCurrentProblem, fetchProblems } from "../store/problem";
+
+// Third Party Library Imports
 const { faker } = require("@faker-js/faker");
+
+// Local Imports
+import { fetchProblems } from "../store/problem";
 
 import {
   MainDiv,
@@ -22,7 +27,6 @@ const PreviousProblems = () => {
   useEffect(() => {
     const getProblems = async () => {
       await dispatch(fetchProblems());
-      await dispatch(fetchCurrentProblem());
     };
 
     getProblems();

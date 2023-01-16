@@ -4,21 +4,60 @@ const {
 const express = require("express");
 const router = express.Router();
 
-/* middleware for protecting routes */
-const verifyUser = require("../../services/verifyUser.services");
+const { Op } = require("sequelize");
 
-/* get all problems */
+/* middleware for protecting routes */
+const {
+  verifyUser,
+  softVerifyUser,
+} = require("../../services/verifyUser.services");
+
+/* get all problems except current*/
 router.get("/", async (req, res, next) => {
   try {
     const problems = await Problem.findAll();
-    res.json(problems);
+    res.json(problems.filter((problem) => !problem.current));
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+// get current problem
+router.get("/current", softVerifyUser, async (req, res, next) => {
+  try {
+    const now = new Date();
+
+    const problem = await Problem.findOne({
+      attributes: [
+        "id",
+        "title",
+        "initialCode",
+        "hint1",
+        "hint2",
+        "hint3",
+        "hint4",
+        "startDate",
+        "endDate",
+        req.user ? "statement" : "blurb",
+      ],
+      where: {
+        endDate: {
+          [Op.gt]: now,
+        },
+        startDate: {
+          [Op.lte]: now,
+        },
+      },
+    });
+
+    res.json(problem);
   } catch (ex) {
     next(ex);
   }
 });
 
 /* get problem by id */
-router.get("/:id", verifyUser, async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const problem = await Problem.findByPk(req.params.id);
     res.json(problem);
