@@ -61,7 +61,7 @@ router.put("/solution/:id", verifyUser, async (req, res, next) => {
       await result.update({ ...req.body, completeDatetime: now });
     }
 
-    console.log(result);
+    // console.log(result);
 
     res.json(result);
   } catch (ex) {

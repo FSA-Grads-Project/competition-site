@@ -12,7 +12,7 @@ const getGoogleOAuthURL = () => {
       "https://www.googleapis.com/auth/userinfo.email",
     ].join(" "),
   };
-
+  console.log(options)
   const queryString = new URLSearchParams(options);
 
   return `${rootUrl}?${queryString.toString()}`;
