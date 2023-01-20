@@ -40,6 +40,7 @@ const LoginModal = () => {
           onClick={() => {
             const URL = getGoogleOAuthURL();
             window.location.href = URL;
+            console.log(URL)
           }}
         >
           <ButtonIcon src={"/icons/googleLogo.png"} />

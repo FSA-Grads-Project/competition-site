@@ -38,6 +38,7 @@ router.get("/current", softVerifyUser, async (req, res, next) => {
         "hint4",
         "startDate",
         "endDate",
+        "current",
         req.user ? "statement" : "blurb",
       ],
       where: {
