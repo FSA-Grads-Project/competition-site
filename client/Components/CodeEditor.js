@@ -113,11 +113,6 @@ export const CodeEditor = () => {
     }
   };
 
-  /* Currently the problem id is appended onto the existing route.
-     As discussed, it may be better to change the route to be 
-     /api/problems/:id/submit. Or, to include the user id it might
-     need to be something like /api/problems/:id/users/:id/submit.*/
-
   const onSubmit = () => {
     dispatch(openSubmitModal());
   };
