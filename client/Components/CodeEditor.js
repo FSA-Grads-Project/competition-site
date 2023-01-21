@@ -54,7 +54,7 @@ export const CodeEditor = () => {
   const auth = useSelector((state) => state.auth).auth;
   const editor = useRef();
   const solutionCode = useSelector((state) => state.solution?.solution?.solutionCode);
-  const initialCode = useSelector((state) => state.problems?.problem?.initialCode);
+  const defaultCode = useSelector((state) => state.problems?.problem?.initialCode);
   const solution = useSelector((state) => state.solution);
   const problem = useSelector((state) => state.problems.problem)
 
@@ -69,9 +69,10 @@ export const CodeEditor = () => {
   
   const dispatch = useDispatch();
   useEffect(() => {
+    const initialCode = solutionCode || defaultCode
 
       const state = EditorState.create({
-        doc: initialCode || solutionCode,
+        doc: initialCode,
         extensions: [
           basicSetup,
           keymap.of([defaultKeymap, indentWithTab]),
