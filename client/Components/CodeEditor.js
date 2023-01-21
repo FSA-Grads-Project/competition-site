@@ -2,9 +2,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-// Local Imports
-import { useLocation } from "react-router-dom";
-
 // Third Party Library Imports
 import { EditorState, basicSetup } from "@codemirror/basic-setup";
 import { EditorView, keymap } from "@codemirror/view";
