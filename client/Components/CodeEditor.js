@@ -2,6 +2,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+// Local Imports
+import { useLocation } from "react-router-dom";
+
 // Third Party Library Imports
 import { EditorState, basicSetup } from "@codemirror/basic-setup";
 import { EditorView, keymap } from "@codemirror/view";
@@ -53,8 +56,10 @@ let baseTheme = EditorView.theme({
 export const CodeEditor = () => {
   const auth = useSelector((state) => state.auth).auth;
   const editor = useRef();
-  const solution = useSelector((state) => state);
-  const problem = useSelector((state) => state);
+  const solutionCode = useSelector((state) => state.solution?.solution?.solutionCode);
+  const initialCode = useSelector((state) => state.problems?.problem?.initialCode);
+  const solution = useSelector((state) => state.solution);
+  const problem = useSelector((state) => state.problems.problem)
 
   const [code, setCode] = useState("");
   const [contextOutput, setContextOutput] = useState([]);
@@ -67,10 +72,9 @@ export const CodeEditor = () => {
   
   const dispatch = useDispatch();
   useEffect(() => {
-    const initialCode = solution.solution?.solution?.solutionCode || problem.problems?.problem?.initialCode
 
       const state = EditorState.create({
-        doc: initialCode,
+        doc: initialCode || solutionCode,
         extensions: [
           basicSetup,
           keymap.of([defaultKeymap, indentWithTab]),
@@ -86,7 +90,7 @@ export const CodeEditor = () => {
         view.destroy();
       };
 
-  }, []);
+  }, [solution]);
 
   useEffect(() => {
     if (solutionPassed) {
@@ -96,7 +100,7 @@ export const CodeEditor = () => {
 
   const onEvaluate = async () => {
     const res = await useEvaluateCode(
-      problem.problems.problem,
+      problem,
       code,
       setContextOutput,
       setConsoleOutput
