@@ -55,7 +55,6 @@ export const CodeEditor = () => {
   const editor = useRef();
   const solutionCode = useSelector((state) => state.solution?.solution?.solutionCode);
   const defaultCode = useSelector((state) => state.problems?.problem?.initialCode);
-  const solution = useSelector((state) => state.solution);
   const problem = useSelector((state) => state.problems.problem)
 
   const [code, setCode] = useState("");
@@ -88,7 +87,7 @@ export const CodeEditor = () => {
         view.destroy();
       };
 
-  }, [solution]);
+  }, [defaultCode, solutionCode]);
 
   useEffect(() => {
     if (solutionPassed) {
