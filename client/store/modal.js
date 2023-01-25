@@ -6,6 +6,7 @@ export const modalSlice = createSlice({
   initialState: {
     loginModalOpen: false,
     submitModalOpen: false,
+    hintModalOpen: false,
   },
   reducers: {
     openLoginModal: (state) => {
@@ -20,6 +21,12 @@ export const modalSlice = createSlice({
     closeSubmitModal: (state) => {
       state.submitModalOpen = false;
     },
+    openHintModal: (state) => {
+      state.hintModalOpen = true;
+    },
+    closeHintModal: (state) => {
+      state.hintModalOpen = false;
+    },
   },
 });
 
@@ -30,4 +37,6 @@ export const {
   closeLoginModal,
   openSubmitModal,
   closeSubmitModal,
+  openHintModal,
+  closeHintModal,
 } = modalSlice.actions;

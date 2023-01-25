@@ -1,6 +1,16 @@
 import tw from "tailwind-styled-components";
 
 
+export const HintButton = tw.button`
+  bg-[#EDE4C5]
+  p-1
+  m-5
+  font-cormorant-sc
+  text-base
+  w-12
+	disabled:bg-disabledButtonBackground
+`;
+
 export const Main = tw.div`
     flex
     justify-center
