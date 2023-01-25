@@ -24,23 +24,23 @@ const Nav = () => {
       <NavText>
         <Link to="/about">About</Link>
       </NavText>
-      <NavText>
-        {!auth.id ? (
-          <p
-            className="cursor-pointer"
-            onClick={() => dispatch(openLoginModal())}
-          >
-            Login
-          </p>
-        ) : (
-          <React.Fragment>
+      {!auth.id ? (
+        <NavText
+          className="cursor-pointer"
+          onClick={() => dispatch(openLoginModal())}
+        >
+          Login
+        </NavText>
+      ) : (
+        <React.Fragment>
+          <NavText>
             <Link to="/account">Account</Link>
-            <Link to="/" onClick={() => dispatch(clearRefreshToken())}>
-              Logout
-            </Link>
-          </React.Fragment>
-        )}
-      </NavText>
+          </NavText>
+          <NavText>
+            <Link to="/" onClick={() => dispatch(clearRefreshToken())}>Logout</Link>
+          </NavText>
+        </React.Fragment>
+      )}
     </NavMain>
   );
 };
