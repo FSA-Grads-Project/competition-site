@@ -13,12 +13,8 @@ const Header = () => {
     <div>
       <Head>
         <Hidden>hidden</Hidden>
-        <Logo>
-          <Link to="/">The Dispatch</Link>
-        </Logo>
-        <Issue>
-          <Link to="/">Issue {problem.id || '?'}</Link>
-        </Issue>
+        <Logo>The Dispatch</Logo>
+        <Issue>Issue {problem.id || '?'}</Issue>
       </Head>
       <Nav />
       <Outlet />
