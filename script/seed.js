@@ -87,7 +87,7 @@ runSubmission()
     hint1: `Sherman is a crazy cat that likes to climb the tallest outside
 branches of the tree.`,
     startDate: "2023-01-01 00:00:00",
-    endDate: "2023-01-31T02:47:34.577Z",
+    endDate: "2023-01-11T02:47:34.577Z",
     spaceWeight: 0.75,
     timeWeight: 0.25,
   });

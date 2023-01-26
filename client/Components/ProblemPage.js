@@ -18,8 +18,8 @@ import { fetchSolution, uploadNewSolution } from "../store/solution";
 
 export const ProblemPage = () => {
   const auth = useSelector((state) => state.auth).auth;
-  const solution = useSelector((state) => state.solution.solution.completeDatetime);
-  const problem = useSelector((state) => state.problems.problem.current);
+  const solution = useSelector((state) => state.solution?.solution?.completeDatetime);
+  const problem = useSelector((state) => state.problems?.problem?.current);
   const pathname = useLocation().pathname;
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();

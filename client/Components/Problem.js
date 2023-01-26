@@ -20,7 +20,12 @@ export const Problem = () => {
             {problem.statement || problem.blurb}
           </ProblemStatement>
         </>
-      ) : null}
+      ) : 
+        <>
+          <ProblemTitle> No Title </ProblemTitle>
+          <ProblemStatement> No Statement </ProblemStatement>
+        </>
+      }
     </div>
   );
 };
