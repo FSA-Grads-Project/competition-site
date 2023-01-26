@@ -1,7 +1,7 @@
 // System Imports
 import React from "react";
 import { useSelector } from "react-redux";
-
+ 
 import {
   ProblemTitle,
   ProblemStatement,
@@ -20,7 +20,12 @@ export const Problem = () => {
             {problem.statement || problem.blurb}
           </ProblemStatement>
         </>
-      ) : null}
+      ) : 
+        <>
+          <ProblemTitle> No Title </ProblemTitle>
+          <ProblemStatement> No Statement </ProblemStatement>
+        </>
+      }
     </div>
   );
 };
