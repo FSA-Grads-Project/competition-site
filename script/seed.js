@@ -68,7 +68,7 @@ department put out a four-alarm fire. Your goal is to help the
 firefighters by developing a function that accepts the root
 node of the binary tree as an argument and returns the number
 of the node where Sherman the cat is located.`,
-    blurb: `Local firefighters have been called to rescue a cat named Sherman who's stuck in a tree. Log in for more details to see if you'll be able to help the firefighters get him down safely`,
+    blurb: `Local firefighters have been called to rescue a cat named Sherman who's stuck in a tree. Log in for more details to see if you'll be able to help the firefighters get him down safely!`,
     initialCode: `function findSherman(root) {
   // write your code here
 }
@@ -87,7 +87,7 @@ runSubmission()
     hint1: `Sherman is a crazy cat that likes to climb the tallest outside
 branches of the tree.`,
     startDate: "2023-01-01 00:00:00",
-    endDate: "2023-01-11T02:47:34.577Z",
+    endDate: "2023-01-31 00:00:00",
     spaceWeight: 0.75,
     timeWeight: 0.25,
   });

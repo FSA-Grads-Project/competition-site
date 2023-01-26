@@ -46,7 +46,7 @@ const PreviousProblems = () => {
                 {faker.lorem.paragraph(1)}{" "}
               </ProblemStatmentDiv>
               <ProblemLinkDiv>
-                <ProblemDetailLink href={`/problems/${problem.id}`}>
+                <ProblemDetailLink href={`/problem/${problem.id}`}>
                   {" "}
                   Continue here...{" "}
                 </ProblemDetailLink>

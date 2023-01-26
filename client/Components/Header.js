@@ -1,20 +1,20 @@
 import React from "react";
-import Nav from "./Nav";
+import { useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 
+import Nav from "./Nav";
 import { Logo, Issue, Head, Hidden } from "../StyledComponents/AppStyles.tw";
 
 const Header = () => {
+
+  const { problem } = useSelector(state => state.problems);
+
   return (
     <div>
       <Head>
         <Hidden>hidden</Hidden>
-        <Logo>
-          <Link to="/">The Dispatch</Link>
-        </Logo>
-        <Issue>
-          <Link to="/problem">Issue 1</Link>
-        </Issue>
+        <Logo>The Dispatch</Logo>
+        <Issue>Issue {problem.id || '?'}</Issue>
       </Head>
       <Nav />
       <Outlet />
