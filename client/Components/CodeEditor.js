@@ -19,6 +19,7 @@ import {
   OutputTitle,
   ConsoleOutput,
   ContextOutput,
+  ResetCodeButton,
 } from "../StyledComponents/GlobalStyles.tw";
 import {
   SolutionTitleSpan,
@@ -61,17 +62,20 @@ export const CodeEditor = () => {
   const [contextOutput, setContextOutput] = useState([]);
   const [consoleOutput, setConsoleOutput] = useState([]);
   const [solutionPassed, setSolutionPassed] = useState(false);
+  const [reset, setReset] = useState(false);
+
 
   const onUpdate = EditorView.updateListener.of((v) => {
     setCode(v.state.doc.toString());
   });
   
   const dispatch = useDispatch();
+
   useEffect(() => {
     const initialCode = solutionCode || defaultCode
 
       const state = EditorState.create({
-        doc: initialCode,
+        doc: !reset ? initialCode : defaultCode,
         extensions: [
           basicSetup,
           keymap.of([defaultKeymap, indentWithTab]),
@@ -81,13 +85,17 @@ export const CodeEditor = () => {
         ],
       });
 
+      if (reset) {
+        setReset(false);
+      }
+
       const view = new EditorView({ state, parent: editor.current });
 
       return () => {
         view.destroy();
       };
 
-  }, [defaultCode, solutionCode]);
+  }, [defaultCode, solutionCode, reset]);
 
   useEffect(() => {
     if (solutionPassed) {
@@ -118,6 +126,10 @@ export const CodeEditor = () => {
     dispatch(openSubmitModal());
   };
 
+  const onResetCode = () => {
+    setReset(true);
+  };
+
   return (
     <div>
       <SubmitModal
@@ -134,6 +146,7 @@ export const CodeEditor = () => {
         <SubmitButton onClick={onSubmit} disabled={!solutionPassed}>
           Submit
         </SubmitButton>
+        <ResetCodeButton onClick={onResetCode}>Reset Code</ResetCodeButton>
       </ButtonWrapper>
       <OutputTitle>Output</OutputTitle>
       <OutputDiv>

@@ -19,6 +19,15 @@ export const EvaluateButton = tw.button`
   w-1/3
 `;
 
+export const ResetCodeButton = tw.button`
+  bg-[#EDE4C5]
+  p-3
+  m-5
+  font-cormorant-sc
+  text-2xl
+  w-1/3
+`;
+
 export const ButtonWrapper = tw.div`
   flex
   justify-center
