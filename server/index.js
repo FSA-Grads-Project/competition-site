@@ -8,7 +8,7 @@ const initialization = async () => {
     await connection.sync();
 
     // listen for requests
-    const port = process.env.PORT || 3000;
+    const port = process.env.PORT || 3050;
 
     app.listen(port, () => {
       console.log(`listening on port ${port}`);

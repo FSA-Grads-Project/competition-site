@@ -7,14 +7,14 @@ import { Logo, Issue, Head, Hidden } from "../StyledComponents/AppStyles.tw";
 
 const Header = () => {
 
-  const { problem } = useSelector(state => state.problems);
+  const problem  = useSelector(state => state.problems);
 
   return (
     <div>
       <Head>
         <Hidden>hidden</Hidden>
         <Logo>The Dispatch</Logo>
-        <Issue>Issue {problem.id || '?'}</Issue>
+        <Issue>Issue {problem.problem.id ? problem.problem.id : '?'}</Issue>
       </Head>
       <Nav />
       <Outlet />
