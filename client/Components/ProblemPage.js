@@ -18,8 +18,8 @@ import { fetchSolution, uploadNewSolution } from "../store/solution";
 
 export const ProblemPage = () => {
   const auth = useSelector((state) => state.auth).auth;
-  const solution = useSelector((state) => state);
-  const problem = useSelector((state) => state);
+  const solution = useSelector((state) => state.solution?.solution?.completeDatetime);
+  const problem = useSelector((state) => state.problems?.problem?.current);
   const pathname = useLocation().pathname;
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
@@ -53,8 +53,8 @@ export const ProblemPage = () => {
 
   if (isLoading) {
     return null
-  } else if ((auth.accessToken && !solution.solution.solution.completeDatetime) || 
-            (!auth.accessToken && !problem.problems.problem.current)) {
+  } else if ((auth.accessToken && !solution) || 
+            (!auth.accessToken && !problem)) {
             return (
               <div>
                 <Main>
@@ -67,8 +67,8 @@ export const ProblemPage = () => {
                 </Main>
               </div>
             )
-  } else if ((auth.accessToken && solution.solution.solution.completeDatetime) || 
-            (!auth.accessToken && problem.problems.problem.current)) {
+  } else if ((auth.accessToken && solution) || 
+            (!auth.accessToken && problem)) {
             return (
               <div>
                 <Main>

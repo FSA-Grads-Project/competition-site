@@ -53,8 +53,9 @@ let baseTheme = EditorView.theme({
 export const CodeEditor = () => {
   const auth = useSelector((state) => state.auth).auth;
   const editor = useRef();
-  const solution = useSelector((state) => state);
-  const problem = useSelector((state) => state);
+  const solutionCode = useSelector((state) => state.solution?.solution?.solutionCode);
+  const defaultCode = useSelector((state) => state.problems?.problem?.initialCode);
+  const problem = useSelector((state) => state.problems.problem)
 
   const [code, setCode] = useState("");
   const [contextOutput, setContextOutput] = useState([]);
@@ -67,7 +68,7 @@ export const CodeEditor = () => {
   
   const dispatch = useDispatch();
   useEffect(() => {
-    const initialCode = solution.solution?.solution?.solutionCode || problem.problems?.problem?.initialCode
+    const initialCode = solutionCode || defaultCode
 
       const state = EditorState.create({
         doc: initialCode,
@@ -86,7 +87,7 @@ export const CodeEditor = () => {
         view.destroy();
       };
 
-  }, []);
+  }, [defaultCode, solutionCode]);
 
   useEffect(() => {
     if (solutionPassed) {
@@ -96,7 +97,7 @@ export const CodeEditor = () => {
 
   const onEvaluate = async () => {
     const res = await useEvaluateCode(
-      problem.problems.problem,
+      problem,
       code,
       setContextOutput,
       setConsoleOutput
