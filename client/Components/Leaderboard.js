@@ -113,7 +113,7 @@ const Leaderboard = () => {
                   <TableRow>
                     <LeftTableCell>
                       {" "}
-                      ALGORITHM EXECUTION TIME:{" "}
+                      Execution Time:{" "}
                       {Math.floor(Math.random() * 5) / 5} seconds{" "}
                     </LeftTableCell>
                     <RightTableCell>
@@ -124,7 +124,7 @@ const Leaderboard = () => {
                   <TableRow>
                     <LeftTableCell>
                       {" "}
-                      ALGORITHM MEMORY USED: {score.spaceUsed} KB{" "}
+                      Memory Used: {score.spaceUsed} KB{" "}
                     </LeftTableCell>
                     <RightTableCell>
                       {" "}
@@ -134,7 +134,7 @@ const Leaderboard = () => {
                   <TableRow>
                     <LeftTableCell>
                       {" "}
-                      TOTAL TIME TO SOLVE: {score.timeElapsed} minutes{" "}
+                      Time to Solve: {score.timeElapsed} minutes{" "}
                     </LeftTableCell>
                     <RightTableCell>
                       {" "}
