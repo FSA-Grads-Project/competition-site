@@ -40,7 +40,7 @@ let baseTheme = EditorView.theme({
   },
   ".cm-scroller": {
     height: "20vh",
-    "min-height": "200px",
+    "min-height": "350px",
   },
   ".cm-gutter": {
     backgroundColor: "#EDE4C5",

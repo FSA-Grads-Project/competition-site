@@ -39,6 +39,7 @@ export const OutputDiv = tw.div`
   min-h-[200px] 
   bg-[#EDE4C5]
 `;
+
 export const ContextOutput = tw.div`
 
 `;
@@ -91,6 +92,35 @@ export const ModalBox = tw.div`
 	bg-darkBackground 
 	p-10 
 	px-15 
+	rounded-xl 
+	flex 
+	flex-col 
+	justify-center 
+	font-playfair 
+	items-center
+`;
+
+// modal background
+export const LeaderboardModalBackground = tw.div`
+	bg-darkFont
+	fixed
+	inset-0
+	flex
+	justify-center
+	items-center
+	backdrop-blur-sm
+	bg-opacity-70
+	z-10
+`;
+
+// Modal box container
+export const LeaderboardModalBox = tw.div`
+	bg-darkBackground 
+	overflow-scroll
+	pt-5
+	pb-20
+	pr-10
+	pl-10
 	rounded-xl 
 	flex 
 	flex-col 

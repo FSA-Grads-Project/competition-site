@@ -6,6 +6,7 @@ export const modalSlice = createSlice({
   initialState: {
     loginModalOpen: false,
     submitModalOpen: false,
+    leaderboardModalOpen: false,
   },
   reducers: {
     openLoginModal: (state) => {
@@ -20,6 +21,12 @@ export const modalSlice = createSlice({
     closeSubmitModal: (state) => {
       state.submitModalOpen = false;
     },
+    openLeaderboardModal: (state) => {
+      state.leaderboardModalOpen = true;
+    },
+    closeLeaderboardModal: (state) => {
+      state.leaderboardModalOpen = false;
+    },
   },
 });
 
@@ -30,4 +37,6 @@ export const {
   closeLoginModal,
   openSubmitModal,
   closeSubmitModal,
+  openLeaderboardModal,
+  closeLeaderboardModal
 } = modalSlice.actions;

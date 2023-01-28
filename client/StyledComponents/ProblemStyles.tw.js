@@ -31,8 +31,9 @@ export const SolutionTitleSpan = tw.span`
 `
 
 export const LeftDiv = tw.div`
-    mr-20
+    flex
     ml-20
+    mr-20
     w-1/2
 `
 
@@ -42,3 +43,13 @@ export const RightDiv = tw.div`
     w-1/2
 `
 
+export const LeaderBoardTab = tw.button`
+    -ml-20
+    h-10
+    p-2
+    self-center
+    -rotate-90   
+    font-cormorant-sc
+    bg-[#EDE4C5]
+    
+`

@@ -9,12 +9,15 @@ import {
   Main,
   LeftDiv,
   RightDiv,
+  LeaderBoardTab,
 } from "../StyledComponents/ProblemStyles.tw";
 import Leaderboard from "./Leaderboard";
 import Problem from "./Problem";
 import CodeEditor from "./CodeEditor";
 import { fetchProblem } from "../store/problem";
 import { fetchSolution, uploadNewSolution } from "../store/solution";
+import { openLeaderboardModal } from "../store/modal";
+import LeaderboardModal from "./LeaderboardModal";
 
 export const ProblemPage = () => {
   const auth = useSelector((state) => state.auth).auth;
@@ -51,14 +54,20 @@ export const ProblemPage = () => {
     getProblemAndUserSolution();
   }, [pathname, auth.accessToken]);
 
+  const onClick = () => {
+    dispatch(openLeaderboardModal());
+  };
+
   if (isLoading) {
     return null
   } else if ((auth.accessToken && !solution) || 
             (!auth.accessToken && !problem)) {
             return (
               <div>
+              <LeaderboardModal/>
                 <Main>
                   <LeftDiv>
+                    <LeaderBoardTab onClick={onClick}>LEADERBOARD</LeaderBoardTab>
                     <Problem />
                   </LeftDiv>
                   <RightDiv>
