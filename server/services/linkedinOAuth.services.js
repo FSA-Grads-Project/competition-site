@@ -18,15 +18,25 @@ const getLinkedinTokens = async (code, axios) => {
 
 // Function to retrieve user info from googleAPI using the id and access tokens provided by google
 const getLinkedinUserInfo = async (access_token, axios) => {
-  const res = await axios.get(`https://api.linkedin.com/v2/me`, {
+  const user = await axios.get(`https://api.linkedin.com/v2/me`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
   });
 
-  console.log(res.data);
+  const email = await axios.get(
+    `https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))`,
+    {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
+  );
 
-  return res.data;
+  return {
+    ...user.data,
+    email: email.data.elements[0]["handle~"].emailAddress,
+  };
 };
 
 module.exports = { getLinkedinTokens, getLinkedinUserInfo };

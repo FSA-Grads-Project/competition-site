@@ -18,15 +18,24 @@ const getGithubTokens = async (code, axios) => {
 
 // Function to retrieve user info from googleAPI using the id and access tokens provided by google
 const getGithubUserInfo = async (access_token, axios) => {
-  const res = await axios.get(`https://api.github.com/user`, {
+  const user = await axios.get(`https://api.github.com/user`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
   });
 
-  console.log(res.data);
+  const email = await axios.get(`https://api.github.com/user/emails`, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
 
-  return res.data;
+  return {
+    ...user.data,
+    email: email.data
+      .filter((email) => email.primary)
+      .map((email) => email.email)[0],
+  };
 };
 
 module.exports = { getGithubTokens, getGithubUserInfo };

@@ -34,6 +34,8 @@ const {
   decodeToken,
 } = require("../../services/token.services");
 
+const { loginUser } = require("../../services/loginUser.services");
+
 /* Route redirected directly from google -- contains code */
 router.get("/oauth/google", async (req, res, next) => {
   try {
@@ -49,21 +51,7 @@ router.get("/oauth/google", async (req, res, next) => {
     // Get googleUser with tokens
     const googleUser = await getUserInfo(id_token, access_token, axios);
 
-    // Check if user already exists in the User model
-    let user = await User.findOne({
-      where: { providerId: googleUser.id, provider: "GOOGLE" },
-    });
-
-    // If user does not exist, create new user
-    if (!user) {
-      user = await User.create({
-        providerId: googleUser.id,
-        provider: "GOOGLE",
-        alias: `anonymousUser${(Math.random() + 1)
-          .toString(36)
-          .substring(2, 10)}`,
-      });
-    }
+    const user = await loginUser(googleUser);
 
     // create refresh token
     const refreshToken = createRefreshToken(user);
@@ -93,21 +81,7 @@ router.get("/oauth/github", async (req, res, next) => {
     // Get githubUser with tokens
     const githubUser = await getGithubUserInfo(access_token, axios);
 
-    // Check if user already exists in the User model
-    let user = await User.findOne({
-      where: { providerId: githubUser.id.toString(), provider: "GITHUB" },
-    });
-
-    // If user does not exist, create new user
-    if (!user) {
-      user = await User.create({
-        providerId: githubUser.id.toString(),
-        provider: "GITHUB",
-        alias: `anonymousUser${(Math.random() + 1)
-          .toString(36)
-          .substring(2, 10)}`,
-      });
-    }
+    const user = await loginUser(githubUser);
 
     // create refresh token
     const refreshToken = createRefreshToken(user);
@@ -137,21 +111,7 @@ router.get("/oauth/linkedin", async (req, res, next) => {
     // Get linkedinUser with tokens
     const linkedinUser = await getLinkedinUserInfo(access_token, axios);
 
-    // Check if user already exists in the User model
-    let user = await User.findOne({
-      where: { providerId: linkedinUser.id.toString(), provider: "LINKEDIN" },
-    });
-
-    // If user does not exist, create new user
-    if (!user) {
-      user = await User.create({
-        providerId: linkedinUser.id.toString(),
-        provider: "LINKEDIN",
-        alias: `anonymousUser${(Math.random() + 1)
-          .toString(36)
-          .substring(2, 10)}`,
-      });
-    }
+    const user = await loginUser(linkedinUser);
 
     // create refresh token
     const refreshToken = createRefreshToken(user);
