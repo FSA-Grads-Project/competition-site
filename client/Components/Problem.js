@@ -13,7 +13,7 @@ import {
 
 export const Problem = () => {
 
-  const { problem } = useSelector((state) => state.problems);
+  const { current, problem } = useSelector((state) => state.problems);
 
   const dispatch = useDispatch();
   const hint = useSelector((state) => state.problems?.problem?.hint1);
@@ -29,8 +29,7 @@ export const Problem = () => {
           <ProblemStatement>
             {problem.statement || problem.blurb}
           </ProblemStatement>
-          <HintButton onClick={onHint}>Hint</HintButton>
-          <HintModal hint={hint} />
+          {!current && <><HintButton onClick={onHint}>Hint</HintButton><HintModal hint={hint} /></>}
         </>
       ) : 
         <>
