@@ -57,11 +57,11 @@ router.put("/solution/:id", verifyUser, async (req, res, next) => {
     const result = await Result.findByPk(req.params.id);
     if (req.body.type === "eval") {
       await result.update({ ...req.body });
-    } else {
+    } else if (req.body.type === "submit") {
       await result.update({ ...req.body, completeDatetime: now });
+    } else {
+      await result.update({solutionCode: req.body.solutionCode});
     }
-
-    // console.log(result);
 
     res.json(result);
   } catch (ex) {
