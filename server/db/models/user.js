@@ -5,13 +5,20 @@ const Sequelize = require("sequelize");
 const connection = require("../database");
 
 const User = connection.define("user", {
-  providerId: {
+  // providerId: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false,
+  // },
+  // provider: {
+  //   type: Sequelize.ENUM("GOOGLE", "GITHUB", "LINKEDIN"),
+  //   allowNull: false,
+  // },
+  email: {
     type: Sequelize.STRING,
     allowNull: false,
-  },
-  provider: {
-    type: Sequelize.ENUM("GOOGLE", "GITHUB", "LINKEDIN"),
-    allowNull: false,
+    validate: {
+      isEmail: true,
+    },
   },
   admin: {
     type: Sequelize.BOOLEAN,
