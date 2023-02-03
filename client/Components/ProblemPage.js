@@ -10,9 +10,8 @@ import {
   LeftDiv,
   RightDiv,
 } from "../StyledComponents/ProblemStyles.tw";
-import Leaderboard from "./Leaderboard";
+import ProblemPageRight from "./ProblemPageRight";
 import Problem from "./Problem";
-import CodeEditor from "./CodeEditor";
 import { fetchProblem } from "../store/problem";
 import { fetchSolution, uploadNewSolution } from "../store/solution";
 
@@ -62,7 +61,7 @@ export const ProblemPage = () => {
                     <Problem />
                   </LeftDiv>
                   <RightDiv>
-                    <CodeEditor />
+                    <ProblemPageRight auth={auth} />
                   </RightDiv>
                 </Main>
               </div>
@@ -76,7 +75,7 @@ export const ProblemPage = () => {
                     <Problem />
                   </LeftDiv>
                   <RightDiv>
-                    <Leaderboard />
+                    <ProblemPageRight auth={auth} />
                   </RightDiv>
                 </Main>
               </div>

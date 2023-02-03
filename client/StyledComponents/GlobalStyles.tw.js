@@ -2,38 +2,42 @@ import tw from "tailwind-styled-components";
 
 export const SubmitButton = tw.button`
   bg-[#EDE4C5]
-  p-3
-  m-5
+  p-1
+  m-4
   font-cormorant-sc
-  text-2xl
-  w-1/3
+  text-xl
+  w-1/4
 	disabled:bg-disabledButtonBackground
 `;
 
 export const EvaluateButton = tw.button`
   bg-[#EDE4C5]
-  p-3
-  m-5
+  p-1
+  m-4
   font-cormorant-sc
-  text-2xl
-  w-1/3
+  text-xl
+  w-1/4
+	disabled:bg-disabledButtonBackground
+
 `;
 
 export const ResetCodeButton = tw.button`
   bg-[#EDE4C5]
-  p-3
-  m-5
+  p-1
+  m-4
   font-cormorant-sc
-  text-2xl
-  w-1/3
+  text-xl
+  w-1/4
 `;
 
 export const ButtonWrapper = tw.div`
   flex
   justify-center
+	mt-2
 `;
 
 export const EditorWrapper = tw.div`
+  w-[700px]
   bg-[#EDE4C5]
 `;
 
@@ -48,6 +52,7 @@ export const OutputDiv = tw.div`
   min-h-[200px] 
   bg-[#EDE4C5]
 `;
+
 export const ContextOutput = tw.div`
 
 `;
@@ -56,10 +61,22 @@ export const ConsoleOutput = tw.div`
   
 `;
 
+export const OutputTitleWrapper = tw.div`
+	flex
+	justify-center
+	content-center
+	items-center
+	mr-60
+	ml-60
+	mb-1
+`
+
 export const OutputTitle = tw.div`
-  pb-2
+	mt-2
+  pb-1
   font-cormorant-sc
-  text-xl
+  text-2xl
+	pl-2
 `;
 
 export const DarkButton = tw.button`
@@ -106,4 +123,57 @@ export const ModalBox = tw.div`
 	justify-center 
 	font-playfair 
 	items-center
+`;
+
+export const TitleWrapper = tw.div`
+	flex
+	justify-around
+	ml-10
+	mr-10
+	mb-4
+`
+
+export const LeaderBoardTitleWrapper = tw.div`
+	flex
+	content-center
+	items-center
+	border-b-2
+	border-black
+	`
+
+	export const NotLeaderBoardTitleWrapper = tw.div`
+	flex
+	content-center
+	items-center
+	opacity-40
+
+	`
+
+export const LeaderBoardTitle = tw.div`
+	pl-1.5
+	font-playfair
+	font-black
+	text-3xl
+`;
+
+export const CodeEditorTitle = tw.div`
+	font-playfair
+	font-black
+	text-3xl
+	border-b-2
+	border-black
+`;
+
+export const NotCodeEditorTitle = tw.div`
+	font-playfair
+	font-black
+	opacity-40
+	text-3xl
+`;
+
+export const NotLeaderBoardTitle = tw.div`
+	pl-1.5
+	font-playfair
+	font-black
+	text-3xl
 `;
