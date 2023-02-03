@@ -61,7 +61,7 @@ export const ProblemPage = () => {
                     <Problem />
                   </LeftDiv>
                   <RightDiv>
-                    <ProblemPageRight auth={auth} />
+                    <ProblemPageRight auth={auth} solution={solution} />
                   </RightDiv>
                 </Main>
               </div>
@@ -75,7 +75,7 @@ export const ProblemPage = () => {
                     <Problem />
                   </LeftDiv>
                   <RightDiv>
-                    <ProblemPageRight auth={auth} />
+                    <ProblemPageRight auth={auth} solution={solution} />
                   </RightDiv>
                 </Main>
               </div>
