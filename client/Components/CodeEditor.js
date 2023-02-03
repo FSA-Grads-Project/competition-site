@@ -131,8 +131,19 @@ export const CodeEditor = () => {
     dispatch(openSubmitModal());
   };
 
-  const onResetCode = () => {
+  const onResetCode = async () => {
     setReset(true);
+    const res = await useEvaluateCode(
+      problem,
+      defaultCode,
+      setContextOutput,
+      setConsoleOutput
+    );
+
+    if (auth.accessToken) {
+      await useUploadUserSolution(defaultCode, res, "reset");
+      setContextOutput(["See Output Here"])
+    }
   };
 
   return (

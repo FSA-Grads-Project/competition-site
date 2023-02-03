@@ -9,6 +9,7 @@ import {
   Main,
   LeftDiv,
   RightDiv,
+  LeaderBoardTab,
 } from "../StyledComponents/ProblemStyles.tw";
 import ProblemPageRight from "./ProblemPageRight";
 import Problem from "./Problem";
