@@ -56,6 +56,7 @@ export const CodeEditor = () => {
   const editor = useRef();
   const solutionCode = useSelector((state) => state.solution?.solution?.solutionCode);
   const defaultCode = useSelector((state) => state.problems?.problem?.initialCode);
+  const solution = useSelector((state) => state.solution?.solution?.completeDatetime);
   const problem = useSelector((state) => state.problems.problem)
 
   const [code, setCode] = useState("");
@@ -99,7 +100,7 @@ export const CodeEditor = () => {
         view.destroy();
       };
 
-  }, [defaultCode, solutionCode, reset]);
+  }, [defaultCode, solutionCode, reset, solution]);
 
   useEffect(() => {
     if (solutionPassed) {
@@ -145,11 +146,11 @@ export const CodeEditor = () => {
         <Editor ref={editor}></Editor>
       </EditorWrapper>
       <ButtonWrapper>
-        <EvaluateButton onClick={onEvaluate} disabled={!auth.accessToken}>Evaluate</EvaluateButton>
-        <SubmitButton onClick={onSubmit} disabled={!solutionPassed || !auth.accessToken}>
+        <EvaluateButton onClick={onEvaluate} disabled={!auth.accessToken || solution}>Evaluate</EvaluateButton>
+        <SubmitButton onClick={onSubmit} disabled={!solutionPassed || !auth.accessToken || solution}>
           Submit
         </SubmitButton>
-        <ResetCodeButton onClick={onResetCode} disabled={!solutionPassed}>Reset Code</ResetCodeButton>
+        <ResetCodeButton onClick={onResetCode} disabled={!solutionPassed || solution}>Reset Code</ResetCodeButton>
       </ButtonWrapper>
       <OutputTitleWrapper>
       <IconContext.Provider value={{ size: "1.5em", className: "global-class-name" }}>

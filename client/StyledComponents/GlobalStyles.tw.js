@@ -28,6 +28,8 @@ export const ResetCodeButton = tw.button`
   font-cormorant-sc
   text-xl
   w-1/4
+	disabled:bg-disabledButtonBackground
+
 `;
 
 export const ButtonWrapper = tw.div`
