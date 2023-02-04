@@ -1,15 +1,21 @@
 import tw from "tailwind-styled-components";
 
 export const LeaderboardMainDiv = tw.div`
-    max-h-[300px] 
-    max-w-[400px] 
+    max-h-[600px] 
+    max-w-[800px] 
+    h-[800px]
     flex
     flex-col
     text-center
+    border-2
+    border-slate-700 
 `
 
 export const Header = tw.div`
+    p-4
     text-xl
+    font-cormorant-sc
+
 `
 
 export const Intro = tw.div`
