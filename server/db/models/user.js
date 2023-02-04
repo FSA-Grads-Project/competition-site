@@ -5,20 +5,9 @@ const Sequelize = require("sequelize");
 const connection = require("../database");
 
 const User = connection.define("user", {
-  // providerId: {
-  //   type: Sequelize.STRING,
-  //   allowNull: false,
-  // },
-  // provider: {
-  //   type: Sequelize.ENUM("GOOGLE", "GITHUB", "LINKEDIN"),
-  //   allowNull: false,
-  // },
   email: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate: {
-      isEmail: true,
-    },
   },
   admin: {
     type: Sequelize.BOOLEAN,
@@ -32,6 +21,11 @@ const User = connection.define("user", {
   refreshToken: {
     type: Sequelize.STRING,
     defaultValue: "",
+  },
+  initialLogin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true,
+    allowNull: false,
   },
 });
 
