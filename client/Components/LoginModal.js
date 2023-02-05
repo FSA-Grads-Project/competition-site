@@ -32,15 +32,18 @@ const LoginModal = () => {
       }}
     >
       <ModalBox>
-        <p className="text-center text-3xl">Welcome Back To</p>
+        <p className="text-center text-3xl">Welcome To</p>
         <p className="text-center text-5xl font-black">The Dispatch</p>
-        <p className="text-center text-xl p-2 pt-7">Sign In Below</p>
+        <div className="flex flex-col w-full mt-4 items-center">
+          <hr className="w-full mt-2 mb-1 bg-darkFont h-0.5 border-0"></hr>
+          <hr className="w-11/12 bg-darkFont h-0.5 border-0"></hr>
+        </div>
+        <p className="text-center text-xl p-2 pt-5">Sign In Below</p>
         <DarkButton
           className="w-full"
           onClick={() => {
             const URL = getGoogleOAuthURL();
             window.location.href = URL;
-            console.log(URL)
           }}
         >
           <ButtonIcon src={"/icons/googleLogo.png"} />

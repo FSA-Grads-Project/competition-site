@@ -8,6 +8,7 @@ import Account from "./Components/Account";
 import PreviousProblems from "./Components/PreviousProblems";
 import Login from "./Components/Login";
 import LoginModal from "./Components/LoginModal";
+import InitialLoginModal from "./Components/InitialLoginModal";
 import UserCheck from "./Components/UserCheck";
 import "./style.css";
 
@@ -15,6 +16,7 @@ const App = () => {
   return (
     <div>
       <LoginModal />
+      <InitialLoginModal />
       <Routes>
         <Route element={<UserCheck />}>
           <Route element={<Header />}>

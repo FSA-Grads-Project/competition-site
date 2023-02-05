@@ -7,6 +7,7 @@ export const modalSlice = createSlice({
     loginModalOpen: false,
     submitModalOpen: false,
     hintModalOpen: false,
+    initialLoginModalOpen: false,
   },
   reducers: {
     openLoginModal: (state) => {
@@ -27,6 +28,13 @@ export const modalSlice = createSlice({
     closeHintModal: (state) => {
       state.hintModalOpen = false;
     },
+    openInitialLoginModal: (state) => {
+      state.initialLoginModalOpen = true;
+    },
+    closeInitialLoginModal: (state) => {
+      console.log("redux thunk ran");
+      state.initialLoginModalOpen = false;
+    },
   },
 });
 
@@ -39,4 +47,6 @@ export const {
   closeSubmitModal,
   openHintModal,
   closeHintModal,
+  openInitialLoginModal,
+  closeInitialLoginModal,
 } = modalSlice.actions;

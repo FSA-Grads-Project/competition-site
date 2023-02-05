@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
+import { openInitialLoginModal } from "../store/modal";
 
 // Local imports
 import { getAccessToken } from "../store/auth";
@@ -24,6 +25,12 @@ const UserCheck = () => {
       fetchUser();
     }
   }, []);
+
+  useEffect(() => {
+    if (auth.initialLogin) {
+      dispatch(openInitialLoginModal());
+    }
+  }, [auth]);
 
   return <div>{isLoading ? null : <Outlet />}</div>;
 };
