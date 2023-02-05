@@ -22,7 +22,6 @@ const InitialLoginModal = () => {
   useEffect(() => {
     const getUsername = async () => {
       const res = (await useGetUsername()).data;
-      setInitialUsername(res);
       setUsername(res);
     };
 
@@ -33,11 +32,9 @@ const InitialLoginModal = () => {
 
   const onClick = async () => {
     const response = await useUpdateUsername(username);
-    console.log(response.data);
     if (response.data === "Username Taken") {
       setError("Username is already taken, try again");
     } else if (response.data === "Successful signup") {
-      console.log("this ran");
       dispatch(closeInitialLoginModal());
     }
   };

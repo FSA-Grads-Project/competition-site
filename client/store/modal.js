@@ -32,7 +32,6 @@ export const modalSlice = createSlice({
       state.initialLoginModalOpen = true;
     },
     closeInitialLoginModal: (state) => {
-      console.log("redux thunk ran");
       state.initialLoginModalOpen = false;
     },
   },
