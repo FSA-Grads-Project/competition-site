@@ -25,6 +25,34 @@ router.get("/user", verifyUser, async (req, res, next) => {
   }
 });
 
+router.put("/username", verifyUser, async (req, res, next) => {
+  try {
+    if (req.user.alias !== req.body.username) {
+      const userWithUsername = await User.findOne({
+        where: { alias: req.body.username },
+      });
+      if (userWithUsername) {
+        throw new Error("Username Taken");
+      }
+    }
+
+    const user = req.user;
+    await user.update({ alias: req.body.username, initialLogin: false });
+
+    res.send("Successful signup");
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/username", verifyUser, async (req, res, next) => {
+  try {
+    res.json(req.user.alias);
+  } catch (err) {
+    next(err);
+  }
+});
+
 /* get user by id */
 router.get("/:id", verifyUser, async (req, res, next) => {
   try {

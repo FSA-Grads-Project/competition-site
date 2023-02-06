@@ -1,20 +1,37 @@
 // Local imports
 const User = require("../db/models/user");
+const { encryptEmail } = require("./encryption.services");
 
 // Function to find user or create new user
 const loginUser = async (userInfo) => {
   let user = await User.findOne({
     where: {
-      email: userInfo.email,
+      email: encryptEmail(userInfo.email),
     },
   });
 
   if (!user) {
-    user = await User.create({
-      email: userInfo.email,
-      alias: `anonymousUser${(Math.random() + 1)
+    // use email as initial alias option (without @domain.com)
+    let alias = userInfo.email.slice(0, userInfo.email.search("@"));
+
+    // check if alias is already being used
+    let aliasUser = await User.findOne({ where: { alias } });
+
+    // if alias already exists, begin while loop adding random string after initial alias
+    while (aliasUser) {
+      alias = `${userInfo.email.slice(0, userInfo.email.search("@"))}${(
+        Math.random() + 1
+      )
         .toString(36)
-        .substring(2, 10)}`,
+        .substring(2, 10)}`;
+
+      aliasUser = await User.findOne({ where: { alias } });
+    }
+
+    // create new user using encrypted email and unique alias found above
+    user = await User.create({
+      email: encryptEmail(userInfo.email),
+      alias,
     });
   }
 

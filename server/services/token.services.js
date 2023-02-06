@@ -36,6 +36,7 @@ const createAccessToken = (user) => {
     {
       userId: user.id,
       admin: user.admin,
+      initialLogin: user.initialLogin,
     },
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: "10m" }

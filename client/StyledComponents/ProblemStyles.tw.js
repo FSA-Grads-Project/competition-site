@@ -13,7 +13,6 @@ export const HintButton = tw.button`
 
 export const Main = tw.div`
     flex
-    justify-center
 `
 export const ProblemTitle= tw.div`
     block
@@ -41,14 +40,16 @@ export const SolutionTitleSpan = tw.span`
 `
 
 export const LeftDiv = tw.div`
-    mr-20
-    ml-20
-    w-1/2
+    ml-40
+    mr-40
+    w-1/3
 `
 
 export const RightDiv = tw.div`
+    mr-40
     text-center
-    mr-20
-    w-1/2
+    max-h-[600px] 
+    max-w-[800px] 
+    h-[800px]
 `
 

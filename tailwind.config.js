@@ -20,6 +20,7 @@ module.exports = {
       darkFont: "#333333",
       blackColor: "#000000",
       disabledButtonBackground: "#E6E2D8",
+      errorFont: "rgba(153, 27, 27)",
     },
     extend: {
       fontFamily: {
