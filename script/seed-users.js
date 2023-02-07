@@ -1,28 +1,21 @@
 const { faker } = require("@faker-js/faker");
+const { encryptEmail } = require("../server/services/encryption.services");
 
 const USERS = [];
 
 const createUser = () => {
   return {
-    // providerId: Math.floor(Math.random() * 1000000000000000000000).toString(),
-    // provider: "GOOGLE",
     alias: `anonymousUser${(Math.random() + 1).toString(36).substring(2, 10)}`,
-    // username: faker.internet.userName(),
-    // password: faker.internet.password(),
-    // firstName: faker.name.firstName(),
-    // lastName: faker.name.lastName(),
-    // birthdate: faker.date.birthdate(),
-    email: faker.internet.email(),
-    // country: faker.address.country()
+    email: encryptEmail(faker.internet.email()),
+    initialLogin: false,
   };
 };
 
 USERS.push({
-  // providerId: "106070769519563768221",
-  // provider: "GOOGLE",
-  email: "martinmurjas@gmail.com",
+  email: encryptEmail("martinmurjas@gmail.com"),
   admin: true,
   alias: "martinmurjas",
+  initialLogin: false,
 });
 
 Array.from({ length: 10 }).forEach(() => USERS.push(createUser()));

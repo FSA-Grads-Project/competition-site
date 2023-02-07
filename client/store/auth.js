@@ -12,10 +12,10 @@ export const getAccessToken = createAsyncThunk(
     try {
       const accessToken = (await axios.get("/sessions/getAccessToken")).data;
 
-      const { userId, admin } = decodeJwt(accessToken);
+      const { userId, admin, initialLogin } = decodeJwt(accessToken);
 
       // Returns the userId, admin status and access token to the redux store state
-      return { id: userId, admin, accessToken };
+      return { id: userId, admin, accessToken, initialLogin };
     } catch (err) {
       throw new Error(err);
     }
