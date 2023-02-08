@@ -34,7 +34,6 @@ const ProblemPageRight = ({ auth, solution, problem }) => {
       setCodeEditorView(false)
     }
   }
-  console.log(problem)
 
   useEffect(() => {
     if (codeEditorView && !auth.accessToken && problem) {
