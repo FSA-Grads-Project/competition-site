@@ -9,7 +9,6 @@ import {
   Main,
   LeftDiv,
   RightDiv,
-  LeaderBoardTab,
 } from "../StyledComponents/ProblemStyles.tw";
 import ProblemPageRight from "./ProblemPageRight";
 import Problem from "./Problem";
@@ -19,7 +18,7 @@ import { fetchSolution, uploadNewSolution } from "../store/solution";
 export const ProblemPage = () => {
   const auth = useSelector((state) => state.auth).auth;
   const solution = useSelector((state) => state.solution?.solution?.completeDatetime);
-  const problem = useSelector((state) => state.problems?.problem?.current);
+  const current = useSelector((state) => state.problems?.problem?.current);
   const pathname = useLocation().pathname;
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
@@ -54,29 +53,29 @@ export const ProblemPage = () => {
   if (isLoading) {
     return null
   } else if ((auth.accessToken && !solution) || 
-            (!auth.accessToken && !problem)) {
+            (!auth.accessToken && !current)) {
             return (
               <div>
                 <Main>
                   <LeftDiv>
-                    <Problem />
+                    <Problem current={current} />
                   </LeftDiv>
                   <RightDiv>
-                    <ProblemPageRight auth={auth} solution={solution} />
+                    <ProblemPageRight auth={auth} solution={solution} current={current} />
                   </RightDiv>
                 </Main>
               </div>
             )
   } else if ((auth.accessToken && solution) || 
-            (!auth.accessToken && problem)) {
+            (!auth.accessToken && current)) {
             return (
               <div>
                 <Main>
                   <LeftDiv>
-                    <Problem />
+                    <Problem current={current} />
                   </LeftDiv>
                   <RightDiv>
-                    <ProblemPageRight auth={auth} solution={solution} />
+                    <ProblemPageRight auth={auth} solution={solution} current={current} />
                   </RightDiv>
                 </Main>
               </div>
