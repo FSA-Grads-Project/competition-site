@@ -16,7 +16,7 @@ const {
 router.get("/", async (req, res, next) => {
   try {
     const problems = await Problem.findAll();
-    res.json(problems.filter((problem) => !problem.current));
+    res.json(problems);
   } catch (ex) {
     next(ex);
   }
@@ -52,6 +52,25 @@ router.get("/current", softVerifyUser, async (req, res, next) => {
     });
 
     res.json(problem);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+// get current problem
+router.get("/previousProblems", softVerifyUser, async (req, res, next) => {
+  try {
+    const now = new Date();
+
+    const problems = await Problem.findAll({
+      where: {
+        endDate: {
+          [Op.lte]: now,
+        },
+      },
+    });
+
+    res.send(problems);
   } catch (ex) {
     next(ex);
   }
