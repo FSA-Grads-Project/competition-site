@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { axiosProtected } from "../api/axios";
+// import axios from "axios";
+import axios, { axiosProtected } from "../api/axios";
 
 // creating thunk
 
@@ -22,6 +22,19 @@ export const fetchProblem = createAsyncThunk(
   }
 );
 
+export const fetchPreviousProblems = createAsyncThunk(
+  "problems/getPreviousProblems",
+  async () => {
+    try {
+      const response = await axios.get("/problems/previousProblems");
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  }
+);
+
 // createSlice creates the action + reducer
 
 export const problemSlice = createSlice({
@@ -29,7 +42,9 @@ export const problemSlice = createSlice({
   initialState: {
     problem: {},
     problems: [],
+    previousProblems: [],
     status: "idle",
+    error: {},
   },
   reducers: {},
   extraReducers: {
@@ -46,6 +61,17 @@ export const problemSlice = createSlice({
     [fetchProblems.fulfilled]: (state, action) => {
       state.status = "succeeded";
       state.problems = action.payload;
+    },
+    [fetchPreviousProblems.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [fetchPreviousProblems.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.previousProblems = action.payload;
+    },
+    [fetchPreviousProblems.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = action.payload;
     },
   },
 });

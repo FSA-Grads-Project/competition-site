@@ -82,6 +82,7 @@ export const solutionSlice = createSlice({
     },
     [updateSolution.fulfilled]: (state, action) => {
       state.solutionStatus = "succeeded";
+      state.solution = action.payload;
       state.error = "";
     },
     [updateSolution.rejected]: (state, action) => {

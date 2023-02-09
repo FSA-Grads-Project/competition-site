@@ -3,6 +3,8 @@ import React, { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Third Party Library Imports
+import { VscOutput } from "react-icons/vsc";
+import { IconContext } from "react-icons";
 import { EditorState, basicSetup } from "@codemirror/basic-setup";
 import { EditorView, keymap } from "@codemirror/view";
 import { defaultKeymap, indentWithTab } from "@codemirror/commands";
@@ -19,10 +21,9 @@ import {
   OutputTitle,
   ConsoleOutput,
   ContextOutput,
+  ResetCodeButton,
+  OutputTitleWrapper
 } from "../StyledComponents/GlobalStyles.tw";
-import {
-  SolutionTitleSpan,
-} from "../StyledComponents/ProblemStyles.tw";
 import SubmitModal from "./SubmitModal";
 import { openSubmitModal } from "../store/modal";
 import useEvaluateCode from "../hooks/useEvaluateCode";
@@ -39,7 +40,7 @@ let baseTheme = EditorView.theme({
     overflowWrap: "anywhere",
   },
   ".cm-scroller": {
-    height: "20vh",
+    height: "40vh",
     "min-height": "200px",
   },
   ".cm-gutter": {
@@ -55,23 +56,33 @@ export const CodeEditor = () => {
   const editor = useRef();
   const solutionCode = useSelector((state) => state.solution?.solution?.solutionCode);
   const defaultCode = useSelector((state) => state.problems?.problem?.initialCode);
+  const solution = useSelector((state) => state.solution?.solution?.completeDatetime);
   const problem = useSelector((state) => state.problems.problem)
+  const current = useSelector((state) => state.problems?.problem?.current);
+
 
   const [code, setCode] = useState("");
   const [contextOutput, setContextOutput] = useState([]);
   const [consoleOutput, setConsoleOutput] = useState([]);
   const [solutionPassed, setSolutionPassed] = useState(false);
+  const [reset, setReset] = useState(false);
+
 
   const onUpdate = EditorView.updateListener.of((v) => {
     setCode(v.state.doc.toString());
   });
   
   const dispatch = useDispatch();
+  let initialCode;
   useEffect(() => {
-    const initialCode = solutionCode || defaultCode
+    if (auth.accessToken) {
+      initialCode = solutionCode || defaultCode
+    } else {
+      initialCode = defaultCode
+    }
 
       const state = EditorState.create({
-        doc: initialCode,
+        doc: !reset ? initialCode : defaultCode,
         extensions: [
           basicSetup,
           keymap.of([defaultKeymap, indentWithTab]),
@@ -81,13 +92,17 @@ export const CodeEditor = () => {
         ],
       });
 
+      if (reset) {
+        setReset(false);
+      }
+
       const view = new EditorView({ state, parent: editor.current });
 
       return () => {
         view.destroy();
       };
 
-  }, [defaultCode, solutionCode]);
+  }, [defaultCode, solutionCode, reset, solution, current]);
 
   useEffect(() => {
     if (solutionPassed) {
@@ -118,6 +133,21 @@ export const CodeEditor = () => {
     dispatch(openSubmitModal());
   };
 
+  const onResetCode = async () => {
+    setReset(true);
+    const res = await useEvaluateCode(
+      problem,
+      defaultCode,
+      setContextOutput,
+      setConsoleOutput
+    );
+
+    if (auth.accessToken) {
+      await useUploadUserSolution(defaultCode, res, "reset");
+      setContextOutput(["See Output Here"])
+    }
+  };
+
   return (
     <div>
       <SubmitModal
@@ -125,17 +155,26 @@ export const CodeEditor = () => {
         setContextOutput={setContextOutput}
         setConsoleOutput={setConsoleOutput}
       />
-      <SolutionTitleSpan>Your Solution</SolutionTitleSpan>
       <EditorWrapper>
         <Editor ref={editor}></Editor>
       </EditorWrapper>
-      <ButtonWrapper>
-        <EvaluateButton onClick={onEvaluate}>Evaluate</EvaluateButton>
-        <SubmitButton onClick={onSubmit} disabled={!solutionPassed}>
+     
+        <ButtonWrapper>
+        <EvaluateButton onClick={onEvaluate} disabled={(!auth.accessToken && current) || solution}>Evaluate</EvaluateButton>
+        <SubmitButton onClick={onSubmit} disabled={!solutionPassed || !auth.accessToken || solution}>
           Submit
         </SubmitButton>
-      </ButtonWrapper>
+        <ResetCodeButton onClick={onResetCode} disabled={!auth.accessToken || solution}>Reset Code</ResetCodeButton>
+        </ButtonWrapper>
+        
+      <OutputTitleWrapper>
+      <IconContext.Provider value={{ size: "1.5em", className: "global-class-name" }}>
+                        <div>
+                          <VscOutput />
+                        </div>
+                    </IconContext.Provider>
       <OutputTitle>Output</OutputTitle>
+      </OutputTitleWrapper>
       <OutputDiv>
         <ContextOutput>
           {" "}
