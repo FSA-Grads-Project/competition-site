@@ -12,7 +12,7 @@ import { IconContext } from "react-icons";
 import Leaderboard from "./Leaderboard";
 import CodeEditor from "./CodeEditor";
 
-const ProblemPageRight = ({ auth, solution, problem }) => {
+const ProblemPageRight = ({ auth, solution, current }) => {
   const [leaderBoardView, setLeaderBoardview] = useState(true);
   const [codeEditorView, setCodeEditorView] = useState(true);
 
@@ -36,11 +36,11 @@ const ProblemPageRight = ({ auth, solution, problem }) => {
   }
 
   useEffect(() => {
-    if (codeEditorView && !auth.accessToken && problem) {
+    if (codeEditorView && !auth.accessToken && current) {
       setLeaderBoardview(true)
       setCodeEditorView(false)
     }
-    if (codeEditorView && !auth.accessToken && !problem) {
+    if (codeEditorView && !auth.accessToken && !current) {
       setCodeEditorView(true)
       setLeaderBoardview(false)
     } 
@@ -48,7 +48,7 @@ const ProblemPageRight = ({ auth, solution, problem }) => {
       setLeaderBoardview(true)
       setCodeEditorView(false)
     }
-  }, [auth, solution, codeEditor, problem])
+  }, [auth, solution, codeEditor, current])
 
 if (codeEditorView) {
             return (
