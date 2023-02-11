@@ -28,6 +28,7 @@ import SubmitModal from "./SubmitModal";
 import { openSubmitModal } from "../store/modal";
 import useEvaluateCode from "../hooks/useEvaluateCode";
 import useUploadUserSolution from "../hooks/useUploadUserSolution";
+import useResetCode from "../hooks/useResetCode";
 
 let baseTheme = EditorView.theme({
   ".cm-activeLine": {
@@ -60,6 +61,7 @@ export const CodeEditor = () => {
   const problem = useSelector((state) => state.problems.problem)
   const current = useSelector((state) => state.problems?.problem?.current);
 
+  const dispatch = useDispatch();
 
   const [code, setCode] = useState("");
   const [contextOutput, setContextOutput] = useState([]);
@@ -72,13 +74,11 @@ export const CodeEditor = () => {
     setCode(v.state.doc.toString());
   });
   
-  const dispatch = useDispatch();
-  let initialCode;
   useEffect(() => {
-    if (auth.accessToken) {
-      initialCode = solutionCode || defaultCode
+    if (auth.accessToken && solutionCode) {
+      var initialCode = solutionCode
     } else {
-      initialCode = defaultCode
+      var initialCode = defaultCode
     }
 
       const state = EditorState.create({
@@ -135,17 +135,13 @@ export const CodeEditor = () => {
 
   const onResetCode = async () => {
     setReset(true);
-    const res = await useEvaluateCode(
-      problem,
-      defaultCode,
-      setContextOutput,
-      setConsoleOutput
-    );
 
     if (auth.accessToken) {
-      await useUploadUserSolution(defaultCode, res, "reset");
       setContextOutput(["See Output Here"])
+      setConsoleOutput(["See Console Here"])
     }
+
+    useResetCode(defaultCode)
   };
 
   return (
