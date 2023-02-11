@@ -9,120 +9,87 @@ import { BiCodeAlt } from "react-icons/bi";
 import Leaderboard from "./Leaderboard";
 import CodeEditor from "./CodeEditor";
 
-export const TabTitle = ({ leaderBoardView, codeEditorView, title }) => {
+export const TabTitle = ({ leaderBoardView, codeEditorView, view, title }) => {
   return (
     <div>
       <TabTitleDiv
         className={
-          (codeEditorView && title === "editor") ||
-          (leaderBoardView && title === "leaderboard")
+          (codeEditorView && view === "editor") ||
+          (leaderBoardView && view === "leaderboard")
             ? "cursor-default"
             : "cursor-pointer text-fadedFont"
         }
       >
-        {title === "editor" ? (
+        {view === "editor" ? (
           <BiCodeAlt className="min-w-10 min-h-10 mx-1" />
         ) : (
           <MdLeaderboard className="min-w-10 min-h-8 mx-1" />
         )}
-        <TabTitleH1>
-          {title === "editor" ? "Code Editor" : "Leaderboard"}
-        </TabTitleH1>
+        <TabTitleH1>{title}</TabTitleH1>
       </TabTitleDiv>
     </div>
   );
 };
 
 const ProblemPageRight = ({ auth, solution, current }) => {
-  const [leaderBoardView, setLeaderBoardview] = useState(true);
-  const [codeEditorView, setCodeEditorView] = useState(true);
-
-  let codeEditor;
-  if (solution && auth.accessToken) {
-    codeEditor = `</> Your Solution`;
-  } else {
-    codeEditor = `</> Code Editor`;
-  }
-  let leaderBoard = `Leaderboard`;
+  const [leaderBoardView, setLeaderBoardview] = useState(false);
+  const [codeEditorView, setCodeEditorView] = useState(false);
 
   function onClick() {
-    console.log("this ran");
-    if (leaderBoardView) {
-      setCodeEditorView(true);
-      setLeaderBoardview(false);
-    }
-    if (codeEditorView) {
-      setLeaderBoardview(true);
-      setCodeEditorView(false);
-    }
+    setCodeEditorView(!codeEditorView);
+    setLeaderBoardview(!leaderBoardView);
   }
 
   useEffect(() => {
-    if (codeEditorView && !auth.accessToken && current) {
+    if ((!auth.accessToken && current) || (auth.accessToken && solution)) {
       setLeaderBoardview(true);
       setCodeEditorView(false);
     }
-    if (codeEditorView && !auth.accessToken && !current) {
+    if ((!auth.accessToken && !current) || (auth.accessToken && !solution)) {
       setCodeEditorView(true);
       setLeaderBoardview(false);
     }
-    if (codeEditorView && solution) {
-      setLeaderBoardview(true);
-      setCodeEditorView(false);
-    }
-  }, [auth, solution, codeEditor, current]);
+  }, [auth, solution, current]);
 
-  if (codeEditorView) {
-    return (
-      <div>
-        <TitleWrapper>
+  return (
+    <div>
+      <TitleWrapper>
+        <div
+          onClick={() => {
+            !codeEditorView ? onClick() : () => null;
+          }}
+        >
           <TabTitle
             leaderBoardView={leaderBoardView}
             codeEditorView={codeEditorView}
-            title={"editor"}
+            view={"editor"}
+            title={
+              solution && auth.accessToken ? "Your Solution" : "Code Editor"
+            }
           />
-          <div className="flex justify-center items-center mx-5 h-full">
-            <div className="h-4/6 w-1 bg-darkFont m-0.5"></div>
-            <div className="h-full w-1 bg-darkFont m-0.5"></div>
-            <div className="h-4/6 w-1 bg-darkFont m-0.5"></div>
-          </div>
-          <div onClick={onClick}>
-            <TabTitle
-              leaderBoardView={leaderBoardView}
-              codeEditorView={codeEditorView}
-              title={"leaderboard"}
-            />
-          </div>
-        </TitleWrapper>
-        <CodeEditor />
-      </div>
-    );
-  } else if (leaderBoardView) {
-    return (
-      <div>
-        <TitleWrapper>
-          <div onClick={onClick}>
-            <TabTitle
-              leaderBoardView={leaderBoardView}
-              codeEditorView={codeEditorView}
-              title={"editor"}
-            />
-          </div>
-          <div className="flex justify-center items-center mx-5 h-full">
-            <div className="h-4/6 w-1 bg-darkFont m-0.5"></div>
-            <div className="h-full w-1 bg-darkFont m-0.5"></div>
-            <div className="h-4/6 w-1 bg-darkFont m-0.5"></div>
-          </div>
+        </div>
+
+        <div className="flex justify-center items-center mx-5 h-full">
+          <div className="h-4/6 w-1 bg-darkFont m-0.5"></div>
+          <div className="h-full w-1 bg-darkFont m-0.5"></div>
+          <div className="h-4/6 w-1 bg-darkFont m-0.5"></div>
+        </div>
+        <div
+          onClick={() => {
+            !leaderBoardView ? onClick() : () => null;
+          }}
+        >
           <TabTitle
             leaderBoardView={leaderBoardView}
             codeEditorView={codeEditorView}
-            title={"leaderboard"}
+            view={"leaderboard"}
+            title={"Leaderboard"}
           />
-        </TitleWrapper>
-        <Leaderboard />
-      </div>
-    );
-  }
+        </div>
+      </TitleWrapper>
+      {codeEditorView ? <CodeEditor /> : <Leaderboard />}
+    </div>
+  );
 };
 
 export default ProblemPageRight;
