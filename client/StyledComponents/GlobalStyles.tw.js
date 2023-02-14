@@ -71,7 +71,7 @@ export const OutputTitleWrapper = tw.div`
 	mr-60
 	ml-60
 	mb-1
-`
+`;
 
 export const OutputTitle = tw.div`
 	mt-2
@@ -129,53 +129,25 @@ export const ModalBox = tw.div`
 
 export const TitleWrapper = tw.div`
 	flex
-	justify-around
-	ml-10
-	mr-10
+	justify-center
+	items-center
 	mb-4
-`
+	h-14
+	w-full
+`;
 
-export const LeaderBoardTitleWrapper = tw.div`
+export const TabTitleDiv = tw.div`
 	flex
-	content-center
+	justify-center
 	items-center
-	border-b-2
-	border-black
-	`
-
-	export const NotLeaderBoardTitleWrapper = tw.div`
-	flex
-	content-center
-	items-center
-	opacity-40
-
-	`
-
-export const LeaderBoardTitle = tw.div`
-	pl-1.5
-	font-playfair
-	font-black
-	text-3xl
+	border-darkFont
+	h-10
+	box-border
 `;
 
-export const CodeEditorTitle = tw.div`
+export const TabTitleH1 = tw.h1`
 	font-playfair
 	font-black
 	text-3xl
-	border-b-2
-	border-black
-`;
-
-export const NotCodeEditorTitle = tw.div`
-	font-playfair
-	font-black
-	opacity-40
-	text-3xl
-`;
-
-export const NotLeaderBoardTitle = tw.div`
-	pl-1.5
-	font-playfair
-	font-black
-	text-3xl
+	mx-3
 `;

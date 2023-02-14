@@ -1,104 +1,95 @@
 import React, { useState, useEffect } from "react";
-import { NotLeaderBoardTitle, 
-         NotCodeEditorTitle,
-         CodeEditorTitle, 
-         LeaderBoardTitle, 
-         LeaderBoardTitleWrapper,
-         NotLeaderBoardTitleWrapper,
-         TitleWrapper} from "../StyledComponents/GlobalStyles.tw";
-import { MdLeaderboard } from 'react-icons/md';
-import { SlEqualizer } from 'react-icons/sl';
-import { IconContext } from "react-icons";
+import {
+  TitleWrapper,
+  TabTitleDiv,
+  TabTitleH1,
+} from "../StyledComponents/GlobalStyles.tw";
+import { MdLeaderboard } from "react-icons/md";
+import { BiCodeAlt } from "react-icons/bi";
 import Leaderboard from "./Leaderboard";
 import CodeEditor from "./CodeEditor";
 
+export const TabTitle = ({ leaderBoardView, codeEditorView, view, title }) => {
+  return (
+    <div>
+      <TabTitleDiv
+        className={
+          (codeEditorView && view === "editor") ||
+          (leaderBoardView && view === "leaderboard")
+            ? "cursor-default"
+            : "cursor-pointer text-fadedFont"
+        }
+      >
+        {view === "editor" ? (
+          <BiCodeAlt className="min-w-10 min-h-10 mx-1" />
+        ) : (
+          <MdLeaderboard className="min-w-10 min-h-8 mx-1" />
+        )}
+        <TabTitleH1>{title}</TabTitleH1>
+      </TabTitleDiv>
+    </div>
+  );
+};
+
 const ProblemPageRight = ({ auth, solution, current }) => {
-  const [leaderBoardView, setLeaderBoardview] = useState(true);
-  const [codeEditorView, setCodeEditorView] = useState(true);
+  const [leaderBoardView, setLeaderBoardview] = useState(false);
+  const [codeEditorView, setCodeEditorView] = useState(false);
 
-  let codeEditor; 
-  if (solution && auth.accessToken) {
-    codeEditor = `</> Your Solution`
-  } else {
-    codeEditor = `</> Code Editor`
-  }
-  let leaderBoard = `Leaderboard`
-
-  function onClick(){
-    if (leaderBoardView) {
-      setCodeEditorView(true)
-      setLeaderBoardview(false)
-    } 
-    if (codeEditorView) {
-      setLeaderBoardview(true)
-      setCodeEditorView(false)
-    }
+  function onClick() {
+    setCodeEditorView(!codeEditorView);
+    setLeaderBoardview(!leaderBoardView);
   }
 
   useEffect(() => {
-    if (codeEditorView && !auth.accessToken && current) {
-      setLeaderBoardview(true)
-      setCodeEditorView(false)
+    if ((!auth.accessToken && current) || (auth.accessToken && solution)) {
+      setLeaderBoardview(true);
+      setCodeEditorView(false);
     }
-    if (codeEditorView && !auth.accessToken && !current) {
-      setCodeEditorView(true)
-      setLeaderBoardview(false)
-    } 
-    if (codeEditorView && solution) {
-      setLeaderBoardview(true)
-      setCodeEditorView(false)
+    if ((!auth.accessToken && !current) || (auth.accessToken && !solution)) {
+      setCodeEditorView(true);
+      setLeaderBoardview(false);
     }
-  }, [auth, solution, codeEditor, current])
+  }, [auth, solution, current]);
 
-if (codeEditorView) {
-            return (
-              
-                <div>
-                  <TitleWrapper>
-                    <CodeEditorTitle>{codeEditor}</CodeEditorTitle>
-                    <IconContext.Provider value={{ size: "2em", className: "global-class-name" }}>
-                        <div>
-                          <SlEqualizer />
-                        </div>
-                    </IconContext.Provider>
-                    <NotLeaderBoardTitleWrapper>
-                      <IconContext.Provider value={{ size: "2em", className: "global-class-name" }}>
-                          <div>
-                            <MdLeaderboard />
-                          </div>
-                      </IconContext.Provider>
-                      <NotLeaderBoardTitle onClick={onClick}>{leaderBoard}</NotLeaderBoardTitle>
-                    </NotLeaderBoardTitleWrapper>
-                  </TitleWrapper>
-                  <CodeEditor/>
-                </div>
-              
-            )
-  } else if (leaderBoardView) {
-              return (
-              
-                  <div>
-                      <TitleWrapper>                      
-                        <NotCodeEditorTitle onClick={onClick}>{codeEditor}</NotCodeEditorTitle>
-                          <IconContext.Provider value={{ size: "2em", className: "global-class-name" }}>
-                            <div>
-                              <SlEqualizer />
-                            </div>
-                          </IconContext.Provider>
-                          <LeaderBoardTitleWrapper>
-                            <IconContext.Provider value={{ size: "2em", className: "global-class-name" }}>
-                              <div>
-                                <MdLeaderboard />
-                              </div>
-                            </IconContext.Provider>
-                            <LeaderBoardTitle>{leaderBoard}</LeaderBoardTitle>
-                          </LeaderBoardTitleWrapper>
-                    </TitleWrapper>
-                    <Leaderboard/>
-                  </div>
-                  
-              )
-    }
-}
+  return (
+    <div>
+      <TitleWrapper>
+        <div
+          onClick={() => {
+            !codeEditorView ? onClick() : () => null;
+          }}
+        >
+          <TabTitle
+            leaderBoardView={leaderBoardView}
+            codeEditorView={codeEditorView}
+            view={"editor"}
+            title={
+              solution && auth.accessToken ? "Your Solution" : "Code Editor"
+            }
+          />
+        </div>
+
+        <div className="flex justify-center items-center mx-5 h-full">
+          <div className="h-4/6 w-1 bg-darkFont m-0.5"></div>
+          <div className="h-full w-1 bg-darkFont m-0.5"></div>
+          <div className="h-4/6 w-1 bg-darkFont m-0.5"></div>
+        </div>
+        <div
+          onClick={() => {
+            !leaderBoardView ? onClick() : () => null;
+          }}
+        >
+          <TabTitle
+            leaderBoardView={leaderBoardView}
+            codeEditorView={codeEditorView}
+            view={"leaderboard"}
+            title={"Leaderboard"}
+          />
+        </div>
+      </TitleWrapper>
+      {codeEditorView ? <CodeEditor /> : <Leaderboard />}
+    </div>
+  );
+};
 
 export default ProblemPageRight;
