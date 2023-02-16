@@ -1,5 +1,5 @@
 // System Imports
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useLocation } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Third Party Library Imports
@@ -25,24 +25,20 @@ import useEvaluateCode from "../hooks/useEvaluateCode";
 import useUploadUserSolution from "../hooks/useUploadUserSolution";
 import useResetCode from "../hooks/useResetCode";
 
-export const CodeEditor = () => {
-  const auth = useSelector((state) => state.auth).auth;
+export const CodeEditor = ({auth, solution, current}) => {
+  const dispatch = useDispatch();
   const monacoRef = useRef(null);
   const solutionCode = useSelector((state) => state.solution?.solution?.solutionCode);
-  let defaultCode = useSelector((state) => state.problems?.problem?.initialCode);
-  const solution = useSelector((state) => state.solution?.solution?.completeDatetime);
   const problem = useSelector((state) => state.problems.problem)
-  const current = useSelector((state) => state.problems?.problem?.current);
+  let defaultCode = useSelector((state) => state.problems?.problem?.initialCode);
   let initialCode = auth.accessToken && solutionCode ? solutionCode : defaultCode;
-
-  const dispatch = useDispatch();
 
   const [code, setCode] = useState(initialCode);
   const [contextOutput, setContextOutput] = useState([]);
   const [consoleOutput, setConsoleOutput] = useState([]);
   const [solutionPassed, setSolutionPassed] = useState(false);
   const [reset, setReset] = useState(false);
-
+  
   function handleEditorDidMount(editor, monaco){
     monaco.editor.defineTheme('custom-theme', {
       base: "vs",
@@ -57,18 +53,17 @@ export const CodeEditor = () => {
   }
 
   function handleEditorChange(value) {
+    initialCode = value
     setCode(value)
   }
-
- 
 
   useEffect(() => {
     if (reset) {
       handleEditorChange(defaultCode)
       setReset(false);
     }
-
-  }, [handleEditorDidMount, handleEditorChange, defaultCode, solutionCode, reset, solution, current]);
+    handleEditorChange(initialCode)
+  }, [initialCode, solutionCode, reset, solution]);
 
   useEffect(() => {
     if (solutionPassed) {
