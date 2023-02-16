@@ -1,35 +1,22 @@
 import tw from "tailwind-styled-components";
 
-export const SubmitButton = tw.button`
-  bg-[#EDE4C5]
-  p-1
-  m-4
+export const EditorButton = tw.button`
+	bg-darkBackground
+	rounded-md
+  h-10
+  m-2
   font-cormorant-sc
   text-xl
   w-1/4
+	border-2
+	border-darkBackground
 	disabled:bg-disabledButtonBackground
-`;
-
-export const EvaluateButton = tw.button`
-  bg-[#EDE4C5]
-  p-1
-  m-4
-  font-cormorant-sc
-  text-xl
-  w-1/4
-	disabled:bg-disabledButtonBackground
-
-`;
-
-export const ResetCodeButton = tw.button`
-  bg-[#EDE4C5]
-  p-1
-  m-4
-  font-cormorant-sc
-  text-xl
-  w-1/4
-	disabled:bg-disabledButtonBackground
-
+	disabled:border-disabledButtonBackground
+	transition-all duration-200 ease-linear
+	text-center
+	flex
+	justify-center
+	items-center
 `;
 
 export const ButtonWrapper = tw.div`
