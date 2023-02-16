@@ -2,6 +2,8 @@ const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 const path = require('path');
 const exec = require('child_process').exec;
+const babel = require("babel-core");
+const loopcontrol = require("./loopcontrol");
 
 function executeCode (code, problem, res) {
   // create random filename
@@ -11,7 +13,15 @@ function executeCode (code, problem, res) {
   let filePath = path.join(__dirname, `/temp/${fileName}`);
 
 	// create problem code to be used for consoleScript
-	const consoleProblem = problem.replace('return resultTest', '//return resultTest')
+	const consoleProblem = problem.replace('return resultTest', '//return resultTest');
+
+  // convert from a buffer to a string
+  const src = code.toString();
+
+  // use plugin to transform the source
+  const out = babel.transform(src, {
+      plugins: [loopcontrol]
+  });
   
   // create script to pass to docker container that contains code execution process to capture test output + console output
   const runCode = `
@@ -22,11 +32,11 @@ function executeCode (code, problem, res) {
             process: process,
           }
           vm.createContext(sandbox);
-          let script = new vm.Script(${JSON.stringify(problem + code)});
+          let script = new vm.Script(${JSON.stringify(problem + out.code)});
           const contextOutput = script.runInContext(sandbox, {
             console: console,
           });
-          let consoleScript = new vm.Script(eval(${JSON.stringify(consoleProblem + code)}));
+          let consoleScript = new vm.Script(eval(${JSON.stringify(consoleProblem + out.code)}));
           console.log(contextOutput)
         } catch(err) {
         console.log(err)
@@ -34,11 +44,14 @@ function executeCode (code, problem, res) {
         `
   
   try {
+
+
     // create new temp file containing user code
-        fs.writeFile(filePath, runCode, (err) => {
+        fs.writeFile(filePath, runCode, (err) => {  
           if (err)
           console.log(err);
           else {
+            console.log(runCode)
           console.log("File written successfully\n");
 
           // create/destroy docker container for code execution process
@@ -75,7 +88,6 @@ function executeCode (code, problem, res) {
     res.json(er)
     console.log(er)
     next(er)
-    
   }
 
 
