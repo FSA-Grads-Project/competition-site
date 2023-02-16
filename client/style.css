@@ -11,7 +11,8 @@ body {
   color: #333333;
 }
 
-.CodeMirror-selected {
-  /* selected text */
-  background: #0663d3 !important;
-}
+.monaco-editor {
+  padding-top: 15px;
+  overflow: hidden;
+  margin: 0
+ };

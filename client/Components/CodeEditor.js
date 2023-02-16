@@ -5,15 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 // Third Party Library Imports
 import { VscOutput } from "react-icons/vsc";
 import { IconContext } from "react-icons";
-import { EditorState, basicSetup } from "@codemirror/basic-setup";
-import { EditorView, keymap } from "@codemirror/view";
-import { defaultKeymap, indentWithTab } from "@codemirror/commands";
-import { javascript } from "@codemirror/lang-javascript";
+import Editor from "@monaco-editor/react";
 
 // Local Imports
 import {
-  Editor,
-  EditorWrapper,
   ButtonWrapper,
   EvaluateButton,
   SubmitButton,
@@ -30,79 +25,50 @@ import useEvaluateCode from "../hooks/useEvaluateCode";
 import useUploadUserSolution from "../hooks/useUploadUserSolution";
 import useResetCode from "../hooks/useResetCode";
 
-let baseTheme = EditorView.theme({
-  ".cm-activeLine": {
-    backgroundColor: "transparent",
-  },
-  ".cm-content *": {
-    color: "black",
-    fontSize: "16px",
-    lineHeight: "1.5",
-    overflowWrap: "anywhere",
-  },
-  ".cm-scroller": {
-    height: "40vh",
-    "min-height": "200px",
-  },
-  ".cm-gutter": {
-    backgroundColor: "#EDE4C5",
-  },
-  ".cm-gutterElement": {
-    backgroundColor: "#EDE4C5",
-  },
-});
-
 export const CodeEditor = () => {
   const auth = useSelector((state) => state.auth).auth;
-  const editor = useRef();
+  const monacoRef = useRef(null);
   const solutionCode = useSelector((state) => state.solution?.solution?.solutionCode);
-  const defaultCode = useSelector((state) => state.problems?.problem?.initialCode);
+  let defaultCode = useSelector((state) => state.problems?.problem?.initialCode);
   const solution = useSelector((state) => state.solution?.solution?.completeDatetime);
   const problem = useSelector((state) => state.problems.problem)
   const current = useSelector((state) => state.problems?.problem?.current);
+  let initialCode = auth.accessToken && solutionCode ? solutionCode : defaultCode;
 
   const dispatch = useDispatch();
 
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState(initialCode);
   const [contextOutput, setContextOutput] = useState([]);
   const [consoleOutput, setConsoleOutput] = useState([]);
   const [solutionPassed, setSolutionPassed] = useState(false);
   const [reset, setReset] = useState(false);
 
+  function handleEditorDidMount(editor, monaco){
+    monaco.editor.defineTheme('custom-theme', {
+      base: "vs",
+      inherit: true,
+      rules: [],
+      colors: {
+        "editor.background": '#EDE4C5'
+      }
+    });
+    monaco.editor.setTheme('custom-theme')
+    monacoRef.current = editor
+  }
 
-  const onUpdate = EditorView.updateListener.of((v) => {
-    setCode(v.state.doc.toString());
-  });
-  
+  function handleEditorChange(value) {
+    setCode(value)
+  }
+
+ 
+
   useEffect(() => {
-    if (auth.accessToken && solutionCode) {
-      var initialCode = solutionCode
-    } else {
-      var initialCode = defaultCode
+    if (reset) {
+      handleEditorChange(defaultCode)
+      setReset(false);
     }
 
-      const state = EditorState.create({
-        doc: !reset ? initialCode : defaultCode,
-        extensions: [
-          basicSetup,
-          keymap.of([defaultKeymap, indentWithTab]),
-          baseTheme,
-          javascript(),
-          onUpdate,
-        ],
-      });
-
-      if (reset) {
-        setReset(false);
-      }
-
-      const view = new EditorView({ state, parent: editor.current });
-
-      return () => {
-        view.destroy();
-      };
-
-  }, [defaultCode, solutionCode, reset, solution, current]);
+  }, [handleEditorDidMount, handleEditorChange, defaultCode, solutionCode, reset, solution, current]);
 
   useEffect(() => {
     if (solutionPassed) {
@@ -144,6 +110,14 @@ export const CodeEditor = () => {
     useResetCode(defaultCode)
   };
 
+  // Monaco editor options
+  const options = {
+    minimap: { enabled: false },
+    wordWrap: 'on',
+    renderLineHighlight: "none",
+    scrollBeyondLastLine: false
+  }
+
   return (
     <div>
       <SubmitModal
@@ -151,9 +125,16 @@ export const CodeEditor = () => {
         setContextOutput={setContextOutput}
         setConsoleOutput={setConsoleOutput}
       />
-      <EditorWrapper>
-        <Editor ref={editor}></Editor>
-      </EditorWrapper>
+        <Editor
+            defaultValue=""
+            height="300px"
+            min-height="250px"
+            defaultLanguage="javascript"
+            value={code}
+            onChange={handleEditorChange}
+            onMount={handleEditorDidMount}
+            options={options}
+        />
      
         <ButtonWrapper>
         <EvaluateButton onClick={onEvaluate} disabled={(!auth.accessToken && current) || solution}>Evaluate</EvaluateButton>

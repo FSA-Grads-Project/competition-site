@@ -14,15 +14,20 @@ function executeCode (code, problem, res) {
 
 	// create problem code to be used for consoleScript
 	const consoleProblem = problem.replace('return resultTest', '//return resultTest');
-
-  // convert from a buffer to a string
+  // convert from a buffer to a string for babel transform
   const src = code.toString();
-
+  
+  try {
   // use plugin to transform the source
   const out = babel.transform(src, {
       plugins: [loopcontrol]
+      
   });
-  
+  code = out.code; 
+} catch(er) {
+    console.log(er)
+  }
+
   // create script to pass to docker container that contains code execution process to capture test output + console output
   const runCode = `
         const vm = require('vm');
@@ -32,39 +37,47 @@ function executeCode (code, problem, res) {
             process: process,
           }
           vm.createContext(sandbox);
-          let script = new vm.Script(${JSON.stringify(problem + out.code)});
+          let script = new vm.Script(${JSON.stringify(problem + code)});
           const contextOutput = script.runInContext(sandbox, {
             console: console,
           });
-          let consoleScript = new vm.Script(eval(${JSON.stringify(consoleProblem + out.code)}));
+          let consoleScript = new vm.Script(eval(${JSON.stringify(consoleProblem + code)}));
           console.log(contextOutput)
         } catch(err) {
         console.log(err)
-        }
-        `
-  
-  try {
+        }`
+       
+  // const runCode = `
+  //       const {VM} = require('vm2');
+  //       try {
+  //         new VM().run(problem + out.code);
+  //         console.log(contextOutput)
+  //       } catch(err) {
+  //       console.log(err)
+  //       }
+  //     `
 
+  try {
 
     // create new temp file containing user code
         fs.writeFile(filePath, runCode, (err) => {  
           if (err)
           console.log(err);
           else {
-            console.log(runCode)
           console.log("File written successfully\n");
-
           // create/destroy docker container for code execution process
           exec(`docker run --rm -v ${filePath}:/runtest node:18.7.0 /bin/bash -c 'node runtest'`, 
             (error, stdout, stderr) => {
           if (error) {
               console.log(`error: ${error.message}`);
               fs.unlinkSync(filePath)
+              console.log("File removed successfully\n");
               return;
           }
           if (stderr) {
               console.log(`stderr: ${stderr}`);
               fs.unlinkSync(filePath)
+              console.log("File removed successfully\n");
               return;
           }
 
@@ -76,6 +89,7 @@ function executeCode (code, problem, res) {
           results.consoleOutput = stdout
           console.log(results)
           fs.unlinkSync(filePath)
+          console.log("File removed successfully\n");
           res.json(results)
         });
       }
@@ -84,13 +98,12 @@ function executeCode (code, problem, res) {
   } catch(er){
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath)
+      console.log("File removed successfully\n");
     }
     res.json(er)
     console.log(er)
     next(er)
   }
-
-
 }
 
 module.exports = executeCode
