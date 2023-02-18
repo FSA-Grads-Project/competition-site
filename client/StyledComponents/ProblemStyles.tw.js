@@ -46,9 +46,8 @@ export const LeftDiv = tw.div`
 
 export const RightDiv = tw.div`
     mr-40
-    text-center
     max-h-[600px] 
     max-w-[700px]
-		min-w-[700px] 
+    min-w-[700px] 
     h-[800px]
 `;

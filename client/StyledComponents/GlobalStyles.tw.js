@@ -25,18 +25,9 @@ export const ButtonWrapper = tw.div`
 	mt-2
 `;
 
-export const EditorWrapper = tw.div`
-  w-[700px]
-  bg-[#EDE4C5]
-`;
-
-export const Editor = tw.div`
-  text-left
-  bg-[#EDE4C5]
-`;
-
 export const OutputDiv = tw.div`
   flex
+	text-center
   justify-evenly
   min-h-[200px] 
   bg-[#EDE4C5]

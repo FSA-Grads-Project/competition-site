@@ -67,5 +67,4 @@ export const ImgDiv = tw.div`
 
 export const SignInLink = tw.a`
     text-blue-600 visited:text-purple-600
-   
 `

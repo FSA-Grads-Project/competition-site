@@ -25,23 +25,11 @@
     "url": "https://github.com/FSA-Grad-Project/competition-site/issues"
   },
   "homepage": "https://github.com/FSA-Grad-Project/competition-site#readme",
-  "overrides": {
-    "@codemirror/basic-setup": "^0.20.0",
-    "@codemirror/commands": "^6.1.2",
-    "@codemirror/lang-javascript": "^6.1.1",
-    "@codemirror/state": "^6.1.2",
-    "@codemirror/theme-one-dark": "^6.1.0",
-    "@codemirror/view": "^6.4.0"
-  },
   "dependencies": {
-    "@codemirror/basic-setup": "^0.20.0",
-    "@codemirror/commands": "^6.1.2",
-    "@codemirror/lang-javascript": "^6.1.1",
-    "@codemirror/state": "^6.1.2",
-    "@codemirror/theme-one-dark": "^6.1.0",
-    "@codemirror/view": "^6.4.0",
+    "@monaco-editor/react": "^4.4.6",
     "@reduxjs/toolkit": "^1.8.6",
     "ast": "^1.0.7",
+    "babel-core": "^6.26.3",
     "bcrypt": "^5.1.0",
     "codemirror": "^6.0.1",
     "copy": "^0.3.2",
@@ -55,7 +43,8 @@
     "react-icons": "^4.7.1",
     "react-scripts": "^5.0.1",
     "sequelize": "^6.25.2",
-    "style-loader": "^3.3.1"
+    "style-loader": "^3.3.1",
+    "vm2": "^3.9.14"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
