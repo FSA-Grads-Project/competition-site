@@ -5,18 +5,17 @@ import { useSelector, useDispatch } from "react-redux";
 // Third Party Library Imports
 import { VscOutput } from "react-icons/vsc";
 import { IconContext } from "react-icons";
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai"
 import Editor from "@monaco-editor/react";
+
 
 // Local Imports
 import {
   ButtonWrapper,
-  EvaluateButton,
-  SubmitButton,
   OutputDiv,
   OutputTitle,
   ConsoleOutput,
   ContextOutput,
-  ResetCodeButton,
   EditorButton,
   OutputTitleWrapper,
 } from "../StyledComponents/GlobalStyles.tw";
