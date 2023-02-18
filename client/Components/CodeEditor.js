@@ -17,7 +17,8 @@ import {
   ConsoleOutput,
   ContextOutput,
   ResetCodeButton,
-  OutputTitleWrapper
+  EditorButton,
+  OutputTitleWrapper,
 } from "../StyledComponents/GlobalStyles.tw";
 import SubmitModal from "./SubmitModal";
 import { openSubmitModal } from "../store/modal";
@@ -38,6 +39,8 @@ export const CodeEditor = ({auth, solution, current}) => {
   const [consoleOutput, setConsoleOutput] = useState([]);
   const [solutionPassed, setSolutionPassed] = useState(false);
   const [reset, setReset] = useState(false);
+  const [isEvaluating, setIsEvaluating] = useState(false);
+  const [evalCheck, setEvalCheck] = useState(false);
   
   function handleEditorDidMount(editor, monaco){
     monaco.editor.defineTheme('custom-theme', {
@@ -72,6 +75,7 @@ export const CodeEditor = ({auth, solution, current}) => {
   }, [code]);
 
   const onEvaluate = async () => {
+    setIsEvaluating(true);
     const res = await useEvaluateCode(
       problem,
       code,
@@ -83,11 +87,16 @@ export const CodeEditor = ({auth, solution, current}) => {
       await useUploadUserSolution(code, res, "eval");
     }
 
-    if (res.data.contextOutput[0] !== "test failed") {
+    if (res.data.contextOutput[0].includes("test passed")) {
       setSolutionPassed(true);
     } else {
       setSolutionPassed(false);
     }
+    setIsEvaluating(false);
+    setEvalCheck(true);
+    setTimeout(() => {
+      setEvalCheck(false);
+    }, "1000");
   };
 
   const onSubmit = () => {
@@ -98,11 +107,11 @@ export const CodeEditor = ({auth, solution, current}) => {
     setReset(true);
 
     if (auth.accessToken) {
-      setContextOutput(["See Output Here"])
-      setConsoleOutput(["See Console Here"])
+      setContextOutput(["See Output Here"]);
+      setConsoleOutput(["See Console Here"]);
     }
 
-    useResetCode(defaultCode)
+    useResetCode(defaultCode);
   };
 
   // Monaco editor options
@@ -120,6 +129,7 @@ export const CodeEditor = ({auth, solution, current}) => {
         setContextOutput={setContextOutput}
         setConsoleOutput={setConsoleOutput}
       />
+
         <Editor
             defaultValue=""
             height="300px"
@@ -130,22 +140,53 @@ export const CodeEditor = ({auth, solution, current}) => {
             onMount={handleEditorDidMount}
             options={options}
         />
-     
-        <ButtonWrapper>
-        <EvaluateButton onClick={onEvaluate} disabled={(!auth.accessToken && current) || solution}>Evaluate</EvaluateButton>
-        <SubmitButton onClick={onSubmit} disabled={!solutionPassed || !auth.accessToken || solution}>
+      <ButtonWrapper>
+        <div className="w-1/4 m-2 flex justify-center items-center text-center">
+          <EditorButton
+            className={
+              isEvaluating
+                ? "w-10 m-0 rounded-full border-2 border-fadedFont border-l-darkBackground animate-rotate text-lightBackground"
+                : evalCheck
+                ? "text-lightBackground w-full m-0 bg-darkFont border-darkFont"
+                : "w-full m-0"
+            }
+            onClick={onEvaluate}
+            disabled={(!auth.accessToken && current) || solution}
+          >
+            {isEvaluating ? (
+              ""
+            ) : !evalCheck ? (
+              "Evaluate"
+            ) : solutionPassed ? (
+              <AiOutlineCheck />
+            ) : (
+              <AiOutlineClose />
+            )}
+          </EditorButton>
+        </div>
+        <EditorButton
+          onClick={onSubmit}
+          disabled={!solutionPassed || !auth.accessToken || solution}
+        >
           Submit
-        </SubmitButton>
-        <ResetCodeButton onClick={onResetCode} disabled={!auth.accessToken || solution}>Reset Code</ResetCodeButton>
-        </ButtonWrapper>
-        
+        </EditorButton>
+        <EditorButton
+          onClick={onResetCode}
+          disabled={!auth.accessToken || solution}
+        >
+          Reset Code
+        </EditorButton>
+      </ButtonWrapper>
+
       <OutputTitleWrapper>
-      <IconContext.Provider value={{ size: "1.5em", className: "global-class-name" }}>
-                        <div>
-                          <VscOutput />
-                        </div>
-                    </IconContext.Provider>
-      <OutputTitle>Output</OutputTitle>
+        <IconContext.Provider
+          value={{ size: "1.5em", className: "global-class-name" }}
+        >
+          <div>
+            <VscOutput />
+          </div>
+        </IconContext.Provider>
+        <OutputTitle>Output</OutputTitle>
       </OutputTitleWrapper>
       <OutputDiv>
         <ContextOutput>
