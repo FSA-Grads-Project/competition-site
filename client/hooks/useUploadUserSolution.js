@@ -6,7 +6,14 @@ const useUploadUserSolution = async (code, res, type) => {
   const { auth, solution } = store.getState();
   const dispatch = store.dispatch;
 
-  if (res.data.contextOutput.length < 2) {
+  if (type === "reopen") {
+    const solutionResults = {
+      id: solution.solution?.id,
+      type,
+    };
+
+    await dispatch(updateSolution(solutionResults));
+  } else if (res.data.contextOutput.length < 2) {
     return;
   } else {
     const solutionResults = {

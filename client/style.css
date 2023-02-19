@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  max-width: 100%;
+  /* max-width: 100%; */
 }
 
 body {
@@ -12,10 +12,10 @@ body {
 }
 
 .monaco-editor {
-  padding-top: 15px;
+  /* padding-top: 15px; */
   overflow: hidden;
-  margin: 0
- };
+  margin: 0;
+}
 
 .animate-rotate {
   animation: rotating 2s 0.25s linear infinite;

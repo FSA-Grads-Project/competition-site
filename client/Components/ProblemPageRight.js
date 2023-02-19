@@ -87,7 +87,11 @@ const ProblemPageRight = ({ auth, solution, current }) => {
           />
         </div>
       </TitleWrapper>
-      {codeEditorView ? <CodeEditor auth={auth} solution={solution} current={current} /> : <Leaderboard />}
+      {codeEditorView ? (
+        <CodeEditor auth={auth} solution={solution} current={current} />
+      ) : (
+        <Leaderboard />
+      )}
     </div>
   );
 };
