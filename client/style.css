@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  max-width: 100%;
-}
-
 body {
   background-color: #fdf5e8;
   color: #333333;
