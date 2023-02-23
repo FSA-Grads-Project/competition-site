@@ -33,8 +33,6 @@ const SubmitModal = ({ code, setContextOutput, setConsoleOutput }) => {
       setConsoleOutput
     );
 
-    console.log(res.data);
-
     if (auth.accessToken) {
       await useUploadUserSolution(code, res, "submit");
     }

@@ -8,6 +8,7 @@ export const modalSlice = createSlice({
     submitModalOpen: false,
     hintModalOpen: false,
     initialLoginModalOpen: false,
+    reopenProblemModalOpen: false,
   },
   reducers: {
     openLoginModal: (state) => {
@@ -34,6 +35,12 @@ export const modalSlice = createSlice({
     closeInitialLoginModal: (state) => {
       state.initialLoginModalOpen = false;
     },
+    openReopenProblemModal: (state) => {
+      state.reopenProblemModalOpen = true;
+    },
+    closeReopenProblemModal: (state) => {
+      state.reopenProblemModalOpen = false;
+    },
   },
 });
 
@@ -48,4 +55,6 @@ export const {
   closeHintModal,
   openInitialLoginModal,
   closeInitialLoginModal,
+  openReopenProblemModal,
+  closeReopenProblemModal,
 } = modalSlice.actions;

@@ -5,9 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 // Third Party Library Imports
 import { VscOutput } from "react-icons/vsc";
 import { IconContext } from "react-icons";
-import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai"
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import Editor from "@monaco-editor/react";
-
 
 // Local Imports
 import {
@@ -20,18 +19,27 @@ import {
   OutputTitleWrapper,
 } from "../StyledComponents/GlobalStyles.tw";
 import SubmitModal from "./SubmitModal";
-import { openSubmitModal } from "../store/modal";
+import ReopenProblemModal from "./ReopenProblemModal";
+import { openSubmitModal, openReopenProblemModal } from "../store/modal";
 import useEvaluateCode from "../hooks/useEvaluateCode";
 import useUploadUserSolution from "../hooks/useUploadUserSolution";
 import useResetCode from "../hooks/useResetCode";
 
-export const CodeEditor = ({auth, solution, current}) => {
+export const CodeEditor = ({ auth, solution, current }) => {
   const dispatch = useDispatch();
   const monacoRef = useRef(null);
-  const solutionCode = useSelector((state) => state.solution?.solution?.solutionCode);
-  const problem = useSelector((state) => state.problems.problem)
-  let defaultCode = useSelector((state) => state.problems?.problem?.initialCode);
-  let initialCode = auth.accessToken && solutionCode ? solutionCode : defaultCode;
+  const solutionCode = useSelector(
+    (state) => state.solution?.solution?.solutionCode
+  );
+  const solutionCompletedDate = useSelector(
+    (state) => state.solution?.solution?.completeDatetime
+  );
+  const problem = useSelector((state) => state.problems.problem);
+  let defaultCode = useSelector(
+    (state) => state.problems?.problem?.initialCode
+  );
+  let initialCode =
+    auth.accessToken && solutionCode ? solutionCode : defaultCode;
 
   const [code, setCode] = useState(initialCode);
   const [contextOutput, setContextOutput] = useState([]);
@@ -40,31 +48,43 @@ export const CodeEditor = ({auth, solution, current}) => {
   const [reset, setReset] = useState(false);
   const [isEvaluating, setIsEvaluating] = useState(false);
   const [evalCheck, setEvalCheck] = useState(false);
-  
-  function handleEditorDidMount(editor, monaco){
-    monaco.editor.defineTheme('custom-theme', {
+
+  // let themeColor = solutionCompletedDate ? "#F0ECE1" : "#EDE4C5";
+
+  function handleEditorDidMount(editor, monaco) {
+    monaco.editor.defineTheme("custom-theme", {
       base: "vs",
       inherit: true,
       rules: [],
       colors: {
-        "editor.background": '#EDE4C5'
-      }
+        // "editor.background": themeColor,
+        "editor.background": "#EDE4C5",
+      },
     });
-    monaco.editor.setTheme('custom-theme')
-    monacoRef.current = editor
+
+    // monaco.editor.defineTheme("disabled-theme", {
+    //   base: "vs",
+    //   inherit: true,
+    //   rules: [],
+    //   colors: {
+    //     "editor.background": "#F0ECE1",
+    //   },
+    // });
+    monaco.editor.setTheme("custom-theme");
+    monacoRef.current = editor;
   }
 
   function handleEditorChange(value) {
-    initialCode = value
-    setCode(value)
+    initialCode = value;
+    setCode(value);
   }
 
   useEffect(() => {
     if (reset) {
-      handleEditorChange(defaultCode)
+      handleEditorChange(defaultCode);
       setReset(false);
     }
-    handleEditorChange(initialCode)
+    handleEditorChange(initialCode);
   }, [initialCode, solutionCode, reset, solution]);
 
   useEffect(() => {
@@ -113,13 +133,18 @@ export const CodeEditor = ({auth, solution, current}) => {
     useResetCode(defaultCode);
   };
 
+  const onReopen = async () => {
+    dispatch(openReopenProblemModal());
+  };
+
   // Monaco editor options
   const options = {
     minimap: { enabled: false },
-    wordWrap: 'on',
+    wordWrap: "on",
     renderLineHighlight: "none",
-    scrollBeyondLastLine: false
-  }
+    scrollBeyondLastLine: false,
+    readOnly: solutionCompletedDate ? true : false,
+  };
 
   return (
     <div>
@@ -128,91 +153,117 @@ export const CodeEditor = ({auth, solution, current}) => {
         setContextOutput={setContextOutput}
         setConsoleOutput={setConsoleOutput}
       />
+      <ReopenProblemModal />
 
+      <div
+        // className={
+        //   solutionCompletedDate
+        //     ? "py-4 bg-disabledCodeEditor"
+        //     : "py-4 bg-darkBackground"
+        // }
+        className="py-4 bg-darkBackground"
+      >
         <Editor
-            defaultValue=""
-            height="300px"
-            min-height="250px"
-            defaultLanguage="javascript"
-            value={code}
-            onChange={handleEditorChange}
-            onMount={handleEditorDidMount}
-            options={options}
+          defaultValue=""
+          // height="320px"
+          min-height="250px"
+          defaultLanguage="javascript"
+          value={code}
+          onChange={handleEditorChange}
+          onMount={handleEditorDidMount}
+          options={options}
+          className="min-h-72"
         />
-      <ButtonWrapper>
-        <div className="w-1/4 m-2 flex justify-center items-center text-center">
+      </div>
+      {solutionCompletedDate ? (
+        <ButtonWrapper>
           <EditorButton
-            className={
-              isEvaluating
-                ? "w-10 m-0 rounded-full border-2 border-fadedFont border-l-darkBackground animate-rotate text-lightBackground"
-                : evalCheck
-                ? "text-lightBackground w-full m-0 bg-darkFont border-darkFont"
-                : "w-full m-0"
-            }
-            onClick={onEvaluate}
-            disabled={(!auth.accessToken && current) || solution}
+            onClick={onReopen}
+            // disabled={!auth.accessToken || !solution}
           >
-            {isEvaluating ? (
-              ""
-            ) : !evalCheck ? (
-              "Evaluate"
-            ) : solutionPassed ? (
-              <AiOutlineCheck />
-            ) : (
-              <AiOutlineClose />
-            )}
+            Re-Open Issue
           </EditorButton>
-        </div>
-        <EditorButton
-          onClick={onSubmit}
-          disabled={!solutionPassed || !auth.accessToken || solution}
-        >
-          Submit
-        </EditorButton>
-        <EditorButton
-          onClick={onResetCode}
-          disabled={!auth.accessToken || solution}
-        >
-          Reset Code
-        </EditorButton>
-      </ButtonWrapper>
-
-      <OutputTitleWrapper>
-        <IconContext.Provider
-          value={{ size: "1.5em", className: "global-class-name" }}
-        >
-          <div>
-            <VscOutput />
+        </ButtonWrapper>
+      ) : (
+        <ButtonWrapper>
+          <div className="w-1/4 m-2 flex justify-center items-center text-center">
+            <EditorButton
+              className={
+                isEvaluating
+                  ? "w-10 m-0 rounded-full border-2 border-fadedFont border-l-darkBackground animate-rotate text-lightBackground"
+                  : evalCheck
+                  ? "text-lightBackground w-full m-0 bg-darkFont border-darkFont"
+                  : "w-full m-0"
+              }
+              onClick={onEvaluate}
+              disabled={(!auth.accessToken && current) || solution}
+            >
+              {isEvaluating ? (
+                ""
+              ) : !evalCheck ? (
+                "Evaluate"
+              ) : solutionPassed ? (
+                <AiOutlineCheck />
+              ) : (
+                <AiOutlineClose />
+              )}
+            </EditorButton>
           </div>
-        </IconContext.Provider>
-        <OutputTitle>Output</OutputTitle>
-      </OutputTitleWrapper>
-      <OutputDiv>
-        <ContextOutput>
-          {" "}
-          {contextOutput.length < 1
-            ? "See Output Here"
-            : contextOutput.map((context, i) => {
-                return (
-                  <ul key={i}>
-                    <li> {context} </li>
-                  </ul>
-                );
-              })}{" "}
-        </ContextOutput>
-        <ConsoleOutput>
-          {" "}
-          {consoleOutput.length < 1
-            ? "See Consoles Here"
-            : consoleOutput.map((console, i) => {
-                return (
-                  <ul key={i}>
-                    <li> {console} </li>
-                  </ul>
-                );
-              })}
-        </ConsoleOutput>
-      </OutputDiv>
+          <EditorButton
+            onClick={onSubmit}
+            disabled={!solutionPassed || !auth.accessToken || solution}
+          >
+            Submit
+          </EditorButton>
+          <EditorButton
+            onClick={onResetCode}
+            disabled={!auth.accessToken || solution}
+          >
+            Reset Code
+          </EditorButton>
+        </ButtonWrapper>
+      )}
+
+      {solutionCompletedDate ? null : (
+        <div>
+          <OutputTitleWrapper>
+            <IconContext.Provider
+              value={{ size: "1.5em", className: "global-class-name" }}
+            >
+              <div>
+                <VscOutput />
+              </div>
+            </IconContext.Provider>
+            <OutputTitle>Output</OutputTitle>
+          </OutputTitleWrapper>
+          <OutputDiv>
+            <ContextOutput>
+              {" "}
+              {contextOutput.length < 1
+                ? "See Output Here"
+                : contextOutput.map((context, i) => {
+                    return (
+                      <ul key={i}>
+                        <li> {context} </li>
+                      </ul>
+                    );
+                  })}{" "}
+            </ContextOutput>
+            <ConsoleOutput>
+              {" "}
+              {consoleOutput.length < 1
+                ? "See Consoles Here"
+                : consoleOutput.map((console, i) => {
+                    return (
+                      <ul key={i}>
+                        <li> {console} </li>
+                      </ul>
+                    );
+                  })}
+            </ConsoleOutput>
+          </OutputDiv>
+        </div>
+      )}
     </div>
   );
 };
