@@ -59,8 +59,10 @@ router.put("/solution/:id", verifyUser, async (req, res, next) => {
       await result.update({ ...req.body });
     } else if (req.body.type === "submit") {
       await result.update({ ...req.body, completeDatetime: now });
+    } else if (req.body.type === "reopen") {
+      await result.update({ completeDatetime: null });
     } else {
-      await result.update({solutionCode: req.body.solutionCode});
+      await result.update({ solutionCode: req.body.solutionCode });
     }
 
     res.json(result);

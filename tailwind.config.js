@@ -21,6 +21,7 @@ module.exports = {
       blackColor: "#000000",
       fadedFont: "#B3B3B3",
       disabledButtonBackground: "#E6E2D8",
+      disabledCodeEditor: "#EDE9DF",
       errorFont: "rgba(153, 27, 27)",
     },
     extend: {

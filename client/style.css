@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  max-width: 100%;
+  /* max-width: 100%; */
 }
 
 body {
@@ -11,7 +11,21 @@ body {
   color: #333333;
 }
 
-.CodeMirror-selected {
-  /* selected text */
-  background: #0663d3 !important;
+.monaco-editor {
+  /* padding-top: 15px; */
+  overflow: hidden;
+  margin: 0;
+}
+
+.animate-rotate {
+  animation: rotating 2s 0.25s linear infinite;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
