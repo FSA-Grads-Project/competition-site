@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "./Components/Header";
-import Landing from "./Components/Landing";
 import ProblemPage from "./Components/ProblemPage";
 import { Route, Routes } from "react-router-dom";
 import About from "./Components/About";
