@@ -3,7 +3,7 @@ import tw from "tailwind-styled-components";
 export const NavMain = tw.div`
     min-h-[40px] 
     flex
-    justify-evenly
+    justify-evenly 
     items-center
     border-b-2
     border-slate-700 
@@ -18,8 +18,13 @@ export const NavText = tw.div`
     font-cormorant-sc
     font-black
     flex
-    gap-x-8
+    gap-x-3
+    md:gap-x-8
 `;
+
+
+
+
 
 
 

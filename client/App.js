@@ -13,7 +13,7 @@ import "./style.css";
 
 const App = () => {
   return (
-    <div>
+    <div className="max-w-7xl">
       <LoginModal />
       <InitialLoginModal />
       <Routes>

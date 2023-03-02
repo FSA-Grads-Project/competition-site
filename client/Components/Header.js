@@ -14,7 +14,7 @@ const Header = () => {
       <Head>
         <Hidden>hidden</Hidden>
         <Logo>The Dispatch</Logo>
-        <Issue>Issue {problem.problem.id ? problem.problem.id : '?'}</Issue>
+        <Issue>Issue {problem.problem?.id ? problem.problem?.id : '?'}</Issue>
       </Head>
       <Nav />
       <Outlet />
