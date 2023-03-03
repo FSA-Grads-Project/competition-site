@@ -8,7 +8,6 @@ function NavHamburger() {
         type="button"
         className="z-40 block hamnburger md:hidden focus:outline-none"
       >
-        Click Me
         <span className="hamburger-top"></span>
         <span className="hamburger-middle"></span>
         <span className="hamburger-bottom"></span>

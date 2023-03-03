@@ -1,4 +1,4 @@
-// System library imports
+// System library import
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 // Local imports
 import { clearRefreshToken } from "../store/auth";
 import { openLoginModal } from "../store/modal";
-import { NavText, NavMain } from "../StyledComponents/NavStyles.tw";
+import { NavText } from "../StyledComponents/NavStyles.tw";
 
 const NavMobileMenu = () => {
   const { auth } = useSelector((state) => state.auth);
