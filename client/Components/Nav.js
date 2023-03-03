@@ -1,5 +1,5 @@
 // System library imports
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -7,41 +7,23 @@ import { Link } from "react-router-dom";
 import { clearRefreshToken } from "../store/auth";
 import { openLoginModal } from "../store/modal";
 import { NavText, NavMain } from "../StyledComponents/NavStyles.tw";
+import NavDesktop from "./NavDesktop";
+import NavMobileMenu from "./NavMobileMenu";
+import NavHamburger from "./NavHamburger";
 
 const Nav = () => {
   const { auth } = useSelector((state) => state.auth);
 
+  const [open, setOpen] = useState(false);
+
   const dispatch = useDispatch();
 
   return (
-    <NavMain>
-      <NavText>
-        <Link to="/problem">Current Issue</Link>
-      </NavText>
-      <NavText>
-        <Link to="/pastissues">Past Issues</Link>
-      </NavText>
-      <NavText>
-        <Link to="/about">About</Link>
-      </NavText>
-      {!auth.id ? (
-        <NavText
-          className="cursor-pointer"
-          onClick={() => dispatch(openLoginModal())}
-        >
-          Login
-        </NavText>
-      ) : (
-        <React.Fragment>
-          <NavText>
-            <Link to="/account">Account</Link>
-          </NavText>
-          <NavText>
-            <Link to="/" onClick={() => dispatch(clearRefreshToken())}>Logout</Link>
-          </NavText>
-        </React.Fragment>
-      )}
-    </NavMain>
+    <>
+      <NavDesktop></NavDesktop>
+      <NavHamburger></NavHamburger>
+      <NavMobileMenu></NavMobileMenu>
+    </>
   );
 };
 
