@@ -27,40 +27,22 @@ function executeCode (code, problem, res) {
   } catch(er) {
       console.log(er)
   }
-
-  // Old code execution process using node vm
-  // const runCode = `
-  //       const vm = require('vm');
-  //       const process = require('process');
-  //       try {
-  //         const sandbox = {
-  //           process: process,
-  //         }
-  //         vm.createContext(sandbox);
-  //         let script = new vm.Script(${JSON.stringify(problem + code)});
-  //         const contextOutput = script.runInContext(sandbox, {
-  //           console: console,
-  //         });
-  //         let consoleScript = new vm.Script(eval(${JSON.stringify(consoleProblem + code)}));
-  //         console.log(contextOutput)
-  //       } catch(err) {
-  //       console.log(err)
-  //       }`
  
   // create script to pass to docker container that contains code execution process to capture test output + console output
   const runCode = `
         const {VM, VMScript} = require('vm2');
         const process = require('process');
         const vm = new VM({
-          timeout: 1000,
           sandbox: {
+            timeout: 10000,
             process: process
           }
         });
         try {
           const contextScript = new VMScript(${JSON.stringify(problem + code)}).compile();
-          const consoleScript = new VMScript(eval(${JSON.stringify(consoleProblem + code)}));
-          console.log(vm.run(contextScript));
+          // const consoleScript = new VMScript(eval(${JSON.stringify(consoleProblem + code)}));
+          const context = vm.run(contextScript)
+          console.log(context)
         } catch(err) {
           console.log(err)
         }
@@ -90,14 +72,19 @@ function executeCode (code, problem, res) {
           }
 
           // prepare test results + consoles for front end
-          console.log(stdout)
           if (!stdout) {
             stdout = "test failed,resultTime: None.,resultMemory: None."
           }
 
           stdout = stdout.split('\n')
           stdout = stdout.filter(Boolean)
+  
+          if (!stdout[stdout.length - 1].includes('test failed') && !stdout[stdout.length - 1].includes('test passed')) {
+            stdout.push("test failed,resultTime: None.,resultMemory: None.")
+          }
+
           let results = {contextOutput: stdout[stdout.length - 1].split(",")};
+        
           stdout.pop();
           results.consoleOutput = stdout
           console.log(results)
