@@ -1,6 +1,6 @@
 import React from "react";
 
-function NavHamburger() {
+function NavHamburger({ isOpen, setIsOpen }) {
   return (
     <div className="md:hidden">
       <button
