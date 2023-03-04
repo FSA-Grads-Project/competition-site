@@ -1,25 +1,50 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from "react-redux";
-import { fetchUsers } from '../store/user';
-import { fetchProblems } from '../store/problem';
-import { Link } from 'react-router-dom';
+// System library imports
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
+// Local imports
+import { clearRefreshToken } from "../store/auth";
+import { openLoginModal } from "../store/modal";
+import { NavText, NavMain } from "../StyledComponents/NavStyles.tw";
 
 const Nav = () => {
-    const dispatch = useDispatch();
+  const { auth } = useSelector((state) => state.auth);
 
-    useEffect(()=> {
-        dispatch(fetchUsers());
-        dispatch(fetchProblems());
-    }, [])
-    
-    return (
-      <div>
-        <Link to='/'>Current Issue</Link>
-        <Link to='/account'>Account</Link>
-        <Link to='/about'>About</Link>
-        <Link to='/pastissues'>Past Issues</Link>
-      </div>
-    )
+  const dispatch = useDispatch();
+
+  return (
+    <NavMain>
+      <NavText>
+        <Link to="/">Current Issue</Link>
+      </NavText>
+      <NavText>
+        <Link to="/pastissues">Past Issues</Link>
+      </NavText>
+      <NavText>
+        <Link to="/about">About</Link>
+      </NavText>
+      {!auth.id ? (
+        <NavText
+          className="cursor-pointer"
+          onClick={() => dispatch(openLoginModal())}
+        >
+          Login
+        </NavText>
+      ) : (
+        <React.Fragment>
+          <NavText>
+            <Link to="/account">Account</Link>
+          </NavText>
+          <NavText>
+            <Link to="/" onClick={() => dispatch(clearRefreshToken())}>
+              Logout
+            </Link>
+          </NavText>
+        </React.Fragment>
+      )}
+    </NavMain>
+  );
 };
 
-export default Nav
+export default Nav;

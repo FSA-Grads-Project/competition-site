@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize');
-const connection = require('../database');
+const Sequelize = require("sequelize");
+const connection = require("../database");
 
-const Result = connection.define('result', {
+const Result = connection.define("result", {
   spaceUsed: {
     type: Sequelize.FLOAT,
   },
@@ -9,11 +9,14 @@ const Result = connection.define('result', {
     type: Sequelize.FLOAT,
   },
   startDatetime: {
-    type: Sequelize.DATE
+    type: Sequelize.DATE,
   },
   completeDatetime: {
-    type: Sequelize.DATE
-  }  
+    type: Sequelize.DATE,
+  },
+  solutionCode: {
+    type: Sequelize.TEXT,
+  },
 });
 
 module.exports = Result;

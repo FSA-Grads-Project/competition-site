@@ -1,56 +1,32 @@
-const Sequelize = require('sequelize');
-const connection = require('../database');
+// System library imports
+const Sequelize = require("sequelize");
 
-const User = connection.define('user', {
-  username: {
-    type: Sequelize.STRING,
-    unique: true,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  },
-  password: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  },
-  firstName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  },
-  lastName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  },
-  country: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  },
+// Local imports
+const connection = require("../database");
+
+const User = connection.define("user", {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate: {
-      isEmail: true,
-      notEmpty: true
-    }
   },
   admin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
-    allowNull: false
-  }
+    allowNull: false,
+  },
+  alias: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  refreshToken: {
+    type: Sequelize.STRING,
+    defaultValue: "",
+  },
+  initialLogin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true,
+    allowNull: false,
+  },
 });
 
 module.exports = User;

@@ -1,15 +1,44 @@
-import React from 'react';
-import { useSelector } from "react-redux";
+// System Imports
+import React from "react";
+import { useDispatch, useSelector } from 'react-redux';
 
-const Problem = () => {
+import HintModal from './HintModal';
+import { openHintModal } from '../store/modal';
+import {
+  HintButton,
+  ProblemTitle,
+  ProblemStatement,
+} from "../StyledComponents/ProblemStyles.tw";
 
-    const problems = useSelector(state => state.problems);
-    
-    return (
-      <div className="text-red-800">
-        The Puzzler
-      </div>
-    )
+
+export const Problem = ({ current }) => {
+
+  const { problem } = useSelector((state) => state.problems);
+
+  const dispatch = useDispatch();
+  const hint = useSelector((state) => state.problems?.problem?.hint1);
+  const onHint = () => {
+    dispatch(openHintModal());
+  };
+
+  return (
+    <div>
+      {problem ? (
+        <>
+          <ProblemTitle>{problem.title}</ProblemTitle>
+          <ProblemStatement>
+            {problem.statement || problem.blurb}
+          </ProblemStatement>
+          {current ? <></> : <><HintButton onClick={onHint}>Hint</HintButton><HintModal hint={hint} /></>}
+        </>
+      ) : 
+        <>
+          <ProblemTitle> No Title </ProblemTitle>
+          <ProblemStatement> No Statement </ProblemStatement>
+        </>
+      }
+    </div>
+  );
 };
 
-export default Problem
+export default Problem;

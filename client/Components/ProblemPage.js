@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { Main, LeftDiv, RightDiv } from "../StyledComponents/ProblemStyles.tw";
 import ProblemPageRight from "./ProblemPageRight";
 import Problem from "./Problem";
+import MissingProblem from "./MissingProblem";
 import { fetchProblem } from "../store/problem";
 import { fetchSolution, uploadNewSolution } from "../store/solution";
 
@@ -16,6 +17,7 @@ export const ProblemPage = () => {
   const solution = useSelector(
     (state) => state.solution?.solution?.completeDatetime
   );
+
   const problem = useSelector((state) => state.problems?.problem);
   const current = problem?.current;
   const pathname = useLocation().pathname;
@@ -55,7 +57,7 @@ export const ProblemPage = () => {
   }
 
   if (!problem) {
-    return <h1>TEST</h1>;
+    return <MissingProblem />;
   }
 
   if ((auth.accessToken && !solution) || (!auth.accessToken && !current)) {

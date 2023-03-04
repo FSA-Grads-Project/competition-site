@@ -1,8 +1,11 @@
 const Sequelize = require("sequelize");
+
 const {
   connection,
-  models: { User, Result, Problem },
+  models: { User, Test, Result, Problem },
 } = require("../server/db");
+// const { RESULTS } = require("./seed-results");
+// const { USERS } = require("./seed-users");
 
 const initialization = async () => {
   await connection.sync({ force: true });
@@ -133,10 +136,14 @@ const initialization = async () => {
   });
 
   const problem1 = await Problem.create({
-    statement: "Find the height of a binary tree",
-    solution: "long string of code...",
-    spaceWeight: 0.33,
-    timeWeight: 0.33,
+    title: "linked list",
+    statement: "Find the first null node in the linked list",
+    blurb: "Find the first null node in the linked list",
+    initialCode: "no starter code",
+    startDate: "2022-11-01 00:00:00",
+    endDate: "2022-12-01 00:00:00",
+    spaceWeight: 0.44,
+    timeWeight: 0.46,
   });
 
   const problem2 = await Problem.create({
@@ -189,7 +196,7 @@ runSubmission()
     hint1: `Sherman is a crazy cat that likes to climb the tallest outside
 branches of the tree.`,
     startDate: "2023-02-01 00:00:00",
-    endDate: "2023-02-01 00:00:00",
+    endDate: "2023-07-01 00:00:00",
     spaceWeight: 0.3,
     timeWeight: 0.6,
   });
@@ -312,8 +319,61 @@ function runSubmission() {
 
   result1.userId = john.id;
   result1.problemId = problem1.id;
-
   await result1.save();
+
+  result2.userId = bob.id;
+  result2.problemId = problem1.id;
+  await result2.save();
+
+  result3.userId = tim.id;
+  result3.problemId = problem1.id;
+  await result3.save();
+
+  result4.userId = john.id;
+  result4.problemId = problem2.id;
+  await result4.save();
+
+  result5.userId = bob.id;
+  result5.problemId = problem2.id;
+  await result5.save();
+
+  result6.userId = tim.id;
+  result6.problemId = problem2.id;
+  await result6.save();
+
+  result7.userId = john.id;
+  result7.problemId = problem3.id;
+  await result7.save();
+
+  result8.userId = bob.id;
+  result8.problemId = problem3.id;
+  await result8.save();
+
+  result9.userId = tim.id;
+  result9.problemId = problem3.id;
+  await result9.save();
+
+  result10.userId = john.id;
+  result10.problemId = problem4.id;
+  await result10.save();
+
+  result11.userId = bob.id;
+  result11.problemId = problem4.id;
+  await result11.save();
+
+  result12.userId = tim.id;
+  result12.problemId = problem4.id;
+  await result12.save();
+
+  result13.userId = joe.id;
+  result13.problemId = problem4.id;
+  await result13.save();
+
+  result14.userId = sam.id;
+  result14.problemId = problem4.id;
+  await result14.save();
+
+  // await Promise.all(RESULTS.map((res) => Result.create(res)));
 };
 
 initialization();
