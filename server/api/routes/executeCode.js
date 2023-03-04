@@ -54,20 +54,20 @@ function executeCode (code, problem, res) {
           if (err)
           console.log(err);
           else {
-          console.log("File written successfully\n");
+          console.log("\nFile written successfully\n");
           // create/destroy docker container for code execution process
           exec(`docker run --rm -v ${filePath}:/app/runtest frai26/dispatch:nodevm2 /bin/bash -c 'node runtest'`, 
             (error, stdout, stderr) => {
           if (error) {
               console.log(`error: ${error.message}`);
               fs.unlinkSync(filePath)
-              console.log("File removed successfully\n");
+              console.log("\nFile removed successfully\n");
               return;
           }
           if (stderr) {
               console.log(`stderr: ${stderr}`);
               fs.unlinkSync(filePath)
-              console.log("File removed successfully\n");
+              console.log("\nFile removed successfully\n");
               return;
           }
 
@@ -89,7 +89,7 @@ function executeCode (code, problem, res) {
           results.consoleOutput = stdout
           console.log(results)
           fs.unlinkSync(filePath)
-          console.log("File removed successfully\n");
+          console.log("\nFile removed successfully\n");
           res.json(results)
         });
       }
@@ -98,7 +98,7 @@ function executeCode (code, problem, res) {
   } catch(er){
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath)
-      console.log("File removed successfully\n");
+      console.log("\nFile removed successfully\n");
     }
     res.json(er)
     console.log(er)
