@@ -20,7 +20,7 @@ module.exports = function(babel) {
                  "body",
                  t.ifStatement(
                     t.binaryExpression(">", t.callExpression(t.memberExpression(t.identifier("Date"), t.identifier("now")), []), lhs),
-                    t.throwStatement(t.stringLiteral("Execution Timedout")),
+                    t.throwStatement(t.stringLiteral("Execution Timed out - Check your while loops")),
                     null
                  )
               );
@@ -43,7 +43,7 @@ module.exports = function(babel) {
                 "body",
                 t.ifStatement(
                    t.binaryExpression(">", t.callExpression(t.memberExpression(t.identifier("Date"), t.identifier("now")), []), lhs),
-                   t.throwStatement(t.stringLiteral("Execution Timedout")),
+                   t.throwStatement(t.stringLiteral("Execution Timed out - Check your for loops")),
                    null
                 )
              );
@@ -66,7 +66,7 @@ module.exports = function(babel) {
               "body",
               t.ifStatement(
                  t.binaryExpression(">", t.callExpression(t.memberExpression(t.identifier("Date"), t.identifier("now")), []), lhs),
-                 t.throwStatement(t.stringLiteral("Execution Timedout")),
+                 t.throwStatement(t.stringLiteral("Execution Timed out - Check your do while loops")),
                  null
               )
            );
