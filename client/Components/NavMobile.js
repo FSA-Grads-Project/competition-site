@@ -8,6 +8,7 @@ import { clearRefreshToken } from "../store/auth";
 import { openLoginModal } from "../store/modal";
 import { NavText } from "../StyledComponents/NavStyles.tw";
 import NavHamburger from "./NavHamburger";
+//import "../style.css";
 
 const NavMobile = () => {
   const { auth } = useSelector((state) => state.auth);
@@ -15,23 +16,26 @@ const NavMobile = () => {
 
   const [open, setOpen] = useState(false);
 
-  const toggleHamburger = () => {
+  const handleBurgerOpen = () => {
+    console.log("handleBurgerOpen clicked!");
     setOpen(!open);
   };
 
-  //TODO if Open show Mobile : show hamburger
-  //<hamburger isOpen={isOpen} />;
   return (
-    <>
-      <div onClick={toggleHamburger}>
-        <NavHamburger />
-      </div>
+    <div className="z-99">
       <div
-        id="menu"
-        className="md:hidden absolute top-0 bottom-0 left-0 flex flex-col self-end 
-            w-full min-h-screen py-1 pt-40 pl-12 space-y-3 
-            text-lg text-white uppercase bg-black"
+        className={
+          open ? "open absolute top-2 bottom-0 left-2 cursor-pointer" : ""
+        }
       >
+        <div
+          className="absolute top-2 bottom-0 left-2 cursor-pointer"
+          onClick={handleBurgerOpen}
+        >
+          <NavHamburger isOpen={open} />
+        </div>
+      </div>
+      <div id="mobileMenu" className={open ? "absolute" : "hidden"}>
         <NavText>
           <Link to="/problem">Current Issue</Link>
         </NavText>
@@ -61,8 +65,21 @@ const NavMobile = () => {
           </React.Fragment>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
 export default NavMobile;
+
+{
+  /* <style jsx>{`
+          #mobileMenu {
+            display: ${open ? "inline" : "none"};
+            height: 100vh;
+            width: 50vw;
+            margin-top: 50px;
+            position: fixed;
+          }
+        }
+      `}</style> */
+}
