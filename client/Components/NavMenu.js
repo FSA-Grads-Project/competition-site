@@ -6,15 +6,15 @@ import { Link } from "react-router-dom";
 // Local imports
 import { clearRefreshToken } from "../store/auth";
 import { openLoginModal } from "../store/modal";
-import { NavText, NavMain } from "../StyledComponents/NavStyles.tw";
+import { NavText } from "../StyledComponents/NavStyles.tw";
 
-const NavDesktop = () => {
+const NavMenu = () => {
   const { auth } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
   return (
-    <NavMain>
+    <>
       <NavText>
         <Link to="/problem">Current Issue</Link>
       </NavText>
@@ -43,8 +43,8 @@ const NavDesktop = () => {
           </NavText>
         </React.Fragment>
       )}
-    </NavMain>
+    </>
   );
 };
 
-export default NavDesktop;
+export default NavMenu;

@@ -32,18 +32,6 @@ export const HamburgerContainerDiv = tw.div`
     justify-around
 `;
 
-export const Burger = tw.div`
-    w-8
-    h-1
-    border
-    rounded-lg
-    !bg-black
-    transform-center
-    transition-all
-    duration-500
-
-`;
-
 export const MobileMenuOpen = tw.div`
     absolute 
     top-2 
@@ -61,6 +49,31 @@ export const MobileMenuOpen = tw.div`
     z-10 bg-black
   `;
 
+export const MobileMenuDiv = tw.div`
+    flex 
+    flex-col
+    p-6 
+    m-3 
+    space-y-10 
+    bg-[#fdf5e8] 
+    rounded-2xl 
+    shadow-2xl
+  `;
+
 export const MobileMenuClosed = tw.div`
     hidden
   `;
+
+// export const BurgerSpan = tw.span`
+//     absolute
+//     w-6
+//     h-2
+//     border-6
+//     border-t-4
+
+//     border-slate-700
+//     rounded-lg
+//     bg-gray-700
+//     rotate-0
+//     duration-500
+//   `;

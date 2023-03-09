@@ -2,6 +2,7 @@ import React from "react";
 import {
   HamburgerContainerDiv,
   Burger,
+  BurgerSpan,
 } from "../StyledComponents/NavStyles.tw";
 //import "../style.css";
 
@@ -14,9 +15,9 @@ function NavHamburger({ isOpen }) {
     </div>
     // <>
     //   <HamburgerContainerDiv>
-    //     <Burger />
-    //     <Burger />
-    //     <Burger />
+    //     <BurgerSpan />
+    //     <BurgerSpan />
+    //     <BurgerSpan />
     //   </HamburgerContainerDiv>
     // </>
   );

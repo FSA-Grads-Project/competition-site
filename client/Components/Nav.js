@@ -1,10 +1,10 @@
 // System library imports
 import React, { useState, useEffect } from "react";
-// import { useSelector, useDispatch } from "react-redux";
 
 // Local imports
-import NavDesktop from "./NavDesktop";
+import { NavMain } from "../StyledComponents/NavStyles.tw";
 import NavMobile from "./NavMobile";
+import NavMenu from "./NavMenu";
 
 const Nav = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -19,7 +19,11 @@ const Nav = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return <>{isMobile ? <NavMobile /> : <NavDesktop />}</>;
+  return (
+    <>
+      <NavMain>{isMobile ? <NavMobile /> : <NavMenu />}</NavMain>
+    </>
+  );
 };
 
 export default Nav;
