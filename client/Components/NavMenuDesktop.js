@@ -8,36 +8,55 @@ import { clearRefreshToken } from "../store/auth";
 import { openLoginModal } from "../store/modal";
 import { NavText } from "../StyledComponents/NavStyles.tw";
 
-const NavMenu = () => {
+const NavMenuDesktop = ({ setOpen }) => {
   const { auth } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
+  const clickHandler = () => setOpen(false);
+
   return (
     <>
       <NavText>
-        <Link to="/problem">Current Issue</Link>
+        <Link to="/problem" onClick={clickHandler}>
+          Current Issue
+        </Link>
       </NavText>
       <NavText>
-        <Link to="/pastissues">Past Issues</Link>
+        <Link to="/pastissues" onClick={clickHandler}>
+          Past Issues
+        </Link>
       </NavText>
       <NavText>
-        <Link to="/about">About</Link>
+        <Link to="/about" onClick={clickHandler}>
+          About
+        </Link>
       </NavText>
       {!auth.id ? (
         <NavText
           className="cursor-pointer"
-          onClick={() => dispatch(openLoginModal())}
+          onClick={() => {
+            dispatch(openLoginModal());
+            setOpen(false);
+          }}
         >
           Login
         </NavText>
       ) : (
         <React.Fragment>
           <NavText>
-            <Link to="/account">Account</Link>
+            <Link to="/account" onClick={clickHandler}>
+              Account
+            </Link>
           </NavText>
           <NavText>
-            <Link to="/" onClick={() => dispatch(clearRefreshToken())}>
+            <Link
+              to="/"
+              onClick={() => {
+                dispatch(clearRefreshToken());
+                setOpen(false);
+              }}
+            >
               Logout
             </Link>
           </NavText>
@@ -47,4 +66,4 @@ const NavMenu = () => {
   );
 };
 
-export default NavMenu;
+export default NavMenuDesktop;

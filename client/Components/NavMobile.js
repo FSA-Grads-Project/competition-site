@@ -8,7 +8,7 @@ import {
   MobileNavBackground,
 } from "../StyledComponents/GlobalStyles.tw";
 import NavHamburger from "./NavHamburger";
-import NavMenu from "./NavMenu";
+import NavMenuMobile from "./NavMenuMobile";
 
 const NavMobile = () => {
   // const { auth } = useSelector((state) => state.auth);
@@ -17,7 +17,6 @@ const NavMobile = () => {
   const [open, setOpen] = useState(false);
 
   const handleBurgerOpen = () => {
-    console.log("handleBurgerOpen clicked!");
     setOpen(!open);
   };
 
@@ -45,12 +44,7 @@ const NavMobile = () => {
           }}
         >
           <ModalBox>
-            <p className="text-center text-3xl font-black">The Dispatch</p>
-            <div className="flex flex-col w-full mt-2 items-center">
-              <hr className="w-full mt-2 mb-1 bg-darkFont h-0.5 border-0"></hr>
-              <hr className="w-11/12 mb-2 bg-darkFont h-0.5 border-0"></hr>
-            </div>
-            <NavMenu />
+            <NavMenuMobile setOpen={setOpen} />
           </ModalBox>
         </MobileNavBackground>
       </div>

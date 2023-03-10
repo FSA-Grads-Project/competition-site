@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 // Local imports
 import { NavMain } from "../StyledComponents/NavStyles.tw";
 import NavMobile from "./NavMobile";
-import NavMenu from "./NavMenu";
+import NavMenuDesktop from "./NavMenuDesktop";
 
 const Nav = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -21,7 +21,7 @@ const Nav = () => {
 
   return (
     <>
-      <NavMain>{isMobile ? <NavMobile /> : <NavMenu />}</NavMain>
+      <NavMain>{isMobile ? <NavMobile /> : <NavMenuDesktop />}</NavMain>
     </>
   );
 };

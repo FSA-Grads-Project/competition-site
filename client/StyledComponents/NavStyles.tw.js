@@ -22,6 +22,30 @@ export const NavText = tw.div`
     gap-x-8
 `;
 
+///////// Mobile Nav
+export const MobileNavDiv = tw.div`
+    min-h-[40px] 
+    flex
+    justify-evenly
+    items-center
+    border-slate-700 
+    mb-5
+    mr-20
+    ml-20
+    hover:border-b-2
+    hover:font-bold
+    hover:scale-105
+    duration-200
+`;
+
+export const NavMobileMenuText = tw.div`
+    font-cormorant-sc
+    font-black
+    text-2xl
+    flex
+    gap-x-8
+`;
+
 //Mobile Nav
 export const HamburgerContainerDiv = tw.div`
     z-20
