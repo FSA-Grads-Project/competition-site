@@ -39,10 +39,9 @@ function executeCode (code, problem, res) {
           }
         });
         try {
-          const contextScript = new VMScript(${JSON.stringify(problem + code)}).compile();
+          const contextScript = new VMScript(${JSON.stringify(problem + code)})
           const consoleScript = new VMScript(eval(${JSON.stringify(consoleProblem + code)}));
-          const context = vm.run(contextScript)
-          console.log(context)
+          console.log(vm.run(contextScript))
         } catch(err) {
           console.log(err)
         }
