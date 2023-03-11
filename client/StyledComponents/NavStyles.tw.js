@@ -42,13 +42,13 @@ export const MobileMenuContainer = tw.div`
 	bg-[#fdf5e8]
     border-2
     border-black
+    shadow-xl
     m-10
 	p-10 
 	rounded-xl 
 	flex 
 	flex-col 
 	justify-center 
-	items-center
 `;
 
 export const MobileNavDiv = tw.div`
@@ -63,6 +63,7 @@ export const MobileNavDiv = tw.div`
     hover:border-b-2
     hover:scale-105
     duration-200
+    cursor-pointer
 `;
 
 export const NavMobileMenuText = tw.div`
