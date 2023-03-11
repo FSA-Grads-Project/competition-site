@@ -44,9 +44,11 @@ const NavMobile = () => {
         }}
       >
         <MobileMenuContainer>
-          <div>
-            <IoCloseSharp size={35} className="fixed top-0 left-0" />
-          </div>
+          <IoCloseSharp
+            size={35}
+            className="absolute mb-[425px] mr-60 hover:scale-[1.2] duration-200 cursor-pointer"
+            onClick={() => setOpen(!open)}
+          />
           <NavMenuMobile setOpen={setOpen} />
         </MobileMenuContainer>
       </MobileNavBackground>
