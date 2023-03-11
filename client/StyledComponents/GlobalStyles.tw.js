@@ -130,13 +130,3 @@ export const TabTitleH1 = tw.h1`
 	text-3xl
 	mx-3
 `;
-
-// Mobile Nav Menu background
-export const MobileNavBackground = tw.div`
-	w-full	
-	fixed
-	inset-0
-	flex
-	justify-center
-	items-center
-`;

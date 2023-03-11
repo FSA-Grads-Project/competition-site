@@ -1,19 +1,18 @@
 // System library import
 import React, { useState, useEffect } from "react";
-//import { useSelector, useDispatch } from "react-redux";
+import { IoMenu, IoCloseSharp } from "react-icons/io5";
 
 // Local imports
 import {
-  ModalBox,
+  MobileMenuContainer,
   MobileNavBackground,
-} from "../StyledComponents/GlobalStyles.tw";
+  BurgerTopSpan,
+  BurgerBottomSpan,
+} from "../StyledComponents/NavStyles.tw";
 import NavHamburger from "./NavHamburger";
 import NavMenuMobile from "./NavMenuMobile";
 
 const NavMobile = () => {
-  // const { auth } = useSelector((state) => state.auth);
-  // const dispatch = useDispatch();
-
   const [open, setOpen] = useState(false);
 
   const handleBurgerOpen = () => {
@@ -21,7 +20,7 @@ const NavMobile = () => {
   };
 
   return (
-    <div className="">
+    <>
       <div
         className={
           open ? "open absolute top-2 bottom-0 left-2 cursor-pointer" : ""
@@ -34,21 +33,24 @@ const NavMobile = () => {
           <NavHamburger isOpen={open} />
         </div>
       </div>
-      <div className={open ? "absolute" : "hidden"}>
-        <MobileNavBackground
-          id="mobileNavBackground"
-          onClick={(ev) => {
-            if (ev.target.id === "mobileNavBackground") {
-              setOpen(!open);
-            }
-          }}
-        >
-          <ModalBox>
-            <NavMenuMobile setOpen={setOpen} />
-          </ModalBox>
-        </MobileNavBackground>
-      </div>
-    </div>
+
+      <MobileNavBackground
+        id="mobileNavBackground"
+        className={open ? "absolute" : "hidden"}
+        onClick={(ev) => {
+          if (ev.target.id === "mobileNavBackground") {
+            setOpen(!open);
+          }
+        }}
+      >
+        <MobileMenuContainer>
+          <div>
+            <IoCloseSharp size={35} className="fixed top-0 left-0" />
+          </div>
+          <NavMenuMobile setOpen={setOpen} />
+        </MobileMenuContainer>
+      </MobileNavBackground>
+    </>
   );
 };
 

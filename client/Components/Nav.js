@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 
 // Local imports
-import { NavMain } from "../StyledComponents/NavStyles.tw";
+import { NavMainDiv } from "../StyledComponents/NavStyles.tw";
 import NavMobile from "./NavMobile";
 import NavMenuDesktop from "./NavMenuDesktop";
 
@@ -20,9 +20,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <>
-      <NavMain>{isMobile ? <NavMobile /> : <NavMenuDesktop />}</NavMain>
-    </>
+    <NavMainDiv>{isMobile ? <NavMobile /> : <NavMenuDesktop />}</NavMainDiv>
   );
 };
 

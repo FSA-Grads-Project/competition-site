@@ -1,6 +1,6 @@
 import tw from "tailwind-styled-components";
 
-export const NavMain = tw.div`
+export const NavMainDiv = tw.div`
     min-h-[40px] 
     flex
     justify-evenly
@@ -22,7 +22,35 @@ export const NavText = tw.div`
     gap-x-8
 `;
 
-///////// Mobile Nav
+/*****  Mobile Nav *****/
+
+// Mobile Nav Menu background
+export const MobileNavBackground = tw.div`
+    z-99
+	w-full	
+	fixed
+	inset-0
+	flex
+	justify-center
+`;
+
+// Modal box container
+export const MobileMenuContainer = tw.div`
+    z-99
+    h-1/2
+    w-3/4
+	bg-[#fdf5e8]
+    border-2
+    border-black
+    m-10
+	p-10 
+	rounded-xl 
+	flex 
+	flex-col 
+	justify-center 
+	items-center
+`;
+
 export const MobileNavDiv = tw.div`
     min-h-[40px] 
     flex
@@ -33,7 +61,6 @@ export const MobileNavDiv = tw.div`
     mr-20
     ml-20
     hover:border-b-2
-    hover:font-bold
     hover:scale-105
     duration-200
 `;
@@ -41,9 +68,8 @@ export const MobileNavDiv = tw.div`
 export const NavMobileMenuText = tw.div`
     font-cormorant-sc
     font-black
-    text-2xl
-    flex
-    gap-x-8
+    text-xl
+    text-center
 `;
 
 //Mobile Nav
@@ -89,16 +115,32 @@ export const MobileMenuClosed = tw.div`
     hidden
   `;
 
-// export const BurgerSpan = tw.span`
-//     absolute
-//     w-6
-//     h-2
-//     border-6
-//     border-t-4
+export const BurgerTopSpan = tw.span`
+    absolute
+    w-6
+    h-2
+    bg-gray-700
+    border-6
+    border-t-4
+    border-slate-700
+    rounded-lg
+    duration-500
+    rotate-45
+    translate-y-2
+    translate-x-2
+  `;
 
-//     border-slate-700
-//     rounded-lg
-//     bg-gray-700
-//     rotate-0
-//     duration-500
-//   `;
+export const BurgerBottomSpan = tw.span`
+    absolute
+    w-6
+    h-2
+    bg-gray-700
+    border-6
+    border-t-4
+    border-slate-700
+    rounded-lg
+    duration-500
+    -rotate-45
+    translate-y-2
+    -translate-x-2
+  `;

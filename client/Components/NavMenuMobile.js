@@ -7,9 +7,7 @@ import { Link } from "react-router-dom";
 import { clearRefreshToken } from "../store/auth";
 import { openLoginModal } from "../store/modal";
 import {
-  NavText,
   NavMobileMenuText,
-  NavMain,
   MobileNavDiv,
 } from "../StyledComponents/NavStyles.tw";
 
