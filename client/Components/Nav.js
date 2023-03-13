@@ -16,7 +16,7 @@ const Nav = () => {
   return (
     <NavMain>
       <NavText>
-        <Link to="/problem">Current Issue</Link>
+        <Link to="/">Current Issue</Link>
       </NavText>
       <NavText>
         <Link to="/pastissues">Past Issues</Link>
@@ -37,7 +37,9 @@ const Nav = () => {
             <Link to="/account">Account</Link>
           </NavText>
           <NavText>
-            <Link to="/" onClick={() => dispatch(clearRefreshToken())}>Logout</Link>
+            <Link to="/" onClick={() => dispatch(clearRefreshToken())}>
+              Logout
+            </Link>
           </NavText>
         </React.Fragment>
       )}

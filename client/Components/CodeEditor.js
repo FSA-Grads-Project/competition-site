@@ -8,6 +8,9 @@ import { IconContext } from "react-icons";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import Editor from "@monaco-editor/react";
 
+// import customTheme from "monaco-themes/themes/tomorrow.json";
+import customTheme from "monaco-themes/themes/solarized-light.json";
+
 // Local Imports
 import {
   ButtonWrapper,
@@ -52,15 +55,11 @@ export const CodeEditor = ({ auth, solution, current }) => {
   // let themeColor = solutionCompletedDate ? "#F0ECE1" : "#EDE4C5";
 
   function handleEditorDidMount(editor, monaco) {
-    monaco.editor.defineTheme("custom-theme", {
-      base: "vs",
-      inherit: true,
-      rules: [],
-      colors: {
-        // "editor.background": themeColor,
-        "editor.background": "#EDE4C5",
-      },
-    });
+    customTheme.colors["editor.background"] = "#EDE4C5";
+    customTheme.colors["editor.selectionBackground"] = "#DBD2B2";
+    customTheme.rules.push({ foreground: "586e75", token: "number" });
+
+    monaco.editor.defineTheme("custom-theme", customTheme);
 
     // monaco.editor.defineTheme("disabled-theme", {
     //   base: "vs",
@@ -95,6 +94,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
 
   const onEvaluate = async () => {
     setIsEvaluating(true);
+
     const res = await useEvaluateCode(
       problem,
       code,
