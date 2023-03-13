@@ -13,126 +13,126 @@ const initialization = async () => {
   // await Promise.all(USERS.map((user) => User.create(user)));
 
   const john = await User.create({
-    email: 'john.lennon@hotmail.com',
-    alias: 'john'
+    email: "john.lennon@hotmail.com",
+    alias: "john",
   });
 
   const bob = await User.create({
-    email: 'bob.hope@hotmail.com',
-    alias: 'bob'
+    email: "bob.hope@hotmail.com",
+    alias: "bob",
   });
 
   const tim = await User.create({
-    email: 'tim.armstrong@hotmail.com',
-    alias: 'tim'
+    email: "tim.armstrong@hotmail.com",
+    alias: "tim",
   });
 
   const joe = await User.create({
-    email: 'joe.schmoe@hotmail.com',
-    alias: 'joe'
+    email: "joe.schmoe@hotmail.com",
+    alias: "joe",
   });
 
   const sam = await User.create({
-    email: 'sam.clemens@hotmail.com',
-    alias: 'sam'
+    email: "sam.clemens@hotmail.com",
+    alias: "sam",
   });
 
   const result1 = await Result.create({
     spaceUsed: 11290304,
     timeElapsed: 1437141724,
-    startDatetime: '2022-11-01',
-    completeDatetime: '2022-11-02'
+    startDatetime: "2022-11-01",
+    completeDatetime: "2022-11-02",
   });
 
   const result2 = await Result.create({
     spaceUsed: 12743560,
     timeElapsed: 9358756,
-    startDatetime: '2022-11-01',
-    completeDatetime: '2022-11-04'
+    startDatetime: "2022-11-01",
+    completeDatetime: "2022-11-04",
   });
 
   const result3 = await Result.create({
     spaceUsed: 12487664,
     timeElapsed: 4099683,
-    startDatetime: '2022-11-01',
-    completeDatetime: '2022-11-03'
+    startDatetime: "2022-11-01",
+    completeDatetime: "2022-11-03",
   });
 
   const result4 = await Result.create({
     spaceUsed: 11290304,
     timeElapsed: 1437141724,
-    startDatetime: '2022-12-01',
-    completeDatetime: '2022-12-02'
+    startDatetime: "2022-12-01",
+    completeDatetime: "2022-12-02",
   });
 
   const result5 = await Result.create({
     spaceUsed: 12743560,
     timeElapsed: 9358756,
-    startDatetime: '2022-12-01',
-    completeDatetime: '2022-12-04'
+    startDatetime: "2022-12-01",
+    completeDatetime: "2022-12-04",
   });
 
   const result6 = await Result.create({
     spaceUsed: 12487664,
     timeElapsed: 4099683,
-    startDatetime: '2022-12-01',
-    completeDatetime: '2022-12-03'
+    startDatetime: "2022-12-01",
+    completeDatetime: "2022-12-03",
   });
 
   const result7 = await Result.create({
     spaceUsed: 11290304,
     timeElapsed: 1437141724,
-    startDatetime: '2023-01-01',
-    completeDatetime: '2023-01-02'
+    startDatetime: "2023-01-01",
+    completeDatetime: "2023-01-02",
   });
 
   const result8 = await Result.create({
     spaceUsed: 12743560,
     timeElapsed: 9358756,
-    startDatetime: '2023-01-01',
-    completeDatetime: '2023-01-04'
+    startDatetime: "2023-01-01",
+    completeDatetime: "2023-01-04",
   });
 
   const result9 = await Result.create({
     spaceUsed: 12487664,
     timeElapsed: 4099683,
-    startDatetime: '2023-01-01',
-    completeDatetime: '2023-01-03'
+    startDatetime: "2023-01-01",
+    completeDatetime: "2023-01-03",
   });
 
   const result10 = await Result.create({
     spaceUsed: 11290304,
     timeElapsed: 1437141724,
-    startDatetime: '2023-02-01',
-    completeDatetime: '2023-02-02'
+    startDatetime: "2023-02-01",
+    completeDatetime: "2023-02-02",
   });
 
   const result11 = await Result.create({
     spaceUsed: 12743560,
     timeElapsed: 9358756,
-    startDatetime: '2023-02-01',
-    completeDatetime: '2023-02-04'
+    startDatetime: "2023-02-01",
+    completeDatetime: "2023-02-04",
   });
 
   const result12 = await Result.create({
     spaceUsed: 12487664,
     timeElapsed: 4099683,
-    startDatetime: '2023-02-01',
-    completeDatetime: '2023-02-03'
+    startDatetime: "2023-02-01",
+    completeDatetime: "2023-02-03",
   });
 
   const result13 = await Result.create({
     spaceUsed: 11290304,
     timeElapsed: 1437141724,
-    startDatetime: '2023-02-01',
-    completeDatetime: '2023-02-02'
+    startDatetime: "2023-02-01",
+    completeDatetime: "2023-02-02",
   });
 
   const result14 = await Result.create({
     spaceUsed: 12487664,
     timeElapsed: 4099683,
-    startDatetime: '2023-02-01',
-    completeDatetime: '2023-02-03'
+    startDatetime: "2023-02-01",
+    completeDatetime: "2023-02-03",
   });
 
   const problem1 = await Problem.create({
@@ -197,8 +197,8 @@ runSubmission()
 branches of the tree.`,
     startDate: "2023-02-01 00:00:00",
     endDate: "2023-07-01 00:00:00",
-    spaceWeight: 0.30,
-    timeWeight: 0.60,
+    spaceWeight: 0.3,
+    timeWeight: 0.6,
   });
 
   const test1 = await Test.create({
