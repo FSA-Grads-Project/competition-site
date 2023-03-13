@@ -1,13 +1,12 @@
 // System library import
-import React, { useState, useEffect } from "react";
-import { IoMenu, IoCloseSharp } from "react-icons/io5";
+import React, { useState } from "react";
+import { IoCloseSharp } from "react-icons/io5";
 
 // Local imports
 import {
   MobileMenuContainer,
   MobileNavBackground,
-  BurgerTopSpan,
-  BurgerBottomSpan,
+  NavOpenCloseButton,
 } from "../StyledComponents/NavStyles.tw";
 import NavHamburger from "./NavHamburger";
 import NavMenuMobile from "./NavMenuMobile";
@@ -30,7 +29,7 @@ const NavMobile = () => {
           className="absolute top-2 bottom-0 left-2 cursor-pointer"
           onClick={handleBurgerOpen}
         >
-          <NavHamburger isOpen={open} />
+          {open ? null : <NavHamburger isOpen={open} setOpen={setOpen} />}
         </div>
       </div>
 
@@ -44,12 +43,9 @@ const NavMobile = () => {
         }}
       >
         <MobileMenuContainer>
-          <button
-            className="absolute top-16 hover:scale-[1.2] duration-300"
-            onClick={() => setOpen(!open)}
-          >
+          <NavOpenCloseButton className="top-16" onClick={() => setOpen(!open)}>
             <IoCloseSharp size={35} />
-          </button>
+          </NavOpenCloseButton>
           <NavMenuMobile setOpen={setOpen} />
         </MobileMenuContainer>
       </MobileNavBackground>

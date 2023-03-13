@@ -1,24 +1,12 @@
 import React from "react";
-import {
-  HamburgerContainerDiv,
-  Burger,
-  BurgerSpan,
-} from "../StyledComponents/NavStyles.tw";
+import { IoMenu } from "react-icons/io5";
+import { NavOpenCloseButton } from "../StyledComponents/NavStyles.tw";
 
-function NavHamburger({ isOpen }) {
+function NavHamburger({ isOpen, setOpen }) {
   return (
-    <div className="hamburger">
-      <span className="hamburger-top"></span>
-      <span className="hamburger-middle"></span>
-      <span className="hamburger-bottom"></span>
-    </div>
-    // <>
-    //   <HamburgerContainerDiv>
-    //     <BurgerSpan />
-    //     <BurgerSpan />
-    //     <BurgerSpan />
-    //   </HamburgerContainerDiv>
-    // </>
+    <NavOpenCloseButton id="hide">
+      <IoMenu size={34} />
+    </NavOpenCloseButton>
   );
 }
 
