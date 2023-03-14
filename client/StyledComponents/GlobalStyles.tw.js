@@ -127,6 +127,7 @@ export const TabTitleDiv = tw.div`
 export const TabTitleH1 = tw.h1`
 	font-playfair
 	font-black
-	text-3xl
+	text-xl
 	mx-3
+	md:text-3xl
 `;
