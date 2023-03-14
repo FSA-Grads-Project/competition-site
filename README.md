@@ -36,3 +36,4 @@ Data structures and algorithms competition site
 Above fonts and colors are included in the tailwind.config.js file. You can use the colors directly with classes (ie bg-darkBackground)
 
 pw - theDispatchFSA
+...
