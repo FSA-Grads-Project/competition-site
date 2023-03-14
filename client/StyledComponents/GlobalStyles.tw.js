@@ -81,6 +81,7 @@ export const ButtonIcon = tw.img`
 
 // modal background
 export const ModalBackground = tw.div`
+	w-full	
 	bg-darkFont
 	fixed
 	inset-0
@@ -88,7 +89,7 @@ export const ModalBackground = tw.div`
 	justify-center
 	items-center
 	backdrop-blur-sm
-	bg-opacity-70
+	bg-opacity-60
 	z-10
 `;
 
@@ -126,6 +127,7 @@ export const TabTitleDiv = tw.div`
 export const TabTitleH1 = tw.h1`
 	font-playfair
 	font-black
-	text-3xl
+	text-xl
 	mx-3
+	md:text-3xl
 `;
