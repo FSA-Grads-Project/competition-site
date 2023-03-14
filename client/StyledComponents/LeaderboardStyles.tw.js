@@ -6,6 +6,7 @@ export const LeaderboardMainDiv = tw.div`
     h-[800px]
     flex
     flex-col
+    text-center
     border-2
     border-slate-700 
 `
@@ -14,6 +15,23 @@ export const Header = tw.div`
     p-4
     text-xl
     font-cormorant-sc
+
+`
+
+export const Intro = tw.div`
+    text-xs
+    font-cormorant-sc
+    font-black
+    w-2/3
+    self-center
+    border-b-2
+    border-slate-700 
+    border-t-2 
+    mt-1
+    mb-5
+    mr-20
+    ml-20
+    py-3
 `
 
 export const MainDiv = tw.div`
@@ -21,64 +39,52 @@ export const MainDiv = tw.div`
     text-sm
     font-cormorant-sc
     font-black
-    min-w-[500px]
+    text-center
+    justify-center
 `
-
 export const TopScoreDiv = tw.div`
     p-2
 `
 
+
 export const TableRow = tw.div`
-    flex
+    table-row
 `
 
+
 export const LeaderboardTable = tw.div`
+    table w-full
     justify-center
     place-content-center
     hidden 
 `
 
 export const TableHeader = tw.div`
-    text-center
+    table-header-group
 `
 
 export const LeftTableCell = tw.div`
-    basis-1/3
-    text-center
-`
-
-export const MiddleTableCell = tw.div`
-    basis-1/3
+    table-cell 
     text-center
 `
 
 export const RightTableCell = tw.div`
-    basis-1/3
-    text-center
+    table-cell
+    text-right
 `
 
 export const TableRowGroup = tw.div`
-    flex
-    flex-col
+    table-row-group
 `
 
 export const LeftTableCellHeader = tw.div`
-    basis-1/3
     underline
     decoration-dashed
-    text-center
-`
-
-export const MiddleTableCellHeader = tw.div`
-    basis-1/3
-    underline
-    decoration-dashed
-    text-center
 `
 
 export const RightTableCellHeader = tw.p`
-    basis-1/3
     underline
     decoration-dashed
-    text-center
+    table-cell
+    text-right
 `

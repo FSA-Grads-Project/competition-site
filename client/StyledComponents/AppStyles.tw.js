@@ -14,16 +14,14 @@ export const Logo = tw.div`
     font-playfair-sc
     font-black
     p-4
-    text-2xl
-    md:text-5xl
+    text-5xl
 `;
 
 export const Issue = tw.div`
     font-playfair-sc
     font-black
     pr-28
-    text-sm
-    md:text-xl
+    text-xl
 `;
 
 export const Hidden = tw.div`

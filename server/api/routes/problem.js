@@ -1,5 +1,5 @@
 const {
-  models: { Result, Problem, User },
+  models: { Result, Problem },
 } = require("../../db");
 const express = require("express");
 const router = express.Router();
@@ -39,8 +39,6 @@ router.get("/current", softVerifyUser, async (req, res, next) => {
         "startDate",
         "endDate",
         "current",
-        "timeWeight",
-        "spaceWeight",
         req.user ? "statement" : "blurb",
       ],
       where: {
@@ -88,27 +86,11 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-/* get all results joined with user info for a problem */
-router.get("/:id/results", async (req, res, next) => {
+/* get all results for a problem */
+router.get("/:id/results", verifyUser, async (req, res, next) => {
   try {
     const results = await Result.findAll({
-      attributes:[ 
-        'spaceUsed',
-        'timeElapsed',
-        'startDatetime',
-        'completeDatetime'
-      ],
-      include: { 
-        model: User,
-        attributes: [
-          'id',
-          'alias'
-        ]
-      },
-      where: {
-        completeDatetime: { [Op.not]: null },
-        problemId: req.params.id
-      },
+      where: { problemId: req.params.id },
     });
     res.json(results);
   } catch (ex) {

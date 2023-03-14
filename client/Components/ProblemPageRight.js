@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import {
   TitleWrapper,
   TabTitleDiv,
@@ -9,7 +8,6 @@ import { MdLeaderboard } from "react-icons/md";
 import { BiCodeAlt } from "react-icons/bi";
 import Leaderboard from "./Leaderboard";
 import CodeEditor from "./CodeEditor";
-import { openLoginModal } from "../store/modal";
 
 export const TabTitle = ({ leaderBoardView, codeEditorView, view, title }) => {
   return (
@@ -36,7 +34,6 @@ export const TabTitle = ({ leaderBoardView, codeEditorView, view, title }) => {
 const ProblemPageRight = ({ auth, solution, current }) => {
   const [leaderBoardView, setLeaderBoardview] = useState(false);
   const [codeEditorView, setCodeEditorView] = useState(false);
-  const dispatch = useDispatch();
 
   function onClick() {
     setCodeEditorView(!codeEditorView);
@@ -59,11 +56,7 @@ const ProblemPageRight = ({ auth, solution, current }) => {
       <TitleWrapper>
         <div
           onClick={() => {
-            if (!auth.accessToken && current) {
-              !codeEditorView ? dispatch(openLoginModal()) : () => null
-            } else {
-              !codeEditorView ? onClick() : () => null;
-            }
+            !codeEditorView ? onClick() : () => null;
           }}
         >
           <TabTitle

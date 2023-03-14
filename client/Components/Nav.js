@@ -1,27 +1,47 @@
 // System library imports
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 // Local imports
-import { NavMainDiv } from "../StyledComponents/NavStyles.tw";
-import NavMobile from "./NavMobile";
-import NavMenuDesktop from "./NavMenuDesktop";
+import { clearRefreshToken } from "../store/auth";
+import { openLoginModal } from "../store/modal";
+import { NavText, NavMain } from "../StyledComponents/NavStyles.tw";
 
 const Nav = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const { auth } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    function handleResize() {
-      setIsMobile(window.innerWidth < 768);
-    }
-
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const dispatch = useDispatch();
 
   return (
-    <NavMainDiv>{isMobile ? <NavMobile /> : <NavMenuDesktop />}</NavMainDiv>
-
+    <NavMain>
+      <NavText>
+        <Link to="/problem">Current Issue</Link>
+      </NavText>
+      <NavText>
+        <Link to="/pastissues">Past Issues</Link>
+      </NavText>
+      <NavText>
+        <Link to="/about">About</Link>
+      </NavText>
+      {!auth.id ? (
+        <NavText
+          className="cursor-pointer"
+          onClick={() => dispatch(openLoginModal())}
+        >
+          Login
+        </NavText>
+      ) : (
+        <React.Fragment>
+          <NavText>
+            <Link to="/account">Account</Link>
+          </NavText>
+          <NavText>
+            <Link to="/" onClick={() => dispatch(clearRefreshToken())}>Logout</Link>
+          </NavText>
+        </React.Fragment>
+      )}
+    </NavMain>
   );
 };
 

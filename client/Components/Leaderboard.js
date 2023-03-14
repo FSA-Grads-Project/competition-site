@@ -13,11 +13,9 @@ import {
   LeaderboardTable,
   TableHeader,
   LeftTableCell,
-  MiddleTableCell,
   RightTableCell,
   TableRowGroup,
   LeftTableCellHeader,
-  MiddleTableCellHeader,
   RightTableCellHeader,
 } from "../StyledComponents/LeaderboardStyles.tw";
 import { fetchUsers } from "../store/user";
@@ -26,96 +24,50 @@ import { fetchResults } from "../store/results";
 const Leaderboard = () => {
   const dispatch = useDispatch();
 
-  const { id } = useSelector((state) => state.problems.problem);
-
   useEffect(() => {
-    const getResults = async () => {
-      await dispatch(fetchResults(id));
+    const getUsersAndResults = async () => {
+      await dispatch(fetchUsers());
+      await dispatch(fetchResults());
     };
 
-    getResults();
-
+    getUsersAndResults();
   }, []);
 
-  const { results } = useSelector((state) => state.results);
-  const { timeWeight } = useSelector((state) => state.problems.problem);
-  const { spaceWeight } = useSelector((state) => state.problems.problem);
-  const { endDate } = useSelector((state) => state.problems.problem);
+  const [scores, setScores] = useState([]);
 
-  const [ scores, setScores ] = useState([]);
+  const users = useSelector((state) => state.users).users;
+  const results = useSelector((state) => state.results).results;
 
-  const calculateRank = (users, property) => {
-    let rank = 1;
+  const getTopScores = (resArr) => {
+    const topScores = [];
 
-    if (property === 'score') {
-      users.sort((user1, user2) => user2[property] - user1[property]);
-    } else {
-      users.sort((user1, user2) => user1[property] - user2[property]);
-    }
+    for (const res of resArr) {
+      let topScoreUser = {};
 
-    for (let i = 0; i < users.length; i++) {
-      let currentUser = users[i];
-      let previousUser = users[i - 1];
-      if (i === 0 || previousUser[property] === currentUser[property]) {
-        currentUser[property + 'Rank'] = rank;
-      } else {
-        rank += 1;
-        currentUser[property + 'Rank'] = rank;
+      topScoreUser.alias = users.find((user) => user.id === res.id * 1)?.alias;
+      topScoreUser.id = res.id;
+      topScoreUser.spaceUsed = res.spaceUsed;
+      topScoreUser.timeElapsed = res.timeElapsed;
+
+      if (res.spaceUsed <= 2) {
+        topScoreUser.score = res.timeElapsed * 60 - 100;
       }
-    }
-  };
-
-  const maxRank = (users, property) => {
-    let maximum = -Infinity;
-    for (let i = 0; i < users.length; i++) {
-      if (users[i][property] > maximum) maximum = users[i][property];
-    }
-    return maximum;
-  };
-
-  const compositeScore = (users) => {
-    const tMR = maxRank(users, 'timeElapsedRank');
-    const sMR = maxRank(users, 'spaceUsedRank');
-    const cMR = maxRank(users, 'timeToCompleteRank');
-
-    for (let i = 0; i < users.length; i++) {
-      let user = users[i];
-      user.score = ((tMR - user.timeElapsedRank + 1) / tMR) * timeWeight
-        + ((sMR - user.spaceUsedRank + 1) / sMR) * spaceWeight
-        + ((cMR - user.timeToCompleteRank + 1) / cMR) * 0.10;
-    }
-  };
-
-  const calculateScores = (...array) => {
-
-    if (array.length === 0) return;
-
-    let users = [];
-
-    for (let i = 0; i < array.length; i++) {
-      let user = {};
-
-      user.id = array[i].user.id;
-      user.alias = array[i].user.alias;
-      user.timeElapsed = array[i].timeElapsed;
-      user.spaceUsed = array[i].spaceUsed;
-
-      let start = Date.parse(array[i].startDatetime);
-      let complete = Date.parse(array[i].completeDatetime);
-
-      user.timeToComplete = complete - start;
-
-      if (array[i].completeDatetime <= endDate) users.push(user);
+      if (res.spaceUsed <= 4) {
+        topScoreUser.score = res.timeElapsed * 60 - 200;
+      }
+      if (res.spaceUsed <= 6) {
+        topScoreUser.score = res.timeElapsed * 60 - 300;
+      }
+      if (res.spaceUsed <= 8) {
+        topScoreUser.score = res.timeElapsed * 60 - 400;
+      }
+      if (res.spaceUsed <= 10) {
+        topScoreUser.score = res.timeElapsed * 60 - 500;
+      }
+      topScores.push(topScoreUser);
     }
 
-    calculateRank(users, 'timeElapsed');
-    calculateRank(users, 'spaceUsed');
-    calculateRank(users, 'timeToComplete');
-
-    compositeScore(users);
-
-    calculateRank(users, 'score');
-    setScores(users.sort((user1, user2) => user1.scoreRank - user2.scoreRank));
+    setScores(topScores.sort((a, b) => (a.score < b.score ? 1 : -1)));
   };
 
   const showResults = (e) => {
@@ -133,59 +85,60 @@ const Leaderboard = () => {
   };
 
   useEffect(() => {
-    calculateScores(...results);
-  }, [ results ]); 
+    getTopScores(results);
+  }, [results]);
 
   return (
     <LeaderboardMainDiv>
-      <Header>Leaderboard</Header>
-      <hr />
+      <Header> Last Weeks Leaderboard </Header>
+      <Intro>
+        Last week a team of code crakers were able to unlock the secret of the
+        safe housing the Blue Jewel necklace of the titanic.
+      </Intro>
       <MainDiv>
         {scores.map((score) => {
           return (
             <TopScoreDiv key={score.id} onClick={showResults}>
-              {score.alias.padEnd(100, '.')}
-              {score.scoreRank}
+              {" "}
+              {score.alias}...............................................
+              {score.score}
               <LeaderboardTable id={"leaderboardTable"}>
                 <TableHeader>
                   <TableRow>
-                    <LeftTableCellHeader>Measure</LeftTableCellHeader>
-                    <MiddleTableCellHeader>Result</MiddleTableCellHeader>
-                    <RightTableCellHeader>Rank</RightTableCellHeader>
+                    <LeftTableCellHeader> Measure </LeftTableCellHeader>
+                    <RightTableCellHeader> Rank </RightTableCellHeader>
                   </TableRow>
                 </TableHeader>
                 <TableRowGroup>
                   <TableRow>
                     <LeftTableCell>
-                      EXECUTION TIME:
+                      {" "}
+                      ALGORITHM EXECUTION TIME:{" "}
+                      {Math.floor(Math.random() * 5) / 5} seconds{" "}
                     </LeftTableCell>
-                    <MiddleTableCell>
-                      {score.timeElapsed} nanoseconds
-                    </MiddleTableCell>
                     <RightTableCell>
-                      {score.timeElapsedRank}
+                      {" "}
+                      {Math.ceil(Math.random() * 10)}{" "}
                     </RightTableCell>
                   </TableRow>
                   <TableRow>
                     <LeftTableCell>
-                      MEMORY USED:
+                      {" "}
+                      ALGORITHM MEMORY USED: {score.spaceUsed} KB{" "}
                     </LeftTableCell>
-                    <MiddleTableCell>
-                      {score.spaceUsed} bytes
-                    </MiddleTableCell>
                     <RightTableCell>
-                      {score.spaceUsedRank}
+                      {" "}
+                      {Math.ceil(Math.random() * 10)}{" "}
                     </RightTableCell>
                   </TableRow>
                   <TableRow>
                     <LeftTableCell>
-                      TIME TO SOLVE:
+                      {" "}
+                      TOTAL TIME TO SOLVE: {score.timeElapsed} minutes{" "}
                     </LeftTableCell>
-                    <MiddleTableCell>
-                      {score.timeToComplete} milliseconds
-                    </MiddleTableCell>
                     <RightTableCell>
-                      {score.timeToCompleteRank}
+                      {" "}
+                      {Math.ceil(Math.random() * 10)}{" "}
                     </RightTableCell>
                   </TableRow>
                 </TableRowGroup>
