@@ -3,6 +3,8 @@ import tw from "tailwind-styled-components";
 export const Main = tw.div`
     flex
     justify-around
+    flex-col
+    md:flex-row
 `;
 
 export const RightDiv = tw.div`
