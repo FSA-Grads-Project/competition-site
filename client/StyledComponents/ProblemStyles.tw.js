@@ -47,11 +47,12 @@ export const SolutionTitleSpan = tw.span`
 export const LeftDiv = tw.div`
     ml-40
     mr-40
+    mb-6
     w-1/3
 `;
 
 export const RightDiv = tw.div`
-    w-2/3
+    w-5/6
     self-center
     md:mr-40
 `;

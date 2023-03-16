@@ -6,7 +6,7 @@ export const EditorButton = tw.button`
   h-10
   m-2
   font-cormorant-sc
-  text-xl
+  text-md
   w-1/4
 	border-2
 	border-darkBackground
@@ -17,6 +17,7 @@ export const EditorButton = tw.button`
 	flex
 	justify-center
 	items-center
+	md:text-xl
 `;
 
 export const ButtonWrapper = tw.div`
@@ -127,6 +128,7 @@ export const TabTitleDiv = tw.div`
 export const TabTitleH1 = tw.h1`
 	font-playfair
 	font-black
-	text-3xl
-	mx-3
+	text-xl
+	md:text-3xl
+	md:mx-3
 `;
