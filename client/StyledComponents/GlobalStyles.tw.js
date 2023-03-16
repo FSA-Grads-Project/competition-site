@@ -57,8 +57,8 @@ export const OutputTitle = tw.div`
   pb-1
   font-cormorant-sc
   text-2xl
-	pl-2
-`;
+  `;
+ // pl-2
 
 export const DarkButton = tw.button`
 	bg-darkFont

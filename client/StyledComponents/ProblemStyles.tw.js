@@ -45,17 +45,19 @@ export const SolutionTitleSpan = tw.span`
 `;
 
 export const LeftDiv = tw.div`
-    ml-40
-    mr-40
     mb-6
     w-1/3
+    self-center
+    md:ml-40
+    md:mr-40
 `;
 
 export const RightDiv = tw.div`
     w-5/6
     self-center
+    mb-10
+    max-h-[600px] 
+    max-w-[700px]
+    h-[800px]
     md:mr-40
 `;
-//max-h-[600px] 
-//max-w-[700px]
-//h-[800px]
