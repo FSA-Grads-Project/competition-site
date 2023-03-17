@@ -12,19 +12,25 @@ export const HintButton = tw.button`
 
 export const Main = tw.div`
     flex
+    flex-col
+    md:flex
+    md:flex-row
 `;
 export const ProblemTitle = tw.div`
     block
     pb-2
     font-playfair
     font-black
-    text-4xl
+    text-md
     border-b-2
     border-black
+    md:text-4xl
 `;
 export const ProblemStatement = tw.div`
     font-cormorant-sc
     font-black
+    text-sm
+    md:text-md
 `;
 
 export const SolutionTitleSpan = tw.span`
@@ -39,15 +45,19 @@ export const SolutionTitleSpan = tw.span`
 `;
 
 export const LeftDiv = tw.div`
-    ml-40
-    mr-40
+    mb-6
     w-1/3
+    self-center
+    md:ml-40
+    md:mr-40
 `;
 
 export const RightDiv = tw.div`
-    mr-40
+    w-5/6
+    self-center
+    mb-10
     max-h-[600px] 
     max-w-[700px]
-    min-w-[700px] 
     h-[800px]
+    md:mr-40
 `;

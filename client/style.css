@@ -9,6 +9,8 @@
 body {
   background-color: #fdf5e8;
   color: #333333;
+  display: flex;
+  justify-content: center;
 }
 
 .monaco-editor {
