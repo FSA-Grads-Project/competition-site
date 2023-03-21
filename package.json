@@ -7,7 +7,7 @@
     "build": "webpack",
     "build:dev": "npm run build -- --watch --mode=development & npm run build:image",
     "start": "node server",
-    "build:image": "docker inspect --type=image node:18.7.0 --format='ignore_me' || docker pull node:18.7.0",
+    "build:image": "docker inspect --type=image frai26/dispatch:nodevm2 --format='ignore_me' || docker pull frai26/dispatch:nodevm2",
     "start:dev": "npm run build:dev & npm run start:server",
     "start:server": "nodemon server --ignore public --ignore server/api/routes/temp",
     "seed": "node script/seed",
