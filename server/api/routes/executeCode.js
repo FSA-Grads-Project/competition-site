@@ -55,7 +55,7 @@ function executeCode (code, problem, res) {
           else {
           console.log("\nFile written successfully\n");
           // create/destroy docker container for code execution process
-          exec(`docker run --rm -v ${filePath}:/app/runtest frai26/dispatch:nodevm2 /bin/bash -c 'node runtest'`, 
+          exec(`docker run --rm -v ${filePath}:/app/runtest alexanderstoisolovich/nodevm2:dockerimg /bin/bash -c 'node runtest'`, 
             (error, stdout, stderr) => {
           if (error) {
               console.log(`error: ${error.message}`);
