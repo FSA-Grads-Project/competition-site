@@ -1,15 +1,17 @@
 // System library import
-import React, { useState } from "react";
-import { IoCloseSharp } from "react-icons/io5";
+import React, { useState } from 'react';
+import { IoCloseSharp } from 'react-icons/io5';
+import { Fade as Hamburger } from 'hamburger-react';
 
 // Local imports
 import {
   MobileMenuContainer,
   MobileNavBackground,
   NavOpenCloseButton,
-} from "../StyledComponents/NavStyles.tw";
-import NavHamburger from "./NavHamburger";
-import NavMenuMobile from "./NavMenuMobile";
+} from '../StyledComponents/NavStyles.tw';
+import NavHamburger from './NavHamburger';
+import NavMenuMobile from './NavMenuMobile';
+import NewHamburger from './NewHamburger';
 
 const NavMobile = () => {
   const [open, setOpen] = useState(false);
@@ -20,35 +22,37 @@ const NavMobile = () => {
 
   return (
     <>
-      <div
+      <Hamburger size={30} toggled={open} toggle={setOpen} />
+
+      {/* <div
         className={
-          open ? "open absolute top-2 bottom-0 left-2 cursor-pointer" : ""
+          open ? 'open absolute top-2 bottom-0 left-2 cursor-pointer' : ''
         }
       >
         <div
-          className="absolute top-2 bottom-0 left-2 cursor-pointer"
+          className='absolute top-2 bottom-0 left-2 cursor-pointer'
           onClick={handleBurgerOpen}
         >
           {open ? null : <NavHamburger isOpen={open} setOpen={setOpen} />}
         </div>
-      </div>
+      </div> */}
 
-      <MobileNavBackground
-        id="mobileNavBackground"
-        className={open ? "absolute" : "hidden"}
+      {/* <MobileNavBackground
+        id='mobileNavBackground'
+        className={open ? 'absolute' : 'hidden'}
         onClick={(ev) => {
-          if (ev.target.id === "mobileNavBackground") {
+          if (ev.target.id === 'mobileNavBackground') {
             setOpen(!open);
           }
         }}
-      >
-        <MobileMenuContainer>
-          <NavOpenCloseButton className="top-16" onClick={() => setOpen(!open)}>
+      > */}
+      {/* <MobileMenuContainer>
+          <NavOpenCloseButton className='top-16' onClick={() => setOpen(!open)}>
             <IoCloseSharp size={35} />
           </NavOpenCloseButton>
           <NavMenuMobile setOpen={setOpen} />
-        </MobileMenuContainer>
-      </MobileNavBackground>
+        </MobileMenuContainer> */}
+      {/* </MobileNavBackground> */}
     </>
   );
 };
