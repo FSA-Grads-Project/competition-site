@@ -56,4 +56,3 @@ export const ListItem = tw.li`
   font-cormorant-sc
   font-black
 `;
-

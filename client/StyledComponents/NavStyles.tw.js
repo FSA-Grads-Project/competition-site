@@ -1,4 +1,4 @@
-import tw from "tailwind-styled-components";
+import tw from 'tailwind-styled-components';
 
 export const NavMainDiv = tw.div`
     min-h-[40px] 
@@ -44,7 +44,7 @@ export const MobileMenuContainer = tw.div`
     shadow-xl
     m-10
 	p-10 
-	rounded-xl 
+	rounded 
 	flex 
 	flex-col 
 	justify-center 
@@ -63,7 +63,7 @@ export const MobileNavDiv = tw.div`
 export const NavMobileMenuText = tw.div`
     font-cormorant-sc
     font-black
-    text-2xl
+    text-xl
     text-center
     min-h-[40px] 
     border-slate-700 

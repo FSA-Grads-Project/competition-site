@@ -20,7 +20,15 @@ const Nav = () => {
   }, []);
 
   return (
-    <NavMainDiv>{isMobile ? <NavMobile /> : <NavMenuDesktop />}</NavMainDiv>
+    <>
+      {isMobile ? (
+        <NavMobile />
+      ) : (
+        <NavMainDiv>
+          <NavMenuDesktop />
+        </NavMainDiv>
+      )}
+    </>
   );
 };
 
