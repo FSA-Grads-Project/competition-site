@@ -42,21 +42,23 @@ export const MobileMenuContainer = tw.div`
     border-2
     border-black
     shadow-xl
-    m-10
-	p-10 
+    mt-5
+    ml-auto
+    mr-auto
+	pt-6
 	rounded 
 	flex 
 	flex-col 
-	justify-center 
+	justify-center
+    absolute 
+    inset-0
 `;
 
 export const MobileNavDiv = tw.div`
     flex
     justify-evenly
     items-center
-    mb-10
-    mr-14
-    ml-14
+    mb-5
     cursor-pointer
 `;
 
@@ -70,10 +72,4 @@ export const NavMobileMenuText = tw.div`
     hover:border-b-2
     hover:scale-105
     duration-200
-`;
-
-export const NavOpenCloseButton = tw.button`
-    absolute 
-    hover:scale-[1.2] 
-    duration-300
 `;

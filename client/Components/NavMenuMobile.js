@@ -19,7 +19,7 @@ const NavMenuMobile = ({ setOpen }) => {
   const clickHandler = () => setOpen(false);
 
   return (
-    <>
+    <div>
       <MobileNavDiv>
         <NavMobileMenuText>
           <Link to='/problem' onClick={clickHandler}>
@@ -81,7 +81,7 @@ const NavMenuMobile = ({ setOpen }) => {
           </MobileNavDiv>
         </React.Fragment>
       )}
-    </>
+    </div>
   );
 };
 
