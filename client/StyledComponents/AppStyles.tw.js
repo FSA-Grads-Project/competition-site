@@ -15,9 +15,7 @@ export const Logo = tw.div`
     font-black
     p-4
     text-xl
-    ml-20
     md:text-4xl
-    md:ml-60
 `;
 
 export const Issue = tw.div`
@@ -29,6 +27,6 @@ export const Issue = tw.div`
 `;
 
 export const Hidden = tw.div`
-    pl-28
-    hidden
+invisible
 `;
+//pl-28

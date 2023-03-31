@@ -12,9 +12,13 @@ export const HintButton = tw.button`
 
 export const Main = tw.div`
     flex
-    flex-col
+    flex-wrap
+    justify-around
     md:flex
     md:flex-row
+    md:flex-wrap
+    md:justify-center
+    
 `;
 export const ProblemTitle = tw.div`
     block
@@ -48,18 +52,21 @@ export const LeftDiv = tw.div`
     mb-6
     w-2/3
     self-center
-    md:ml-40
-    md:mr-40
-    md:w-1/3
+    md:w-1/4
+    md:pr-10
     md:self-start
 `;
-
+    
+   // md:ml-40
+    //md:mr-40
 export const RightDiv = tw.div`
     w-5/6
     self-center
     mb-10
     max-h-[600px] 
     max-w-[700px]
-    h-[800px]
-    md:mr-40
+    h-[400px]
+    md:h-[800px]
+    md:w-3/4
 `;
+   // md:mr-40
