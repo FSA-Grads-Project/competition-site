@@ -64,7 +64,7 @@ module.exports = function(babel) {
            .get("body")
            .pushContainer(
               "body",
-              t.ifStatement(
+              t.ifStatement(  
                  t.binaryExpression(">", t.callExpression(t.memberExpression(t.identifier("Date"), t.identifier("now")), []), lhs),
                  t.throwStatement(t.stringLiteral("Execution Timed out - Check your do while loops")),
                  null
