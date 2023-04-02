@@ -1,15 +1,15 @@
 // System library imports
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 // Local imports
-import { clearRefreshToken } from "../store/auth";
-import { openLoginModal } from "../store/modal";
+import { clearRefreshToken } from '../store/auth';
+import { openLoginModal } from '../store/modal';
 import {
   NavMobileMenuText,
   MobileNavDiv,
-} from "../StyledComponents/NavStyles.tw";
+} from '../StyledComponents/NavStyles.tw';
 
 const NavMenuMobile = ({ setOpen }) => {
   const { auth } = useSelector((state) => state.auth);
@@ -19,10 +19,10 @@ const NavMenuMobile = ({ setOpen }) => {
   const clickHandler = () => setOpen(false);
 
   return (
-    <>
+    <div>
       <MobileNavDiv>
         <NavMobileMenuText>
-          <Link to="/problem" onClick={clickHandler}>
+          <Link to='/problem' onClick={clickHandler}>
             Current Issue
           </Link>
         </NavMobileMenuText>
@@ -30,7 +30,7 @@ const NavMenuMobile = ({ setOpen }) => {
 
       <MobileNavDiv>
         <NavMobileMenuText>
-          <Link to="/pastissues" onClick={clickHandler}>
+          <Link to='/pastissues' onClick={clickHandler}>
             Past Issues
           </Link>
         </NavMobileMenuText>
@@ -38,7 +38,7 @@ const NavMenuMobile = ({ setOpen }) => {
 
       <MobileNavDiv>
         <NavMobileMenuText>
-          <Link to="/about" onClick={clickHandler}>
+          <Link to='/about' onClick={clickHandler}>
             About
           </Link>
         </NavMobileMenuText>
@@ -47,7 +47,7 @@ const NavMenuMobile = ({ setOpen }) => {
       {!auth.id ? (
         <MobileNavDiv>
           <NavMobileMenuText
-            className="cursor-pointer"
+            className='cursor-pointer'
             onClick={() => {
               dispatch(openLoginModal());
               setOpen(false);
@@ -60,7 +60,7 @@ const NavMenuMobile = ({ setOpen }) => {
         <React.Fragment>
           <MobileNavDiv>
             <NavMobileMenuText>
-              <Link to="/account" onClick={clickHandler}>
+              <Link to='/account' onClick={clickHandler}>
                 Account
               </Link>
             </NavMobileMenuText>
@@ -69,7 +69,7 @@ const NavMenuMobile = ({ setOpen }) => {
           <MobileNavDiv>
             <NavMobileMenuText>
               <Link
-                to="/"
+                to='/'
                 onClick={() => {
                   dispatch(clearRefreshToken());
                   setOpen(false);
@@ -81,7 +81,7 @@ const NavMenuMobile = ({ setOpen }) => {
           </MobileNavDiv>
         </React.Fragment>
       )}
-    </>
+    </div>
   );
 };
 
