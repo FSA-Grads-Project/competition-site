@@ -11,7 +11,9 @@ const Header = () => {
   return (
     <div>
       <Head>
-        <Hidden>hidden</Hidden>
+        <Hidden>
+          {problem.problem?.id ? `Issue ${problem.problem.id}` : ' '}
+        </Hidden>
         <Logo>The Dispatch</Logo>
         <Issue>
           {problem.problem?.id ? `Issue ${problem.problem.id}` : ' '}
