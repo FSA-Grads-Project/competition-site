@@ -3,25 +3,30 @@ import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 import Nav from './Nav';
-import { Logo, Issue, Head, Hidden } from '../StyledComponents/AppStyles.tw';
+import {
+  Logo,
+  IssueNumber,
+  TitleHeader,
+  HeaderDate,
+} from '../StyledComponents/AppStyles.tw';
 
 const Header = () => {
   const problem = useSelector((state) => state.problems);
 
+  const dateString = new Date().toDateString();
+
   return (
-    <div>
-      <Head>
-        <Hidden>
-          {problem.problem?.id ? `Issue ${problem.problem.id}` : ' '}
-        </Hidden>
+    <>
+      <TitleHeader className='header-grid'>
+        <HeaderDate>{dateString}</HeaderDate>
         <Logo>The Dispatch</Logo>
-        <Issue>
+        <IssueNumber>
           {problem.problem?.id ? `Issue ${problem.problem.id}` : ' '}
-        </Issue>
-      </Head>
+        </IssueNumber>
+      </TitleHeader>
       <Nav />
       <Outlet />
-    </div>
+    </>
   );
 };
 
