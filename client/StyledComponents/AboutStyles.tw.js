@@ -2,28 +2,37 @@ import tw from 'tailwind-styled-components';
 
 export const Main = tw.main`
   flex
-  flex-row
-  ml-20
-  mr-20
-  mb-10
+  flex-col
+  md:ml-20
+  md:mr-20
+  md:mb-10
+  md:flex
+  md:flex-row
 `;
 
 export const Article1 = tw.article`
   flex
   flex-col
-  pr-3
+  self-center
+  w-2/3
+  md:pr-3
+  md:self-start
 `;
 
 export const Article2 = tw.article`
   flex
+  w-2/3
   flex-col
-  pl-3
+  self-center
+  md:pl-3
 `;
 
 export const Article3 = tw.article`
   flex
   flex-col
-  pl-3
+  w-2/3
+  self-center
+  md:pl-3
 `;
 
 export const FlexContainer = tw.div`
@@ -32,11 +41,12 @@ export const FlexContainer = tw.div`
 `;
 
 export const SecondLevelHeader = tw.h2`
+  text-xl
   border-b-2
   border-black
   font-playfair
   font-bold 
-  text-3xl
+  md:text-3xl
 `;
 
 export const Paragraph = tw.p`
@@ -45,6 +55,8 @@ export const Paragraph = tw.p`
   max-w-2xl
   mt-3
   mb-3
+  ml-5
+  mr-5
 `;
 
 export const UnorderedList = tw.ul`
@@ -56,4 +68,3 @@ export const ListItem = tw.li`
   font-cormorant-sc
   font-black
 `;
-
