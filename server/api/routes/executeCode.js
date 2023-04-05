@@ -55,7 +55,7 @@ function executeCode (code, problem, res) {
           else {
           console.log("\nFile written successfully\n");
           // create/destroy docker container for code execution process
-          exec(`docker run --rm -v ${filePath}:/app/runtest alexanderstoisolovich/nodevm2:dockerimg /bin/bash -c 'node runtest'`, 
+          exec(`docker run --rm -v ${filePath}:/app/runtest alexanderstoisolovich/nodevm2test:dockerimg /bin/bash -c 'node runtest'`, 
             (error, stdout, stderr) => {
           if (error) {
               console.log(`error: ${error.message}`);
@@ -77,10 +77,6 @@ function executeCode (code, problem, res) {
 
           stdout = stdout.split('\n')
           stdout = stdout.filter(Boolean)
-  
-          if (!stdout[stdout.length - 1].includes('test failed') && !stdout[stdout.length - 1].includes('test passed')) {
-            stdout.push("test failed,resultTime: None.,resultMemory: None.")
-          }
 
           let results = {contextOutput: stdout[stdout.length - 1].split(",")};
         
