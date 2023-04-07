@@ -1,25 +1,25 @@
 import tw from 'tailwind-styled-components';
 
 export const NavMainDiv = tw.div`
+    max-w-[1250px]
     min-h-[40px] 
     flex
     justify-evenly
     items-center
+    border-t-2 
     border-b-2
     border-slate-700 
-    border-t-2 
-    mt-1
     mb-5
-    mr-20
-    ml-20
+    mr-16
+    ml-16
 `;
 
-export const NavText = tw.div`
+export const NavTextH2 = tw.h2`
     font-cormorant-sc
     font-black
     text-lg
-    flex
-    gap-x-8
+    hover:scale-110
+    duration-150
 `;
 
 /*****  Mobile Nav *****/
@@ -38,7 +38,7 @@ export const MobileMenuContainer = tw.div`
     z-99
     h-1/2
     w-3/4
-	bg-[#fdf5e8]
+	bg-[#ffffff]
     border-2
     border-black
     shadow-xl

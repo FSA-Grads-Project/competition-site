@@ -9,6 +9,7 @@ import {
   TitleHeader,
   HeaderDate,
 } from '../StyledComponents/AppStyles.tw';
+import { DividerHr } from '../StyledComponents/GlobalStyles.tw';
 
 const Header = () => {
   const problem = useSelector((state) => state.problems);
@@ -16,17 +17,19 @@ const Header = () => {
   const dateString = new Date().toDateString();
 
   return (
-    <>
+    <div className='main-container'>
       <TitleHeader className='header-grid'>
-        <HeaderDate>{dateString}</HeaderDate>
-        <Logo>The Dispatch</Logo>
-        <IssueNumber>
+        <HeaderDate className='hidden md:block'>{dateString}</HeaderDate>
+        <Logo className='custom-font'>The Dispatch</Logo>
+        {/* <img src='/TitlePNG.png' alt='Title Pic' width={325} className='pt-4'/> */}
+        <IssueNumber className='hidden md:block'>
           {problem.problem?.id ? `Issue ${problem.problem.id}` : ' '}
         </IssueNumber>
       </TitleHeader>
+      <DividerHr />
       <Nav />
       <Outlet />
-    </>
+    </div>
   );
 };
 

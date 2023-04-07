@@ -13,7 +13,7 @@ import './style.css';
 
 const App = () => {
   return (
-    <div>
+    <div id='App' className='app-js'>
       <LoginModal />
       <InitialLoginModal />
       <Routes>

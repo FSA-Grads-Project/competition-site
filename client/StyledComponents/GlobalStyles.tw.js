@@ -1,4 +1,18 @@
-import tw from "tailwind-styled-components";
+import tw from 'tailwind-styled-components';
+
+export const DividerHr = tw.hr`		
+border-t-2
+mb-1
+ml-16
+mr-16
+`;
+
+export const DividerDiv = tw.div`		
+border-t-2
+mb-1
+ml-16
+mr-16
+`;
 
 export const EditorButton = tw.button`
 	bg-darkBackground
@@ -58,7 +72,7 @@ export const OutputTitle = tw.div`
   font-cormorant-sc
   text-2xl
   `;
- // pl-2
+// pl-2
 
 export const DarkButton = tw.button`
 	bg-darkFont
@@ -125,7 +139,7 @@ export const TabTitleDiv = tw.div`
 	box-border
 `;
 
-export const TabTitleH1 = tw.h1`
+export const TabTitleH3 = tw.h3`
 	font-playfair
 	font-black
 	text-xl
