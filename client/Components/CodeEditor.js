@@ -106,7 +106,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
       await useUploadUserSolution(code, res, "eval");
     }
 
-    if (res.data.contextOutput[0].includes("test passed")) {
+    if (res.data.contextOutput[0].includes("tests passed")) {
       setSolutionPassed(true);
     } else {
       setSolutionPassed(false);
