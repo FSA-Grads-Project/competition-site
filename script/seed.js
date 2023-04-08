@@ -275,24 +275,64 @@ function binaryTreeGenerator(N, nodeSherman) {
   }
   return root;
 }
+
+function test(size, location) {
+  const root = binaryTreeGenerator(size, location);
+
+  const start = process.hrtime.bigint();
+  const result = findSherman(root);
+  const end = process.hrtime.bigint();
+
+  const time = end - start;
+  const memory = process.memoryUsage().heapUsed;
+
+  return { result: result, time: time, memory: memory };
+}
+
+function separateResults(results) {
+  const resultTest = [];
+  const resultTime = [];
+  const resultMemory = [];
+
+  for (let i = 0; i < results.length; i++) {
+    resultTest.push(results[i].result);
+    resultTime.push(results[i].time);
+    resultMemory.push(results[i].memory);
+  }
+
+  return { result: resultTest, time: resultTime, memory: resultMemory };
+}
+
 function runSubmission() {
-  const root = binaryTreeGenerator(50000, 50000);
-  let start = process.hrtime.bigint();
-  let result = findSherman(root);
-  let end = process.hrtime.bigint();
-  let resultTest = "";
-  let resultMemory;
-  let resultTime;
-  if (result === 49999) {
-    resultTest = 'test passed: sherman was at node 49999';
-    resultMemory = process.memoryUsage().heapUsed;
-    resultTime = end - start;
+
+  let results = [];
+
+  const results1 = test(10000, 10000);
+  const results2 = test(20000, 20000);
+  const results3 = test(30000, 30000);
+
+  results.push(results1);
+  results.push(results2);
+  results.push(results3);
+
+  results = separateResults(results);
+
+  let resultTest = results.result;
+  let resultTime = results.time.reduce((acc, cur) => { return acc + Number(cur); }, 0) / results.time.length;
+  let resultMemory = results.memory.reduce((acc, cur) => { return acc + cur; }, 0) / results.memory.length;
+
+  resultTime = resultTime.toFixed(0);
+  resultMemory = resultMemory.toFixed(0);
+
+  if (resultTest[0] === 9999 && resultTest[1] === 19999 && resultTest[2] === 29999) {
+    resultTest = 'tests passed';
   } else {
     resultTest = 'test failed';
-    resultMemory = 'None.'
-    resultTime = 'None.'
+    resultMemory = 'none';
+    resultTime = 'none';
   }
-  return resultTest + ',' + 'resultTime: ' + resultTime + ',' + 'resultMemory: ' + resultMemory
+
+  return resultTest + ',' + 'resultTime: ' + resultTime + ',' + 'resultMemory: ' + resultMemory;
 }
 `,
   });

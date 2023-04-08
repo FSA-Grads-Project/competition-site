@@ -80,10 +80,6 @@ function executeCode(code, problem, res) {
 
           stdout = stdout.split('\n')
           stdout = stdout.filter(Boolean)
-  
-          // if (!stdout[stdout.length - 1].includes('test failed') && !stdout[stdout.length - 1].includes('test passed')) {
-          //   stdout.push("test failed,resultTime: None.,resultMemory: None.")
-          // }
 
             if (
               !stdout[stdout.length - 1].includes('test failed') &&
