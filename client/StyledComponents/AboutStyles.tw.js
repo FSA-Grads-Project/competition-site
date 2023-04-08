@@ -3,10 +3,10 @@ import tw from 'tailwind-styled-components';
 export const MainFlexContainer = tw.main`
   flex
   flex-col
-  items-stretch
-  pt-5
-  pl-10
-  pr-10
+  gap-x-14
+  mt-5
+  ml-16
+  mr-16
   md:mb-10
   md:flex-row
   font-cormorant-sc
@@ -18,8 +18,6 @@ export const ColumnSection = tw.section`
   flex-col
   self-start
   text-justify
-  md:pl-10
-  md:pr-10
 `;
 
 export const H3SectionHeader = tw.h3`

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import {
   TitleWrapper,
   TabTitleDiv,
-  TabTitleH3,
+  H3,
 } from '../StyledComponents/GlobalStyles.tw';
 import { MdLeaderboard } from 'react-icons/md';
 import { BiCodeAlt } from 'react-icons/bi';
@@ -27,7 +27,7 @@ export const TabTitle = ({ leaderBoardView, codeEditorView, view, title }) => {
         ) : (
           <MdLeaderboard className='min-w-10 min-h-8 mx-1' />
         )}
-        <TabTitleH3>{title}</TabTitleH3>
+        <H3>{title}</H3>
       </TabTitleDiv>
     </div>
   );

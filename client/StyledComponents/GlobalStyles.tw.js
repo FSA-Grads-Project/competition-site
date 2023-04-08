@@ -139,7 +139,7 @@ export const TabTitleDiv = tw.div`
 	box-border
 `;
 
-export const TabTitleH3 = tw.h3`
+export const H3 = tw.h3`
 	font-playfair
 	font-black
 	text-xl

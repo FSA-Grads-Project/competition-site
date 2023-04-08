@@ -4,9 +4,9 @@ import tw from 'tailwind-styled-components';
 export const TitleHeader = tw.header`
     font-playfair-sc
     font-black
-    items-end
-    md:items-baseline
-
+    items-baseline
+    ml-16
+    mr-16
 `;
 
 export const Logo = tw.h1`
@@ -18,15 +18,16 @@ export const Logo = tw.h1`
 `;
 
 export const IssueNumber = tw.h4`
-    text-right
-    text-sm
+    font-playfair-sc
+    font-black    
+    text-md
+    md:text-right
     md:text-xl
-
 `;
 
 export const HeaderDate = tw.h4`
-    text-xs
+    font-playfair-sc
+    font-black
+    text-md
     md:text-sm
-    hidden
-    md:block
 `;

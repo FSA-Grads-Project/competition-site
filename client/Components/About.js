@@ -3,12 +3,8 @@ import React from 'react';
 import {
   MainFlexContainer,
   ColumnSection,
-  Section,
-  Article2,
-  Article3,
   H3SectionHeader,
   Paragraph,
-  UnorderedList,
   ListItem,
 } from '../StyledComponents/AboutStyles.tw.js';
 
@@ -50,7 +46,7 @@ const About = () => {
         </section>
         <section>
           <H3SectionHeader>
-            How to evaluate and submit solutions
+            How to evaluate and submit your solutions
           </H3SectionHeader>
           <Paragraph>
             After logging in, the current issue page will display the full

@@ -6,14 +6,25 @@
   box-sizing: border-box;
 }
 
-body {
+/* body {
   background-color: #ffffff;
   display: flex;
+  justify-content: center;
+} */
+
+/* #root {
+  width: 100%;
+} */
+
+#App {
+  display: flex;
+  flex: column;
   justify-content: center;
 }
 
 .main-container {
   max-width: 1250px;
+  width: 100%;
 }
 
 /* Controls Main Title Header with Issue/Date */
@@ -23,18 +34,8 @@ body {
     grid-template-columns: 120px auto 120px;
     grid-template-row: auto;
     place-content: space-between;
-    margin-left: 80px;
-    margin-right: 80px;
   }
 }
-
-/* @font-face {
-  font-family: 'Engravers Old English';
-  src: url('../public/EngraversOldEnglishBTW03Rg.woff');
-}
-.custom-font {
-  font-family: 'Engravers Old English';
-} */
 
 .monaco-editor {
   /* padding-top: 15px; */
@@ -46,6 +47,14 @@ body {
   animation: rotating 2s 0.25s linear infinite;
 }
 
+/* @font-face {
+  font-family: 'EngraversOldEnglish';
+  src: url('../public/OPTIEngraversOldEnglish.otf');
+}
+
+.custom-font {
+  font-family: 'EngraversOldEnglish';
+} */
 
 /* @font-face {
   font-family: 'OldEnglish';

@@ -14,9 +14,22 @@ const NavMobile = () => {
   };
 
   return (
-    <nav className='absolute inset-1 '>
+    <nav
+      className='absolute inset-1 z-50'
+      id='navBackground'
+      onClick={(ev) => {
+        if (ev.target.id === 'navBackground' && open) {
+          handleBurgerToggle();
+        }
+      }}
+    >
       <button onClick={handleBurgerToggle}>
-        <Hamburger size={28} label='Show menu' />
+        <Hamburger
+          size={28}
+          label='Show menu'
+          toggled={open}
+          toggle={setOpen}
+        />
       </button>
       {open && (
         <MobileMenuContainer>

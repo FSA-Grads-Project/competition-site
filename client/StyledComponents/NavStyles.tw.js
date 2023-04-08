@@ -1,23 +1,22 @@
 import tw from 'tailwind-styled-components';
 
 export const NavMainDiv = tw.div`
-    max-w-[1250px]
-    min-h-[40px] 
     flex
-    justify-evenly
+    justify-center
+    md:justify-evenly
     items-center
-    border-t-2 
-    border-b-2
     border-slate-700 
-    mb-5
     mr-16
     ml-16
+    mb-1
+    md:mb-0
 `;
 
 export const NavTextH2 = tw.h2`
     font-cormorant-sc
     font-black
     text-lg
+    pb-1
     hover:scale-110
     duration-150
 `;
@@ -26,7 +25,6 @@ export const NavTextH2 = tw.h2`
 
 // Mobile Nav Menu background
 export const MobileNavBackground = tw.div`
-    z-99
 	w-full	
 	fixed
 	inset-0
@@ -35,7 +33,6 @@ export const MobileNavBackground = tw.div`
 `;
 
 export const MobileMenuContainer = tw.div`
-    z-99
     h-1/2
     w-3/4
 	bg-[#ffffff]
