@@ -1,23 +1,80 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 import Nav from './Nav';
-import { Logo, Issue, Head, Hidden } from '../StyledComponents/AppStyles.tw';
+import {
+  Logo,
+  IssueNumber,
+  TitleHeader,
+  HeaderDate,
+} from '../StyledComponents/AppStyles.tw';
+import { DividerDiv, DividerHr } from '../StyledComponents/GlobalStyles.tw';
+import { NavMainDiv } from '../StyledComponents/NavStyles.tw';
 
-const Header = () => {
+// Renders the full Desktop Header with Date, Title, and Issue number
+const DesktopHeader = () => {
   const problem = useSelector((state) => state.problems);
+  const dateString = new Date().toDateString();
 
   return (
-    <div>
-      <Head>
-        <Hidden>hidden</Hidden>
-        <Logo>The Dispatch</Logo>
-        <Issue>
-          {problem.problem?.id ? `Issue ${problem.problem.id}` : ' '}
-        </Issue>
-      </Head>
+    <TitleHeader className='header-grid'>
+      <HeaderDate>{dateString}</HeaderDate>
+      <Logo className='custom-font'>The Dispatch</Logo>
+      {/* <img src='/TitlePNG.png' alt='Title Pic' width={325} className='pt-4'/> */}
+      <IssueNumber>
+        {problem.problem?.id ? `Issue ${problem.problem.id}` : ' '}
+      </IssueNumber>
+    </TitleHeader>
+  );
+};
+
+// Renders the Mobile Header with just the Title
+const MobileHeader = () => {
+  const problem = useSelector((state) => state.problems);
+  const dateString = new Date().toDateString();
+
+  return (
+    <>
+      <TitleHeader>
+        <Logo className='custom-font'>The Dispatch</Logo>
+      </TitleHeader>
+      <DividerHr />
+      <DividerDiv />
+      <NavMainDiv>
+        <HeaderDate>{dateString}</HeaderDate>
+        {problem.problem?.id ? (
+          <>
+            <div className='pl-2 pr-2'>{' - '}</div>
+            <IssueNumber>Issue {problem.problem.id}</IssueNumber>
+          </>
+        ) : (
+          ' '
+        )}
+      </NavMainDiv>
+    </>
+  );
+};
+
+const Header = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 821);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth < 821);
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return (
+    <div className='main-container'>
+      {isMobile ? <MobileHeader /> : <DesktopHeader />}
+
       <Nav />
+      <DividerDiv />
       <Outlet />
     </div>
   );
