@@ -1,5 +1,5 @@
 // System Imports
-import React, { useRef, useEffect, useState, useLocation } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Third Party Library Imports
@@ -7,6 +7,7 @@ import { VscOutput } from 'react-icons/vsc';
 import { IconContext } from 'react-icons';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import Editor from '@monaco-editor/react';
+import { constrainedEditor } from "constrained-editor-plugin";
 
 // import customTheme from "monaco-themes/themes/tomorrow.json";
 import customTheme from 'monaco-themes/themes/solarized-light.json';
@@ -31,6 +32,7 @@ import useResetCode from '../hooks/useResetCode';
 export const CodeEditor = ({ auth, solution, current }) => {
   const dispatch = useDispatch();
   const monacoRef = useRef(null);
+  let restrictions = [];
   const solutionCode = useSelector(
     (state) => state.solution?.solution?.solutionCode
   );
@@ -52,8 +54,6 @@ export const CodeEditor = ({ auth, solution, current }) => {
   const [isEvaluating, setIsEvaluating] = useState(false);
   const [evalCheck, setEvalCheck] = useState(false);
 
-  // let themeColor = solutionCompletedDate ? "#F0ECE1" : "#EDE4C5";
-
   function handleEditorDidMount(editor, monaco) {
     customTheme.colors['editor.background'] = '#EDE4C5';
     customTheme.colors['editor.selectionBackground'] = '#DBD2B2';
@@ -61,16 +61,19 @@ export const CodeEditor = ({ auth, solution, current }) => {
 
     monaco.editor.defineTheme('custom-theme', customTheme);
 
-    // monaco.editor.defineTheme("disabled-theme", {
-    //   base: "vs",
-    //   inherit: true,
-    //   rules: [],
-    //   colors: {
-    //     "editor.background": "#F0ECE1",
-    //   },
-    // });
     monaco.editor.setTheme('custom-theme');
     monacoRef.current = editor;
+
+    const constrainedInstance = constrainedEditor(monaco);
+    const model = editor.getModel();
+    constrainedInstance.initializeIn(editor);
+    restrictions.push({
+      range: [2, 1, 4, 1],
+      allowMultiline: true
+    });
+
+    constrainedInstance.addRestrictionsTo(model, restrictions);
+
   }
 
   function handleEditorChange(value) {
