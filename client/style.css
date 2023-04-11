@@ -6,16 +6,6 @@
   box-sizing: border-box;
 }
 
-/* body {
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-} */
-
-/* #root {
-  width: 100%;
-} */
-
 #App {
   display: flex;
   flex: column;
