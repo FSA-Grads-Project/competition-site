@@ -39,10 +39,12 @@ export const CodeEditor = ({ auth, solution, current }) => {
   const solutionCompletedDate = useSelector(
     (state) => state.solution?.solution?.completeDatetime
   );
+
   const problem = useSelector((state) => state.problems.problem);
   let defaultCode = useSelector(
     (state) => state.problems?.problem?.initialCode
   );
+
   let initialCode =
     auth.accessToken && solutionCode ? solutionCode : defaultCode;
 
@@ -68,14 +70,12 @@ export const CodeEditor = ({ auth, solution, current }) => {
     const model = editor.getModel();
     constrainedInstance.initializeIn(editor);
     restrictions.push({
-      range: [2, 1, 4, 1],
+      range: problem.readOnlyRange,
       allowMultiline: true
     });
 
     constrainedInstance.addRestrictionsTo(model, restrictions);
-
   }
-
   function handleEditorChange(value) {
     initialCode = value;
     setCode(value);
