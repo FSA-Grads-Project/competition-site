@@ -8,7 +8,6 @@ export const fetchProblems = createAsyncThunk(
   "problems/getProblems",
   async () => {
     const response = await axios.get("/api/problems");
-    console.log(response.data)
     return response.data;
   }
 );
