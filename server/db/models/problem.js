@@ -70,6 +70,10 @@ const Problem = connection.define("problem", {
       isFloat: true,
     },
   },
+  readOnlyRange: {
+    type: Sequelize.ARRAY(Sequelize.INTEGER),
+    allowNull: false,
+  },
   current: {
     type: Sequelize.VIRTUAL,
     get() {
