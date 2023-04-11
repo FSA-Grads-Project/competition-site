@@ -15,7 +15,7 @@ const NavMobile = () => {
 
   return (
     <nav
-      className='absolute inset-1 z-50'
+      className='absolute inset-1'
       id='navBackground'
       onClick={(ev) => {
         if (ev.target.id === 'navBackground' && open) {
