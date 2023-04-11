@@ -72,7 +72,6 @@ const Problem = connection.define("problem", {
   },
   readOnlyRange: {
     type: Sequelize.ARRAY(Sequelize.INTEGER),
-    allowNull: false,
   },
   current: {
     type: Sequelize.VIRTUAL,

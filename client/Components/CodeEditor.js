@@ -70,7 +70,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
     const model = editor.getModel();
     constrainedInstance.initializeIn(editor);
     restrictions.push({
-      range: problem.readOnlyRange,
+      range: problem.readOnlyRange ? problem.readOnlyRange : [1,1,1,1],
       allowMultiline: true
     });
 
