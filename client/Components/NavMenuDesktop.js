@@ -14,6 +14,8 @@ const NavMenuDesktop = ({ setOpen }) => {
 
   const dispatch = useDispatch();
 
+  //const clickHandler = () => setOpen(false);
+
   return (
     <>
       <DividerHr />
@@ -33,7 +35,6 @@ const NavMenuDesktop = ({ setOpen }) => {
             className="cursor-pointer"
             onClick={() => {
               dispatch(openLoginModal());
-              setOpen(false);
             }}
           >
             Login
@@ -48,7 +49,6 @@ const NavMenuDesktop = ({ setOpen }) => {
                 to="/"
                 onClick={() => {
                   dispatch(clearRefreshToken());
-                  setOpen(false);
                 }}
               >
                 Logout

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import Nav from './Nav';
 import {
@@ -17,13 +17,18 @@ const DesktopHeader = () => {
   const problem = useSelector((state) => state.problems);
   const dateString = new Date().toDateString();
 
+  const pathname = useLocation().pathname;
+
   return (
     <TitleHeader className='header-grid'>
       <HeaderDate>{dateString}</HeaderDate>
-      <Logo className='custom-font'>The Dispatch</Logo>
-      {/* <img src='/TitlePNG.png' alt='Title Pic' width={325} className='pt-4'/> */}
+      {/* <Logo className='custom-font'>The Dispatch</Logo> */}
+      <img src='/TitlePNG.png' alt='Title Pic' width={350} className='pt-4' />
       <IssueNumber>
-        {problem.problem?.id ? `Issue ${problem.problem.id}` : ' '}
+        {(problem.problem?.id && pathname === `/problem`) ||
+        pathname === `/problem/${problem.problem?.id}`
+          ? `Issue ${problem.problem.id}`
+          : ' '}
       </IssueNumber>
     </TitleHeader>
   );
@@ -34,16 +39,20 @@ const MobileHeader = () => {
   const problem = useSelector((state) => state.problems);
   const dateString = new Date().toDateString();
 
+  const pathname = useLocation().pathname;
+
   return (
     <>
       <TitleHeader>
-        <Logo className='custom-font'>The Dispatch</Logo>
+        {/* <Logo className='custom-font'>The Dispatch</Logo> */}
+        <img src='/TitlePNG.png' alt='Title Pic' width={300} className='pt-4' />
       </TitleHeader>
       <DividerHr />
       <DividerDiv />
       <NavMainDiv>
         <HeaderDate>{dateString}</HeaderDate>
-        {problem.problem?.id ? (
+        {(problem.problem?.id && pathname === `/problem`) ||
+        pathname === `/problem/${problem.problem?.id}` ? (
           <>
             <div className='pl-2 pr-2'>{' - '}</div>
             <IssueNumber>Issue {problem.problem.id}</IssueNumber>

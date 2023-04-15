@@ -2,6 +2,8 @@ import tw from 'tailwind-styled-components';
 
 //This adds to .header-grid in style.css
 export const TitleHeader = tw.header`
+    flex
+    justify-center    
     font-playfair-sc
     font-black
     items-baseline
