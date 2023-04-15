@@ -1,84 +1,63 @@
 // System library imports
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Local imports
 import { clearRefreshToken } from "../store/auth";
 import { openLoginModal } from "../store/modal";
-import { NavText } from "../StyledComponents/NavStyles.tw";
+import { NavMainDiv, NavTextH2 } from "../StyledComponents/NavStyles.tw";
+import { DividerDiv, DividerHr } from "../StyledComponents/GlobalStyles.tw";
 
 const NavMenuDesktop = ({ setOpen }) => {
-  const navigate = useNavigate();
-
   const { auth } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
   return (
-    <React.Fragment>
-      <NavText>
-        <a
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          Current Issue
-        </a>
-      </NavText>
-      <NavText>
-        <a
-          onClick={() => {
-            navigate("/pastissues");
-          }}
-        >
-          Past Issues
-        </a>
-      </NavText>
-      <NavText>
-        <a
-          onClick={() => {
-            navigate("/about");
-          }}
-        >
-          About
-        </a>
-      </NavText>
-      {!auth.id ? (
-        <NavText>
-          <a
+    <>
+      <DividerHr />
+      <DividerDiv />
+      <NavMainDiv>
+        <NavTextH2>
+          <Link to="/problem">Current Issue</Link>
+        </NavTextH2>
+        <NavTextH2>
+          <Link to="/pastissues">Past Issues</Link>
+        </NavTextH2>
+        <NavTextH2>
+          <Link to="/about">About</Link>
+        </NavTextH2>
+        {!auth.id ? (
+          <NavTextH2
             className="cursor-pointer"
             onClick={() => {
               dispatch(openLoginModal());
+              setOpen(false);
             }}
           >
             Login
-          </a>
-        </NavText>
-      ) : (
-        <React.Fragment>
-          <NavText>
-            <a
-              onClick={() => {
-                navigate("/account");
-              }}
-            >
-              Account
-            </a>
-          </NavText>
-          <NavText>
-            <a
-              onClick={() => {
-                dispatch(clearRefreshToken());
-                navigate("/");
-              }}
-            >
-              Logout
-            </a>
-          </NavText>
-        </React.Fragment>
-      )}
-    </React.Fragment>
+          </NavTextH2>
+        ) : (
+          <React.Fragment>
+            <NavTextH2>
+              <Link to="/account">Account</Link>
+            </NavTextH2>
+            <NavTextH2>
+              <Link
+                to="/"
+                onClick={() => {
+                  dispatch(clearRefreshToken());
+                  setOpen(false);
+                }}
+              >
+                Logout
+              </Link>
+            </NavTextH2>
+          </React.Fragment>
+        )}
+      </NavMainDiv>
+    </>
   );
 };
 

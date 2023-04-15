@@ -1,34 +1,33 @@
-import tw from "tailwind-styled-components";
+import tw from 'tailwind-styled-components';
 
-export const Head = tw.div`
-    flex
-    justify-between
-    items-center 
-    border-b-2
-    border-slate-700
-    mr-20
-    ml-20
-`;
-
-export const Logo = tw.div`
+//This adds to .header-grid in style.css
+export const TitleHeader = tw.header`
     font-playfair-sc
     font-black
-    p-4
-    text-xl
-    ml-20
-    md:text-4xl
-    md:ml-60
+    items-baseline
+    ml-16
+    mr-16
 `;
 
-export const Issue = tw.div`
+export const Logo = tw.h1`
+   pt-4
+   pb-3
+   text-4xl
+   text-center
+   md:text-5xl
+`;
+
+export const IssueNumber = tw.h4`
     font-playfair-sc
-    font-black
-    text-sm
+    font-black    
+    text-md
+    md:text-right
     md:text-xl
-    md:pr-28
 `;
 
-export const Hidden = tw.div`
-    pl-28
-    hidden
+export const HeaderDate = tw.h4`
+    font-playfair-sc
+    font-black
+    text-md
+    md:text-sm
 `;

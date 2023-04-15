@@ -33,8 +33,9 @@ const Leaderboard = () => {
 
   const { id } = useSelector((state) => state.problems.problem);
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1500);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1375);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 640);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 750);
+  const [selectedDetails, setSelectedDetails] = useState(null);
 
   useEffect(() => {
     const getResults = async () => {
@@ -44,7 +45,8 @@ const Leaderboard = () => {
     getResults();
 
     function handleResize() {
-      setIsDesktop(window.innerWidth > 1375);
+      setIsDesktop(window.innerWidth > 750);
+      setIsMobile(window.innerWidth <= 640);
     }
 
     window.addEventListener("resize", handleResize);
@@ -65,9 +67,13 @@ const Leaderboard = () => {
     }
   }, [results]);
 
-  // return isMobile ? <LeaderboardMobile /> : <LeaderboardDesktop />;
-
-  console.log(scores);
+  const toggleDetails = (id) => {
+    if (selectedDetails === id) {
+      setSelectedDetails(null);
+    } else {
+      setSelectedDetails(id);
+    }
+  };
 
   const trophyColors = {
     1: "text-goldTrophy",
@@ -84,7 +90,9 @@ const Leaderboard = () => {
       <div className="h-[calc(100vh-15rem)] max-h-[41rem] min-h-[17rem] border-2 border-darkFont flex flex-col items-center font-cormorant-sc p-2">
         <div className="flex justify-between w-full pr-5 pl-5 pt-3 pb-1 items-center ">
           <h2 className={`${isDesktop ? "w-3/12" : "w-4/12"}`}>User</h2>
-          <h2 className="w-7/12 text-center">Category Details</h2>
+          {!isMobile ? (
+            <h2 className="w-7/12 text-center">Category Details</h2>
+          ) : null}
           <h2 className="w-2/12 text-right">Rank</h2>
         </div>
         <div className="border-b-2 h-px border-darkFont w-[calc(100%-2rem)] mb-1"></div>
@@ -92,7 +100,10 @@ const Leaderboard = () => {
         <div className="overflow-y-scroll w-full m-2">
           {scores.map((score, ind) => {
             return (
-              <div key={score.id}>
+              <div
+                key={score.id}
+                onClick={isMobile ? (ev) => toggleDetails(score.id) : null}
+              >
                 <div className="flex justify-between w-full pr-5 pl-5 pt-3 pb-3 items-center">
                   <p
                     className={`text-m overflow-hidden overflow-ellipsis ${
@@ -109,9 +120,9 @@ const Leaderboard = () => {
                       score={score}
                       className="w-7/12"
                     />
-                  ) : (
+                  ) : !isMobile ? (
                     <VerticalCategoryDetails score={score} />
-                  )}
+                  ) : null}
                   <h2
                     className={`text-l font-playfair flex justify-end items-center ${
                       isDesktop ? "w-2/12" : "w-2/12"
@@ -127,6 +138,13 @@ const Leaderboard = () => {
                     {score.scoreRank}
                   </h2>
                 </div>
+                <div
+                  className={`transition-all duration-300 h-0 overflow-hidden ease-in transition-[height] w-[calc(100%-2rem)] flex justify-center items-center ${
+                    selectedDetails === score.id && isMobile ? "h-16" : "h-0"
+                  }`}
+                >
+                  <VerticalCategoryDetails score={score} />
+                </div>
                 {ind !== scores.length - 1 ? (
                   <div className="flex justify-center">
                     <div className="border-b-2 h-2 border-disabledButtonBackground mb-1 w-[calc(100%-2rem)]"></div>
@@ -137,7 +155,6 @@ const Leaderboard = () => {
           })}
         </div>
       </div>
-      {/*<OldLeaderboard scores={scores} />*/}
     </div>
   );
 };

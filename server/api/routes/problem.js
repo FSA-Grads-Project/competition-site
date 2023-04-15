@@ -41,6 +41,7 @@ router.get("/current", softVerifyUser, async (req, res, next) => {
         "current",
         "timeWeight",
         "spaceWeight",
+        "readOnlyRange",
         req.user ? "statement" : "blurb",
       ],
       where: {

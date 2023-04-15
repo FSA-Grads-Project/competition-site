@@ -4,14 +4,38 @@
 @tailwind utilities;
 
 * {
-  /* max-width: 100%; */
+  box-sizing: border-box;
 }
 
-body {
-  background-color: #fdf5e8;
-  color: #333333;
+/* body {
+  background-color: #ffffff;
   display: flex;
   justify-content: center;
+} */
+
+/* #root {
+  width: 100%;
+} */
+
+#App {
+  display: flex;
+  flex: column;
+  justify-content: center;
+}
+
+.main-container {
+  max-width: 1250px;
+  width: 100%;
+}
+
+/* Controls Main Title Header with Issue/Date */
+@media (min-width: 821px) {
+  .header-grid {
+    display: grid;
+    grid-template-columns: 120px auto 120px;
+    grid-template-row: auto;
+    place-content: space-between;
+  }
 }
 
 .monaco-editor {
@@ -23,6 +47,34 @@ body {
 .animate-rotate {
   animation: rotating 2s 0.25s linear infinite;
 }
+
+/* @font-face {
+  font-family: 'EngraversOldEnglish';
+  src: url('../public/OPTIEngraversOldEnglish.otf');
+}
+
+.custom-font {
+  font-family: 'EngraversOldEnglish';
+} */
+
+/* @font-face {
+  font-family: 'OldEnglish';
+  src: url('../client/public/OPTIEngraversOldEnglish.otf') format('opentype');
+} */
+
+/* @font-face {
+  font-family: 'EngraversOldEnglish';
+  src: url('../public/OPTIEngraversOldEnglish.otf');
+}
+
+.custom-font {
+  font-family: 'EngraversOldEnglish';
+} */
+
+/* @font-face {
+  font-family: 'OldEnglish';
+  src: url('../client/public/OPTIEngraversOldEnglish.otf') format('opentype');
+} */
 
 /* Custom Scrollbar Firefox */
 * {
@@ -36,14 +88,14 @@ body {
 }
 
 *::-webkit-scrollbar-track {
-  background: #fdf5e8;
+  background: white;
   border-radius: 1px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #ede4c5;
+  background-color: #f0f0f0;
   border-radius: 14px;
-  border: 1px solid #e6e2d8;
+  border: 1px solid #f0f0f0;
 }
 
 /*Animation for Execute */

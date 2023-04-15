@@ -1,19 +1,18 @@
 // System Library Imports
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // Local Imports
-import { fetchPreviousProblems } from "../store/problem";
-
+import { fetchPreviousProblems } from '../store/problem';
+import { H3 } from '../StyledComponents/GlobalStyles.tw';
 import {
   MainDiv,
-  PreviousProblemsDiv,
-  MainHeader,
-  PrevProblem,
-  ProblemsHeader,
+  PreviousProblemsFlexContainer,
+  PrevProblemDiv,
+  ProblemHeader,
   ProblemStatmentDiv,
-} from "../StyledComponents/PreviousProblems.tw";
+} from '../StyledComponents/PreviousProblems.tw';
 
 const PreviousProblems = () => {
   const { previousProblems, status, error } = useSelector(
@@ -31,26 +30,26 @@ const PreviousProblems = () => {
     getProblems();
   }, []);
 
-  if (status === "succeeded") {
+  if (status === 'succeeded') {
     return (
       <MainDiv>
-        <MainHeader> Past Issues </MainHeader>
-        <PreviousProblemsDiv>
+        <H3 className='pt-4'>Past Issues</H3>
+        <PreviousProblemsFlexContainer>
           {previousProblems.map((problem) => {
             return (
-              <PrevProblem
+              <PrevProblemDiv
                 key={problem.id}
                 onClick={() => {
                   navigate(`/problem/${problem.id}`);
                 }}
               >
-                <ProblemsHeader> {problem.title}</ProblemsHeader>
+                <ProblemHeader> {problem.title}</ProblemHeader>
                 <ProblemStatmentDiv>{problem.statement}</ProblemStatmentDiv>
                 <p>...</p>
-              </PrevProblem>
+              </PrevProblemDiv>
             );
           })}
-        </PreviousProblemsDiv>
+        </PreviousProblemsFlexContainer>
       </MainDiv>
     );
   }

@@ -2,15 +2,14 @@ const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const path = require("path");
 const exec = require("child_process").exec;
+
 const babel = require("babel-core");
 const loopcontrol = require("./loopcontrol");
+const os = require("os");
 
 function executeCode(code, problem, res) {
   // create random filename
   let fileName = uuidv4() + ".js";
-
-  // create filepath in temp folder utilizing random filename
-  let filePath = path.join(__dirname, `/temp/${fileName}`);
 
   // create problem code to be used for consoleScript
   const consoleProblem = problem.replace(
@@ -34,6 +33,7 @@ function executeCode(code, problem, res) {
   const runCode = `
         const {VM, VMScript} = require('vm2');
         const process = require('process');
+
         const vm = new VM({
           sandbox: {
             timeout: 10000,
@@ -51,6 +51,10 @@ function executeCode(code, problem, res) {
         }
       `;
 
+  let platform = os.cpus()[0].model.includes("Intel")
+    ? "linux/arm64/v8"
+    : "linux/amd64";
+
   try {
     // create new temp file containing user code
     fs.writeFile(filePath, runCode, (err) => {
@@ -59,7 +63,7 @@ function executeCode(code, problem, res) {
         console.log("\nFile written successfully\n");
         // create/destroy docker container for code execution process
         exec(
-          `docker run --rm -v ${filePath}:/app/runtest alexanderstoisolovich/nodevm2test:dockerimg /bin/bash -c 'node runtest'`,
+          `docker run  --platform ${platform} --rm -v ${filePath}:/app/runtest alexanderstoisolovich/nodevm2test:dockerimg /bin/bash -c 'node runtest'`,
           (error, stdout, stderr) => {
             if (error) {
               console.log(`error: ${error.message}`);

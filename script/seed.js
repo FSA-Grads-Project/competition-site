@@ -181,7 +181,6 @@ of the node where Sherman the cat is located.`,
     initialCode: `function findSherman(root) {
   // write your code here
 }
-
 // example of the binary-tree class - do not edit
 class binaryTree {
   constructor(number, sherman = false) {
@@ -203,7 +202,6 @@ branches of the tree.`,
 
   const test1 = await Test.create({
     test: `
-
 class Node {
   constructor(number, sherman = false) {
     this.number = number;
@@ -212,7 +210,6 @@ class Node {
     this.right = null; 
   }
 }
-
 class NodeQueue {
   constructor(value) {
     this.value = value;
@@ -220,7 +217,6 @@ class NodeQueue {
     this.next = null;
   }
 }
-
 class Queue {
   constructor() {
     this.head = null;
@@ -230,7 +226,6 @@ class Queue {
   enqueue(value) {
     this.length += 1;
     let newNode = new NodeQueue(value);
-
     if (this.tail) {
       this.tail.next = newNode;
       newNode.prev = this.tail;
@@ -245,7 +240,6 @@ class Queue {
       this.length -= 1;
       const dequeuedNode = this.head;
       this.head = this.head.next;
-
       if (this.head) {
         this.head.prev = null;
       } else {
@@ -256,27 +250,20 @@ class Queue {
     return undefined;
   }
 }
-
 function binaryTreeGenerator(N, nodeSherman) {
   let primaryQueue = new Queue(); 
-
   for (let i = 0; i < N; i++) {
     let node = new Node(i);
     if (i === nodeSherman - 1) node.sherman = true;
     primaryQueue.enqueue(node);
   }
-
   let secondaryQueue = new Queue();
-
   let root = primaryQueue.dequeue();
   secondaryQueue.enqueue(root);
-
   while (secondaryQueue.length > 0) {
     let p = secondaryQueue.dequeue();
-
     let pL = primaryQueue.dequeue();
     let pR = primaryQueue.dequeue();
-
     if (pL !== undefined) {
       secondaryQueue.enqueue(pL);
       p.left = pL;
@@ -289,27 +276,63 @@ function binaryTreeGenerator(N, nodeSherman) {
   return root;
 }
 
-function runSubmission() {
+function test(size, location) {
+  const root = binaryTreeGenerator(size, location);
 
-  const root = binaryTreeGenerator(50000, 50000);
-  let start = process.hrtime.bigint();
-  let result = findSherman(root);
-  let end = process.hrtime.bigint();
-  let resultTest = "";
-  let resultMemory;
-  let resultTime;
+  const start = process.hrtime.bigint();
+  const result = findSherman(root);
+  const end = process.hrtime.bigint();
 
-  if (result === 49999) {
-    resultTest = 'test passed: sherman was at node 49999';
-    resultMemory = process.memoryUsage().heapUsed;
-    resultTime = end - start;
-  } else {
-    resultTest = 'test failed';
-    resultMemory = 'None.'
-    resultTime = 'None.'
+  const time = end - start;
+  const memory = process.memoryUsage().heapUsed;
+
+  return { result: result, time: time, memory: memory };
+}
+
+function separateResults(results) {
+  const resultTest = [];
+  const resultTime = [];
+  const resultMemory = [];
+
+  for (let i = 0; i < results.length; i++) {
+    resultTest.push(results[i].result);
+    resultTime.push(results[i].time);
+    resultMemory.push(results[i].memory);
   }
 
-  return resultTest + ',' + 'resultTime: ' + resultTime + ',' + 'resultMemory: ' + resultMemory
+  return { result: resultTest, time: resultTime, memory: resultMemory };
+}
+
+function runSubmission() {
+
+  let results = [];
+
+  const results1 = test(10000, 10000);
+  const results2 = test(20000, 20000);
+  const results3 = test(30000, 30000);
+
+  results.push(results1);
+  results.push(results2);
+  results.push(results3);
+
+  results = separateResults(results);
+
+  let resultTest = results.result;
+  let resultTime = results.time.reduce((acc, cur) => { return acc + Number(cur); }, 0) / results.time.length;
+  let resultMemory = results.memory.reduce((acc, cur) => { return acc + cur; }, 0) / results.memory.length;
+
+  resultTime = resultTime.toFixed(0);
+  resultMemory = resultMemory.toFixed(0);
+
+  if (resultTest[0] === 9999 && resultTest[1] === 19999 && resultTest[2] === 29999) {
+    resultTest = 'tests passed';
+  } else {
+    resultTest = 'test failed';
+    resultMemory = 'none';
+    resultTime = 'none';
+  }
+
+  return resultTest + ',' + 'resultTime: ' + resultTime + ',' + 'resultMemory: ' + resultMemory;
 }
 `,
   });
