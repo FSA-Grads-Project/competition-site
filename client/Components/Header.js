@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 
 import Nav from './Nav';
 import {
@@ -33,6 +35,13 @@ const DesktopHeader = () => {
 const MobileHeader = () => {
   const problem = useSelector((state) => state.problems);
   const dateString = new Date().toDateString();
+  const pathname = useLocation().pathname;
+
+  // useEffect(() => {
+  //   console.log(pathname)
+  //   console.log(problem)
+
+  // }, [problem, pathname]);
 
   return (
     <>
@@ -43,8 +52,8 @@ const MobileHeader = () => {
       <DividerDiv />
       <NavMainDiv>
         <HeaderDate>{dateString}</HeaderDate>
-        {problem.problem?.id ? (
-          <>
+        {problem.problem?.id && pathname === '/problem' || pathname === `/problem/${problem.problem?.id}` ? (
+          <> 
             <div className='pl-2 pr-2'>{' - '}</div>
             <IssueNumber>Issue {problem.problem.id}</IssueNumber>
           </>

@@ -69,6 +69,9 @@ export const CodeEditor = ({ auth, solution, current }) => {
     const constrainedInstance = constrainedEditor(monaco);
     const model = editor.getModel();
     constrainedInstance.initializeIn(editor);
+    console.log(problem)
+
+    console.log(problem.readOnlyRange)
     restrictions.push({
       range: problem.readOnlyRange ? problem.readOnlyRange : [1,1,1,1],
       allowMultiline: true

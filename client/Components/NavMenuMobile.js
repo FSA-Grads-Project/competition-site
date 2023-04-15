@@ -12,6 +12,7 @@ import {
 } from '../StyledComponents/NavStyles.tw';
 
 const NavMenuMobile = ({ setOpen }) => {
+
   const { auth } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
