@@ -1,7 +1,7 @@
 // System library imports
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Local imports
 import { clearRefreshToken } from "../store/auth";
@@ -9,60 +9,76 @@ import { openLoginModal } from "../store/modal";
 import { NavText } from "../StyledComponents/NavStyles.tw";
 
 const NavMenuDesktop = ({ setOpen }) => {
+  const navigate = useNavigate();
+
   const { auth } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
-  const clickHandler = () => setOpen(false);
-
   return (
-    <>
+    <React.Fragment>
       <NavText>
-        <Link to="/problem" onClick={clickHandler}>
-          Current Issue
-        </Link>
-      </NavText>
-      <NavText>
-        <Link to="/pastissues" onClick={clickHandler}>
-          Past Issues
-        </Link>
-      </NavText>
-      <NavText>
-        <Link to="/about" onClick={clickHandler}>
-          About
-        </Link>
-      </NavText>
-      {!auth.id ? (
-        <NavText
-          className="cursor-pointer"
+        <a
           onClick={() => {
-            dispatch(openLoginModal());
-            setOpen(false);
+            navigate("/");
           }}
         >
-          Login
+          Current Issue
+        </a>
+      </NavText>
+      <NavText>
+        <a
+          onClick={() => {
+            navigate("/pastissues");
+          }}
+        >
+          Past Issues
+        </a>
+      </NavText>
+      <NavText>
+        <a
+          onClick={() => {
+            navigate("/about");
+          }}
+        >
+          About
+        </a>
+      </NavText>
+      {!auth.id ? (
+        <NavText>
+          <a
+            className="cursor-pointer"
+            onClick={() => {
+              dispatch(openLoginModal());
+            }}
+          >
+            Login
+          </a>
         </NavText>
       ) : (
         <React.Fragment>
           <NavText>
-            <Link to="/account" onClick={clickHandler}>
+            <a
+              onClick={() => {
+                navigate("/account");
+              }}
+            >
               Account
-            </Link>
+            </a>
           </NavText>
           <NavText>
-            <Link
-              to="/"
+            <a
               onClick={() => {
                 dispatch(clearRefreshToken());
-                setOpen(false);
+                navigate("/");
               }}
             >
               Logout
-            </Link>
+            </a>
           </NavText>
         </React.Fragment>
       )}
-    </>
+    </React.Fragment>
   );
 };
 

@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+// Third Party Imports
+import { FaTrophy } from "react-icons/fa";
+
 // Local imports
 import {
   LeaderboardMainDiv,
@@ -20,13 +23,18 @@ import {
   MiddleTableCellHeader,
   RightTableCellHeader,
 } from "../StyledComponents/LeaderboardStyles.tw";
-import { fetchUsers } from "../store/user";
 import { fetchResults } from "../store/results";
+import useUserResults from "../hooks/useUserResults";
+import LeaderboardMobile from "./LeaderboardMobile";
+import LeaderboardDesktop from "./LeaderboardDesktop";
 
 const Leaderboard = () => {
   const dispatch = useDispatch();
 
   const { id } = useSelector((state) => state.problems.problem);
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1500);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1375);
 
   useEffect(() => {
     const getResults = async () => {
@@ -35,89 +43,150 @@ const Leaderboard = () => {
 
     getResults();
 
+    function handleResize() {
+      setIsDesktop(window.innerWidth > 1375);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const { results } = useSelector((state) => state.results);
-  const { timeWeight } = useSelector((state) => state.problems.problem);
-  const { spaceWeight } = useSelector((state) => state.problems.problem);
-  const { endDate } = useSelector((state) => state.problems.problem);
 
-  const [ scores, setScores ] = useState([]);
+  const [scores, setScores] = useState([]);
 
-  const calculateRank = (users, property) => {
-    let rank = 1;
-
-    if (property === 'score') {
-      users.sort((user1, user2) => user2[property] - user1[property]);
-    } else {
-      users.sort((user1, user2) => user1[property] - user2[property]);
+  useEffect(() => {
+    if (results.length) {
+      const userResults = useUserResults();
+      setScores(
+        userResults.sort((user1, user2) => user1.scoreRank - user2.scoreRank)
+      );
     }
+  }, [results]);
 
-    for (let i = 0; i < users.length; i++) {
-      let currentUser = users[i];
-      let previousUser = users[i - 1];
-      if (i === 0 || previousUser[property] === currentUser[property]) {
-        currentUser[property + 'Rank'] = rank;
-      } else {
-        rank += 1;
-        currentUser[property + 'Rank'] = rank;
-      }
-    }
+  // return isMobile ? <LeaderboardMobile /> : <LeaderboardDesktop />;
+
+  console.log(scores);
+
+  const trophyColors = {
+    1: "text-goldTrophy",
+    2: "text-silverTrophy",
+    3: "text-bronzeTrophy",
   };
 
-  const maxRank = (users, property) => {
-    let maximum = -Infinity;
-    for (let i = 0; i < users.length; i++) {
-      if (users[i][property] > maximum) maximum = users[i][property];
-    }
-    return maximum;
-  };
+  if (!scores) {
+    return null;
+  }
 
-  const compositeScore = (users) => {
-    const tMR = maxRank(users, 'timeElapsedRank');
-    const sMR = maxRank(users, 'spaceUsedRank');
-    const cMR = maxRank(users, 'timeToCompleteRank');
+  return (
+    <div>
+      <div className="h-[calc(100vh-15rem)] max-h-[41rem] min-h-[17rem] border-2 border-darkFont flex flex-col items-center font-cormorant-sc p-2">
+        <div className="flex justify-between w-full pr-5 pl-5 pt-3 pb-1 items-center ">
+          <h2 className={`${isDesktop ? "w-3/12" : "w-4/12"}`}>User</h2>
+          <h2 className="w-7/12 text-center">Category Details</h2>
+          <h2 className="w-2/12 text-right">Rank</h2>
+        </div>
+        <div className="border-b-2 h-px border-darkFont w-[calc(100%-2rem)] mb-1"></div>
+        <div className="border-b-2 h-px border-darkFont w-[calc(100%-2rem)] mb-1"></div>
+        <div className="overflow-y-scroll w-full m-2">
+          {scores.map((score, ind) => {
+            return (
+              <div key={score.id}>
+                <div className="flex justify-between w-full pr-5 pl-5 pt-3 pb-3 items-center">
+                  <p
+                    className={`text-m overflow-hidden overflow-ellipsis ${
+                      isDesktop ? "w-3/12" : "w-4/12"
+                    }`}
+                  >
+                    <span className="text-l font-playfair">
+                      {score.alias[0].toUpperCase()}
+                    </span>
+                    {score.alias.slice(1)}
+                  </p>
+                  {isDesktop ? (
+                    <HorizontalCategoryDetails
+                      score={score}
+                      className="w-7/12"
+                    />
+                  ) : (
+                    <VerticalCategoryDetails score={score} />
+                  )}
+                  <h2
+                    className={`text-l font-playfair flex justify-end items-center ${
+                      isDesktop ? "w-2/12" : "w-2/12"
+                    }`}
+                  >
+                    {score.scoreRank <= 3 ? (
+                      <FaTrophy
+                        className={`w-7 h-7 mr-3 ${
+                          trophyColors[score.scoreRank]
+                        }`}
+                      />
+                    ) : null}
+                    {score.scoreRank}
+                  </h2>
+                </div>
+                {ind !== scores.length - 1 ? (
+                  <div className="flex justify-center">
+                    <div className="border-b-2 h-2 border-disabledButtonBackground mb-1 w-[calc(100%-2rem)]"></div>
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      {/*<OldLeaderboard scores={scores} />*/}
+    </div>
+  );
+};
 
-    for (let i = 0; i < users.length; i++) {
-      let user = users[i];
-      user.score = ((tMR - user.timeElapsedRank + 1) / tMR) * timeWeight
-        + ((sMR - user.spaceUsedRank + 1) / sMR) * spaceWeight
-        + ((cMR - user.timeToCompleteRank + 1) / cMR) * 0.10;
-    }
-  };
+const VerticalCategoryDetails = ({ score }) => {
+  return (
+    <div className="text-sm ml-3">
+      <div className="flex">
+        <h3 className="w-28">Execution Time:</h3>
+        <p className="text-right w-24">
+          {(score.timeElapsed / 1000000).toFixed(2)}ms
+        </p>
+      </div>
+      <div className="flex">
+        <h3 className="w-28">Space Used:</h3>
+        <p className="text-right w-24">
+          {(score.spaceUsed / 1000000).toFixed(2)}mb
+        </p>
+      </div>
+      <div className="flex">
+        <h3 className="w-28">Time To Solve:</h3>
+        <p className="text-right w-24">
+          {(score.timeToComplete / 3600000).toFixed(2)}hr
+        </p>
+      </div>
+    </div>
+  );
+};
 
-  const calculateScores = (...array) => {
+const HorizontalCategoryDetails = ({ score }) => {
+  return (
+    <div className="flex justify-center text-sm ml-1">
+      <div className="flex flex-col items-center mx-3 w-28">
+        <p>Execution Code</p>
+        <p className="">{(score.timeElapsed / 1000000).toFixed(2)}ms</p>
+      </div>
+      <div className="flex flex-col items-center mx-3 w-24">
+        <p>Space Used</p>
+        <p className="">{(score.spaceUsed / 1000000).toFixed(2)}mb</p>
+      </div>
+      <div className="flex flex-col items-center mx-3 w-24">
+        <p>Time To Solve</p>
+        <p className="">{(score.timeToComplete / 3600000).toFixed(2)}hr</p>
+      </div>
+    </div>
+  );
+};
 
-    if (array.length === 0) return;
-
-    let users = [];
-
-    for (let i = 0; i < array.length; i++) {
-      let user = {};
-
-      user.id = array[i].user.id;
-      user.alias = array[i].user.alias;
-      user.timeElapsed = array[i].timeElapsed;
-      user.spaceUsed = array[i].spaceUsed;
-
-      let start = Date.parse(array[i].startDatetime);
-      let complete = Date.parse(array[i].completeDatetime);
-
-      user.timeToComplete = complete - start;
-
-      if (array[i].completeDatetime <= endDate) users.push(user);
-    }
-
-    calculateRank(users, 'timeElapsed');
-    calculateRank(users, 'spaceUsed');
-    calculateRank(users, 'timeToComplete');
-
-    compositeScore(users);
-
-    calculateRank(users, 'score');
-    setScores(users.sort((user1, user2) => user1.scoreRank - user2.scoreRank));
-  };
-
+const OldLeaderboard = ({ scores }) => {
   const showResults = (e) => {
     let allLeaders = document.querySelectorAll("#leaderboardTable");
     Array.from(allLeaders).map((l) => {
@@ -132,10 +201,6 @@ const Leaderboard = () => {
     }
   };
 
-  useEffect(() => {
-    calculateScores(...results);
-  }, [ results ]); 
-
   return (
     <LeaderboardMainDiv>
       <Header>Leaderboard</Header>
@@ -144,7 +209,7 @@ const Leaderboard = () => {
         {scores.map((score) => {
           return (
             <TopScoreDiv key={score.id} onClick={showResults}>
-              {score.alias.padEnd(100, '.')}
+              {score.alias.padEnd(100, ".")}
               {score.scoreRank}
               <LeaderboardTable id={"leaderboardTable"}>
                 <TableHeader>
@@ -156,37 +221,23 @@ const Leaderboard = () => {
                 </TableHeader>
                 <TableRowGroup>
                   <TableRow>
-                    <LeftTableCell>
-                      EXECUTION TIME:
-                    </LeftTableCell>
+                    <LeftTableCell>EXECUTION TIME:</LeftTableCell>
                     <MiddleTableCell>
                       {score.timeElapsed} nanoseconds
                     </MiddleTableCell>
-                    <RightTableCell>
-                      {score.timeElapsedRank}
-                    </RightTableCell>
+                    <RightTableCell>{score.timeElapsedRank}</RightTableCell>
                   </TableRow>
                   <TableRow>
-                    <LeftTableCell>
-                      MEMORY USED:
-                    </LeftTableCell>
-                    <MiddleTableCell>
-                      {score.spaceUsed} bytes
-                    </MiddleTableCell>
-                    <RightTableCell>
-                      {score.spaceUsedRank}
-                    </RightTableCell>
+                    <LeftTableCell>MEMORY USED:</LeftTableCell>
+                    <MiddleTableCell>{score.spaceUsed} bytes</MiddleTableCell>
+                    <RightTableCell>{score.spaceUsedRank}</RightTableCell>
                   </TableRow>
                   <TableRow>
-                    <LeftTableCell>
-                      TIME TO SOLVE:
-                    </LeftTableCell>
+                    <LeftTableCell>TIME TO SOLVE:</LeftTableCell>
                     <MiddleTableCell>
                       {score.timeToComplete} milliseconds
                     </MiddleTableCell>
-                    <RightTableCell>
-                      {score.timeToCompleteRank}
-                    </RightTableCell>
+                    <RightTableCell>{score.timeToCompleteRank}</RightTableCell>
                   </TableRow>
                 </TableRowGroup>
               </LeaderboardTable>
