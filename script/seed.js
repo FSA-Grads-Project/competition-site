@@ -144,6 +144,7 @@ const initialization = async () => {
     endDate: "2022-12-01 00:00:00",
     spaceWeight: 0.44,
     timeWeight: 0.46,
+    readOnlyRange: [2, 1, 4, 1]
   });
 
   const problem2 = await Problem.create({
@@ -155,6 +156,7 @@ const initialization = async () => {
     endDate: "2023-01-01 00:00:00",
     spaceWeight: 0.44,
     timeWeight: 0.46,
+    readOnlyRange: [2, 1, 4, 1]
   });
 
   const problem3 = await Problem.create({
@@ -166,6 +168,7 @@ const initialization = async () => {
     endDate: "2023-02-01 00:00:00",
     spaceWeight: 0.44,
     timeWeight: 0.46,
+    readOnlyRange: [2, 1, 4, 1]
   });
 
   const problem4 = await Problem.create({
@@ -198,6 +201,7 @@ branches of the tree.`,
     endDate: "2023-07-01 00:00:00",
     spaceWeight: 0.3,
     timeWeight: 0.6,
+    readOnlyRange: [2, 1, 4, 1]
   });
 
   const test1 = await Test.create({
