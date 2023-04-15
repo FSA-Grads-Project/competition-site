@@ -33,6 +33,7 @@ export const MobileNavBackground = tw.div`
 `;
 
 export const MobileMenuContainer = tw.div`
+    z-50
     h-1/2
     w-3/4
 	bg-[#ffffff]

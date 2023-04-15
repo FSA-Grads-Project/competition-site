@@ -14,7 +14,9 @@ const NavMenuDesktop = ({ setOpen }) => {
 
   const dispatch = useDispatch();
 
-  const clickHandler = () => setOpen(false);
+  //const clickHandler = () => setOpen(false);
+
+  console.log(setOpen);
 
   return (
     <>
@@ -22,26 +24,19 @@ const NavMenuDesktop = ({ setOpen }) => {
       <DividerDiv />
       <NavMainDiv>
         <NavTextH2>
-          <Link to='/problem' onClick={clickHandler}>
-            Current Issue
-          </Link>
+          <Link to='/problem'>Current Issue</Link>
         </NavTextH2>
         <NavTextH2>
-          <Link to='/pastissues' onClick={clickHandler}>
-            Past Issues
-          </Link>
+          <Link to='/pastissues'>Past Issues</Link>
         </NavTextH2>
         <NavTextH2>
-          <Link to='/about' onClick={clickHandler}>
-            About
-          </Link>
+          <Link to='/about'>About</Link>
         </NavTextH2>
         {!auth.id ? (
           <NavTextH2
             className='cursor-pointer'
             onClick={() => {
               dispatch(openLoginModal());
-              setOpen(false);
             }}
           >
             Login
@@ -49,16 +44,13 @@ const NavMenuDesktop = ({ setOpen }) => {
         ) : (
           <React.Fragment>
             <NavTextH2>
-              <Link to='/account' onClick={clickHandler}>
-                Account
-              </Link>
+              <Link to='/account'>Account</Link>
             </NavTextH2>
             <NavTextH2>
               <Link
                 to='/'
                 onClick={() => {
                   dispatch(clearRefreshToken());
-                  setOpen(false);
                 }}
               >
                 Logout

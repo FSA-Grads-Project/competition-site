@@ -20,6 +20,7 @@ export const PrevProblemDiv = tw.div`
     w-full
     sm:w-3/4
     md:w-[264px]
+    z-20
 `;
 
 export const ProblemHeader = tw.div`
