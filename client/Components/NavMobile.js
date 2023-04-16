@@ -1,10 +1,10 @@
 // System library import
-import React, { useState } from 'react';
-import { Fade as Hamburger } from 'hamburger-react';
+import React, { useState } from "react";
+import { Fade as Hamburger } from "hamburger-react";
 
 // Local imports
-import { MobileMenuContainer } from '../StyledComponents/NavStyles.tw';
-import NavMenuMobile from './NavMenuMobile';
+import { MobileMenuContainer } from "../StyledComponents/NavStyles.tw";
+import NavMenuMobile from "./NavMenuMobile";
 
 const NavMobile = () => {
   const [open, setOpen] = useState(false);
@@ -15,10 +15,10 @@ const NavMobile = () => {
 
   return (
     <nav
-      className='absolute inset-1'
-      id='navBackground'
+      className="absolute inset-1"
+      id="navBackground"
       onClick={(ev) => {
-        if (ev.target.id === 'navBackground' && open) {
+        if (ev.target.id === "navBackground" && open) {
           handleBurgerToggle();
         }
       }}
@@ -26,7 +26,7 @@ const NavMobile = () => {
       <button onClick={handleBurgerToggle}>
         <Hamburger
           size={28}
-          label='Show menu'
+          label="Show menu"
           toggled={open}
           toggle={setOpen}
         />

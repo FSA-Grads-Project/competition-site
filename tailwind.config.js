@@ -30,6 +30,9 @@ module.exports = {
       disabledButtonBackground: "#E6E2D8",
       disabledCodeEditor: "#EDE9DF",
       errorFont: "rgba(153, 27, 27)",
+      goldTrophy: "#c9b037",
+      silverTrophy: "#d7d7d7",
+      bronzeTrophy: "#8C7853",
     },
     extend: {
       fontFamily: {
