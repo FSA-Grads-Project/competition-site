@@ -6,27 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { FaTrophy } from "react-icons/fa";
 
 // Local imports
-import {
-  LeaderboardMainDiv,
-  Header,
-  Intro,
-  MainDiv,
-  TopScoreDiv,
-  TableRow,
-  LeaderboardTable,
-  TableHeader,
-  LeftTableCell,
-  MiddleTableCell,
-  RightTableCell,
-  TableRowGroup,
-  LeftTableCellHeader,
-  MiddleTableCellHeader,
-  RightTableCellHeader,
-} from "../StyledComponents/LeaderboardStyles.tw";
+import {} from "../StyledComponents/LeaderboardStyles.tw";
 import { fetchResults } from "../store/results";
 import useUserResults from "../hooks/useUserResults";
-import LeaderboardMobile from "./LeaderboardMobile";
-import LeaderboardDesktop from "./LeaderboardDesktop";
 
 const Leaderboard = () => {
   const dispatch = useDispatch();
@@ -200,69 +182,6 @@ const HorizontalCategoryDetails = ({ score }) => {
         <p className="">{(score.timeToComplete / 3600000).toFixed(2)}hr</p>
       </div>
     </div>
-  );
-};
-
-const OldLeaderboard = ({ scores }) => {
-  const showResults = (e) => {
-    let allLeaders = document.querySelectorAll("#leaderboardTable");
-    Array.from(allLeaders).map((l) => {
-      if (!l.classList.contains("hidden")) {
-        l.classList.toggle("hidden");
-      }
-    });
-    if (e.target.firstElementChild === null) {
-      return;
-    } else {
-      e.target.firstElementChild.classList.toggle("hidden");
-    }
-  };
-
-  return (
-    <LeaderboardMainDiv>
-      <Header>Leaderboard</Header>
-      <hr />
-      <MainDiv>
-        {scores.map((score) => {
-          return (
-            <TopScoreDiv key={score.id} onClick={showResults}>
-              {score.alias.padEnd(100, ".")}
-              {score.scoreRank}
-              <LeaderboardTable id={"leaderboardTable"}>
-                <TableHeader>
-                  <TableRow>
-                    <LeftTableCellHeader>Measure</LeftTableCellHeader>
-                    <MiddleTableCellHeader>Result</MiddleTableCellHeader>
-                    <RightTableCellHeader>Rank</RightTableCellHeader>
-                  </TableRow>
-                </TableHeader>
-                <TableRowGroup>
-                  <TableRow>
-                    <LeftTableCell>EXECUTION TIME:</LeftTableCell>
-                    <MiddleTableCell>
-                      {score.timeElapsed} nanoseconds
-                    </MiddleTableCell>
-                    <RightTableCell>{score.timeElapsedRank}</RightTableCell>
-                  </TableRow>
-                  <TableRow>
-                    <LeftTableCell>MEMORY USED:</LeftTableCell>
-                    <MiddleTableCell>{score.spaceUsed} bytes</MiddleTableCell>
-                    <RightTableCell>{score.spaceUsedRank}</RightTableCell>
-                  </TableRow>
-                  <TableRow>
-                    <LeftTableCell>TIME TO SOLVE:</LeftTableCell>
-                    <MiddleTableCell>
-                      {score.timeToComplete} milliseconds
-                    </MiddleTableCell>
-                    <RightTableCell>{score.timeToCompleteRank}</RightTableCell>
-                  </TableRow>
-                </TableRowGroup>
-              </LeaderboardTable>
-            </TopScoreDiv>
-          );
-        })}
-      </MainDiv>
-    </LeaderboardMainDiv>
   );
 };
 
