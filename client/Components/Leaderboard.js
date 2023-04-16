@@ -87,7 +87,7 @@ const Leaderboard = () => {
 
   return (
     <div>
-      <div className="h-[calc(100vh-15rem)] max-h-[41rem] min-h-[17rem] border-2 border-darkFont flex flex-col items-center font-cormorant-sc p-2">
+      <div className="h-[calc(100vh-19rem)] max-h-[41rem] min-h-[17rem] border-2 border-darkFont flex flex-col items-center font-cormorant-sc p-2">
         <div className="flex justify-between w-full pr-5 pl-5 pt-3 pb-1 items-center ">
           <h2 className={`${isDesktop ? "w-3/12" : "w-4/12"}`}>User</h2>
           {!isMobile ? (
