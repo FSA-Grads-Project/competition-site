@@ -43,18 +43,21 @@ export const ButtonWrapper = tw.div`
 `;
 
 export const EditorAndOutputDiv = tw.div`
+	flex
+	text-center
+	justify-evenly
 	py-4
   min-h-[200px] 
   bg-[#FFFFFF]
-	border-[2px] 
+	border-[1.5px] 
 	border-black 
-	rounded-md
+	rounded
 `;
 
 // export const OutputDiv = tw.div`
-//   flex
-// 	text-center
-//   justify-evenly
+// flex
+// text-center
+// justify-evenly
 //   min-h-[200px]
 //   bg-[#FFFFFF]
 // 	border-[2px]

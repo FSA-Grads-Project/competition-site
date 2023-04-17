@@ -239,7 +239,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
             </IconContext.Provider>
             <OutputTitle>Output</OutputTitle>
           </OutputTitleWrapper>
-          <EditorAndOutputDiv className='  flex text-center justify-evenly'>
+          <EditorAndOutputDiv>
             <ContextOutput>
               {' '}
               {contextOutput.length < 1
