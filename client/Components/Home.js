@@ -145,7 +145,7 @@ const Home = () => {
                   Continue Here
                 </Link>
                 {problems.length - 1 > ind ? (
-                  <HorizontalLineLight className="my-2 mt-5"></HorizontalLineLight>
+                  <HorizontalLineLight className="my-2 mt-5 flex md:bg-[#ffffff] lg:bg-disabledButtonBackground"></HorizontalLineLight>
                 ) : null}
               </PrevProblem>
             ))}
