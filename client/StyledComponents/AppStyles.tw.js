@@ -6,9 +6,8 @@ export const TitleHeader = tw.header`
     justify-center    
     font-playfair-sc
     font-black
-    items-baseline
-    ml-16
-    mr-16
+    items-end
+    mx-16
 `;
 
 export const Logo = tw.h1`

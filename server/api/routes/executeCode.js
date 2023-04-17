@@ -51,11 +51,13 @@ function executeCode(code, problem, res) {
         }
       `;
 
-  let platform = os.cpus()[0].model.includes("Intel")
+  let platform = !os.cpus()[0].model.includes("Intel")
     ? "linux/arm64/v8"
     : "linux/amd64";
 
   try {
+    let filePath = path.join(__dirname, `/temp/${fileName}`);
+
     // create new temp file containing user code
     fs.writeFile(filePath, runCode, (err) => {
       if (err) console.log(err);

@@ -25,6 +25,8 @@ export const ProblemPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setIsLoading(true);
+
     const location = pathname.split('/');
 
     const getProblemAndUserSolution = async () => {
@@ -63,7 +65,7 @@ export const ProblemPage = () => {
   if ((auth.accessToken && !solution) || (!auth.accessToken && !current)) {
     return (
       <>
-        <Main>
+        <Main id='problemPage-main'>
           <LeftDiv>
             <Problem current={current} />
           </LeftDiv>

@@ -20,7 +20,7 @@ export const Problem = ({ current }) => {
   };
 
   return (
-    <div>
+    <div id='problem'>
       {problem ? (
         <>
           <ProblemTitle>{problem.title}</ProblemTitle>
