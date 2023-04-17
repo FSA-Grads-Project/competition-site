@@ -25,25 +25,22 @@ const About = () => {
             <ListItem>Memory used</ListItem>
           </ul>
           <Paragraph>
-            Every problem is designed to have multiple solutions with varying time
-            and space complexities and dependent on the problem, the composite
-            score is weighted based on whether the time the algorithm takes to run
-            or the memory usage is determined to be the critical factor.
+            Every problem is designed to have multiple solutions with varying
+            time and space complexities and dependent on the problem, the
+            composite score is weighted based on whether the time the algorithm
+            takes to run or the memory usage is determined to be the critical
+            factor.
           </Paragraph>
           <Paragraph>
-            A new problem is released every calendar month and solutions submitted
-            during that time are ranked and added to the leaderboard. Past
-            problems are available in a playground setting, but solutions
+            A new problem is released every calendar month and solutions
+            submitted during that time are ranked and added to the leaderboard.
+            Past problems are available in a playground setting, but solutions
             submitted for past problems are not included in the leaderboard for
             the problem.
           </Paragraph>
         </section>
       </ColumnSection>
       <ColumnSection>
-        <section>
-          <H3SectionHeader>How to create an account</H3SectionHeader>
-          <Paragraph>To be completed...</Paragraph>
-        </section>
         <section>
           <H3SectionHeader>
             How to evaluate and submit your solutions

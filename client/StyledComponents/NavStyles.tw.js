@@ -34,7 +34,8 @@ export const MobileNavBackground = tw.div`
 
 export const MobileMenuContainer = tw.div`
     z-50
-    h-1/2
+    h-4/5
+    xs:h-1/2
     w-full
 	bg-[#ffffff]
     border-2
