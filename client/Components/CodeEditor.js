@@ -159,14 +159,6 @@ export const CodeEditor = ({ auth, solution, current }) => {
       />
       <ReopenProblemModal />
 
-      {/* <div
-        // className={
-        //   solutionCompletedDate
-        //     ? "py-4 bg-disabledCodeEditor"
-        //     : "py-4 bg-darkBackground"
-        // }
-        className='py-4 bg-[#ffffff] border-[2px] border-black rounded-md'
-      > */}
       <EditorAndOutputDiv>
         <Editor
           defaultValue=''
@@ -195,7 +187,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
             <EditorButton
               className={
                 isEvaluating
-                  ? 'w-10 m-0 rounded-full border-2 border-fadedFont border-l-darkBackground animate-rotate text-lightBackground'
+                  ? 'w-10 m-0 rounded-full border-[3px] bg-disabledButtonBackground border-fadedFont border-l-disabledButtonBackground animate-rotate text-lightBackground'
                   : evalCheck
                   ? 'text-lightBackground w-full m-0 bg-darkFont border-darkFont'
                   : 'w-full'

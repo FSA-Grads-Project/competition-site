@@ -15,28 +15,22 @@ export const DividerDiv = tw.div`
 `;
 
 export const EditorButton = tw.button`
-	bg-black
 	rounded-md
   h-10
+	bg-[#000000]
   font-cormorant-sc
   text-md
-	text-white
-  w-1/4
-	border-2
-	border-black
-	disabled:bg-disabledButtonBackground
-	disabled:border-disabledButtonBackground
-	disabled:hover:scale-100
-	disabled:hover:shadow-none
-	transition-all duration-150 ease-linear
+	text-[#ffffff]
 	text-center
-	flex
-	justify-center
-	items-center
+  w-1/4
+	disabled:bg-disabledButtonBackground
+	disabled:text-darkFont
+	transition-all duration-150 ease-linear
 	md:text-xl
-	hover:scale-[102%]
-	hover:shadow-lg
 `;
+	// border-2
+	// border-black
+	// disabled:border-disabledButtonBackground
 
 export const ButtonWrapper = tw.div`
   flex
@@ -92,7 +86,6 @@ export const OutputTitle = tw.div`
   font-cormorant-sc
   text-2xl
   `;
-// pl-2
 
 export const DarkButton = tw.button`
 	bg-darkFont
