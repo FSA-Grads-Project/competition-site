@@ -15,15 +15,15 @@ export const DividerDiv = tw.div`
 `;
 
 export const EditorButton = tw.button`
-	bg-darkBackground
+	bg-black
 	rounded-md
   h-10
-  m-2
   font-cormorant-sc
   text-md
+	text-white
   w-1/4
 	border-2
-	border-darkBackground
+	border-black
 	disabled:bg-disabledButtonBackground
 	disabled:border-disabledButtonBackground
 	transition-all duration-200 ease-linear
@@ -37,16 +37,30 @@ export const EditorButton = tw.button`
 export const ButtonWrapper = tw.div`
   flex
   justify-center
-	mt-2
+	gap-7
+	mt-6
+	mb-4
 `;
 
-export const OutputDiv = tw.div`
-  flex
-	text-center
-  justify-evenly
+export const EditorAndOutputDiv = tw.div`
+	py-4
   min-h-[200px] 
-  bg-[#EDE4C5]
+  bg-[#FFFFFF]
+	border-[2px] 
+	border-black 
+	rounded-md
 `;
+
+// export const OutputDiv = tw.div`
+//   flex
+// 	text-center
+//   justify-evenly
+//   min-h-[200px]
+//   bg-[#FFFFFF]
+// 	border-[2px]
+// 	border-black
+// 	rounded-md
+// `;
 
 export const ContextOutput = tw.div`
 
@@ -61,13 +75,12 @@ export const OutputTitleWrapper = tw.div`
 	justify-center
 	content-center
 	items-center
-	mr-60
-	ml-60
+	mx-auto
 	mb-1
 `;
 
 export const OutputTitle = tw.div`
-	mt-2
+	pt-2
   pb-1
   font-cormorant-sc
   text-2xl

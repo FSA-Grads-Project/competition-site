@@ -7,7 +7,7 @@ import { VscOutput } from 'react-icons/vsc';
 import { IconContext } from 'react-icons';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import Editor from '@monaco-editor/react';
-import { constrainedEditor } from "constrained-editor-plugin";
+import { constrainedEditor } from 'constrained-editor-plugin';
 
 // import customTheme from "monaco-themes/themes/tomorrow.json";
 import customTheme from 'monaco-themes/themes/solarized-light.json';
@@ -21,6 +21,7 @@ import {
   ContextOutput,
   EditorButton,
   OutputTitleWrapper,
+  EditorAndOutputDiv,
 } from '../StyledComponents/GlobalStyles.tw';
 import SubmitModal from './SubmitModal';
 import ReopenProblemModal from './ReopenProblemModal';
@@ -57,8 +58,8 @@ export const CodeEditor = ({ auth, solution, current }) => {
   const [evalCheck, setEvalCheck] = useState(false);
 
   function handleEditorDidMount(editor, monaco) {
-    customTheme.colors['editor.background'] = '#EDE4C5';
-    customTheme.colors['editor.selectionBackground'] = '#DBD2B2';
+    customTheme.colors['editor.background'] = '#ffffff';
+    customTheme.colors['editor.selectionBackground'] = '#e6f7ff';
     customTheme.rules.push({ foreground: '586e75', token: 'number' });
 
     monaco.editor.defineTheme('custom-theme', customTheme);
@@ -70,8 +71,8 @@ export const CodeEditor = ({ auth, solution, current }) => {
     const model = editor.getModel();
     constrainedInstance.initializeIn(editor);
     restrictions.push({
-      range: problem.readOnlyRange ? problem.readOnlyRange : [1,1,1,1],
-      allowMultiline: true
+      range: problem.readOnlyRange ? problem.readOnlyRange : [1, 1, 1, 1],
+      allowMultiline: true,
     });
 
     constrainedInstance.addRestrictionsTo(model, restrictions);
@@ -158,14 +159,15 @@ export const CodeEditor = ({ auth, solution, current }) => {
       />
       <ReopenProblemModal />
 
-      <div
+      {/* <div
         // className={
         //   solutionCompletedDate
         //     ? "py-4 bg-disabledCodeEditor"
         //     : "py-4 bg-darkBackground"
         // }
-        className='py-4 bg-darkBackground'
-      >
+        className='py-4 bg-[#ffffff] border-[2px] border-black rounded-md'
+      > */}
+      <EditorAndOutputDiv>
         <Editor
           defaultValue=''
           // height="320px"
@@ -177,7 +179,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
           options={options}
           className='min-h-72'
         />
-      </div>
+      </EditorAndOutputDiv>
       {solutionCompletedDate ? (
         <ButtonWrapper>
           <EditorButton
@@ -189,14 +191,14 @@ export const CodeEditor = ({ auth, solution, current }) => {
         </ButtonWrapper>
       ) : (
         <ButtonWrapper>
-          <div className='w-1/4 m-2 flex justify-center items-center text-center'>
+          <div className='w-1/4 flex justify-center items-center text-center'>
             <EditorButton
               className={
                 isEvaluating
                   ? 'w-10 m-0 rounded-full border-2 border-fadedFont border-l-darkBackground animate-rotate text-lightBackground'
                   : evalCheck
                   ? 'text-lightBackground w-full m-0 bg-darkFont border-darkFont'
-                  : 'w-full m-0'
+                  : 'w-full'
               }
               onClick={onEvaluate}
               disabled={(!auth.accessToken && current) || solution}
@@ -228,18 +230,16 @@ export const CodeEditor = ({ auth, solution, current }) => {
       )}
 
       {solutionCompletedDate ? null : (
-        <div>
+        <div id='output-container'>
           <OutputTitleWrapper>
             <IconContext.Provider
               value={{ size: '1.5em', className: 'global-class-name' }}
             >
-              <div>
-                <VscOutput />
-              </div>
+              <VscOutput />
             </IconContext.Provider>
             <OutputTitle>Output</OutputTitle>
           </OutputTitleWrapper>
-          <OutputDiv>
+          <EditorAndOutputDiv className='  flex text-center justify-evenly'>
             <ContextOutput>
               {' '}
               {contextOutput.length < 1
@@ -264,7 +264,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
                     );
                   })}
             </ConsoleOutput>
-          </OutputDiv>
+          </EditorAndOutputDiv>
         </div>
       )}
     </div>
