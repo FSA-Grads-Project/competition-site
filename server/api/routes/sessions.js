@@ -63,7 +63,7 @@ router.get("/oauth/google", async (req, res, next) => {
     setRefreshTokenCookie(refreshToken, res);
 
     // redirect back to client
-    res.redirect("http://localhost:3000/login");
+    res.redirect(`http://localhost:3000/login?path=${req.query.state}`);
   } catch (ex) {
     next(ex);
   }
@@ -93,7 +93,7 @@ router.get("/oauth/github", async (req, res, next) => {
     setRefreshTokenCookie(refreshToken, res);
 
     // redirect back to client
-    res.redirect("http://localhost:3000/login");
+    res.redirect(`http://localhost:3000/login?path=${req.query.state}`);
   } catch (ex) {
     next(ex);
   }
@@ -123,7 +123,7 @@ router.get("/oauth/linkedin", async (req, res, next) => {
     setRefreshTokenCookie(refreshToken, res);
 
     // redirect back to client
-    res.redirect("http://localhost:3000/login");
+    res.redirect(`http://localhost:3000/login?path=${req.query.state}`);
   } catch (ex) {
     next(ex);
   }

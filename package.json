@@ -28,6 +28,7 @@
   "dependencies": {
     "@monaco-editor/react": "^4.4.6",
     "@reduxjs/toolkit": "^1.8.6",
+    "@tailwindcss/line-clamp": "^0.4.4",
     "ast": "^1.0.7",
     "babel-core": "^6.26.3",
     "bcrypt": "^5.1.0",

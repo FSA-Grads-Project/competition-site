@@ -1,6 +1,7 @@
 // System library imports
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 // Local imports
 import {
@@ -17,6 +18,8 @@ import getLinkedinOAuthURL from "../Utils/getLinkedinUrl";
 const LoginModal = () => {
   const modalOpen = useSelector((state) => state.modals.loginModalOpen);
   const dispatch = useDispatch();
+
+  const { pathname } = useLocation();
 
   if (!modalOpen) {
     return null;
@@ -42,7 +45,7 @@ const LoginModal = () => {
         <DarkButton
           className="w-full"
           onClick={() => {
-            const URL = getGoogleOAuthURL();
+            const URL = getGoogleOAuthURL(pathname);
             window.location.href = URL;
           }}
         >
@@ -52,7 +55,7 @@ const LoginModal = () => {
         <DarkButton
           className="w-full"
           onClick={() => {
-            const URL = getGithubOAuthURL();
+            const URL = getGithubOAuthURL(pathname);
             window.location.href = URL;
           }}
         >
@@ -62,7 +65,7 @@ const LoginModal = () => {
         <DarkButton
           className="w-full"
           onClick={() => {
-            const URL = getLinkedinOAuthURL();
+            const URL = getLinkedinOAuthURL(pathname);
             window.location.href = URL;
           }}
         >
