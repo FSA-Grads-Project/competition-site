@@ -7,8 +7,8 @@ import axios, { axiosProtected } from "../api/axios";
 export const fetchProblems = createAsyncThunk(
   "problems/getProblems",
   async () => {
-    const response = await axios.get("/api/problems");
-    return response.data;
+    const response = await axios.get("/problems");
+    return response.data.sort((a, b) => b.id - a.id);
   }
 );
 

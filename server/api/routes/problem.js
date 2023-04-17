@@ -15,7 +15,24 @@ const {
 /* get all problems except current*/
 router.get("/", async (req, res, next) => {
   try {
-    const problems = await Problem.findAll();
+    const now = new Date();
+
+    const problems = await Problem.findAll({
+      attributes: [
+        "id",
+        "title",
+        "startDate",
+        "endDate",
+        "current",
+        "readOnlyRange",
+        "blurb",
+      ],
+      where: {
+        startDate: {
+          [Op.lte]: now,
+        },
+      },
+    });
     res.json(problems);
   } catch (ex) {
     next(ex);
@@ -93,22 +110,19 @@ router.get("/:id", async (req, res, next) => {
 router.get("/:id/results", async (req, res, next) => {
   try {
     const results = await Result.findAll({
-      attributes:[ 
-        'spaceUsed',
-        'timeElapsed',
-        'startDatetime',
-        'completeDatetime'
+      attributes: [
+        "spaceUsed",
+        "timeElapsed",
+        "startDatetime",
+        "completeDatetime",
       ],
-      include: { 
+      include: {
         model: User,
-        attributes: [
-          'id',
-          'alias'
-        ]
+        attributes: ["id", "alias"],
       },
       where: {
         completeDatetime: { [Op.not]: null },
-        problemId: req.params.id
+        problemId: req.params.id,
       },
     });
     res.json(results);

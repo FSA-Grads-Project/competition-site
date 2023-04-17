@@ -1,4 +1,4 @@
-const getLinkedInOAuthURL = () => {
+const getLinkedInOAuthURL = (pathname) => {
   const rootUrl = "https://www.linkedin.com/oauth/v2/authorization";
 
   const params = {
@@ -6,7 +6,7 @@ const getLinkedInOAuthURL = () => {
     client_id: process.env.LINKEDIN_CLIENT_ID,
     response_type: "code",
     scope: "r_liteprofile r_emailaddress",
-    state: "DCEeFWf45A53sdfKef424",
+    state: pathname,
   };
 
   const queryString = new URLSearchParams(params);

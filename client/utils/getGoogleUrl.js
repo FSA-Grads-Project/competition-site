@@ -1,4 +1,4 @@
-const getGoogleOAuthURL = () => {
+const getGoogleOAuthURL = (pathname) => {
   const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
 
   const options = {
@@ -11,8 +11,9 @@ const getGoogleOAuthURL = () => {
       "https://www.googleapis.com/auth/userinfo.profile",
       "https://www.googleapis.com/auth/userinfo.email",
     ].join(" "),
+    state: pathname,
   };
-  console.log(options)
+  console.log(options);
   const queryString = new URLSearchParams(options);
 
   return `${rootUrl}?${queryString.toString()}`;

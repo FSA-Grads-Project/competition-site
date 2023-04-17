@@ -22,10 +22,10 @@ const NavMenuDesktop = ({ setOpen }) => {
       <DividerDiv />
       <NavMainDiv>
         <NavTextH2>
-          <Link to="/problem">Current Issue</Link>
+          <Link to="/">Home</Link>
         </NavTextH2>
         <NavTextH2>
-          <Link to="/pastissues">Past Issues</Link>
+          <Link to="/problem">Current Issue</Link>
         </NavTextH2>
         <NavTextH2>
           <Link to="/about">About</Link>

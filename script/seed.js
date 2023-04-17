@@ -147,9 +147,10 @@ const initialization = async () => {
   });
 
   const problem2 = await Problem.create({
-    title: "nodes",
+    title: "A Community Center for Graph Theory Enthusiasts",
     statement: "Find the first null node in ",
-    blurb: "Find the first null node in ",
+    blurb:
+      "In the heart of Silicon Valley, there stood a store called 'Null Node Nook.' The store was a programmer's paradise, filled with all sorts of resources and tools for solving complex programming problems. But its main attraction was the 'Null Node Lounge' - a cozy corner in the store where customers could gather and work together to solve one of the most challenging problems in graph theory: finding a null node.",
     initialCode: "no starter code",
     startDate: "2022-12-01 00:00:00",
     endDate: "2023-01-01 00:00:00",
@@ -158,9 +159,10 @@ const initialization = async () => {
   });
 
   const problem3 = await Problem.create({
-    title: "linked list",
+    title: "A Programmer's Paradise for Linked List Lovers",
     statement: "Find the first null node in the linked list",
-    blurb: "Find the first null node in the linked list",
+    blurb:
+      "In the bustling city of Techville, there was a store that stood out from the rest - 'The Linked List Emporium.' The store was a programmer's paradise, filled to the brim with resources and tools for solving all sorts of programming problems. But its specialty was linked lists. The owner, a brilliant programmer named Max, had a particular passion for linked lists and had spent years perfecting his craft. His store was not just a place to buy programming resources - it was a community center where people from all walks of life could gather and share their love for linked lists.",
     initialCode: "no starter code",
     startDate: "2023-01-01 00:00:00",
     endDate: "2023-02-01 00:00:00",
@@ -177,7 +179,7 @@ department put out a four-alarm fire. Your goal is to help the
 firefighters by developing a function that accepts the root
 node of the binary tree as an argument and returns the number
 of the node where Sherman the cat is located.`,
-    blurb: `Local firefighters have been called to rescue a cat named Sherman who's stuck in a tree. Log in for more details to see if you'll be able to help the firefighters get him down safely!`,
+    blurb: `Local firefighters have received an urgent call to rescue Sherman, a cat stuck in a tree on 2nd Street downtown. The situation was made more complicated by the fact that the firefighters were already stretched thin, trying to help another department put out a four-alarm fire. With every second counting, and the firefighters needed to move quickly to rescue Sherman before they could head out to the other emergency.`,
     initialCode: `function findSherman(root) {
   // write your code here
 }
@@ -198,7 +200,7 @@ branches of the tree.`,
     endDate: "2023-07-01 00:00:00",
     spaceWeight: 0.3,
     timeWeight: 0.6,
-    readOnlyRange: [2, 1, 4, 1]
+    readOnlyRange: [2, 1, 4, 1],
   });
 
   const test1 = await Test.create({
