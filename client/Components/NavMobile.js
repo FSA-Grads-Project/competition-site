@@ -15,7 +15,7 @@ const NavMobile = () => {
 
   return (
     <>
-      <button onClick={handleBurgerToggle} className='fixed top-0 left-1'>
+      <button onClick={handleBurgerToggle} className='fixed top-0 left-1 z-50'>
         <Hamburger
           size={30}
           label='Show menu'
