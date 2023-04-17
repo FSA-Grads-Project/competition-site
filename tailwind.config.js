@@ -28,7 +28,7 @@ module.exports = {
       darkFont: "#333333",
       blackColor: "#000000",
       fadedFont: "#B3B3B3",
-      disabledButtonBackground: "#E6E2D8",
+      disabledButtonBackground: "#f2f2f2",
       disabledCodeEditor: "#EDE9DF",
       errorFont: "rgba(153, 27, 27)",
       goldTrophy: "#c9b037",

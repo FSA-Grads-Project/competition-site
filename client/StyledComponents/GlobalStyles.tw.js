@@ -26,12 +26,16 @@ export const EditorButton = tw.button`
 	border-black
 	disabled:bg-disabledButtonBackground
 	disabled:border-disabledButtonBackground
-	transition-all duration-200 ease-linear
+	disabled:hover:scale-100
+	disabled:hover:shadow-none
+	transition-all duration-150 ease-linear
 	text-center
 	flex
 	justify-center
 	items-center
 	md:text-xl
+	hover:scale-[102%]
+	hover:shadow-lg
 `;
 
 export const ButtonWrapper = tw.div`
