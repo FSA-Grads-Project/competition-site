@@ -33,16 +33,16 @@ export const MobileNavBackground = tw.div`
 `;
 
 export const MobileMenuContainer = tw.div`
-    z-50
+    z-40
     h-4/5
     xs:h-1/2
+    landscape:h-full
     w-full
 	bg-[#ffffff]
     border-2
     border-black
     shadow-xl
-    mt-12
-	rounded 
+	rounded-lg
 	flex 
 	flex-col
 	justify-center
@@ -55,6 +55,7 @@ export const MobileNavDiv = tw.div`
     justify-evenly
     items-center
     my-9
+    landscape:my-6
     cursor-pointer
 `;
 

@@ -45,7 +45,12 @@ const MobileHeader = () => {
     <>
       <TitleHeader>
         {/* <Logo className='custom-font'>The Dispatch</Logo> */}
-        <img src='/TitlePNG.png' alt='Title Pic' width={300} className='pt-4' />
+        <img
+          src='/TitlePNG.png'
+          alt='Title Pic'
+          width={300}
+          className='pt-4 w-[275px] sm:w-[300px]'
+        />
       </TitleHeader>
       <DividerHr />
       <DividerDiv />
