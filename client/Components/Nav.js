@@ -19,7 +19,7 @@ const Nav = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return <>{isMobile ? <NavMobile /> : <NavMenuDesktop />}</>;
+  return <nav>{isMobile ? <NavMobile /> : <NavMenuDesktop />}</nav>;
 };
 
 export default Nav;
