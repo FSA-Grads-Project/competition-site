@@ -1,10 +1,10 @@
 // System library import
-import React, { useState } from "react";
-import { Fade as Hamburger } from "hamburger-react";
+import React, { useState } from 'react';
+import { Fade as Hamburger } from 'hamburger-react';
 
 // Local imports
-import { MobileMenuContainer } from "../StyledComponents/NavStyles.tw";
-import NavMenuMobile from "./NavMenuMobile";
+import { MobileMenuContainer } from '../StyledComponents/NavStyles.tw';
+import NavMenuMobile from './NavMenuMobile';
 
 const NavMobile = () => {
   const [open, setOpen] = useState(false);
@@ -14,29 +14,31 @@ const NavMobile = () => {
   };
 
   return (
-    <nav
-      className="absolute inset-1"
-      id="navBackground"
-      onClick={(ev) => {
-        if (ev.target.id === "navBackground" && open) {
-          handleBurgerToggle();
-        }
-      }}
-    >
-      <button onClick={handleBurgerToggle}>
+    <>
+      <button onClick={handleBurgerToggle} className='fixed top-0 left-1'>
         <Hamburger
-          size={28}
-          label="Show menu"
+          size={30}
+          label='Show menu'
           toggled={open}
           toggle={setOpen}
         />
       </button>
       {open && (
-        <MobileMenuContainer>
-          <NavMenuMobile setOpen={setOpen} />
-        </MobileMenuContainer>
+        <div
+          className='absolute inset-0 h-full'
+          id='navBackground'
+          onClick={(ev) => {
+            if (ev.target.id === 'navBackground' && open) {
+              handleBurgerToggle();
+            }
+          }}
+        >
+          <MobileMenuContainer>
+            <NavMenuMobile setOpen={setOpen} />
+          </MobileMenuContainer>
+        </div>
       )}
-    </nav>
+    </>
   );
 };
 

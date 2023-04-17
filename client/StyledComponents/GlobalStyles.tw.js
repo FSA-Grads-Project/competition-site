@@ -1,17 +1,17 @@
 import tw from 'tailwind-styled-components';
 
 export const DividerHr = tw.hr`		
-border-t-2
-mb-1
-ml-16
-mr-16
+	border-t-2
+	mb-1
+	xs:mx-16
+	mx-7
 `;
 
 export const DividerDiv = tw.div`		
-border-t-2
-mb-1
-ml-16
-mr-16
+	border-t-2
+	mb-1
+	xs:mx-16
+	mx-7
 `;
 
 export const EditorButton = tw.button`

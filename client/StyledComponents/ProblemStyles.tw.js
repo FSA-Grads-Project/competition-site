@@ -7,10 +7,10 @@ export const Main = tw.div`
     gap-x-12
     lg:justify-between
     mt-10
-    ml-16
-    mr-16
+    xs:mx-16
+
+    mx-7
 `;
-//lg:flex-row
 
 export const LeftDiv = tw.div`
     flex-1
@@ -23,7 +23,7 @@ export const RightDiv = tw.div`
     flex-2
     mb-10
     w-full
-    min-w-[375px]
+    min-w-[350px]
     lg:max-w-[800px]
     lg:w-2/3
     `;

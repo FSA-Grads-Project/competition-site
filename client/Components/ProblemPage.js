@@ -1,16 +1,16 @@
 // System Imports
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 // Local Imports
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
-import { Main, LeftDiv, RightDiv } from "../StyledComponents/ProblemStyles.tw";
-import ProblemPageRight from "./ProblemPageRight";
-import Problem from "./Problem";
-import MissingProblem from "./MissingProblem";
-import { fetchProblem } from "../store/problem";
-import { fetchSolution, uploadNewSolution } from "../store/solution";
+import { Main, LeftDiv, RightDiv } from '../StyledComponents/ProblemStyles.tw';
+import ProblemPageRight from './ProblemPageRight';
+import Problem from './Problem';
+import MissingProblem from './MissingProblem';
+import { fetchProblem } from '../store/problem';
+import { fetchSolution, uploadNewSolution } from '../store/solution';
 
 export const ProblemPage = () => {
   const auth = useSelector((state) => state.auth).auth;
@@ -27,11 +27,11 @@ export const ProblemPage = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    const location = pathname.split("/");
+    const location = pathname.split('/');
 
     const getProblemAndUserSolution = async () => {
       const problemResponse = await dispatch(
-        fetchProblem(location[2] || "current")
+        fetchProblem(location[2] || 'current')
       );
 
       let solutionResponse = {};
@@ -65,7 +65,7 @@ export const ProblemPage = () => {
   if ((auth.accessToken && !solution) || (!auth.accessToken && !current)) {
     return (
       <>
-        <Main>
+        <Main id='problemPage-main'>
           <LeftDiv>
             <Problem current={current} />
           </LeftDiv>
