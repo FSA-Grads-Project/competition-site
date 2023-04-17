@@ -1,4 +1,4 @@
-import tw from 'tailwind-styled-components';
+import tw from "tailwind-styled-components";
 
 export const DividerHr = tw.hr`		
 	border-t-2
@@ -145,4 +145,41 @@ export const H3 = tw.h3`
 	text-xl
 	md:text-3xl
 	md:mx-3
+`;
+
+export const LeadingParagraph = tw.p`
+	first-letter:text-4xl 
+	first-letter:font-bold 
+	first-letter:text-black
+	first-letter:mr-3 
+	first-letter:mt-1 
+	first-letter:float-left 
+	first-letter:font-playfair
+`;
+
+export const HorizontalLineDark = tw.div`
+	h-0.5 
+	w-full 
+	bg-darkFont 
+	my-4
+`;
+
+export const HorizontalLineLight = tw.div`
+	h-0.5 
+	w-full 
+	bg-disabledButtonBackground
+	my-4
+`;
+
+export const VerticalLineContainer = tw.div`
+	w-8
+	flex
+	justify-center 
+	items-center 
+`;
+
+export const VerticalLine = tw.div`
+	bg-darkFont 
+	w-0.5 
+	h-full
 `;
