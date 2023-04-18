@@ -148,11 +148,11 @@ export const H3 = tw.h3`
 `;
 
 export const LeadingParagraph = tw.p`
-	first-letter:text-4xl 
+	first-letter:text-5xl 
 	first-letter:font-bold 
 	first-letter:text-black
 	first-letter:mr-3 
-	first-letter:mt-1 
+
 	first-letter:float-left 
 	first-letter:font-playfair
 `;
@@ -172,7 +172,7 @@ export const HorizontalLineLight = tw.div`
 `;
 
 export const VerticalLineContainer = tw.div`
-	w-8
+	w-12
 	flex
 	justify-center 
 	items-center 
