@@ -28,9 +28,6 @@ export const EditorButton = tw.button`
 	transition-all duration-150 ease-linear
 	md:text-xl
 `;
-	// border-2
-	// border-black
-	// disabled:border-disabledButtonBackground
 
 export const ButtonWrapper = tw.div`
   flex
