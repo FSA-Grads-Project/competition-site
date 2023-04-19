@@ -1,46 +1,46 @@
 import tw from "tailwind-styled-components";
+import { Link } from "react-router-dom";
 
 export const Main = tw.div`
 	w-[calc(100%-4rem)] 
 	xs:w-[calc(100%-8rem)] 
-	lg:h-[calc(100vh-12rem)] 
+	lg:max-h-[calc(100vh-12rem)] 
 	mx-8 xs:mx-16 
 	flex 
 	flex-col 
 	lg:flex-row 
 	justify-center 
 	mt-5 
-	font-cormorant-sc 
+	font-cormorant
+	text-darkFont
 	text-justify
+	leading-relaxed
+	tracking-wider
 `;
 
 export const LeftCol = tw.div`
 	w-full 
 	lg:w-[calc(60%-1rem)] 
-	lg:overflow-y-scroll 
-	lg:pr-3
+	lg:overflow-y-auto
+	lg:pr-5
 `;
 
 export const CurrImg = tw.img`
 	w-8/12 
 	mx-auto 
-	sm:float-right 
-	sm:px-4 
-	sm:w-4/12 
 	lg:w-6/12
+	mb-5
 `;
 
 export const MainTitle = tw.h1`
 	text-3xl 
 	font-playfair-sc 
-	lg:line-clamp-3 
+	lg:line-clamp-4 
 	text-left
 `;
 
 export const CurrTitleUnderline = tw.div`
 	h-0.5 
-	sm:w-8/12 
-	lg:w-6/12 
 	bg-darkFont 
 	my-4
 `;
@@ -65,19 +65,19 @@ export const SubImg = tw.img`
 	px-4 
 	sm:float-none 
 	sm:px-0 
-	sm:mx-auto 
-	md:float-right 
-	md:px-4
+	sm:mx-auto
+	sm:mb-5
+	sm:w-[10rem]
 `;
 
 export const RightCol = tw.div`
 	lg:w-[calc(40%-1rem)] 
 	lg:overflow-y-scroll 
-	font-cormorant-sc 
-	lg:pr-4
+	font-cormorant
+	lg:pr-5
 `;
 
-export const PrevProblem = tw.div`
+export const PrevProblem = tw(Link)`
 	my-2 
 	w-full 
 	md:w-[calc(50%-2rem)] 

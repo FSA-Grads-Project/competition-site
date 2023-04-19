@@ -46,60 +46,61 @@ const Home = () => {
   }
 
   return (
-    <Main>
+    <Main className="lg:h-[82.5rem]">
       <LeftCol>
-        <div>
-          <CurrImg src={`/problemImages/${problems[0].id}.png`} />
+        <Link to="/problem">
           <div>
-            <MainTitle>{problems[0].title}</MainTitle>
-            <CurrTitleUnderline></CurrTitleUnderline>
+            <CurrImg src={`/problemImages/${problems[0].id}.png`} />
+            <MainTitle className="text-[2.3rem]">{problems[0].title}</MainTitle>
+            <CurrTitleUnderline className="bg-[#C8CDCF]"></CurrTitleUnderline>
+
             <LeadingParagraph>{problems[0].blurb}</LeadingParagraph>
-            <Link to="/problem" className="font-playfair-sc">
-              See More Here
-            </Link>
+            <p className="font-playfair-sc">See More Here</p>
           </div>
-        </div>
-        <HorizontalLineDark className="mb-1"></HorizontalLineDark>
-        <HorizontalLineDark className="mt-1"></HorizontalLineDark>
+        </Link>
+        <HorizontalLineDark className="mb-1 mt-10"></HorizontalLineDark>
+        <HorizontalLineDark className="mt-1 mb-10"></HorizontalLineDark>
         <LeftColBottom>
-          <div className="sm:w-[calc(50%-1rem)]">
+          <Link
+            to={`/problem/${problems[1].id}`}
+            className="sm:w-[calc(50%-1rem)]"
+          >
             <SubTitle>{problems[1].title}</SubTitle>
-            <HorizontalLineDark></HorizontalLineDark>
-            <SubImg src={`/problemImages/${problems[1].id}.png`} />
-            <LeadingParagraph>{problems[1].blurb}</LeadingParagraph>
-            <Link
-              to={`/problem/${problems[1].id}`}
-              className="font-playfair-sc"
-            >
-              See More Here
-            </Link>
-          </div>
+            <HorizontalLineDark className="bg-[#C8CDCF]"></HorizontalLineDark>
+
+            <div className="overflow-hidden sm:h-[30rem] md:h-[26.5rem]">
+              <SubImg src={`/problemImages/${problems[1].id}.png`} />
+              <LeadingParagraph>{problems[1].blurb}</LeadingParagraph>
+            </div>
+
+            <p className="font-playfair-sc">See More Here</p>
+          </Link>
           <HorizontalLineLight className="sm:hidden"></HorizontalLineLight>
           <VerticalLineContainer className="hidden sm:flex">
-            <VerticalLine></VerticalLine>
+            <VerticalLine className="bg-[#C8CDCF]"></VerticalLine>
           </VerticalLineContainer>
-          <div className="sm:w-[calc(50%-1rem)]">
+          <Link
+            to={`/problem/${problems[2].id}`}
+            className="sm:w-[calc(50%-1rem)]"
+          >
             <SubTitle>{problems[2].title}</SubTitle>
-            <HorizontalLineDark></HorizontalLineDark>
-            <SubImg src={`/problemImages/${problems[2].id}.png`} />
-            <LeadingParagraph>{problems[2].blurb}</LeadingParagraph>
-            <Link
-              to={`/problem/${problems[2].id}`}
-              className="font-playfair-sc"
-            >
-              See More Here
-            </Link>
-          </div>
+            <HorizontalLineDark className="bg-[#C8CDCF]"></HorizontalLineDark>
+            <div className="overflow-hidden sm:h-[30rem] md:h-[26.5rem]">
+              <SubImg src={`/problemImages/${problems[2].id}.png`} />
+              <LeadingParagraph>{problems[2].blurb}</LeadingParagraph>
+            </div>
+            <p className="font-playfair-sc">See More Here</p>
+          </Link>
         </LeftColBottom>
       </LeftCol>
-      <VerticalLineContainer>
-        <VerticalLine></VerticalLine>
+      <VerticalLineContainer className="w-4 mr-4 ml-1">
+        <VerticalLine className="bg-[#C8CDCF]"></VerticalLine>
       </VerticalLineContainer>
       <HorizontalLineDark className="mb-1 lg:hidden"></HorizontalLineDark>
       <HorizontalLineDark className="mt-0 lg:hidden"></HorizontalLineDark>
       <RightCol>
-        <div className="mb-3">
-          <MainTitle>About The Dispatch</MainTitle>
+        <Link to="/about" className="mb-3">
+          <MainTitle className="text-center">About The Dispatch</MainTitle>
           <p className="my-3">
             The Dispatch is an algorithms and data structures competition site
             where a user's solution to a problem is ranked based on a composite
@@ -126,26 +127,19 @@ const Home = () => {
             submitted for past problems are not included in the leaderboard for
             the problem.
           </p>
-          <Link to="/about" className="font-playfair-sc mt-3">
-            Learn More
-          </Link>
-        </div>
-        <HorizontalLineDark></HorizontalLineDark>
+          <p className="font-playfair-sc mt-3">Learn More</p>
+        </Link>
+        <HorizontalLineDark className="bg-[#C8CDCF]"></HorizontalLineDark>
         <div>
-          <MainTitle>Previous Headlines</MainTitle>
+          <MainTitle className="text-center">Previous Headlines</MainTitle>
           <PrevProblems>
             {problems.map((problem, ind) => (
-              <PrevProblem key={problem.id}>
+              <PrevProblem to={`/problem/${problem.id}`} key={problem.id}>
                 <SubTitle className="mb-3">{problem.title}</SubTitle>
                 <p className="line-clamp-4">{problem.blurb}</p>
-                <Link
-                  to={`/problem/${problem.id}`}
-                  className="font-playfair-sc text-sm"
-                >
-                  Continue Here
-                </Link>
+                <p className="font-playfair-sc text-sm">Continue Here</p>
                 {problems.length - 1 > ind ? (
-                  <HorizontalLineLight className="my-2 mt-5 flex md:bg-[#ffffff] lg:bg-disabledButtonBackground"></HorizontalLineLight>
+                  <HorizontalLineLight className="my-2 mt-5 flex md:bg-[#ffffff] lg:bg-[#f0f0f0]"></HorizontalLineLight>
                 ) : null}
               </PrevProblem>
             ))}
