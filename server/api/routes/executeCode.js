@@ -82,7 +82,7 @@ function executeCode(code, problem, res) {
 
             // prepare test results + consoles for front end
             if (!stdout) {
-              stdout = 'test failed,resultTime: None.,resultMemory: None.';
+              stdout = 'test failed,Time: None.,Memory: None.';
             }
 
             stdout = stdout.split('\n');
@@ -92,7 +92,7 @@ function executeCode(code, problem, res) {
               !stdout[stdout.length - 1].includes('test failed') &&
               !stdout[stdout.length - 1].includes('tests passed')
             ) {
-              stdout.push('test failed,resultTime: None.,resultMemory: None.');
+              stdout.push('test failed,Time: None.,Memory: None.');
             }
 
             let results = {

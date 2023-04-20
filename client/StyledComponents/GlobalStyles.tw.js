@@ -48,41 +48,6 @@ export const EditorAndOutputDiv = tw.div`
 	rounded-lg
 `;
 
-// export const OutputDiv = tw.div`
-// flex
-// text-center
-// justify-evenly
-//   min-h-[200px]
-//   bg-[#FFFFFF]
-// 	border-[2px]
-// 	border-black
-// 	rounded-md
-// `;
-
-export const ContextOutput = tw.div`
-
-`;
-
-export const ConsoleOutput = tw.div`
-  
-`;
-
-export const OutputTitleWrapper = tw.div`
-	flex
-	justify-center
-	content-center
-	items-center
-	mx-auto
-	mb-1
-`;
-
-export const OutputTitle = tw.div`
-	pt-2
-  pb-1
-  font-cormorant-sc
-  text-2xl
-  `;
-
 export const DarkButton = tw.button`
 	bg-darkFont
 	p-2

@@ -72,3 +72,15 @@ export const HintButton = tw.button`
   w-12
 	disabled:bg-disabledButtonBackground
 `;
+
+export const ContextOutputH4 = tw.h4`
+	text-lg 
+	font-playfair-sc 
+	md:font-thin
+	md:tracking-wider
+	md:text-4xl
+`;
+
+export const ConsoleOutput = tw.div`
+  
+`;

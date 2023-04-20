@@ -15,18 +15,16 @@ import customTheme from 'monaco-themes/themes/solarized-light.json';
 // Local Imports
 import {
   ButtonWrapper,
-  OutputDiv,
-  OutputTitle,
-  ConsoleOutput,
-  ContextOutput,
   EditorButton,
-  OutputTitleWrapper,
   EditorAndOutputDiv,
   H3,
   H4,
-  H5,
   DividerDiv,
 } from '../StyledComponents/GlobalStyles.tw';
+import {
+  ConsoleOutput,
+  ContextOutputH4,
+} from '../StyledComponents/ProblemStyles.tw';
 import SubmitModal from './SubmitModal';
 import ReopenProblemModal from './ReopenProblemModal';
 import { openSubmitModal, openReopenProblemModal } from '../store/modal';
@@ -227,34 +225,34 @@ export const CodeEditor = ({ auth, solution, current }) => {
       )}
 
       {solutionCompletedDate ? null : (
-        <div id='output-container' className='min-h-0'>
+        <div id='output-container' className='min-h-0 text-darkFont'>
           <EditorAndOutputDiv id='editor-output'>
             <div id='output-title-container' className=''>
               <H4>The Dispatch Output</H4>
               <DividerDiv className='my-2' />
             </div>
-
-            {contextOutput[0] === 'tests passed' ? (
+            {contextOutput.length < 1 ? (
+              ''
+            ) : contextOutput[0] === 'tests passed' ? (
               <div
-                id='output-content-container'
-                className='flex flex-col md:flex-row align-start justify-center md:justify-around mt-3 mx-auto md:mx-6'
+                id='output-passed-container'
+                className='flex flex-col align-start justify-center md:justify-around mt-3'
               >
-                {/* <div className=''>
-                <H3 className='md:text-5xl'>
-                  {contextOutput.length < 1 ? '' : contextOutput[0] + '!'}
+                <H3 className='md:text-5xl md:tracking-widest'>
+                  {contextOutput[0] + '!'}
                 </H3>
-              </div> */}
+                <DividerDiv className='my-5' />
 
-                <EditorAndOutputDiv className='w-3/4'>
-                  <H3 className='md:text-5xl'> {contextOutput[0] + '!'} </H3>
-                  <DividerDiv className='my-2' />
-                  <ContextOutput>
-                    <ul>
-                      <li> {contextOutput[1]} </li>
-                      <li> {contextOutput[2]} </li>
-                    </ul>
-                  </ContextOutput>
-                </EditorAndOutputDiv>
+                <div className='flex flex-row justify-around mt-2'>
+                  <ContextOutputH4>
+                    {contextOutput[1].slice(0, 6)}
+                    {(contextOutput[1].slice(6) / 1000000).toFixed(2)} ms
+                  </ContextOutputH4>
+                  <ContextOutputH4>
+                    {contextOutput[2].slice(0, 8)}
+                    {Math.ceil(contextOutput[2].slice(8) / 1048576)} mb
+                  </ContextOutputH4>
+                </div>
               </div>
             ) : (
               <div

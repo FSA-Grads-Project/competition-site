@@ -296,16 +296,16 @@ function test(size, location, testNumber) {
 
 function separateResults(results) {
   const resultTest = [];
-  const resultTime = [];
-  const resultMemory = [];
+  const Time = [];
+  const Memory = [];
 
   for (let i = 0; i < results.length; i++) {
     resultTest.push(results[i].result);
-    resultTime.push(results[i].time);
-    resultMemory.push(results[i].memory);
+    Time.push(results[i].time);
+    Memory.push(results[i].memory);
   }
 
-  return { result: resultTest, time: resultTime, memory: resultMemory };
+  return { result: resultTest, time: Time, memory: Memory };
 }
 
 function runSubmission() {
@@ -323,21 +323,21 @@ function runSubmission() {
   results = separateResults(results);
 
   let resultTest = results.result;
-  let resultTime = results.time.reduce((acc, cur) => { return acc + Number(cur); }, 0) / results.time.length;
-  let resultMemory = results.memory.reduce((acc, cur) => { return acc + cur; }, 0) / results.memory.length;
+  let Time = results.time.reduce((acc, cur) => { return acc + Number(cur); }, 0) / results.time.length;
+  let Memory = results.memory.reduce((acc, cur) => { return acc + cur; }, 0) / results.memory.length;
 
-  resultTime = resultTime.toFixed(0);
-  resultMemory = resultMemory.toFixed(0);
+  Time = Time.toFixed(0);
+  Memory = Memory.toFixed(0);
 
   if (resultTest[0] === 9999 && resultTest[1] === 19999 && resultTest[2] === 29999) {
     resultTest = 'tests passed';
   } else {
     resultTest = 'test failed';
-    resultMemory = 'none';
-    resultTime = 'none';
+    Memory = 'none';
+    Time = 'none';
   }
 
-  return resultTest + ',' + 'resultTime: ' + resultTime + ',' + 'resultMemory: ' + resultMemory;
+  return resultTest + ',' + 'Time: ' + Time + ',' + 'Memory: ' + Memory;
 }
 `,
   });
