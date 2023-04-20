@@ -8,7 +8,6 @@ export const Main = tw.div`
     lg:justify-between
     mt-10
     xs:mx-16
-
     mx-7
 `;
 

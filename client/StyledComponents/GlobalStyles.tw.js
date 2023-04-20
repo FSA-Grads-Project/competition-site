@@ -1,4 +1,4 @@
-import tw from "tailwind-styled-components";
+import tw from 'tailwind-styled-components';
 
 export const DividerHr = tw.hr`		
 	border-t-2
@@ -33,20 +33,19 @@ export const ButtonWrapper = tw.div`
   flex
   justify-center
 	gap-7
-	mt-6
-	mb-4
+	my-10
 `;
 
 export const EditorAndOutputDiv = tw.div`
 	flex
+	flex-col
 	text-center
-	justify-evenly
 	py-4
-  min-h-[200px] 
+  min-h-72
   bg-[#FFFFFF]
 	border-[1.5px] 
 	border-black 
-	rounded
+	rounded-lg
 `;
 
 // export const OutputDiv = tw.div`
@@ -150,11 +149,21 @@ export const TabTitleDiv = tw.div`
 `;
 
 export const H3 = tw.h3`
-	font-playfair
-	font-black
-	text-xl
+	text-xl 
+	font-playfair-sc 
 	md:text-3xl
-	md:mx-3
+`;
+
+export const H4 = tw.h4`
+	text-xl 
+	font-playfair-sc 
+	md:text-2xl
+`;
+
+export const H5 = tw.h5`
+	text-lg 
+	font-playfair-sc 
+	md:text-xl
 `;
 
 export const LeadingParagraph = tw.p`

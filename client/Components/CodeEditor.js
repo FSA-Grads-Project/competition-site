@@ -22,6 +22,10 @@ import {
   EditorButton,
   OutputTitleWrapper,
   EditorAndOutputDiv,
+  H3,
+  H4,
+  H5,
+  DividerDiv,
 } from '../StyledComponents/GlobalStyles.tw';
 import SubmitModal from './SubmitModal';
 import ReopenProblemModal from './ReopenProblemModal';
@@ -150,6 +154,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
     readOnly: solutionCompletedDate ? true : false,
   };
 
+  console.log(contextOutput);
   return (
     <div>
       <SubmitModal
@@ -159,7 +164,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
       />
       <ReopenProblemModal />
 
-      <EditorAndOutputDiv>
+      <EditorAndOutputDiv id='code-editor'>
         <Editor
           defaultValue=''
           // height="320px"
@@ -222,40 +227,62 @@ export const CodeEditor = ({ auth, solution, current }) => {
       )}
 
       {solutionCompletedDate ? null : (
-        <div id='output-container'>
-          <OutputTitleWrapper>
-            <IconContext.Provider
-              value={{ size: '1.5em', className: 'global-class-name' }}
-            >
-              <VscOutput />
-            </IconContext.Provider>
-            <OutputTitle>Output</OutputTitle>
-          </OutputTitleWrapper>
-          <EditorAndOutputDiv>
-            <ContextOutput>
-              {' '}
-              {contextOutput.length < 1
-                ? 'See Output Here'
-                : contextOutput.map((context, i) => {
-                    return (
-                      <ul key={i}>
-                        <li> {context} </li>
-                      </ul>
-                    );
-                  })}{' '}
-            </ContextOutput>
-            <ConsoleOutput>
-              {' '}
-              {consoleOutput.length < 1
-                ? 'See Consoles Here'
-                : consoleOutput.map((console, i) => {
-                    return (
-                      <ul key={i}>
-                        <li> {console} </li>
-                      </ul>
-                    );
-                  })}
-            </ConsoleOutput>
+        <div id='output-container' className='min-h-0'>
+          <EditorAndOutputDiv id='editor-output'>
+            <div id='output-title-container' className=''>
+              <H4>The Dispatch Output</H4>
+              <DividerDiv className='my-2' />
+            </div>
+
+            {contextOutput[0] === 'tests passed' ? (
+              <div
+                id='output-content-container'
+                className='flex flex-col md:flex-row align-start justify-center md:justify-around mt-3 mx-auto md:mx-6'
+              >
+                {/* <div className=''>
+                <H3 className='md:text-5xl'>
+                  {contextOutput.length < 1 ? '' : contextOutput[0] + '!'}
+                </H3>
+              </div> */}
+
+                <EditorAndOutputDiv className='w-3/4'>
+                  <H3 className='md:text-5xl'> {contextOutput[0] + '!'} </H3>
+                  <DividerDiv className='my-2' />
+                  <ContextOutput>
+                    <ul>
+                      <li> {contextOutput[1]} </li>
+                      <li> {contextOutput[2]} </li>
+                    </ul>
+                  </ContextOutput>
+                </EditorAndOutputDiv>
+              </div>
+            ) : (
+              <div
+                id='output-content-container'
+                className='flex flex-col md:flex-row align-start justify-center md:justify-around mt-3 mx-auto md:mx-6'
+              >
+                <EditorAndOutputDiv className='w-3/4'>
+                  <H3 className='md:text-5xl'>
+                    {contextOutput[0] + '!'}
+                    {/* {contextOutput.length < 1 ? '' : contextOutput[0] + '!'} */}
+                  </H3>
+                  <DividerDiv className='my-2' />
+
+                  <ConsoleOutput>
+                    {' '}
+                    {consoleOutput.length < 1
+                      ? ''
+                      : consoleOutput.map((console, i) => {
+                          return (
+                            <ul key={i}>
+                              <li> {console} </li>
+                            </ul>
+                          );
+                        })}
+                  </ConsoleOutput>
+                </EditorAndOutputDiv>
+              </div>
+            )}
           </EditorAndOutputDiv>
         </div>
       )}
@@ -264,3 +291,23 @@ export const CodeEditor = ({ auth, solution, current }) => {
 };
 
 export default CodeEditor;
+
+{
+  /* <ContextOutput>
+                  {' '}
+                  {
+                    contextOutput.length < 1 ? (
+                      'See Output Here'
+                    ) : (
+                      // contextOutput.map((context, i) => {
+
+                      // return (
+                      <ul>
+                        <li> {contextOutput[1]} </li>
+                        <li> {contextOutput[2]} </li>
+                      </ul>
+                    )
+                    //   );
+                  }
+                </ContextOutput> */
+}

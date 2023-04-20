@@ -27,7 +27,7 @@ export const TabTitle = ({ leaderBoardView, codeEditorView, view, title }) => {
         ) : (
           <MdLeaderboard className='min-w-10 min-h-8 mx-1' />
         )}
-        <H3>{title}</H3>
+        <H3 className='md:mr-3'>{title}</H3>
       </TabTitleDiv>
     </div>
   );
