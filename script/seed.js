@@ -279,9 +279,9 @@ function binaryTreeGenerator(N, nodeSherman) {
   return root;
 }
 
-function test(size, location) {
+function test(size, location, testNumber) {
   const root = binaryTreeGenerator(size, location);
-
+  console.log(' - test number: - ' + testNumber)
   const start = process.hrtime.bigint();
   const result = findSherman(root);
   const end = process.hrtime.bigint();
@@ -310,9 +310,9 @@ function runSubmission() {
 
   let results = [];
 
-  const results1 = test(10000, 10000);
-  const results2 = test(20000, 20000);
-  const results3 = test(30000, 30000);
+  const results1 = test(10000, 10000, 1);
+  const results2 = test(20000, 20000, 2);
+  const results3 = test(30000, 30000, 3);
 
   results.push(results1);
   results.push(results2);
