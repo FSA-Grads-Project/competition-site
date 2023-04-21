@@ -15,7 +15,6 @@ import customTheme from 'monaco-themes/themes/solarized-light.json';
 // Local Imports
 import {
   ButtonWrapper,
-  OutputDiv,
   OutputTitle,
   ConsoleOutput,
   ContextOutput,
@@ -32,8 +31,10 @@ import useResetCode from '../hooks/useResetCode';
 
 export const CodeEditor = ({ auth, solution, current }) => {
   const dispatch = useDispatch();
-  const monacoRef = useRef(null);
+  const monacoRef = useRef(null);  
+  const constrainedEditorRef = useRef(null);  
   let restrictions = [];
+
   const solutionCode = useSelector(
     (state) => state.solution?.solution?.solutionCode
   );
@@ -53,7 +54,6 @@ export const CodeEditor = ({ auth, solution, current }) => {
   const [contextOutput, setContextOutput] = useState([]);
   const [consoleOutput, setConsoleOutput] = useState([]);
   const [solutionPassed, setSolutionPassed] = useState(false);
-  const [reset, setReset] = useState(false);
   const [isEvaluating, setIsEvaluating] = useState(false);
   const [evalCheck, setEvalCheck] = useState(false);
 
@@ -61,12 +61,10 @@ export const CodeEditor = ({ auth, solution, current }) => {
     customTheme.colors['editor.background'] = '#ffffff';
     customTheme.colors['editor.selectionBackground'] = '#e6f7ff';
     customTheme.rules.push({ foreground: '586e75', token: 'number' });
-
     monaco.editor.defineTheme('custom-theme', customTheme);
-
     monaco.editor.setTheme('custom-theme');
-    monacoRef.current = editor;
 
+    monacoRef.current = editor;
     const constrainedInstance = constrainedEditor(monaco);
     const model = editor.getModel();
     constrainedInstance.initializeIn(editor);
@@ -74,21 +72,24 @@ export const CodeEditor = ({ auth, solution, current }) => {
       range: problem.readOnlyRange ? problem.readOnlyRange : [1, 1, 1, 1],
       allowMultiline: true,
     });
-
     constrainedInstance.addRestrictionsTo(model, restrictions);
+    constrainedEditorRef.current = constrainedInstance;
   }
+
+  const handleUnmount = () => {
+    if (constrainedEditorRef.current) {
+      constrainedEditorRef.current.dispose();
+    }
+  };
+
   function handleEditorChange(value) {
-    initialCode = value;
+    initialCode = value;    
     setCode(value);
   }
 
   useEffect(() => {
-    if (reset) {
-      handleEditorChange(defaultCode);
-      setReset(false);
-    }
     handleEditorChange(initialCode);
-  }, [initialCode, solutionCode, reset, solution]);
+  }, [initialCode, solutionCode, solution]);
 
   useEffect(() => {
     if (solutionPassed) {
@@ -127,15 +128,15 @@ export const CodeEditor = ({ auth, solution, current }) => {
   };
 
   const onResetCode = async () => {
-    setReset(true);
-
     if (auth.accessToken) {
       setContextOutput(['See Output Here']);
       setConsoleOutput(['See Console Here']);
     }
-
     useResetCode(defaultCode);
-  };
+    handleEditorChange(defaultCode);
+    const model = monacoRef.current.getModel();
+    model.setValue(defaultCode);
+  };  
 
   const onReopen = async () => {
     dispatch(openReopenProblemModal());
@@ -162,7 +163,6 @@ export const CodeEditor = ({ auth, solution, current }) => {
       <EditorAndOutputDiv>
         <Editor
           defaultValue=''
-          // height="320px"
           min-height='250px'
           defaultLanguage='javascript'
           value={code}
@@ -170,6 +170,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
           onMount={handleEditorDidMount}
           options={options}
           className='min-h-72'
+          onUnmount={handleUnmount}
         />
       </EditorAndOutputDiv>
       {solutionCompletedDate ? (

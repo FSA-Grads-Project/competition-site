@@ -51,9 +51,11 @@ function executeCode(code, problem, res) {
         }
       `;
 
-  let platform = !os.cpus()[0].model.includes("Intel")
-    ? "linux/arm64/v8"
-    : "linux/amd64";
+  // let platform = os.cpus()[0].model.includes("Intel")
+  //   ? "linux/amd64"
+  //   : "linux/arm64/v8";
+   
+  let platform = "linux/amd64"
 
   try {
     let filePath = path.join(__dirname, `/temp/${fileName}`);
@@ -90,7 +92,7 @@ function executeCode(code, problem, res) {
 
             if (
               !stdout[stdout.length - 1].includes("test failed") &&
-              !stdout[stdout.length - 1].includes("test passed")
+              !stdout[stdout.length - 1].includes("tests passed")
             ) {
               stdout.push("test failed,resultTime: None.,resultMemory: None.");
             }
