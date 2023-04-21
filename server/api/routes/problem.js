@@ -24,7 +24,7 @@ router.get("/", async (req, res, next) => {
         "startDate",
         "endDate",
         "current",
-        "readOnlyRange",
+        "numberOfLinesForReadOnly",
         "blurb",
       ],
       where: {
@@ -58,7 +58,7 @@ router.get("/current", softVerifyUser, async (req, res, next) => {
         "current",
         "timeWeight",
         "spaceWeight",
-        "readOnlyRange",
+        "numberOfLinesForReadOnly",
         req.user ? "statement" : "blurb",
       ],
       where: {

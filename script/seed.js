@@ -183,7 +183,7 @@ of the node where Sherman the cat is located.`,
     initialCode: `function findSherman(root) {
   // write your code here
 }
-// example of the binary-tree class - do not edit
+// example of the binary-tree class
 class binaryTree {
   constructor(number, sherman = false) {
     this.number = number;
@@ -200,7 +200,7 @@ branches of the tree.`,
     endDate: "2023-07-01 00:00:00",
     spaceWeight: 0.3,
     timeWeight: 0.6,
-    readOnlyRange: [2, 1, 4, 1],
+    numberOfLinesForReadOnly: 10,
   });
 
   const test1 = await Test.create({
