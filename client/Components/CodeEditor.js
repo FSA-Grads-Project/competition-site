@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // Third Party Library Imports
 import { VscOutput } from 'react-icons/vsc';
-import { IconContext } from 'react-icons';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import Editor from '@monaco-editor/react';
 import { constrainedEditor } from 'constrained-editor-plugin';
@@ -225,7 +224,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
       )}
 
       {solutionCompletedDate ? null : (
-        <div id='output-container' className='min-h-0 text-darkFont'>
+        <div id='output-container' className='h-[250px] text-darkFont'>
           <EditorAndOutputDiv id='editor-output'>
             <div id='output-title-container' className=''>
               <H4>The Dispatch Output</H4>
@@ -256,18 +255,14 @@ export const CodeEditor = ({ auth, solution, current }) => {
               </div>
             ) : (
               <div
-                id='output-content-container'
-                className='flex flex-col md:flex-row align-start justify-center md:justify-around mt-3 mx-auto md:mx-6'
+                id='output-failed-container'
+                className='flex flex-col md:flex-row md:items-center justify-center md:justify-around mt-3 mx-auto md:mx-6'
               >
-                <EditorAndOutputDiv className='w-3/4'>
-                  <H3 className='md:text-5xl'>
-                    {contextOutput[0] + '!'}
-                    {/* {contextOutput.length < 1 ? '' : contextOutput[0] + '!'} */}
-                  </H3>
-                  <DividerDiv className='my-2' />
-
-                  <ConsoleOutput>
-                    {' '}
+                <H3 className='md:text-5xl md:tracking-widest'>
+                  {contextOutput[0] + '!'}
+                </H3>
+                <EditorAndOutputDiv className='w-full'>
+                  <ConsoleOutput className='max-h-52 overflow-y-auto px-2 pt-1'>
                     {consoleOutput.length < 1
                       ? ''
                       : consoleOutput.map((console, i) => {
@@ -289,23 +284,3 @@ export const CodeEditor = ({ auth, solution, current }) => {
 };
 
 export default CodeEditor;
-
-{
-  /* <ContextOutput>
-                  {' '}
-                  {
-                    contextOutput.length < 1 ? (
-                      'See Output Here'
-                    ) : (
-                      // contextOutput.map((context, i) => {
-
-                      // return (
-                      <ul>
-                        <li> {contextOutput[1]} </li>
-                        <li> {contextOutput[2]} </li>
-                      </ul>
-                    )
-                    //   );
-                  }
-                </ContextOutput> */
-}
