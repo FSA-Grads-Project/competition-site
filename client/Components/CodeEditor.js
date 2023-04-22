@@ -33,7 +33,6 @@ export const CodeEditor = ({ auth, solution, current }) => {
   const dispatch = useDispatch();
   const monacoRef = useRef(null);  
   const constrainedEditorRef = useRef(null);  
-  let restrictions = [];
 
   const solutionCode = useSelector(
     (state) => state.solution?.solution?.solutionCode
@@ -46,6 +45,8 @@ export const CodeEditor = ({ auth, solution, current }) => {
   let defaultCode = useSelector(
     (state) => state.problems?.problem?.initialCode
   );
+
+  const numberOfLinesForReadOnly = useSelector(state => state.problems.problem.numberOfLinesForReadOnly);
 
   let initialCode =
     auth.accessToken && solutionCode ? solutionCode : defaultCode;
@@ -68,20 +69,23 @@ export const CodeEditor = ({ auth, solution, current }) => {
     const constrainedInstance = constrainedEditor(monaco);
     const model = editor.getModel();
     constrainedInstance.initializeIn(editor);
-    restrictions.push({
-      range: problem.readOnlyRange ? problem.readOnlyRange : [1, 1, 1, 1],
-      allowMultiline: true,
-    });
-    constrainedInstance.addRestrictionsTo(model, restrictions);
     constrainedEditorRef.current = constrainedInstance;
-  }
+    const maxLine = model.getLineCount();
+    const initialRestrictions = [
+      {
+        range: [1, 1, maxLine - numberOfLinesForReadOnly, model.getLineMaxColumn(maxLine)],
+        allowMultiline: true,
+        readOnly: false
+      }
+    ];
+    constrainedInstance.addRestrictionsTo(model, initialRestrictions);
+  };
 
   const handleUnmount = () => {
     if (constrainedEditorRef.current) {
       constrainedEditorRef.current.dispose();
     }
   };
-
   function handleEditorChange(value) {
     initialCode = value;    
     setCode(value);
@@ -136,6 +140,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
     handleEditorChange(defaultCode);
     const model = monacoRef.current.getModel();
     model.setValue(defaultCode);
+    constrainedEditorRef.current.addRestrictionsTo(model, initialRestrictions);
   };  
 
   const onReopen = async () => {

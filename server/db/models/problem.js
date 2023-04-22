@@ -70,8 +70,8 @@ const Problem = connection.define("problem", {
       isFloat: true,
     },
   },
-  readOnlyRange: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER),
+  numberOfLinesForReadOnly: {
+    type: Sequelize.INTEGER
   },
   current: {
     type: Sequelize.VIRTUAL,
