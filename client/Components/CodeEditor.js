@@ -111,7 +111,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
       await useUploadUserSolution(code, res, 'eval');
     }
 
-    if (res.data.contextOutput[0].includes('test passed')) {
+    if (res.data.contextOutput[0].includes('tests passed')) {
       setSolutionPassed(true);
     } else {
       setSolutionPassed(false);
@@ -225,50 +225,48 @@ export const CodeEditor = ({ auth, solution, current }) => {
 
       {solutionCompletedDate ? null : (
         <div id='output-container' className='h-[250px] text-darkFont'>
-          <EditorAndOutputDiv id='editor-output'>
+          <EditorAndOutputDiv id='editor-output' className='pb-0'>
             <div id='output-title-container' className=''>
               <H4>The Dispatch Output</H4>
-              <DividerDiv className='my-2' />
+              <DividerDiv className='mt-3 xs:mx-7' />
+              <DividerDiv className='mt-1 xs:mx-7' />
             </div>
             {contextOutput.length < 1 ? (
               ''
             ) : contextOutput[0] === 'tests passed' ? (
-              <div
-                id='output-passed-container'
-                className='flex flex-col align-start justify-center md:justify-around mt-3'
-              >
+              <div id='output-passed-container' className='text-center mt-3'>
                 <H3 className='md:text-5xl md:tracking-widest'>
                   {contextOutput[0] + '!'}
                 </H3>
-                <DividerDiv className='my-5' />
+                <DividerDiv className='my-5 xs:mx-7' />
 
-                <div className='flex flex-row justify-around mt-2'>
+                <div className='flex flex-row justify-around pt-1'>
                   <ContextOutputH4>
                     {contextOutput[1].slice(0, 6)}
                     {(contextOutput[1].slice(6) / 1000000).toFixed(2)} ms
                   </ContextOutputH4>
                   <ContextOutputH4>
                     {contextOutput[2].slice(0, 8)}
-                    {Math.ceil(contextOutput[2].slice(8) / 1048576)} mb
+                    {Math.ceil(contextOutput[2].slice(8) / 1048576)} MB
                   </ContextOutputH4>
                 </div>
               </div>
             ) : (
-              <div
-                id='output-failed-container'
-                className='flex flex-col md:flex-row md:items-center justify-center md:justify-around mt-3 mx-auto md:mx-6'
-              >
-                <H3 className='md:text-5xl md:tracking-widest'>
+              <div id='output-failed-container' className='text-center px-3'>
+                <H3 className='text-4xl sm:text-5xl md:text-5xl leading-normal tracking-widest'>
                   {contextOutput[0] + '!'}
                 </H3>
-                <EditorAndOutputDiv className='w-full'>
-                  <ConsoleOutput className='max-h-52 overflow-y-auto px-2 pt-1'>
+                <DividerDiv className='mx-4 xs:mx-5 mt-2' />
+                <EditorAndOutputDiv className='w-full border-none pb-0'>
+                  <ConsoleOutput className='min-h-36 max-h-52 overflow-y-auto mx-5 pt-1 text-left'>
                     {consoleOutput.length < 1
                       ? ''
                       : consoleOutput.map((console, i) => {
                           return (
-                            <ul key={i}>
-                              <li> {console} </li>
+                            <ul key={i} className='output-ul'>
+                              <li className='font-playfair tracking-wider mb-1'>
+                                {console}
+                              </li>
                             </ul>
                           );
                         })}

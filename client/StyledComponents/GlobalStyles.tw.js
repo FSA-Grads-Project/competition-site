@@ -37,8 +37,6 @@ export const ButtonWrapper = tw.div`
 `;
 
 export const EditorAndOutputDiv = tw.div`
-	flex
-	flex-col
 	text-center
 	py-4
   min-h-72
@@ -99,6 +97,7 @@ export const TitleWrapper = tw.div`
 	flex
 	justify-center
 	items-center
+	mx-1
 	mb-4
 	h-14
 	w-full

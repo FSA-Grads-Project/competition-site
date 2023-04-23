@@ -13,23 +13,22 @@ import { openLoginModal } from '../store/modal';
 
 export const TabTitle = ({ leaderBoardView, codeEditorView, view, title }) => {
   return (
-    <div>
-      <TabTitleDiv
-        className={
-          (codeEditorView && view === 'editor') ||
-          (leaderBoardView && view === 'leaderboard')
-            ? 'cursor-default'
-            : 'cursor-pointer text-fadedFont'
-        }
-      >
-        {view === 'editor' ? (
-          <BiCodeAlt className='min-w-10 min-h-10 mx-1' />
-        ) : (
-          <MdLeaderboard className='min-w-10 min-h-8 mx-1' />
-        )}
-        <H3 className='md:mr-3'>{title}</H3>
-      </TabTitleDiv>
-    </div>
+    <TabTitleDiv
+      id='TabTitle-div'
+      className={
+        (codeEditorView && view === 'editor') ||
+        (leaderBoardView && view === 'leaderboard')
+          ? 'cursor-default'
+          : 'cursor-pointer text-fadedFont'
+      }
+    >
+      {view === 'editor' ? (
+        <BiCodeAlt className='min-w-10 min-h-10 mx-1' />
+      ) : (
+        <MdLeaderboard className='min-w-10 min-h-8 mx-1' />
+      )}
+      <H3 className='md:mr-3'>{title}</H3>
+    </TabTitleDiv>
   );
 };
 
@@ -55,8 +54,8 @@ const ProblemPageRight = ({ auth, solution, current }) => {
   }, [auth, solution, current]);
 
   return (
-    <div>
-      <TitleWrapper>
+    <div id='ProblemPageRight-containerDiv'>
+      <TitleWrapper id='TitleWrapper'>
         <div
           onClick={() => {
             if (!auth.accessToken && current) {

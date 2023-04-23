@@ -7,6 +7,7 @@ export const Main = tw.div`
     gap-x-12
     lg:justify-between
     mt-10
+    pb-10
     xs:mx-16
     mx-7
 `;
@@ -34,22 +35,21 @@ export const RightDiv = tw.div`
 export const ProblemTitle = tw.div`
     block
     pb-2
+    mb-2
     text-center
     lg:text-left
     font-playfair
     font-black
     text-xl
+    text-darkFont
     md:text-3xl
     border-b-2
     border-black
 `;
 
 export const ProblemStatement = tw.div`
-    font-cormorant-sc
-    font-black
-    text-sm
-    text-justify
-    md:text-md
+    font-cormorant
+    text-lg
 `;
 
 export const SolutionTitleSpan = tw.span`
@@ -75,10 +75,10 @@ export const HintButton = tw.button`
 
 export const ContextOutputH4 = tw.h4`
 	text-lg 
-	font-playfair-sc 
+	font-playfair
 	md:font-thin
 	md:tracking-wider
-	md:text-4xl
+	md:text-3xl
 `;
 
 export const ConsoleOutput = tw.div`
