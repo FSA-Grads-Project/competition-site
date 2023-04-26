@@ -31,8 +31,8 @@ import useResetCode from '../hooks/useResetCode';
 
 export const CodeEditor = ({ auth, solution, current }) => {
   const dispatch = useDispatch();
-  const monacoRef = useRef(null);  
-  const constrainedEditorRef = useRef(null);  
+  const monacoRef = useRef(null);
+  const constrainedEditorRef = useRef(null);
 
   const solutionCode = useSelector(
     (state) => state.solution?.solution?.solutionCode
@@ -46,7 +46,9 @@ export const CodeEditor = ({ auth, solution, current }) => {
     (state) => state.problems?.problem?.initialCode
   );
 
-  const numberOfLinesForReadOnly = useSelector(state => state.problems.problem.numberOfLinesForReadOnly);
+  const numberOfLinesForReadOnly = useSelector(
+    (state) => state.problems.problem.numberOfLinesForReadOnly
+  );
 
   let initialCode =
     auth.accessToken && solutionCode ? solutionCode : defaultCode;
@@ -73,13 +75,18 @@ export const CodeEditor = ({ auth, solution, current }) => {
     const maxLine = model.getLineCount();
     const initialRestrictions = [
       {
-        range: [1, 1, maxLine - numberOfLinesForReadOnly, model.getLineMaxColumn(maxLine)],
+        range: [
+          1,
+          1,
+          maxLine - numberOfLinesForReadOnly,
+          model.getLineMaxColumn(maxLine),
+        ],
         allowMultiline: true,
-        readOnly: false
-      }
+        readOnly: false,
+      },
     ];
     constrainedInstance.addRestrictionsTo(model, initialRestrictions);
-  };
+  }
 
   const handleUnmount = () => {
     if (constrainedEditorRef.current) {
@@ -87,7 +94,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
     }
   };
   function handleEditorChange(value) {
-    initialCode = value;    
+    initialCode = value;
     setCode(value);
   }
 
@@ -141,7 +148,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
     const model = monacoRef.current.getModel();
     model.setValue(defaultCode);
     constrainedEditorRef.current.addRestrictionsTo(model, initialRestrictions);
-  };  
+  };
 
   const onReopen = async () => {
     dispatch(openReopenProblemModal());
@@ -174,7 +181,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
           onChange={handleEditorChange}
           onMount={handleEditorDidMount}
           options={options}
-          className='min-h-72'
+          className='min-h-[16rem]'
           onUnmount={handleUnmount}
         />
       </EditorAndOutputDiv>

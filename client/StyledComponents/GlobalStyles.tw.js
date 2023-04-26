@@ -1,4 +1,4 @@
-import tw from "tailwind-styled-components";
+import tw from 'tailwind-styled-components';
 
 export const DividerHr = tw.hr`		
 	border-t-2
@@ -48,17 +48,6 @@ export const EditorAndOutputDiv = tw.div`
 	border-black 
 	rounded
 `;
-
-// export const OutputDiv = tw.div`
-// flex
-// text-center
-// justify-evenly
-//   min-h-[200px]
-//   bg-[#FFFFFF]
-// 	border-[2px]
-// 	border-black
-// 	rounded-md
-// `;
 
 export const ContextOutput = tw.div`
 

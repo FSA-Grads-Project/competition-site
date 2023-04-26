@@ -23,9 +23,9 @@ export const TabTitle = ({ leaderBoardView, codeEditorView, view, title }) => {
         }
       >
         {view === 'editor' ? (
-          <BiCodeAlt className='min-w-10 min-h-10 mx-1' />
+          <BiCodeAlt className='min-w-[2.5rem] min-h-[2.5rem] mx-1' />
         ) : (
-          <MdLeaderboard className='min-w-10 min-h-8 mx-1' />
+          <MdLeaderboard className='min-w-[2.5rem] min-h-[2rem] mx-1' />
         )}
         <H3>{title}</H3>
       </TabTitleDiv>
