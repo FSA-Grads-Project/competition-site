@@ -1,5 +1,5 @@
-import tw from "tailwind-styled-components";
-import { Link } from "react-router-dom";
+import tw from 'tailwind-styled-components';
+import { Link } from 'react-router-dom';
 
 export const Main = tw.div`
 	w-[calc(100%-4rem)] 
@@ -13,7 +13,6 @@ export const Main = tw.div`
 	mt-5 
 	font-cormorant
 	text-darkFont
-	text-justify
 	leading-relaxed
 	tracking-wider
 `;
@@ -32,7 +31,7 @@ export const CurrImg = tw.img`
 	mb-5
 `;
 
-export const MainTitle = tw.h1`
+export const MainTitle = tw.h3`
 	text-3xl 
 	font-playfair-sc 
 	lg:line-clamp-4 
