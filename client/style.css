@@ -5,6 +5,7 @@
 
 * {
   box-sizing: border-box;
+  text-color: #333333;
 }
 
 #App {
@@ -36,6 +37,10 @@
 
 .animate-rotate {
   animation: rotating 2s 0.25s linear infinite;
+}
+
+.output-ul:nth-child(even) {
+  margin-bottom: 1rem;
 }
 
 /* Custom Scrollbar Firefox */
