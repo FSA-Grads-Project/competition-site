@@ -70,7 +70,7 @@ export const HintButton = tw.button`
   font-cormorant-sc
   text-base
   w-12
-	disabled:bg-disabledButtonBackground
+  disabled:bg-disabledButtonBackground
 `;
 
 export const ContextOutputH4 = tw.h4`

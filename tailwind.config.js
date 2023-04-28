@@ -37,22 +37,10 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        creepster: ['Creepster', 'cursive'],
-        'old-standard-tt': ['"Old Standard TT"', 'serif'],
         playfair: ['"Playfair Display"', 'serif'],
         'playfair-sc': ['"Playfair Display SC"', 'serif'],
         cormorant: ['"Cormorant"', 'serif'],
         'cormorant-sc': ['"Cormorant SC"', 'serif'],
-      },
-      minWidth: {
-        72: '16rem',
-        10: '2.5rem',
-        8: '2rem',
-      },
-      minHeight: {
-        72: '16rem',
-        10: '2.5rem',
-        8: '2rem',
       },
     },
   },

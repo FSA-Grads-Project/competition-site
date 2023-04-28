@@ -43,7 +43,24 @@ export const EditorAndOutputDiv = tw.div`
   bg-[#FFFFFF]
 	border-[1.5px] 
 	border-black 
-	rounded-lg
+	rounded
+`;
+
+export const ContextOutput = tw.div`
+
+`;
+
+export const ConsoleOutput = tw.div`
+  
+`;
+
+export const OutputTitleWrapper = tw.div`
+	flex
+	justify-center
+	content-center
+	items-center
+	mx-auto
+	mb-1
 `;
 
 export const DarkButton = tw.button`
