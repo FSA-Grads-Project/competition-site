@@ -33,16 +33,13 @@ export const ButtonWrapper = tw.div`
   flex
   justify-center
 	gap-7
-	mt-6
-	mb-4
+	my-10
 `;
 
 export const EditorAndOutputDiv = tw.div`
-	flex
 	text-center
-	justify-evenly
 	py-4
-  min-h-[200px] 
+  min-h-72
   bg-[#FFFFFF]
 	border-[1.5px] 
 	border-black 
@@ -65,13 +62,6 @@ export const OutputTitleWrapper = tw.div`
 	mx-auto
 	mb-1
 `;
-
-export const OutputTitle = tw.div`
-	pt-2
-  pb-1
-  font-cormorant-sc
-  text-2xl
-  `;
 
 export const DarkButton = tw.button`
 	bg-darkFont
@@ -124,6 +114,7 @@ export const TitleWrapper = tw.div`
 	flex
 	justify-center
 	items-center
+	mx-1
 	mb-4
 	h-14
 	w-full
@@ -139,11 +130,21 @@ export const TabTitleDiv = tw.div`
 `;
 
 export const H3 = tw.h3`
-	font-playfair
-	font-black
-	text-xl
+	text-xl 
+	font-playfair-sc 
 	md:text-3xl
-	md:mx-3
+`;
+
+export const H4 = tw.h4`
+	text-xl 
+	font-playfair-sc 
+	md:text-2xl
+`;
+
+export const H5 = tw.h5`
+	text-lg 
+	font-playfair-sc 
+	md:text-xl
 `;
 
 export const LeadingParagraph = tw.p`

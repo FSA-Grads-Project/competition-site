@@ -1,20 +1,20 @@
-const { v4: uuidv4 } = require("uuid");
-const fs = require("fs");
-const path = require("path");
-const exec = require("child_process").exec;
+const { v4: uuidv4 } = require('uuid');
+const fs = require('fs');
+const path = require('path');
+const exec = require('child_process').exec;
 
-const babel = require("babel-core");
-const loopcontrol = require("./loopcontrol");
-const os = require("os");
+const babel = require('babel-core');
+const loopcontrol = require('./loopcontrol');
+const os = require('os');
 
 function executeCode(code, problem, res) {
   // create random filename
-  let fileName = uuidv4() + ".js";
+  let fileName = uuidv4() + '.js';
 
   // create problem code to be used for consoleScript
   const consoleProblem = problem.replace(
-    "return resultTest",
-    "//return resultTest"
+    'return resultTest',
+    '//return resultTest'
   );
   // convert from a buffer to a string for babel transform
   const src = code.toString();
@@ -51,9 +51,9 @@ function executeCode(code, problem, res) {
         }
       `;
 
-  // let platform = os.cpus()[0].model.includes("Intel")
-  //   ? "linux/amd64"
-  //   : "linux/arm64/v8";
+  let platform = os.cpus()[0].model.includes("Intel")
+    ? "linux/amd64"
+    : "linux/arm64/v8";
    
   let platform = "linux/amd64"
 
@@ -64,7 +64,7 @@ function executeCode(code, problem, res) {
     fs.writeFile(filePath, runCode, (err) => {
       if (err) console.log(err);
       else {
-        console.log("\nFile written successfully\n");
+        console.log('\nFile written successfully\n');
         // create/destroy docker container for code execution process
         exec(
           `docker run  --platform ${platform} --rm -v ${filePath}:/app/runtest alexanderstoisolovich/nodevm2test:dockerimg /bin/bash -c 'node runtest'`,
@@ -72,40 +72,40 @@ function executeCode(code, problem, res) {
             if (error) {
               console.log(`error: ${error.message}`);
               fs.unlinkSync(filePath);
-              console.log("\nFile removed successfully\n");
+              console.log('\nFile removed successfully\n');
               return;
             }
             if (stderr) {
               console.log(`stderr: ${stderr}`);
               fs.unlinkSync(filePath);
-              console.log("\nFile removed successfully\n");
+              console.log('\nFile removed successfully\n');
               return;
             }
 
             // prepare test results + consoles for front end
             if (!stdout) {
-              stdout = "test failed,resultTime: None.,resultMemory: None.";
+              stdout = 'test failed,Time: None.,Memory: None.';
             }
 
-            stdout = stdout.split("\n");
+            stdout = stdout.split('\n');
             stdout = stdout.filter(Boolean);
 
             if (
-              !stdout[stdout.length - 1].includes("test failed") &&
-              !stdout[stdout.length - 1].includes("tests passed")
+              !stdout[stdout.length - 1].includes('test failed') &&
+              !stdout[stdout.length - 1].includes('tests passed')
             ) {
-              stdout.push("test failed,resultTime: None.,resultMemory: None.");
+              stdout.push('test failed,Time: None.,Memory: None.');
             }
 
             let results = {
-              contextOutput: stdout[stdout.length - 1].split(","),
+              contextOutput: stdout[stdout.length - 1].split(','),
             };
 
             stdout.pop();
             results.consoleOutput = stdout;
             console.log(results);
             fs.unlinkSync(filePath);
-            console.log("\nFile removed successfully\n");
+            console.log('\nFile removed successfully\n');
             res.json(results);
           }
         );
@@ -114,7 +114,7 @@ function executeCode(code, problem, res) {
   } catch (er) {
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
-      console.log("\nFile removed successfully\n");
+      console.log('\nFile removed successfully\n');
     }
     res.json(er);
     console.log(er);

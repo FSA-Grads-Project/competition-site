@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // Third Party Library Imports
 import { VscOutput } from 'react-icons/vsc';
-import { IconContext } from 'react-icons';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import Editor from '@monaco-editor/react';
 import { constrainedEditor } from 'constrained-editor-plugin';
@@ -15,13 +14,16 @@ import customTheme from 'monaco-themes/themes/solarized-light.json';
 // Local Imports
 import {
   ButtonWrapper,
-  OutputTitle,
-  ConsoleOutput,
-  ContextOutput,
   EditorButton,
-  OutputTitleWrapper,
   EditorAndOutputDiv,
+  H3,
+  H4,
+  DividerDiv,
 } from '../StyledComponents/GlobalStyles.tw';
+import {
+  ConsoleOutput,
+  ContextOutputH4,
+} from '../StyledComponents/ProblemStyles.tw';
 import SubmitModal from './SubmitModal';
 import ReopenProblemModal from './ReopenProblemModal';
 import { openSubmitModal, openReopenProblemModal } from '../store/modal';
@@ -122,7 +124,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
       await useUploadUserSolution(code, res, 'eval');
     }
 
-    if (res.data.contextOutput[0].includes('test passed')) {
+    if (res.data.contextOutput[0].includes('tests passed')) {
       setSolutionPassed(true);
     } else {
       setSolutionPassed(false);
@@ -163,6 +165,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
     readOnly: solutionCompletedDate ? true : false,
   };
 
+  console.log(contextOutput);
   return (
     <div>
       <SubmitModal
@@ -172,7 +175,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
       />
       <ReopenProblemModal />
 
-      <EditorAndOutputDiv>
+      <EditorAndOutputDiv id='code-editor'>
         <Editor
           defaultValue=''
           min-height='250px'
@@ -235,40 +238,56 @@ export const CodeEditor = ({ auth, solution, current }) => {
       )}
 
       {solutionCompletedDate ? null : (
-        <div id='output-container'>
-          <OutputTitleWrapper>
-            <IconContext.Provider
-              value={{ size: '1.5em', className: 'global-class-name' }}
-            >
-              <VscOutput />
-            </IconContext.Provider>
-            <OutputTitle>Output</OutputTitle>
-          </OutputTitleWrapper>
-          <EditorAndOutputDiv>
-            <ContextOutput>
-              {' '}
-              {contextOutput.length < 1
-                ? 'See Output Here'
-                : contextOutput.map((context, i) => {
-                    return (
-                      <ul key={i}>
-                        <li> {context} </li>
-                      </ul>
-                    );
-                  })}{' '}
-            </ContextOutput>
-            <ConsoleOutput>
-              {' '}
-              {consoleOutput.length < 1
-                ? 'See Consoles Here'
-                : consoleOutput.map((console, i) => {
-                    return (
-                      <ul key={i}>
-                        <li> {console} </li>
-                      </ul>
-                    );
-                  })}
-            </ConsoleOutput>
+        <div id='output-container' className='h-[250px] text-darkFont'>
+          <EditorAndOutputDiv id='editor-output' className='pb-0'>
+            <div id='output-title-container' className=''>
+              <H4>The Dispatch Output</H4>
+              <DividerDiv className='mt-3 xs:mx-7' />
+              <DividerDiv className='mt-1 xs:mx-7' />
+            </div>
+            {contextOutput.length < 1 ? (
+              ''
+            ) : contextOutput[0] === 'tests passed' ? (
+              <div id='output-passed-container' className='text-center mt-3'>
+                <H3 className='md:text-5xl md:tracking-widest'>
+                  {contextOutput[0] + '!'}
+                </H3>
+                <DividerDiv className='my-5 xs:mx-7' />
+
+                <div className='flex flex-row justify-around pt-1'>
+                  <ContextOutputH4>
+                    {contextOutput[1].slice(0, 6)}
+                    {(contextOutput[1].slice(6) / 1000000).toFixed(2)} ms
+                  </ContextOutputH4>
+                  <ContextOutputH4>
+                    {contextOutput[2].slice(0, 8)}
+                    {Math.ceil(contextOutput[2].slice(8) / 1048576)} MB
+                  </ContextOutputH4>
+                </div>
+              </div>
+            ) : (
+              <div id='output-failed-container' className='text-center px-3'>
+                <H3 className='text-4xl sm:text-5xl md:text-5xl leading-normal tracking-widest'>
+                  {contextOutput[0] + '!'}
+                </H3>
+                <DividerDiv className='mx-4 xs:mx-5 mt-2' />
+                <EditorAndOutputDiv className='w-full border-none pb-0'>
+                  <ConsoleOutput className='min-h-36 max-h-52 overflow-y-auto mx-5 pt-1 text-left'>
+                    {consoleOutput.length < 1
+                      ? ''
+                      : consoleOutput.map((console, i) => {
+                          return (
+                            <ul key={i} className='output-ul'>
+                              <li className='font-playfair tracking-wider mb-1'>
+                                {console}
+                              </li>
+                            </ul>
+                          );
+                        })}
+                  </ConsoleOutput>
+                </EditorAndOutputDiv>
+              </div>
+            )}
           </EditorAndOutputDiv>
         </div>
       )}

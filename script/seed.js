@@ -1,9 +1,9 @@
-const Sequelize = require("sequelize");
+const Sequelize = require('sequelize');
 
 const {
   connection,
   models: { User, Test, Result, Problem },
-} = require("../server/db");
+} = require('../server/db');
 // const { RESULTS } = require("./seed-results");
 // const { USERS } = require("./seed-users");
 
@@ -13,165 +13,165 @@ const initialization = async () => {
   // await Promise.all(USERS.map((user) => User.create(user)));
 
   const john = await User.create({
-    email: "john.lennon@hotmail.com",
-    alias: "john",
+    email: 'john.lennon@hotmail.com',
+    alias: 'john',
   });
 
   const bob = await User.create({
-    email: "bob.hope@hotmail.com",
-    alias: "bob",
+    email: 'bob.hope@hotmail.com',
+    alias: 'bob',
   });
 
   const tim = await User.create({
-    email: "tim.armstrong@hotmail.com",
-    alias: "tim",
+    email: 'tim.armstrong@hotmail.com',
+    alias: 'tim',
   });
 
   const joe = await User.create({
-    email: "joe.schmoe@hotmail.com",
-    alias: "joe",
+    email: 'joe.schmoe@hotmail.com',
+    alias: 'joe',
   });
 
   const sam = await User.create({
-    email: "sam.clemens@hotmail.com",
-    alias: "sam",
+    email: 'sam.clemens@hotmail.com',
+    alias: 'sam',
   });
 
   const result1 = await Result.create({
     spaceUsed: 11290304,
     timeElapsed: 1437141724,
-    startDatetime: "2022-11-01",
-    completeDatetime: "2022-11-02",
+    startDatetime: '2022-11-01',
+    completeDatetime: '2022-11-02',
   });
 
   const result2 = await Result.create({
     spaceUsed: 12743560,
     timeElapsed: 9358756,
-    startDatetime: "2022-11-01",
-    completeDatetime: "2022-11-04",
+    startDatetime: '2022-11-01',
+    completeDatetime: '2022-11-04',
   });
 
   const result3 = await Result.create({
     spaceUsed: 12487664,
     timeElapsed: 4099683,
-    startDatetime: "2022-11-01",
-    completeDatetime: "2022-11-03",
+    startDatetime: '2022-11-01',
+    completeDatetime: '2022-11-03',
   });
 
   const result4 = await Result.create({
     spaceUsed: 11290304,
     timeElapsed: 1437141724,
-    startDatetime: "2022-12-01",
-    completeDatetime: "2022-12-02",
+    startDatetime: '2022-12-01',
+    completeDatetime: '2022-12-02',
   });
 
   const result5 = await Result.create({
     spaceUsed: 12743560,
     timeElapsed: 9358756,
-    startDatetime: "2022-12-01",
-    completeDatetime: "2022-12-04",
+    startDatetime: '2022-12-01',
+    completeDatetime: '2022-12-04',
   });
 
   const result6 = await Result.create({
     spaceUsed: 12487664,
     timeElapsed: 4099683,
-    startDatetime: "2022-12-01",
-    completeDatetime: "2022-12-03",
+    startDatetime: '2022-12-01',
+    completeDatetime: '2022-12-03',
   });
 
   const result7 = await Result.create({
     spaceUsed: 11290304,
     timeElapsed: 1437141724,
-    startDatetime: "2023-01-01",
-    completeDatetime: "2023-01-02",
+    startDatetime: '2023-01-01',
+    completeDatetime: '2023-01-02',
   });
 
   const result8 = await Result.create({
     spaceUsed: 12743560,
     timeElapsed: 9358756,
-    startDatetime: "2023-01-01",
-    completeDatetime: "2023-01-04",
+    startDatetime: '2023-01-01',
+    completeDatetime: '2023-01-04',
   });
 
   const result9 = await Result.create({
     spaceUsed: 12487664,
     timeElapsed: 4099683,
-    startDatetime: "2023-01-01",
-    completeDatetime: "2023-01-03",
+    startDatetime: '2023-01-01',
+    completeDatetime: '2023-01-03',
   });
 
   const result10 = await Result.create({
     spaceUsed: 11290304,
     timeElapsed: 1437141724,
-    startDatetime: "2023-02-01",
-    completeDatetime: "2023-02-02",
+    startDatetime: '2023-02-01',
+    completeDatetime: '2023-02-02',
   });
 
   const result11 = await Result.create({
     spaceUsed: 12743560,
     timeElapsed: 9358756,
-    startDatetime: "2023-02-01",
-    completeDatetime: "2023-02-04",
+    startDatetime: '2023-02-01',
+    completeDatetime: '2023-02-04',
   });
 
   const result12 = await Result.create({
     spaceUsed: 12487664,
     timeElapsed: 4099683,
-    startDatetime: "2023-02-01",
-    completeDatetime: "2023-02-03",
+    startDatetime: '2023-02-01',
+    completeDatetime: '2023-02-03',
   });
 
   const result13 = await Result.create({
     spaceUsed: 11290304,
     timeElapsed: 1437141724,
-    startDatetime: "2023-02-01",
-    completeDatetime: "2023-02-02",
+    startDatetime: '2023-02-01',
+    completeDatetime: '2023-02-02',
   });
 
   const result14 = await Result.create({
     spaceUsed: 12487664,
     timeElapsed: 4099683,
-    startDatetime: "2023-02-01",
-    completeDatetime: "2023-02-03",
+    startDatetime: '2023-02-01',
+    completeDatetime: '2023-02-03',
   });
 
   const problem1 = await Problem.create({
-    title: "linked list",
-    statement: "Find the first null node in the linked list",
-    blurb: "Find the first null node in the linked list",
-    initialCode: "no starter code",
-    startDate: "2022-11-01 00:00:00",
-    endDate: "2022-12-01 00:00:00",
+    title: 'linked list',
+    statement: 'Find the first null node in the linked list',
+    blurb: 'Find the first null node in the linked list',
+    initialCode: 'no starter code',
+    startDate: '2022-11-01 00:00:00',
+    endDate: '2022-12-01 00:00:00',
     spaceWeight: 0.44,
     timeWeight: 0.46,
   });
 
   const problem2 = await Problem.create({
-    title: "A Community Center for Graph Theory Enthusiasts",
-    statement: "Find the first null node in ",
+    title: 'A Community Center for Graph Theory Enthusiasts',
+    statement: 'Find the first null node in ',
     blurb:
       "In the heart of Silicon Valley, there stood a store called 'Null Node Nook.' The store was a programmer's paradise, filled with all sorts of resources and tools for solving complex programming problems. But its main attraction was the 'Null Node Lounge' - a cozy corner in the store where customers could gather and work together to solve one of the most challenging problems in graph theory: finding a null node.",
-    initialCode: "no starter code",
-    startDate: "2022-12-01 00:00:00",
-    endDate: "2023-01-01 00:00:00",
+    initialCode: 'no starter code',
+    startDate: '2022-12-01 00:00:00',
+    endDate: '2023-01-01 00:00:00',
     spaceWeight: 0.44,
     timeWeight: 0.46,
   });
 
   const problem3 = await Problem.create({
     title: "A Programmer's Paradise for Linked List Lovers",
-    statement: "Find the first null node in the linked list",
+    statement: 'Find the first null node in the linked list',
     blurb:
       "In the bustling city of Techville, there was a store that stood out from the rest - 'The Linked List Emporium.' The store was a programmer's paradise, filled to the brim with resources and tools for solving all sorts of programming problems. But its specialty was linked lists. The owner, a brilliant programmer named Max, had a particular passion for linked lists and had spent years perfecting his craft. His store was not just a place to buy programming resources - it was a community center where people from all walks of life could gather and share their love for linked lists.",
-    initialCode: "no starter code",
-    startDate: "2023-01-01 00:00:00",
-    endDate: "2023-02-01 00:00:00",
+    initialCode: 'no starter code',
+    startDate: '2023-01-01 00:00:00',
+    endDate: '2023-02-01 00:00:00',
     spaceWeight: 0.44,
     timeWeight: 0.46,
   });
 
   const problem4 = await Problem.create({
-    title: "Firefighters called to rescue cat from binary tree!",
+    title: 'Firefighters called to rescue cat from binary tree!',
     statement: `Local firefighters have been called to rescue a cat named
 Sherman from a binary tree on 2nd street. Time is of the essence
 as the firefighters need to travel across town and help another
@@ -196,8 +196,8 @@ runSubmission()
 `,
     hint1: `Sherman is a crazy cat that likes to climb the tallest outside
 branches of the tree.`,
-    startDate: "2023-02-01 00:00:00",
-    endDate: "2023-07-01 00:00:00",
+    startDate: '2023-02-01 00:00:00',
+    endDate: '2023-07-01 00:00:00',
     spaceWeight: 0.3,
     timeWeight: 0.6,
     numberOfLinesForReadOnly: 10,
@@ -281,7 +281,9 @@ function binaryTreeGenerator(N, nodeSherman) {
 
 function test(size, location, testNumber) {
   const root = binaryTreeGenerator(size, location);
-  console.log(' - test number: - ' + testNumber)
+
+  console.log(' ------- TEST NUMBER  ' + testNumber + ' -------')
+
   const start = process.hrtime.bigint();
   const result = findSherman(root);
   const end = process.hrtime.bigint();
@@ -294,16 +296,16 @@ function test(size, location, testNumber) {
 
 function separateResults(results) {
   const resultTest = [];
-  const resultTime = [];
-  const resultMemory = [];
+  const Time = [];
+  const Memory = [];
 
   for (let i = 0; i < results.length; i++) {
     resultTest.push(results[i].result);
-    resultTime.push(results[i].time);
-    resultMemory.push(results[i].memory);
+    Time.push(results[i].time);
+    Memory.push(results[i].memory);
   }
 
-  return { result: resultTest, time: resultTime, memory: resultMemory };
+  return { result: resultTest, time: Time, memory: Memory };
 }
 
 function runSubmission() {
@@ -321,21 +323,21 @@ function runSubmission() {
   results = separateResults(results);
 
   let resultTest = results.result;
-  let resultTime = results.time.reduce((acc, cur) => { return acc + Number(cur); }, 0) / results.time.length;
-  let resultMemory = results.memory.reduce((acc, cur) => { return acc + cur; }, 0) / results.memory.length;
+  let Time = results.time.reduce((acc, cur) => { return acc + Number(cur); }, 0) / results.time.length;
+  let Memory = results.memory.reduce((acc, cur) => { return acc + cur; }, 0) / results.memory.length;
 
-  resultTime = resultTime.toFixed(0);
-  resultMemory = resultMemory.toFixed(0);
+  Time = Time.toFixed(0);
+  Memory = Memory.toFixed(0);
 
   if (resultTest[0] === 9999 && resultTest[1] === 19999 && resultTest[2] === 29999) {
     resultTest = 'tests passed';
   } else {
     resultTest = 'test failed';
-    resultMemory = 'none';
-    resultTime = 'none';
+    Memory = 'none';
+    Time = 'none';
   }
 
-  return resultTest + ',' + 'resultTime: ' + resultTime + ',' + 'resultMemory: ' + resultMemory;
+  return resultTest + ',' + 'Time: ' + Time + ',' + 'Memory: ' + Memory;
 }
 `,
   });
