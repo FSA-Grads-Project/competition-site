@@ -249,12 +249,12 @@ export const CodeEditor = ({ auth, solution, current }) => {
               ''
             ) : contextOutput[0] === 'tests passed' ? (
               <div id='output-passed-container' className='text-center mt-3'>
-                <H3 className='md:text-5xl md:tracking-widest'>
+                <H3 className='text-3xl sm:text-4xl md:text-5xl tracking-widest'>
                   {contextOutput[0] + '!'}
                 </H3>
                 <DividerDiv className='my-5 xs:mx-7' />
 
-                <div className='flex flex-row justify-around pt-1'>
+                <div className='flex flex-col sm:flex-row justify-around gap-4 mb-4 sm:pt-1'>
                   <ContextOutputH4>
                     {contextOutput[1].slice(0, 6)}
                     {(contextOutput[1].slice(6) / 1000000).toFixed(2)} ms
@@ -271,16 +271,14 @@ export const CodeEditor = ({ auth, solution, current }) => {
                   {contextOutput[0] + '!'}
                 </H3>
                 <DividerDiv className='mx-4 xs:mx-5 mt-2' />
-                <EditorAndOutputDiv className='w-full border-none pb-0'>
-                  <ConsoleOutput className='min-h-36 max-h-52 overflow-y-auto mx-5 pt-1 text-left'>
+                <EditorAndOutputDiv className='w-full border-none py-2'>
+                  <ConsoleOutput>
                     {consoleOutput.length < 1
                       ? ''
                       : consoleOutput.map((console, i) => {
                           return (
                             <ul key={i} className='output-ul'>
-                              <li className='font-playfair tracking-wider mb-1'>
-                                {console}
-                              </li>
+                              <li className='mb-1'>{console}</li>
                             </ul>
                           );
                         })}

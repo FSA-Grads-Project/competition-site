@@ -38,13 +38,12 @@ export const ProblemTitle = tw.div`
     mb-2
     text-center
     lg:text-left
-    font-playfair
+    font-playfair-sc
     font-black
-    text-xl
+    text-2xl
+    tracking-wider
     text-darkFont
-    md:text-3xl
-    border-b-2
-    border-black
+    sm:text-3xl
 `;
 
 export const ProblemStatement = tw.div`
@@ -76,11 +75,19 @@ export const HintButton = tw.button`
 export const ContextOutputH4 = tw.h4`
 	text-lg 
 	font-playfair
-	md:font-thin
-	md:tracking-wider
-	md:text-3xl
+	font-thin
+	tracking-wider
+    text-3xl
+    sm:text-3xl
 `;
 
 export const ConsoleOutput = tw.div`
-  
+    min-h-36 
+    max-h-52 
+    overflow-y-auto 
+    mx-5 
+    text-left
+    font-playfair 
+    tracking-wider
+    text-sm
 `;
