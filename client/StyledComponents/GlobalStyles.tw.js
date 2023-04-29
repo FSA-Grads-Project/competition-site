@@ -27,6 +27,7 @@ export const EditorButton = tw.button`
 	disabled:text-darkFont
 	transition-all duration-150 ease-linear
 	md:text-xl
+	shadow-md
 `;
 
 export const ButtonWrapper = tw.div`
@@ -44,6 +45,7 @@ export const EditorAndOutputDiv = tw.div`
 	border-[1.5px] 
 	border-black 
 	rounded-lg
+	drop-shadow-md
 `;
 
 export const DarkButton = tw.button`

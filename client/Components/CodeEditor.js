@@ -165,7 +165,6 @@ export const CodeEditor = ({ auth, solution, current }) => {
     readOnly: solutionCompletedDate ? true : false,
   };
 
-  console.log(contextOutput);
   return (
     <div>
       <SubmitModal
@@ -199,13 +198,16 @@ export const CodeEditor = ({ auth, solution, current }) => {
         </ButtonWrapper>
       ) : (
         <ButtonWrapper>
-          <div className='w-1/4 flex justify-center items-center text-center'>
+          <div
+            id='evalButton-flex-container'
+            className='w-1/4 flex justify-center items-center text-center'
+          >
             <EditorButton
               className={
                 isEvaluating
                   ? 'w-10 m-0 rounded-full border-[3px] bg-disabledButtonBackground border-fadedFont border-l-disabledButtonBackground animate-rotate text-lightBackground'
                   : evalCheck
-                  ? 'text-lightBackground w-full m-0 bg-darkFont border-darkFont'
+                  ? 'flex justify-center items-center text-lightBackground w-full m-0 bg-darkFont border-darkFont'
                   : 'w-full'
               }
               onClick={onEvaluate}
@@ -216,7 +218,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
               ) : !evalCheck ? (
                 'Evaluate'
               ) : solutionPassed ? (
-                <AiOutlineCheck />
+                <AiOutlineCheck className='text-center' />
               ) : (
                 <AiOutlineClose />
               )}
