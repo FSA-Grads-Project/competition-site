@@ -183,7 +183,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
           onChange={handleEditorChange}
           onMount={handleEditorDidMount}
           options={options}
-          className='min-h-72'
+          className='min-h-[16rem]'
           onUnmount={handleUnmount}
         />
       </EditorAndOutputDiv>

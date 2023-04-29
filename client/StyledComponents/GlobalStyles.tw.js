@@ -48,6 +48,23 @@ export const EditorAndOutputDiv = tw.div`
 	drop-shadow-md
 `;
 
+export const ContextOutput = tw.div`
+
+`;
+
+export const ConsoleOutput = tw.div`
+  
+`;
+
+export const OutputTitleWrapper = tw.div`
+	flex
+	justify-center
+	content-center
+	items-center
+	mx-auto
+	mb-1
+`;
+
 export const DarkButton = tw.button`
 	bg-darkFont
 	p-2
