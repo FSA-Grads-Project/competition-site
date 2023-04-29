@@ -282,7 +282,7 @@ function binaryTreeGenerator(N, nodeSherman) {
 function test(size, location, testNumber) {
   const root = binaryTreeGenerator(size, location);
 
-  console.log(' ------- TEST NUMBER  ' + testNumber + ' -------')
+  console.log(' --------- TEST NUMBER  ' + testNumber + ' ---------')
 
   const start = process.hrtime.bigint();
   const result = findSherman(root);

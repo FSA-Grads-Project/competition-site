@@ -68,7 +68,7 @@ const Leaderboard = () => {
   }
 
   return (
-    <div className='h-[calc(100vh-19rem)] max-h-[41rem] min-h-[17rem] border-2 border-darkFont shadow-md rounded-lg flex flex-col items-center font-cormorant-sc p-2'>
+    <div className='h-[calc(100vh-19rem)] max-h-[41rem] min-h-[17rem] border-2 border-darkFont shadow-lg rounded-lg flex flex-col items-center font-cormorant-sc p-2'>
       <div className='flex justify-between w-full pr-5 pl-5 pt-3 pb-1 items-center '>
         <h2 className={`${isDesktop ? 'w-3/12' : 'w-4/12'}`}>User</h2>
         {!isMobile ? (
@@ -138,7 +138,7 @@ const Leaderboard = () => {
 
 const VerticalCategoryDetails = ({ score }) => {
   return (
-    <div className='text-sm ml-3'>
+    <div className='text-sm ml-3 font-cormorant'>
       <div className='flex'>
         <h3 className='w-28'>Execution Time:</h3>
         <p className='text-right w-24'>
@@ -148,13 +148,13 @@ const VerticalCategoryDetails = ({ score }) => {
       <div className='flex'>
         <h3 className='w-28'>Space Used:</h3>
         <p className='text-right w-24'>
-          {(score.spaceUsed / 1000000).toFixed(2)}mb
+          {(score.spaceUsed / 1000000).toFixed(2)}MB
         </p>
       </div>
       <div className='flex'>
         <h3 className='w-28'>Time To Solve:</h3>
         <p className='text-right w-24'>
-          {(score.timeToComplete / 3600000).toFixed(2)}hr
+          {(score.timeToComplete / 3600000).toFixed(2)}Hr
         </p>
       </div>
     </div>
@@ -170,11 +170,11 @@ const HorizontalCategoryDetails = ({ score }) => {
       </div>
       <div className='flex flex-col items-center mx-3 w-24'>
         <p>Space Used</p>
-        <p className=''>{(score.spaceUsed / 1000000).toFixed(2)}mb</p>
+        <p className=''>{(score.spaceUsed / 1000000).toFixed(2)}MB</p>
       </div>
       <div className='flex flex-col items-center mx-3 w-24'>
         <p>Time To Solve</p>
-        <p className=''>{(score.timeToComplete / 3600000).toFixed(2)}hr</p>
+        <p className=''>{(score.timeToComplete / 3600000).toFixed(2)}Hr</p>
       </div>
     </div>
   );
