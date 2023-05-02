@@ -27,6 +27,7 @@ export const EditorButton = tw.button`
 	disabled:text-darkFont
 	transition-all duration-150 ease-linear
 	md:text-xl
+	shadow-md
 `;
 
 export const ButtonWrapper = tw.div`
@@ -39,11 +40,12 @@ export const ButtonWrapper = tw.div`
 export const EditorAndOutputDiv = tw.div`
 	text-center
 	py-4
-  min-h-72
+  min-h-[12rem]
   bg-[#FFFFFF]
 	border-[1.5px] 
 	border-black 
-	rounded
+	rounded-lg
+	drop-shadow-md
 `;
 
 export const ContextOutput = tw.div`
@@ -114,7 +116,7 @@ export const TitleWrapper = tw.div`
 	flex
 	justify-center
 	items-center
-	mx-1
+	mr-1
 	mb-4
 	h-14
 	w-full

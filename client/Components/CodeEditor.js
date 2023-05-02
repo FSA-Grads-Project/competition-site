@@ -165,7 +165,6 @@ export const CodeEditor = ({ auth, solution, current }) => {
     readOnly: solutionCompletedDate ? true : false,
   };
 
-  console.log(contextOutput);
   return (
     <div>
       <SubmitModal
@@ -199,13 +198,16 @@ export const CodeEditor = ({ auth, solution, current }) => {
         </ButtonWrapper>
       ) : (
         <ButtonWrapper>
-          <div className='w-1/4 flex justify-center items-center text-center'>
+          <div
+            id='evalButton-flex-container'
+            className='w-1/4 flex justify-center items-center text-center'
+          >
             <EditorButton
               className={
                 isEvaluating
                   ? 'w-10 m-0 rounded-full border-[3px] bg-disabledButtonBackground border-fadedFont border-l-disabledButtonBackground animate-rotate text-lightBackground'
                   : evalCheck
-                  ? 'text-lightBackground w-full m-0 bg-darkFont border-darkFont'
+                  ? 'flex justify-center items-center text-lightBackground w-full m-0 bg-darkFont border-darkFont'
                   : 'w-full'
               }
               onClick={onEvaluate}
@@ -216,7 +218,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
               ) : !evalCheck ? (
                 'Evaluate'
               ) : solutionPassed ? (
-                <AiOutlineCheck />
+                <AiOutlineCheck className='text-center' />
               ) : (
                 <AiOutlineClose />
               )}
@@ -238,7 +240,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
       )}
 
       {solutionCompletedDate ? null : (
-        <div id='output-container' className='h-[250px] text-darkFont'>
+        <div id='output-container' className='text-darkFont'>
           <EditorAndOutputDiv id='editor-output' className='pb-0'>
             <div id='output-title-container' className=''>
               <H4>The Dispatch Output</H4>
@@ -249,12 +251,12 @@ export const CodeEditor = ({ auth, solution, current }) => {
               ''
             ) : contextOutput[0] === 'tests passed' ? (
               <div id='output-passed-container' className='text-center mt-3'>
-                <H3 className='md:text-5xl md:tracking-widest'>
+                <H3 className='text-3xl sm:text-4xl md:text-5xl tracking-widest'>
                   {contextOutput[0] + '!'}
                 </H3>
                 <DividerDiv className='my-5 xs:mx-7' />
 
-                <div className='flex flex-row justify-around pt-1'>
+                <div className='flex flex-col sm:flex-row justify-around gap-4 mb-4 sm:pt-1'>
                   <ContextOutputH4>
                     {contextOutput[1].slice(0, 6)}
                     {(contextOutput[1].slice(6) / 1000000).toFixed(2)} ms
@@ -271,16 +273,14 @@ export const CodeEditor = ({ auth, solution, current }) => {
                   {contextOutput[0] + '!'}
                 </H3>
                 <DividerDiv className='mx-4 xs:mx-5 mt-2' />
-                <EditorAndOutputDiv className='w-full border-none pb-0'>
-                  <ConsoleOutput className='min-h-36 max-h-52 overflow-y-auto mx-5 pt-1 text-left'>
+                <EditorAndOutputDiv className='w-full border-none py-2'>
+                  <ConsoleOutput>
                     {consoleOutput.length < 1
                       ? ''
                       : consoleOutput.map((console, i) => {
                           return (
                             <ul key={i} className='output-ul'>
-                              <li className='font-playfair tracking-wider mb-1'>
-                                {console}
-                              </li>
+                              <li className='mb-1'>{console}</li>
                             </ul>
                           );
                         })}

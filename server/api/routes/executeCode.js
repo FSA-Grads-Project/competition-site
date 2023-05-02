@@ -51,11 +51,9 @@ function executeCode(code, problem, res) {
         }
       `;
 
-  let platform = os.cpus()[0].model.includes("Intel")
-    ? "linux/amd64"
-    : "linux/arm64/v8";
-   
-  let platform = "linux/amd64"
+  let platform = os.cpus()[0].model.includes('Intel')
+    ? 'linux/amd64'
+    : 'linux/arm64/v8';
 
   try {
     let filePath = path.join(__dirname, `/temp/${fileName}`);
