@@ -133,20 +133,25 @@ export const TabTitleDiv = tw.div`
 
 export const H3 = tw.h3`
 	text-xl 
-	font-playfair-sc 
+	font-playfair-sc
+	text-darkFont
 	md:text-3xl
+	tracking-wider
 `;
 
 export const H4 = tw.h4`
 	text-xl 
 	font-playfair-sc 
 	md:text-2xl
+	tracking-wider
+	text-darkFont
 `;
 
 export const H5 = tw.h5`
 	text-lg 
-	font-playfair-sc 
+	font-cormorant-sc
 	md:text-xl
+	text-darkFont
 `;
 
 export const LeadingParagraph = tw.p`
