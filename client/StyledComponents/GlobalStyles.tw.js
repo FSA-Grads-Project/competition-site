@@ -134,7 +134,6 @@ export const TabTitleDiv = tw.div`
 export const H3 = tw.h3`
 	text-xl 
 	font-playfair-sc
-	text-darkFont
 	md:text-3xl
 	tracking-wider
 `;
