@@ -7,7 +7,7 @@ import { DarkButton } from '../StyledComponents/GlobalStyles.tw';
 import { ModalBackground, ModalBox } from '../StyledComponents/ModalStyles.tw';
 import { closeAccountUsernameModal } from '../store/modal';
 import useUpdateUsername from '../hooks/useUpdateUsername';
-import useGetUsername from '../hooks/useGetUsername';
+import { fetchUser } from '../store/auth';
 
 const AccountUsernameModal = () => {
   const modalOpen = useSelector(
@@ -16,21 +16,19 @@ const AccountUsernameModal = () => {
 
   const dispatch = useDispatch();
   const [error, setError] = useState('');
+  const user = useSelector((state) => state.auth.user.alias);
   const [username, setUsername] = useState('');
 
-  // useEffect(() => {
-  //   const getUsername = async () => {
-  //     const res = (await useGetUsername()).data;
-  //     setUsername(res);
-  //   };
-  //   getUsername();
-  // }, []);
+  useEffect(() => {
+    setUsername(user);
+  }, [user]);
 
   const onClick = async () => {
     const response = await useUpdateUsername(username);
     if (response.data === 'Username Taken') {
       setError('Username is already taken, try again');
     } else if (response.data === 'Successful signup') {
+      dispatch(fetchUser());
       dispatch(closeAccountUsernameModal());
     }
   };

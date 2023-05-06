@@ -8,6 +8,7 @@ import {
   H4,
   H5,
 } from '../StyledComponents/GlobalStyles.tw';
+import AccountUsernameModal from './AccountUsernameModal';
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -16,10 +17,11 @@ const Account = () => {
 
   useEffect(() => {
     dispatch(fetchUser());
-  }, [user]);
+  }, []);
 
   return (
     <>
+      <AccountUsernameModal />
       <H3 className='text-2xl sm:text-3xl text-center text-darkFont my-10'>
         Welcome Back <i>{user.alias ? user.alias : null}</i> {''}!
       </H3>
@@ -28,9 +30,6 @@ const Account = () => {
         className='flex flex-col md:flex-row justify-center md:justify-between gap-20 my-10 mx-16'
       >
         <section id='account-left-container'>
-          {/* <H4 className='text-center mb-4'>
-            Your alias is: <i className='font-cormorant'>{user.alias}</i>
-          </H4> */}
           <button
             className='font-playfair-sc text-darkFont text-xl md:text-2xl hover:scale-[102%] duration-100'
             onClick={() => {

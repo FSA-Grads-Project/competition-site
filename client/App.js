@@ -11,14 +11,12 @@ import LoginModal from './Components/LoginModal';
 import InitialLoginModal from './Components/InitialLoginModal';
 import UserCheck from './Components/UserCheck';
 import './style.css';
-import AccountUsernameModal from './Components/AccountUsernameModal';
 
 const App = () => {
   return (
     <div id='App' className='app-js'>
       <LoginModal />
       <InitialLoginModal />
-      <AccountUsernameModal />
       <Routes>
         <Route element={<UserCheck />}>
           <Route element={<Header />}>
