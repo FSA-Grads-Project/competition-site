@@ -2,12 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUser } from '../store/auth';
 import { openAccountUsernameModal } from '../store/modal';
-import {
-  EditorAndOutputDiv,
-  H3,
-  H4,
-  H5,
-} from '../StyledComponents/GlobalStyles.tw';
+import { H3, H4, H5 } from '../StyledComponents/GlobalStyles.tw';
 import AccountUsernameModal from './AccountUsernameModal';
 import Leaderboard from './Leaderboard';
 
@@ -49,12 +44,13 @@ const Account = () => {
             <H5>...Coming Soon!</H5>
           </div>
           <Leaderboard className='' />
-          {/* <EditorAndOutputDiv className='w-[400px]'>
-          </EditorAndOutputDiv> */}
         </section>
       </div>
 
-      {/* <div id='admin-container' className='mx-16 my-10'>
+      {/* 
+        TODO Admin Section if we can't safely load new problems in db
+        
+        <div id='admin-container' className='mx-16 my-10'>
         <H4 className='text-center md:text-3xl my-6 font-cormorant-sc'>
           Administrator
         </H4>
