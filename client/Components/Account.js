@@ -9,6 +9,7 @@ import {
   H5,
 } from '../StyledComponents/GlobalStyles.tw';
 import AccountUsernameModal from './AccountUsernameModal';
+import Leaderboard from './Leaderboard';
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -21,29 +22,35 @@ const Account = () => {
 
   return (
     <>
-      <AccountUsernameModal />
-      <H3 className='text-2xl sm:text-3xl text-center text-darkFont my-10'>
-        Welcome Back <i>{user.alias ? user.alias : null}</i> {''}!
-      </H3>
       <div
         id='account-flexContainer'
-        className='flex flex-col md:flex-row justify-center md:justify-between gap-20 my-10 mx-16'
+        className='flex flex-col justify-center gap-20 my-8 mx-6 sm:mx-16 text-center'
       >
         <section id='account-left-container'>
+          <H3 className='text-2xl xs:text-3xl md:text-4xl text-darkFont mb-2'>
+            Welcome Back, <i>{user.alias ? user.alias : null}</i> {''}!
+          </H3>
           <button
-            className='font-playfair-sc text-darkFont text-xl md:text-2xl hover:scale-[102%] duration-100'
+            className='font-playfair italic text-darkFont text-lg hover:scale-[102%] duration-100'
             onClick={() => {
               dispatch(openAccountUsernameModal());
             }}
           >
-            Click HERE to change your Byline
+            Click here to change your Byline
           </button>
+          <AccountUsernameModal />
         </section>
-        <section id='account-right-container' className='md:w-1/2'>
-          <H4 className='text-center mb-5'>Personal Stats</H4>
-          <EditorAndOutputDiv>
-            <H5>Coming Soon!</H5>
-          </EditorAndOutputDiv>
+        <section
+          id='account-right-container'
+          className='flex flex-col mx-auto w-2/3 xs:w-3/4 min-w-[325px] max-w-[800px]'
+        >
+          <div className='mb-5'>
+            <H4>Personal Stats</H4>
+            <H5>...Coming Soon!</H5>
+          </div>
+          <Leaderboard className='' />
+          {/* <EditorAndOutputDiv className='w-[400px]'>
+          </EditorAndOutputDiv> */}
         </section>
       </div>
 
