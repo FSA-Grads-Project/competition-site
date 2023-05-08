@@ -13,7 +13,7 @@ export const Main = tw.div`
 	mt-5 
 	font-cormorant
 	text-darkFont
-	text-justify
+	text-left
 	leading-relaxed
 	tracking-wider
 `;

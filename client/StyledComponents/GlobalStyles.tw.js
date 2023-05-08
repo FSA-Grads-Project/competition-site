@@ -120,15 +120,18 @@ export const ModalBackground = tw.div`
 
 // Modal box container
 export const ModalBox = tw.div`
-	bg-darkBackground 
-	p-10 
-	px-15 
-	rounded-xl 
+	bg-[white] 
+	p-5 
+	px-5
+	xs:px-10 
+	rounded-md 
 	flex 
 	flex-col 
 	justify-center 
 	font-playfair 
 	items-center
+	h-[100%]
+	xxs:h-[auto]
 `;
 
 export const TitleWrapper = tw.div`

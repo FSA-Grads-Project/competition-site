@@ -1,14 +1,14 @@
 // System Imports
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import HintModal from './HintModal';
-import { openHintModal } from '../store/modal';
+import HintModal from "./HintModal";
+import { openHintModal } from "../store/modal";
 import {
   HintButton,
   ProblemTitle,
   ProblemStatement,
-} from '../StyledComponents/ProblemStyles.tw';
+} from "../StyledComponents/ProblemStyles.tw";
 
 export const Problem = ({ current }) => {
   const { problem } = useSelector((state) => state.problems);
@@ -20,10 +20,11 @@ export const Problem = ({ current }) => {
   };
 
   return (
-    <div id='problem'>
+    <div id="problem">
       {problem ? (
         <>
           <ProblemTitle>{problem.title}</ProblemTitle>
+          <img src={`/problemImages/${problem.id}.png`} />
           <ProblemStatement>
             {problem.statement || problem.blurb}
           </ProblemStatement>

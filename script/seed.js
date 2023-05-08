@@ -172,13 +172,11 @@ const initialization = async () => {
 
   const problem4 = await Problem.create({
     title: "Firefighters called to rescue cat from binary tree!",
-    statement: `Local firefighters have been called to rescue a cat named
-Sherman from a binary tree on 2nd street. Time is of the essence
-as the firefighters need to travel across town and help another
-department put out a four-alarm fire. Your goal is to help the
-firefighters by developing a function that accepts the root
-node of the binary tree as an argument and returns the number
-of the node where Sherman the cat is located.`,
+    statement: `Local firefighters have been called to rescue a cat named Sherman who has become stuck in a binary tree on 2nd street. Despite their best efforts, the firefighters are struggling to locate the cat and are in urgent need of the community's assistance in finding the feline's location within the tree.
+		\n
+		Time is of the essence as the firefighters are also needed across town to assist with a four-alarm fire. The community is being asked to help by keeping an eye out for Sherman in the tree and reporting any sightings or clues to the firefighters on the scene.
+		\n
+		The rescue mission is ongoing, and the firefighters are grateful for any assistance the community can provide. They urge everyone to stay safe and report any sightings of the cat as soon as possible, so they can quickly retrieve the feline and rush off to assist with the urgent fire. Your goal is to help the firefighters by developing a function that accepts the root node of the binary tree as an argument and returns the number of the node where Sherman the cat is located.`,
     blurb: `Local firefighters have received an urgent call to rescue Sherman, a cat stuck in a tree on 2nd Street downtown. The situation was made more complicated by the fact that the firefighters were already stretched thin, trying to help another department put out a four-alarm fire. With every second counting, and the firefighters needed to move quickly to rescue Sherman before they could head out to the other emergency.`,
     initialCode: `function findSherman(root) {
   // write your code here

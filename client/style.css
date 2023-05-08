@@ -13,6 +13,35 @@
   justify-content: center;
 }
 
+#loginModal {
+  transition: all 0.75s;
+  transform: scale(0) rotate(720deg);
+}
+
+#loginModalExtraPage {
+  transition: all 0.75s;
+  transform: scale(0) rotate(720deg);
+}
+
+#loginModal.openLogin {
+  transition: all 0.75s;
+  transform: scale(1) rotate(0);
+  /* opacity: 100; */
+}
+
+#loginModalExtraPage.openLogin {
+  transition: all 0.75s;
+  transform: scale(1) rotate(6deg);
+}
+
+.github img {
+  transition: all 300ms;
+}
+
+.github:hover img {
+  opacity: 100;
+}
+
 .main-container {
   max-width: 1250px;
   width: 100%;
