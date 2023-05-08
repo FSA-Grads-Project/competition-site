@@ -1,38 +1,45 @@
-# competition-site
+# The Dispatch
 
-Data structures and algorithms competition site
+## Overview
 
-## installation and setup
+The Dispatch is an algorithms and data structures competition site where a user's solution to a problem is ranked based on a composite score calculated from the following factors:
+- Time to complete the problem
+- Time the algorithm takes to run the test cases
+- Memory used
 
-1. fork and clone the repo
-2. cd into the directory
-3. npm install
-4. createdb competition_site_db
-5. create a .env file in the root directory of the project, add all secret's and tokens previously communicated
-6. npm run seed - this seeds the database but does not start the server
-7. npm run start:dev - this starts the server
+Every problem is designed to have multiple solutions with varying time and space complexities and dependent on the problem, the composite score is weighted based on whether the time the algorithm takes to run or the memory usage is determined to be the critical factor.
 
-## github norms
+A new problem is released every calendar month and solutions submitted during that time are ranked and added to the leaderboard. Past problems are available in a playground setting, but solutions submitted for past problems are not included in the leaderboard for the problem.
 
-1. push new changes to your forked repo (i.e. git push origin <branch name>)
-2. create pull request in forked repo
-3. each pull request requires two approvers - the second approver merges the changes
-4. pull changes to your local repo (i.e. git pull upstream main)
-5. sync your forked repo on GitHub
-6. extra: send a message in slack informing of any pushes or approvals
+## Features
 
-## Styling Norms
+- **New problem every month:** The Dispatch releases a new problem every calendar month, providing users with fresh opportunities to test their problem-solving skills.
 
-1. Fonts:
-   a) playfair & playfair-sc: used for headings (ie The Dispatch)
-   b) cororant-sc: used for majority of supporting text (ie problem statements)
-2. Colors:
-   a) lightBackground: #fdf5e8 - main background color & light font for dark buttons
-   b) darkBackground: #EDE4C5 - background for code editor and modals
-   c) darkFont: #333333 - main font color
-   d) fadedFont: #B3B3B3 - font color for disabled or faded text (ie code editor vs leaderboard tabs)
-   e) disabledButtonBackground: #E6E2D8 - used for disabled buttons (ie submit if eval not successful)
+- **Access past problems:** Users can access past problems at any time, even without logging in. These problems are available in a playground setting, allowing users to refine their problem-solving skills.
 
-Above fonts and colors are included in the tailwind.config.js file. You can use the colors directly with classes (ie bg-darkBackground)
+- **Real-time leaderboard:** The Dispatch features a real-time leaderboard that shows rankings based on the composite score. This allows users to see how their solutions stack up against others and provides an added layer of competition.
 
-pw - theDispatchFSA
+## Technologies Used
+
+The Dispatch was built using a variety of technologies, including:
+
+- **React:** A JavaScript library used for building user interfaces.
+- **Redux Tool Kit:** A set of tools for building React/Redux applications.
+- **OAuth Authentication:** A secure way to authenticate users using third-party providers.
+- **Docker:** A tool used for containerization of the application.
+- **Monaco:** A code editor used for the development environment.
+- **Express:** A fast, unopinionated, minimalist web framework for Node.js.
+- **PostgreSQL:** An open-source relational database management system.
+- **TailwindCSS:** A utility-first CSS framework for rapid UI development.
+
+## How to Participate In The Competition
+
+To participate in The Dispatch, users can navigate to the website and sign up for an account. Once registered, users can access the current month's problem and begin working on their solution.
+
+After developing a solution, users can submit their code for evaluation, where it will be ranked based on the composite score which consists of the time to solve, time code takes to execute, and memory used. Users can also view the leaderboard to see how their solution compares to others.
+
+## Brief Demo
+
+Below is a brief demo displaying the home page along with the submission of the solution
+![TheDispatchSample](https://user-images.githubusercontent.com/29100253/236723244-11c094fd-4ca3-49cf-b0eb-6e2f58d3deb3.gif)
+
