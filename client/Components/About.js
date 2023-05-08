@@ -6,8 +6,11 @@ import {
   H3SectionHeader,
   Paragraph,
   ListItem,
+  BioContainer,
+  H4BioHeader,
 } from '../StyledComponents/AboutStyles.tw.js';
 
+// **  This is the "About the Dispatch" Text that gets reused in the Home Page  ** //
 const AboutText = () => {
   return (
     <ColumnSection>
@@ -40,30 +43,129 @@ const AboutText = () => {
 
 const About = () => {
   return (
-    <MainFlexContainer>
-      <AboutText />
-      <ColumnSection>
-        <H3SectionHeader>How it all Works</H3SectionHeader>
-        <Paragraph>
-          After logging in, the current issue page will display the full problem
-          statement along with hints for solving the problem. The code editor
-          where the user can enter their solution becomes accessible with the
-          ouput, including test results and logged values, displayed below the
-          editor.
-        </Paragraph>
-        <Paragraph>
-          After the user has entered their solution into the code editor, the
-          solution can be tested by clicking the evaluate button. If the
-          solution passes all of the tests cases, the submit button is made
-          accessible and the user can submit their solution for scoring and
-          ranking on the leaderboard.
-        </Paragraph>
-        <Paragraph>
-          But be careful! Only one final submission is allowed per user and once
-          you click submit you will be unable to submit a different solution!
-        </Paragraph>
-      </ColumnSection>
-    </MainFlexContainer>
+    <>
+      <MainFlexContainer id='About-text'>
+        <AboutText />
+        <ColumnSection>
+          <H3SectionHeader>How it all Works</H3SectionHeader>
+          <Paragraph>
+            After logging in, the current issue page will display the full
+            problem statement along with hints for solving the problem. The code
+            editor where the user can enter their solution becomes accessible
+            with the ouput, including test results and logged values, displayed
+            below the editor.
+          </Paragraph>
+          <Paragraph>
+            After the user has entered their solution into the code editor, the
+            solution can be tested by clicking the evaluate button. If the
+            solution passes all of the tests cases, the submit button is made
+            accessible and the user can submit their solution for scoring and
+            ranking on the leaderboard.
+          </Paragraph>
+          <Paragraph>
+            But be careful! Only one final submission is allowed per user and
+            once you click submit you will be unable to submit a different
+            solution!
+          </Paragraph>
+        </ColumnSection>
+      </MainFlexContainer>
+      <section className='text-darkFont mx-16'>
+        <H3SectionHeader className='mb-10'>Meet our Team</H3SectionHeader>
+
+        <div
+          id='bio-flex-container'
+          className='flex flex-wrap justify-evenly gap-x-[8.75rem]'
+        >
+          <BioContainer id='Fraiha'>
+            <img
+              src='/bioPics/GenProfilePic.png'
+              alt='image of Adam Stoler'
+              width={150}
+              className='mx-auto'
+            />
+            <H4BioHeader>Alex Fraiha</H4BioHeader>
+            <Paragraph>
+              Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
+              Tempor voluptate mollit minim elit commodo non nulla minim id quis
+              eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
+              ullamco nisi consectetur laborum commodo nulla do. Tempor
+              voluptate mollit minim elit commodo non nulla minim id quis eu.
+              Incididunt quis Lorem excepteur pariatur.
+            </Paragraph>
+          </BioContainer>
+          <BioContainer id='Murjas'>
+            <img
+              src='/bioPics/Murjas.jpg'
+              alt='image of Martin Murjas'
+              width={150}
+              className='mx-auto'
+            />
+            <H4BioHeader>Martin Murjas</H4BioHeader>
+            <Paragraph>
+              As a natural problem-solver and lifelong learner, Martin has
+              always been drawn to engineering, from machines to software. His
+              curiosity and eagerness to make a difference drives him to
+              constantly seek out new ways to innovate and create. As a Full
+              Stack Software Developer at Bloomingdale's, he brings a critical
+              eye and a love of building useful solutions to every project,
+              enhancing user experiences and improving processes.
+            </Paragraph>
+          </BioContainer>
+          <BioContainer id='Motuzis'>
+            <img
+              src='/bioPics/GenProfilePic.png'
+              alt='image of Adam Stoler'
+              width={150}
+              className='mx-auto'
+            />
+            <H4BioHeader>Larry Motuzis</H4BioHeader>
+            <Paragraph>
+              Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
+              Tempor voluptate mollit minim elit commodo non nulla minim id quis
+              eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
+              ullamco nisi consectetur laborum commodo nulla do. Tempor
+              voluptate mollit minim elit commodo non nulla minim id quis eu.
+              Incididunt quis Lorem excepteur pariatur.
+            </Paragraph>
+          </BioContainer>
+          <BioContainer id='Stoisolovich'>
+            <img
+              src='/bioPics/GenProfilePic.png'
+              alt='image of Adam Stoler'
+              width={150}
+              className='mx-auto'
+            />
+            <H4BioHeader>Alex Stoisolovich</H4BioHeader>
+            <Paragraph>
+              Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
+              Tempor voluptate mollit minim elit commodo non nulla minim id quis
+              eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
+              ullamco nisi consectetur laborum commodo nulla do. Tempor
+              voluptate mollit minim elit commodo non nulla minim id quis eu.
+              Incididunt quis Lorem excepteur pariatur.
+            </Paragraph>
+          </BioContainer>
+          <BioContainer id='Stoler'>
+            <img
+              src='/bioPics/Stoler.jpg'
+              alt='image of Adam Stoler'
+              width={150}
+              className='mx-auto'
+            />
+            <H4BioHeader>Adam Stoler</H4BioHeader>
+            <Paragraph>
+              After years of travel to over 50 different countries and 46 U.S.
+              states (and counting) as a guitarist to Grammy & Tony
+              award-winning acts, Adam now applies his creative talents as a
+              Full Stack Engineer. One thing he loves about software engineering
+              is the collaborative environment, both learning from more senior
+              developers, and sharing his knowledge while holding the door open
+              to those behind him.
+            </Paragraph>
+          </BioContainer>
+        </div>
+      </section>
+    </>
   );
 };
 
