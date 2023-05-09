@@ -8,6 +8,7 @@ import {
   ListItem,
   BioContainer,
   H4BioHeader,
+  BioText,
 } from '../StyledComponents/AboutStyles.tw.js';
 
 // **  This is the "About the Dispatch" Text that gets reused in the Home Page  ** //
@@ -69,7 +70,9 @@ const About = () => {
           </Paragraph>
         </ColumnSection>
       </MainFlexContainer>
-      <section className='text-darkFont mx-16'>
+
+      {/* Bio Section */}
+      <section className='text-darkFont mx-7 sm:mx-16'>
         <H3SectionHeader className='mb-10'>Meet our Team</H3SectionHeader>
 
         <div
@@ -81,27 +84,44 @@ const About = () => {
               src='/bioPics/GenProfilePic.png'
               alt='image of Adam Stoler'
               width={150}
-              className='mx-auto'
+              className='mx-auto rounded-full'
             />
             <H4BioHeader>Alex Fraiha</H4BioHeader>
-            <Paragraph>
+            {/* <BioText>
               Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
               Tempor voluptate mollit minim elit commodo non nulla minim id quis
               eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
               ullamco nisi consectetur laborum commodo nulla do. Tempor
               voluptate mollit minim elit commodo non nulla minim id quis eu.
               Incididunt quis Lorem excepteur pariatur.
-            </Paragraph>
+            </BioText> */}
+          </BioContainer>
+          <BioContainer id='Motuzis'>
+            <img
+              src='/bioPics/GenProfilePic.png'
+              alt='image of Adam Stoler'
+              width={150}
+              className='mx-auto rounded-full'
+            />
+            <H4BioHeader>Larry Motuzis</H4BioHeader>
+            {/* <BioText>
+              Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
+              Tempor voluptate mollit minim elit commodo non nulla minim id quis
+              eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
+              ullamco nisi consectetur laborum commodo nulla do. Tempor
+              voluptate mollit minim elit commodo non nulla minim id quis eu.
+              Incididunt quis Lorem excepteur pariatur.
+            </BioText> */}
           </BioContainer>
           <BioContainer id='Murjas'>
             <img
-              src='/bioPics/Murjas.jpg'
+              src='/bioPics/Murjas-nobg.png'
               alt='image of Martin Murjas'
               width={150}
-              className='mx-auto'
+              className='mx-auto rounded-full'
             />
             <H4BioHeader>Martin Murjas</H4BioHeader>
-            <Paragraph>
+            {/* <BioText>
               As a natural problem-solver and lifelong learner, Martin has
               always been drawn to engineering, from machines to software. His
               curiosity and eagerness to make a difference drives him to
@@ -109,59 +129,42 @@ const About = () => {
               Stack Software Developer at Bloomingdale's, he brings a critical
               eye and a love of building useful solutions to every project,
               enhancing user experiences and improving processes.
-            </Paragraph>
-          </BioContainer>
-          <BioContainer id='Motuzis'>
-            <img
-              src='/bioPics/GenProfilePic.png'
-              alt='image of Adam Stoler'
-              width={150}
-              className='mx-auto'
-            />
-            <H4BioHeader>Larry Motuzis</H4BioHeader>
-            <Paragraph>
-              Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
-              Tempor voluptate mollit minim elit commodo non nulla minim id quis
-              eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
-              ullamco nisi consectetur laborum commodo nulla do. Tempor
-              voluptate mollit minim elit commodo non nulla minim id quis eu.
-              Incididunt quis Lorem excepteur pariatur.
-            </Paragraph>
+            </BioText> */}
           </BioContainer>
           <BioContainer id='Stoisolovich'>
             <img
               src='/bioPics/GenProfilePic.png'
               alt='image of Adam Stoler'
               width={150}
-              className='mx-auto'
+              className='mx-auto rounded-full'
             />
             <H4BioHeader>Alex Stoisolovich</H4BioHeader>
-            <Paragraph>
+            {/* <BioText>
               Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
               Tempor voluptate mollit minim elit commodo non nulla minim id quis
               eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
               ullamco nisi consectetur laborum commodo nulla do. Tempor
               voluptate mollit minim elit commodo non nulla minim id quis eu.
               Incididunt quis Lorem excepteur pariatur.
-            </Paragraph>
+            </BioText> */}
           </BioContainer>
           <BioContainer id='Stoler'>
             <img
-              src='/bioPics/Stoler.jpg'
+              src='/bioPics/Stoler-nobg.png'
               alt='image of Adam Stoler'
               width={150}
-              className='mx-auto'
+              className='mx-auto rounded-full'
             />
             <H4BioHeader>Adam Stoler</H4BioHeader>
-            <Paragraph>
-              After years of travel to over 50 different countries and 46 U.S.
+            {/* <BioText>
+              After years of travel to almost 60 different countries and 46 U.S.
               states (and counting) as a guitarist to Grammy & Tony
               award-winning acts, Adam now applies his creative talents as a
               Full Stack Engineer. One thing he loves about software engineering
               is the collaborative environment, both learning from more senior
               developers, and sharing his knowledge while holding the door open
-              to those behind him.
-            </Paragraph>
+              for those behind him.
+            </BioText> */}
           </BioContainer>
         </div>
       </section>

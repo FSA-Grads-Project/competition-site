@@ -5,7 +5,8 @@ export const MainFlexContainer = tw.main`
   flex-col
   gap-x-20
   mt-5
-  mx-16
+  mx-7
+  sm:mx-16
   md:mb-10
   md:flex-row
   text-darkFont
@@ -37,7 +38,6 @@ export const H4BioHeader = tw.h4`
 export const Paragraph = tw.p`
   font-cormorant
   my-2
-
 `;
 
 export const ListItem = tw.li`
@@ -48,7 +48,18 @@ export const ListItem = tw.li`
 export const BioContainer = tw.article`
   flex
   flex-col
-  w-1/4
-  mb-4
+  md:w-2/5
+  lg:w-5/12
+  xl:w-1/4
+  mb-12
+  cursor-pointer
+  hover:scale-105
+  duration-200
+`;
+
+export const BioText = tw.p`
+  font-cormorant
+  my-2
   tracking-wide
+  leading-snug
 `;

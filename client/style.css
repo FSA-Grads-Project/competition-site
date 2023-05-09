@@ -23,7 +23,7 @@
 @media (min-width: 821px) {
   .header-grid {
     display: grid;
-    grid-template-columns: 120px auto 120px;
+    grid-template-columns: 150px auto 150px;
     grid-template-row: auto;
     place-content: space-between;
   }
