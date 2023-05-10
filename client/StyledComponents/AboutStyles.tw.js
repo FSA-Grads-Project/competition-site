@@ -32,7 +32,7 @@ export const H4BioHeader = tw.h4`
   text-xl
   text-center
   font-playfair-sc
-
+  group-hover:opacity-30
 `;
 
 export const Paragraph = tw.p`
@@ -49,17 +49,32 @@ export const BioContainer = tw.article`
   flex
   flex-col
   md:w-2/5
-  lg:w-5/12
-  xl:w-1/4
+
+  lg:w-auto
   mb-12
-  cursor-pointer
-  hover:scale-105
-  duration-200
+  cursor-default
+
+  relative
+  group
 `;
 
 export const BioText = tw.p`
   font-cormorant
-  my-2
   tracking-wide
   leading-snug
+  text-center
+
+  absolute 
+  bottom-[-75px] 
+  m-auto 
+  py-11 
+  px-10
+  text-[#ffffff] 
+  duration-500 
+  rounded-full 
+  bg-[#000000] 
+  opacity-0
+  group-hover:opacity-100 
+  bg-opacity-75 
+  z-20
 `;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   MainFlexContainer,
@@ -43,6 +43,16 @@ const AboutText = () => {
 };
 
 const About = () => {
+  // const [isHovered, setIsHovered] = useState(false);
+
+  // const handleMouseEnter = () => {
+  //   setIsHovered(true);
+  // };
+
+  // const handleMouseLeave = () => {
+  //   setIsHovered(false);
+  // };
+
   return (
     <>
       <MainFlexContainer id='About-text'>
@@ -77,51 +87,51 @@ const About = () => {
 
         <div
           id='bio-flex-container'
-          className='flex flex-wrap justify-evenly gap-x-[8.75rem]'
+          className='flex flex-wrap justify-evenly gap-x-16'
         >
-          <BioContainer id='Fraiha'>
+          <BioContainer id='Fraiha' className='relative group'>
             <img
               src='/bioPics/GenProfilePic.png'
               alt='image of Adam Stoler'
-              width={150}
-              className='mx-auto rounded-full'
+              width={130}
+              className='mx-auto rounded-full group-hover:opacity-30'
             />
             <H4BioHeader>Alex Fraiha</H4BioHeader>
-            {/* <BioText>
+            <BioText>
               Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
               Tempor voluptate mollit minim elit commodo non nulla minim id quis
               eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
               ullamco nisi consectetur laborum commodo nulla do. Tempor
               voluptate mollit minim elit commodo non nulla minim id quis eu.
               Incididunt quis Lorem excepteur pariatur.
-            </BioText> */}
+            </BioText>
           </BioContainer>
-          <BioContainer id='Motuzis'>
+          <BioContainer id='Motuzis' className='relative group'>
             <img
               src='/bioPics/GenProfilePic.png'
-              alt='image of Adam Stoler'
-              width={150}
-              className='mx-auto rounded-full'
+              alt='image of Larry Motuzis'
+              width={130}
+              className='mx-auto rounded-full group-hover:opacity-30'
             />
             <H4BioHeader>Larry Motuzis</H4BioHeader>
-            {/* <BioText>
+            <BioText>
               Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
               Tempor voluptate mollit minim elit commodo non nulla minim id quis
               eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
               ullamco nisi consectetur laborum commodo nulla do. Tempor
               voluptate mollit minim elit commodo non nulla minim id quis eu.
               Incididunt quis Lorem excepteur pariatur.
-            </BioText> */}
+            </BioText>
           </BioContainer>
           <BioContainer id='Murjas'>
             <img
               src='/bioPics/Murjas-nobg.png'
               alt='image of Martin Murjas'
-              width={150}
-              className='mx-auto rounded-full'
+              width={130}
+              className='mx-auto drop-shadow-lg rounded-full group-hover:opacity-30'
             />
             <H4BioHeader>Martin Murjas</H4BioHeader>
-            {/* <BioText>
+            <BioText>
               As a natural problem-solver and lifelong learner, Martin has
               always been drawn to engineering, from machines to software. His
               curiosity and eagerness to make a difference drives him to
@@ -129,42 +139,42 @@ const About = () => {
               Stack Software Developer at Bloomingdale's, he brings a critical
               eye and a love of building useful solutions to every project,
               enhancing user experiences and improving processes.
-            </BioText> */}
+            </BioText>
           </BioContainer>
           <BioContainer id='Stoisolovich'>
             <img
               src='/bioPics/GenProfilePic.png'
-              alt='image of Adam Stoler'
-              width={150}
-              className='mx-auto rounded-full'
+              alt='image of Alex Stoisolovich'
+              width={130}
+              className='mx-auto rounded-full group-hover:opacity-30'
             />
             <H4BioHeader>Alex Stoisolovich</H4BioHeader>
-            {/* <BioText>
+            <BioText>
               Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
               Tempor voluptate mollit minim elit commodo non nulla minim id quis
               eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
               ullamco nisi consectetur laborum commodo nulla do. Tempor
               voluptate mollit minim elit commodo non nulla minim id quis eu.
               Incididunt quis Lorem excepteur pariatur.
-            </BioText> */}
+            </BioText>
           </BioContainer>
           <BioContainer id='Stoler'>
             <img
               src='/bioPics/Stoler-nobg.png'
               alt='image of Adam Stoler'
-              width={150}
-              className='mx-auto rounded-full'
+              width={130}
+              className='mx-auto drop-shadow-lg rounded-full group-hover:opacity-30'
             />
             <H4BioHeader>Adam Stoler</H4BioHeader>
-            {/* <BioText>
-              After years of travel to almost 60 different countries and 46 U.S.
+            <BioText>
+              After traveling to almost 60 different countries and 46 U.S.
               states (and counting) as a guitarist to Grammy & Tony
               award-winning acts, Adam now applies his creative talents as a
               Full Stack Engineer. One thing he loves about software engineering
               is the collaborative environment, both learning from more senior
               developers, and sharing his knowledge while holding the door open
               for those behind him.
-            </BioText> */}
+            </BioText>
           </BioContainer>
         </div>
       </section>
