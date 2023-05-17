@@ -23,7 +23,7 @@ const DesktopHeader = () => {
     <TitleHeader className='header-grid'>
       <HeaderDate>{dateString}</HeaderDate>
       {/* <Logo className='custom-font'>The Dispatch</Logo> */}
-      <img src='/TitlePNG.png' alt='Title Pic' width={350} className='pt-4' />
+      <img src='/TitlePNG.png' alt='Title Pic' width={325} className='pt-4' />
       <IssueNumber>
         {(problem.problem?.id && pathname === `/problem`) ||
         pathname === `/problem/${problem.problem?.id}`

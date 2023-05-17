@@ -85,36 +85,6 @@ export const ButtonIcon = tw.img`
 	h-10
 `;
 
-// modal background
-export const ModalBackground = tw.div`
-	w-full	
-	bg-darkFont
-	fixed
-	inset-0
-	flex
-	justify-center
-	items-center
-	backdrop-blur-sm
-	bg-opacity-60
-	z-10
-`;
-
-// Modal box container
-export const ModalBox = tw.div`
-	bg-[white] 
-	p-5 
-	px-5
-	xs:px-10 
-	rounded-md 
-	flex 
-	flex-col 
-	justify-center 
-	font-playfair 
-	items-center
-	h-[auto]
-	xxs:h-[auto]
-`;
-
 export const TitleWrapper = tw.div`
 	flex
 	justify-center
@@ -136,20 +106,24 @@ export const TabTitleDiv = tw.div`
 
 export const H3 = tw.h3`
 	text-xl 
-	font-playfair-sc 
+	font-playfair-sc
 	md:text-3xl
+	tracking-wider
 `;
 
 export const H4 = tw.h4`
 	text-xl 
 	font-playfair-sc 
 	md:text-2xl
+	tracking-wider
+	text-darkFont
 `;
 
 export const H5 = tw.h5`
 	text-lg 
-	font-playfair-sc 
+	font-cormorant-sc
 	md:text-xl
+	text-darkFont
 `;
 
 export const LeadingParagraph = tw.p`

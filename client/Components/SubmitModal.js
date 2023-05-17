@@ -1,16 +1,13 @@
 // System library imports
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 // Local imports
-import {
-  ModalBackground,
-  ModalBox,
-  DarkButton,
-} from "../StyledComponents/GlobalStyles.tw";
-import { closeSubmitModal } from "../store/modal";
-import useEvaluateCode from "../hooks/useEvaluateCode";
-import useUploadUserSolution from "../hooks/useUploadUserSolution";
+import { ModalBackground, ModalBox } from '../StyledComponents/ModalStyles.tw';
+import { DarkButton } from '../StyledComponents/GlobalStyles.tw';
+import { closeSubmitModal } from '../store/modal';
+import useEvaluateCode from '../hooks/useEvaluateCode';
+import useUploadUserSolution from '../hooks/useUploadUserSolution';
 
 const SubmitModal = ({ code, setContextOutput, setConsoleOutput }) => {
   const modalOpen = useSelector((state) => state.modals.submitModalOpen);
@@ -34,7 +31,7 @@ const SubmitModal = ({ code, setContextOutput, setConsoleOutput }) => {
     );
 
     if (auth.accessToken) {
-      await useUploadUserSolution(code, res, "submit");
+      await useUploadUserSolution(code, res, 'submit');
     }
     setIsSubmitting(false);
     dispatch(closeSubmitModal());
@@ -42,30 +39,30 @@ const SubmitModal = ({ code, setContextOutput, setConsoleOutput }) => {
 
   return (
     <ModalBackground
-      id="submitModalBackground"
+      id='submitModalBackground'
       onClick={(ev) => {
-        if (ev.target.id === "submitModalBackground") {
+        if (ev.target.id === 'submitModalBackground') {
           dispatch(closeSubmitModal());
         }
       }}
     >
       <ModalBox>
         {isSubmitting ? (
-          <p className="text-center text-4xl font-black">Submitting Solution</p>
+          <p className='text-center text-4xl font-black'>Submitting Solution</p>
         ) : (
           <React.Fragment>
-            <p className="text-center text-4xl font-black">
+            <p className='text-center text-4xl font-black'>
               Solution Submission
             </p>
-            <p className="text-center text-xl p-2">
+            <p className='text-center text-xl p-2'>
               Once submitted, you will not be able to edit your solution
             </p>
-            <p className="text-center text-xl p-2 pb-7">
+            <p className='text-center text-xl p-2 pb-7'>
               Are you sure you want to submit?
             </p>
-            <div className="flex">
+            <div className='flex'>
               <DarkButton
-                className="m-3"
+                className='m-3'
                 onClick={() => {
                   onSubmit();
                 }}
@@ -73,7 +70,7 @@ const SubmitModal = ({ code, setContextOutput, setConsoleOutput }) => {
                 Submit
               </DarkButton>
               <DarkButton
-                className="m-3"
+                className='m-3'
                 onClick={() => {
                   dispatch(closeSubmitModal());
                 }}

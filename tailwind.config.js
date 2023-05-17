@@ -20,7 +20,7 @@ module.exports = {
       sm: "640px",
       md: "821px",
       lg: "1024px",
-      xl: "1280px",
+      xl: "1250px",
       "2xl": "1536px",
       xsLandscape: { raw: "(max-height: 550px)" },
       smLandscape: { raw: "(max-height: 640px)" },
