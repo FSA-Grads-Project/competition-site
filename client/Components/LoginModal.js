@@ -6,11 +6,23 @@ import { useLocation } from "react-router-dom";
 // Local imports
 import {
   ModalBackground,
-  ModalBox,
-  DarkButton,
-  ButtonIcon,
+  HorizontalLineDark,
 } from "../StyledComponents/GlobalStyles.tw";
-import { OAuthCompanyDetails } from "../StyledComponents/LoginModalStyles.tw";
+import {
+  OAuthCompanyDetails,
+  OAuthCompany,
+  PrivacyPolicy,
+  PrivacyPolicyContainer,
+  CompanyLogo,
+  LoginModalBox,
+  ModalExtraPageBox,
+  LoginModalHeading,
+  LoginModalDetailsWrapper,
+  PrivacyPolicyButton,
+  PrivacyPolicyInstructions,
+  PrivacyPolicyTitle,
+  PrivacyPolicyWelcome,
+} from "../StyledComponents/LoginModalStyles.tw";
 import { closeLoginModal } from "../store/modal";
 import getGoogleOAuthURL from "../Utils/getGoogleUrl";
 import getGithubOAuthURL from "../Utils/getGithubUrl";
@@ -48,33 +60,24 @@ const LoginModal = () => {
         }
       }}
     >
-      <ModalBox
-        id="loginModalExtraPage"
-        className="xs:w-[500px] xs:!h-[640px] rotate-6 absolute"
-      ></ModalBox>
-      <ModalBox
-        id="loginModal"
-        className="w-[90%] xs:w-[500px] text-darkFont shadow-[0_15px_20px_15px_rgba(0,0,0,0.3)]"
-      >
+      <ModalExtraPageBox id="loginModalExtraPage"></ModalExtraPageBox>
+      <LoginModalBox id="loginModal">
         <img src="/TitlePNG.png" className="w-60"></img>
-        <hr className="w-full mt-2 mb-1 bg-darkFont h-0.5 border-0"></hr>
-        <hr className="w-full mb-1 bg-darkFont h-0.5 border-0"></hr>
-        <h2 className="text-center text-5xl font-black font-playfair-sc">
-          Sign In Below
-        </h2>
-        <hr className="w-full mt-2 bg-darkFont h-0.5 border-0"></hr>
-        <div className="w-full flex flex-wrap justify-between mt-5">
-          <div
+        <HorizontalLineDark className="mb-1 mt-2"></HorizontalLineDark>
+        <HorizontalLineDark className="mb-1 mt-0"></HorizontalLineDark>
+        <LoginModalHeading>Sign In Below</LoginModalHeading>
+        <HorizontalLineDark className="mb-0 mt-2"></HorizontalLineDark>
+        <LoginModalDetailsWrapper>
+          <OAuthCompany
             onClick={() => {
               const URL = getGoogleOAuthURL(pathname);
               window.location.href = URL;
             }}
-            className="w-[46%] flex justify-between flex-wrap grayscale transition-all duration-300 hover:scale-[1.02] hover:cursor-pointer hover:grayscale-0"
           >
             <h3 className="font-playfair-sc w-full">Log In With Google</h3>
-            <hr className="w-full mt-1 mb-2 bg-darkFont h-[1px] border-0"></hr>
+            <HorizontalLineDark className="mt-1 mb-2 h-[1px]"></HorizontalLineDark>
             <OAuthCompanyDetails>
-              <p className="text-[5px] text-justify">
+              <p>
                 Our website is committed to protecting your privacy and personal
                 data. This privacy policy outlines how we use your personal data
                 when you log in to our site using Google OAuth. We only collect
@@ -101,11 +104,8 @@ const LoginModal = () => {
               </p>
             </OAuthCompanyDetails>
             <OAuthCompanyDetails>
-              <img
-                src="/icons/googleLogo.png"
-                className=" w-full p-1 border rounded-lg mb-2"
-              />
-              <p className="text-[5px] text-justify">
+              <CompanyLogo src="/icons/googleLogo.png" />
+              <p>
                 Our website is committed to protecting your privacy and personal
                 data. This privacy policy outlines how we use your personal data
                 when you log in to our site using Google OAuth. We only collect
@@ -121,30 +121,18 @@ const LoginModal = () => {
                 how we are protecting your personal data.
               </p>
             </OAuthCompanyDetails>
-          </div>
-          <div
+          </OAuthCompany>
+          <OAuthCompany
             onClick={() => {
               const URL = getGithubOAuthURL(pathname);
               window.location.href = URL;
             }}
-            className="w-[46%] 
-					flex 
-					justify-between 
-					flex-wrap 
-					grayscale 
-					transition-all 
-					duration-300 
-					hover:scale-[1.02] 
-					hover:cursor-pointer 
-					hover:grayscale-0
-					[&_img]:opacity-70
-					github
-					"
+            className="[&_img]:opacity-70 github"
           >
             <h3 className="font-playfair-sc w-full">Log In With Github</h3>
-            <hr className="w-full mt-1 mb-2 bg-darkFont h-[1px] border-0"></hr>
+            <HorizontalLineDark className="mt-1 mb-2 h-[1px]"></HorizontalLineDark>
             <OAuthCompanyDetails>
-              <p className="text-[5px] text-justify">
+              <p>
                 Our website is committed to protecting your privacy and personal
                 data. This privacy policy outlines how we use your personal data
                 when you log in to our site using Github OAuth. We only collect
@@ -171,11 +159,8 @@ const LoginModal = () => {
               </p>
             </OAuthCompanyDetails>
             <OAuthCompanyDetails>
-              <img
-                src="/icons/githubLogo.png"
-                className=" w-full p-1 border rounded-lg mb-2"
-              />
-              <p className="text-[5px] text-justify">
+              <CompanyLogo src="/icons/githubLogo.png" />
+              <p>
                 Our website is committed to protecting your privacy and personal
                 data. This privacy policy outlines how we use your personal data
                 when you log in to our site using Github OAuth. We only collect
@@ -191,18 +176,18 @@ const LoginModal = () => {
                 how we are protecting your personal data.
               </p>
             </OAuthCompanyDetails>
-          </div>
-          <div
+          </OAuthCompany>
+          <OAuthCompany
             onClick={() => {
               const URL = getLinkedinOAuthURL(pathname);
               window.location.href = URL;
             }}
-            className="w-[46%] mt-5 flex justify-between flex-wrap grayscale transition-all duration-300 hover:scale-[1.02] hover:cursor-pointer hover:grayscale-0"
+            className="mt-5 smLandscape:mt-0"
           >
             <h3 className="font-playfair-sc w-full">Log In With Linkedin</h3>
-            <hr className="w-full mt-1 mb-2 bg-darkFont h-[1px] border-0"></hr>
+            <HorizontalLineDark className="mt-1 mb-2 h-[1px]"></HorizontalLineDark>
             <OAuthCompanyDetails>
-              <p className="text-[5px] text-justify">
+              <p>
                 Our website is committed to protecting your privacy and personal
                 data. This privacy policy outlines how we use your personal data
                 when you log in to our site using Google OAuth. We only collect
@@ -229,11 +214,8 @@ const LoginModal = () => {
               </p>
             </OAuthCompanyDetails>
             <OAuthCompanyDetails>
-              <img
-                src="/icons/linkedinLogo.png"
-                className=" w-full p-1 border rounded-lg mb-2"
-              />
-              <p className="text-[5px] text-justify">
+              <CompanyLogo src="/icons/linkedinLogo.png" />
+              <p>
                 Our website is committed to protecting your privacy and personal
                 data. This privacy policy outlines how we use your personal data
                 when you log in to our site using Google OAuth. We only collect
@@ -249,23 +231,23 @@ const LoginModal = () => {
                 how we are protecting your personal data.
               </p>
             </OAuthCompanyDetails>
-          </div>
-          <div className="mt-5 w-[46%] h-[173px] xs:h-[213px] border-4 border-[#f0f0f0]">
-            <div className="w-[calc(100% - 1rem)] h-[96%] border-2 border-[lightgrey] m-1 p-2 flex flex-col items-center">
-              <p className="font-cormorant-sc">Thank you for using</p>
-              <h3 className="font-playfair-sc text-xl">The Dispatch</h3>
+          </OAuthCompany>
+          <PrivacyPolicyContainer>
+            <PrivacyPolicy>
+              <PrivacyPolicyWelcome>Thank you for using</PrivacyPolicyWelcome>
+              <PrivacyPolicyTitle>The Dispatch</PrivacyPolicyTitle>
               <hr className="w-full mt-1 mb-2 h-[2px]"></hr>
-              <p className="text-sm font-cormorant text-center">
+              <PrivacyPolicyInstructions>
                 Sign in to join the competition or view our privacy policy below
-              </p>
-              <button className="bg-[white] p-2 rounded mt-3 font-cormorant-sc text-md">
+              </PrivacyPolicyInstructions>
+              <PrivacyPolicyButton>
                 Privacy Policy
                 <hr className="w-full bg-[grey] h-[1px] border-0" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </ModalBox>
+              </PrivacyPolicyButton>
+            </PrivacyPolicy>
+          </PrivacyPolicyContainer>
+        </LoginModalDetailsWrapper>
+      </LoginModalBox>
     </ModalBackground>
   );
 };

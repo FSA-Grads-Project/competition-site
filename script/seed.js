@@ -173,15 +173,15 @@ const initialization = async () => {
   const problem4 = await Problem.create({
     title: "Firefighters called to rescue cat from binary tree!",
     statement: `Local firefighters have been called to rescue a cat named Sherman who has become stuck in a binary tree on 2nd street. Despite their best efforts, the firefighters are struggling to locate the cat and are in urgent need of the community's assistance in finding the feline's location within the tree.
-		\n
+
 		Time is of the essence as the firefighters are also needed across town to assist with a four-alarm fire. The community is being asked to help by keeping an eye out for Sherman in the tree and reporting any sightings or clues to the firefighters on the scene.
-		\n
+		
 		The rescue mission is ongoing, and the firefighters are grateful for any assistance the community can provide. They urge everyone to stay safe and report any sightings of the cat as soon as possible, so they can quickly retrieve the feline and rush off to assist with the urgent fire. Your goal is to help the firefighters by developing a function that accepts the root node of the binary tree as an argument and returns the number of the node where Sherman the cat is located.`,
     blurb: `Local firefighters have received an urgent call to rescue Sherman, a cat stuck in a tree on 2nd Street downtown. The situation was made more complicated by the fact that the firefighters were already stretched thin, trying to help another department put out a four-alarm fire. With every second counting, and the firefighters needed to move quickly to rescue Sherman before they could head out to the other emergency.`,
     initialCode: `function findSherman(root) {
   // write your code here
 }
-// example of the binary-tree class - do not edit
+// example of the binary-tree class
 class binaryTree {
   constructor(number, sherman = false) {
     this.number = number;
@@ -198,7 +198,7 @@ branches of the tree.`,
     endDate: "2023-07-01 00:00:00",
     spaceWeight: 0.3,
     timeWeight: 0.6,
-    readOnlyRange: [2, 1, 4, 1],
+    numberOfLinesForReadOnly: 10,
   });
 
   const test1 = await Test.create({
@@ -277,8 +277,10 @@ function binaryTreeGenerator(N, nodeSherman) {
   return root;
 }
 
-function test(size, location) {
+function test(size, location, testNumber) {
   const root = binaryTreeGenerator(size, location);
+
+  console.log(' --------- TEST NUMBER  ' + testNumber + ' ---------')
 
   const start = process.hrtime.bigint();
   const result = findSherman(root);
@@ -292,25 +294,25 @@ function test(size, location) {
 
 function separateResults(results) {
   const resultTest = [];
-  const resultTime = [];
-  const resultMemory = [];
+  const Time = [];
+  const Memory = [];
 
   for (let i = 0; i < results.length; i++) {
     resultTest.push(results[i].result);
-    resultTime.push(results[i].time);
-    resultMemory.push(results[i].memory);
+    Time.push(results[i].time);
+    Memory.push(results[i].memory);
   }
 
-  return { result: resultTest, time: resultTime, memory: resultMemory };
+  return { result: resultTest, time: Time, memory: Memory };
 }
 
 function runSubmission() {
 
   let results = [];
 
-  const results1 = test(10000, 10000);
-  const results2 = test(20000, 20000);
-  const results3 = test(30000, 30000);
+  const results1 = test(10000, 10000, 1);
+  const results2 = test(20000, 20000, 2);
+  const results3 = test(30000, 30000, 3);
 
   results.push(results1);
   results.push(results2);
@@ -319,21 +321,21 @@ function runSubmission() {
   results = separateResults(results);
 
   let resultTest = results.result;
-  let resultTime = results.time.reduce((acc, cur) => { return acc + Number(cur); }, 0) / results.time.length;
-  let resultMemory = results.memory.reduce((acc, cur) => { return acc + cur; }, 0) / results.memory.length;
+  let Time = results.time.reduce((acc, cur) => { return acc + Number(cur); }, 0) / results.time.length;
+  let Memory = results.memory.reduce((acc, cur) => { return acc + cur; }, 0) / results.memory.length;
 
-  resultTime = resultTime.toFixed(0);
-  resultMemory = resultMemory.toFixed(0);
+  Time = Time.toFixed(0);
+  Memory = Memory.toFixed(0);
 
   if (resultTest[0] === 9999 && resultTest[1] === 19999 && resultTest[2] === 29999) {
     resultTest = 'tests passed';
   } else {
     resultTest = 'test failed';
-    resultMemory = 'none';
-    resultTime = 'none';
+    Memory = 'none';
+    Time = 'none';
   }
 
-  return resultTest + ',' + 'resultTime: ' + resultTime + ',' + 'resultMemory: ' + resultMemory;
+  return resultTest + ',' + 'Time: ' + Time + ',' + 'Memory: ' + Memory;
 }
 `,
   });

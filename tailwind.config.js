@@ -15,13 +15,15 @@ module.exports = {
 
   theme: {
     screens: {
-      xxs: "350px",
+      xxs: "400px",
       xs: "550px",
       sm: "640px",
       md: "821px",
       lg: "1024px",
       xl: "1280px",
       "2xl": "1536px",
+      xsLandscape: { raw: "(max-height: 550px)" },
+      smLandscape: { raw: "(max-height: 640px)" },
     },
     colors: {
       lightBackground: "#fdf5e8",
@@ -38,22 +40,10 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        creepster: ["Creepster", "cursive"],
-        "old-standard-tt": ['"Old Standard TT"', "serif"],
         playfair: ['"Playfair Display"', "serif"],
         "playfair-sc": ['"Playfair Display SC"', "serif"],
         cormorant: ['"Cormorant"', "serif"],
         "cormorant-sc": ['"Cormorant SC"', "serif"],
-      },
-      minWidth: {
-        72: "16rem",
-        10: "2.5rem",
-        8: "2rem",
-      },
-      minHeight: {
-        72: "16rem",
-        10: "2.5rem",
-        8: "2rem",
       },
     },
   },

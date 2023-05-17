@@ -32,7 +32,7 @@ export const CurrImg = tw.img`
 	mb-5
 `;
 
-export const MainTitle = tw.h1`
+export const MainTitle = tw.h3`
 	text-3xl 
 	font-playfair-sc 
 	lg:line-clamp-4 

@@ -20,12 +20,15 @@ export const Problem = ({ current }) => {
   };
 
   return (
-    <div id="problem">
+    <div id="problem" className="flex justify-center flex-col items-center">
       {problem ? (
         <>
           <ProblemTitle>{problem.title}</ProblemTitle>
-          <img src={`/problemImages/${problem.id}.png`} />
-          <ProblemStatement>
+          <img
+            src={`/problemImages/${problem.id}.png`}
+            className="max-w-[500px] w-full"
+          />
+          <ProblemStatement className="whitespace-pre-line my-4">
             {problem.statement || problem.blurb}
           </ProblemStatement>
           {current ? (

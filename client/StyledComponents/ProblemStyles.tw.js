@@ -7,14 +7,15 @@ export const Main = tw.div`
     gap-x-12
     lg:justify-between
     mt-10
+    pb-10
     xs:mx-16
-
     mx-7
+    font-darkFont
 `;
 
 export const LeftDiv = tw.div`
     flex-1
-    mb-6
+    py-3
     self-center
     md:self-start
 `;
@@ -26,31 +27,25 @@ export const RightDiv = tw.div`
     min-w-[350px]
     lg:max-w-[800px]
     lg:w-2/3
-    `;
-//lg:h-[800px]
-//h-[400px]
-//self-center
-//max-h-[600px]
+`;
 
 export const ProblemTitle = tw.div`
     block
-    pb-2
+    mb-4
     text-center
     lg:text-left
-    font-playfair
+    font-playfair-sc
     font-black
-    text-xl
-    md:text-3xl
-    border-b-2
-    border-black
+    text-2xl
+    tracking-wider
+    text-darkFont
+    sm:text-3xl
 `;
 
 export const ProblemStatement = tw.div`
-    font-cormorant-sc
-    font-black
-    text-sm
-    text-justify
-    md:text-md
+    font-cormorant
+    text-lg
+    tracking-wide
 `;
 
 export const SolutionTitleSpan = tw.span`
@@ -71,5 +66,25 @@ export const HintButton = tw.button`
   font-cormorant-sc
   text-base
   w-12
-	disabled:bg-disabledButtonBackground
+  disabled:bg-disabledButtonBackground
+`;
+
+export const ContextOutputH4 = tw.h4`
+	text-lg 
+	font-playfair
+	font-thin
+	tracking-wider
+    text-3xl
+    sm:text-3xl
+`;
+
+export const ConsoleOutput = tw.div`
+    min-h-36 
+    max-h-52 
+    overflow-y-auto 
+    mx-5 
+    text-left
+    font-playfair 
+    tracking-wider
+    text-sm
 `;
