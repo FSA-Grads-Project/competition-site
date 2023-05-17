@@ -51,7 +51,7 @@ function executeCode(code, problem, res) {
         }
       `;
 
-  let platform = os.cpus()[0].model.includes('Intel')
+  let platform = !os.cpus()[0].model.includes('Intel')
     ? 'linux/amd64'
     : 'linux/arm64/v8';
 

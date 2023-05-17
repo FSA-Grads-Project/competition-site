@@ -3,7 +3,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Third Party Library Imports
-import { VscOutput } from 'react-icons/vsc';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import Editor from '@monaco-editor/react';
 import { constrainedEditor } from 'constrained-editor-plugin';
@@ -141,14 +140,26 @@ export const CodeEditor = ({ auth, solution, current }) => {
   };
 
   const onResetCode = async () => {
-    if (auth.accessToken) {
-      setContextOutput(['See Output Here']);
-      setConsoleOutput(['See Console Here']);
-    }
+  
+    setContextOutput([]);
+    setConsoleOutput([]);
+    
     useResetCode(defaultCode);
     handleEditorChange(defaultCode);
     const model = monacoRef.current.getModel();
     model.setValue(defaultCode);
+    const maxLine = model.getLineCount();
+    const initialRestrictions = [
+      {
+        range: [
+          1,
+          1,
+          maxLine - numberOfLinesForReadOnly,
+          model.getLineMaxColumn(maxLine),
+        ],
+        allowMultiline: true,
+        readOnly: false,
+      }]
     constrainedEditorRef.current.addRestrictionsTo(model, initialRestrictions);
   };
 
