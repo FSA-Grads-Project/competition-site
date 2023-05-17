@@ -4,10 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 // Local imports
-import {
-  ModalBackground,
-  HorizontalLineDark,
-} from "../StyledComponents/GlobalStyles.tw";
+import { ModalBackground } from "../StyledComponents/ModalStyles.tw";
+import { HorizontalLineDark } from "../StyledComponents/GlobalStyles.tw";
 import {
   OAuthCompanyDetails,
   OAuthCompany,
