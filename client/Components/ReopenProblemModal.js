@@ -1,16 +1,13 @@
 // System library imports
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 // Local imports
-import {
-  ModalBackground,
-  ModalBox,
-  DarkButton,
-} from "../StyledComponents/GlobalStyles.tw";
-import { closeReopenProblemModal } from "../store/modal";
+import { ModalBackground, ModalBox } from '../StyledComponents/ModalStyles.tw';
+import { DarkButton } from '../StyledComponents/GlobalStyles.tw';
+import { closeReopenProblemModal } from '../store/modal';
 // import useEvaluateCode from "../hooks/useEvaluateCode";
-import useUploadUserSolution from "../hooks/useUploadUserSolution";
+import useUploadUserSolution from '../hooks/useUploadUserSolution';
 
 const ReopenProblemModal = () => {
   const modalOpen = useSelector((state) => state.modals.reopenProblemModalOpen);
@@ -33,7 +30,7 @@ const ReopenProblemModal = () => {
     //   setConsoleOutput
     // );
 
-    await useUploadUserSolution(null, null, "reopen");
+    await useUploadUserSolution(null, null, 'reopen');
 
     // if (auth.accessToken) {
 
@@ -44,29 +41,29 @@ const ReopenProblemModal = () => {
 
   return (
     <ModalBackground
-      id="reopenProblemModalBackground"
+      id='reopenProblemModalBackground'
       onClick={(ev) => {
-        if (ev.target.id === "reopenProblemModalBackground") {
+        if (ev.target.id === 'reopenProblemModalBackground') {
           dispatch(closeReopenProblemModal());
         }
       }}
     >
       <ModalBox>
         {isReopening ? (
-          <p className="text-center text-4xl font-black">Reopening Issue</p>
+          <p className='text-center text-4xl font-black'>Reopening Issue</p>
         ) : (
           <React.Fragment>
-            <p className="text-center text-4xl font-black">Reopening Issue</p>
-            <p className="text-center text-xl p-2">
+            <p className='text-center text-4xl font-black'>Reopening Issue</p>
+            <p className='text-center text-xl p-2'>
               If you reopen the issue, your time to complete will be measured
               from when you initially opened the issue.
             </p>
-            <p className="text-center text-xl p-2 pb-7">
+            <p className='text-center text-xl p-2 pb-7'>
               Are you sure you want to reopen?
             </p>
-            <div className="flex">
+            <div className='flex'>
               <DarkButton
-                className="m-3"
+                className='m-3'
                 onClick={() => {
                   onReopen();
                 }}
@@ -74,7 +71,7 @@ const ReopenProblemModal = () => {
                 Reopen Issue
               </DarkButton>
               <DarkButton
-                className="m-3"
+                className='m-3'
                 onClick={() => {
                   dispatch(closeReopenProblemModal());
                 }}

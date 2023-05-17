@@ -279,8 +279,8 @@ export const CodeEditor = ({ auth, solution, current }) => {
                       ? ''
                       : consoleOutput.map((console, i) => {
                           return (
-                            <ul key={i} className='output-ul'>
-                              <li className='mb-1'>{console}</li>
+                            <ul key={i}>
+                              <li className='mb-2'>{console}</li>
                             </ul>
                           );
                         })}
