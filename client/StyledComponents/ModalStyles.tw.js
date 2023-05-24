@@ -16,9 +16,12 @@ export const ModalBackground = tw.div`
 
 // Modal box container
 export const ModalBox = tw.div`
-  bg-[#ffffff]
-	p-10 
-	px-15 
+  	bg-[#ffffff]
+	w-[90%]
+	xs:w-full
+	max-w-[500px]
+	p-5 
+	px-7 
 	rounded-xl 
 	flex 
 	flex-col 

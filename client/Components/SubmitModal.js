@@ -54,11 +54,11 @@ const SubmitModal = ({ code, setContextOutput, setConsoleOutput }) => {
             <p className='text-center text-4xl font-black'>
               Solution Submission
             </p>
-            <p className='text-center text-xl p-2'>
+            <p className='text-center text-xl p-2 mt-4'>
               Once submitted, you will not be able to edit your solution
             </p>
             <p className='text-center text-xl p-2 pb-7'>
-              Are you sure you want to submit?
+              Are you <span className='font-black'>SURE</span> you want to submit?
             </p>
             <div className='flex'>
               <DarkButton
