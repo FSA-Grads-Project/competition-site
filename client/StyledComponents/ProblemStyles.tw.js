@@ -18,6 +18,9 @@ export const LeftDiv = tw.div`
     py-3
     self-center
     md:self-start
+    lg:overflow-y-scroll
+    lg:pr-5
+    lg:h-[calc(100vh-13rem)]
 `;
 
 export const RightDiv = tw.div`
