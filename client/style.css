@@ -28,6 +28,20 @@
     place-content: space-between;
   }
 }
+/* 
+@media (min-width: 1280px) {
+  .bio-text {
+    display: none;
+  }
+
+  .fraiha-container:hover ~ #bio-text-div #fraiha-text,
+  .motuzis-container:hover ~ #bio-text-div #motuzis-text,
+  .murjas-container:hover ~ #bio-text-div #murjas-text,
+  .stoisolovich-container:hover ~ #bio-text-div #stoisolovich-text,
+  .stoler-container:hover ~ #bio-text-div #stoler-text {
+    display: block;
+  }
+} */
 
 .monaco-editor {
   /* padding-top: 15px; */

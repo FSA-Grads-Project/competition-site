@@ -18,12 +18,15 @@ export const ColumnSection = tw.section`
   flex
   flex-col
   self-start
+  mb-14
+  md:mb-6
 `;
 
 export const H3SectionHeader = tw.h3`
   text-xl
   text-center
   font-playfair-sc
+  text-2xl
   md:text-3xl
   my-3
 `;
@@ -32,7 +35,9 @@ export const H4BioHeader = tw.h4`
   text-xl
   text-center
   font-playfair-sc
-  group-hover:opacity-30
+  my-2
+  xl:group-hover:scale-110 
+  duration-500
 `;
 
 export const Paragraph = tw.p`
@@ -49,32 +54,22 @@ export const BioContainer = tw.article`
   flex
   flex-col
   md:w-2/5
-
-  lg:w-auto
   mb-12
   cursor-default
-
+  xl:w-auto
   relative
-  group
 `;
 
 export const BioText = tw.p`
   font-cormorant
-  tracking-wide
-  leading-snug
+  text-darkFont
+  tracking-wider
+  leading-relaxed
   text-center
-
-  absolute 
-  bottom-[-75px] 
-  m-auto 
-  py-11 
-  px-10
-  text-[#ffffff] 
-  duration-500 
-  rounded-full 
-  bg-[#000000] 
-  opacity-0
-  group-hover:opacity-100 
-  bg-opacity-75 
-  z-20
+  sm:text-left
+  mb-4
+  xl:opacity-0 
+  xl:group-hover:opacity-100
+  duration-300
+  xl:absolute 
 `;

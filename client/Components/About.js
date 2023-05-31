@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   MainFlexContainer,
@@ -82,39 +82,43 @@ const About = () => {
       </MainFlexContainer>
 
       {/* Bio Section */}
-      <section className='text-darkFont mx-7 sm:mx-16'>
-        <H3SectionHeader className='mb-10'>Meet our Team</H3SectionHeader>
+      <section className='text-darkFont mx-7 sm:mx-16 my-10'>
+        <H3SectionHeader className='my-10'>Meet our Team</H3SectionHeader>
 
         <div
           id='bio-flex-container'
-          className='flex flex-wrap justify-evenly gap-x-16'
+          className='flex flex-wrap justify-evenly gap-x-16 xl:mb-20'
         >
-          <BioContainer id='Fraiha' className='relative group'>
+          <BioContainer id='fraiha' className='group fraiha-container'>
             <img
               src='/bioPics/GenProfilePic.png'
               alt='image of Adam Stoler'
               width={130}
-              className='mx-auto rounded-full group-hover:opacity-30'
+              className='mx-auto rounded-full xl:group-hover:scale-110 duration-500'
             />
             <H4BioHeader>Alex Fraiha</H4BioHeader>
-            <BioText>
-              Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
-              Tempor voluptate mollit minim elit commodo non nulla minim id quis
-              eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
-              ullamco nisi consectetur laborum commodo nulla do. Tempor
-              voluptate mollit minim elit commodo non nulla minim id quis eu.
-              Incididunt quis Lorem excepteur pariatur.
+            <BioText
+              id='fraiha-text'
+              className='xl:w-[1150px] xl:-bottom-[4.5rem]'
+            >
+              Alex, a former classroom teacher turned software engineer, is very
+              interested in the collaborative aspects of engineering. Currently,
+              he is working on several projects and is excited about the
+              possibilities of Elixir/Phoenix/LiveView.
             </BioText>
           </BioContainer>
-          <BioContainer id='Motuzis' className='relative group'>
+          <BioContainer id='motuzis' className='group motuzis-container'>
             <img
               src='/bioPics/GenProfilePic.png'
               alt='image of Larry Motuzis'
               width={130}
-              className='mx-auto rounded-full group-hover:opacity-30'
+              className='mx-auto rounded-full xl:group-hover:scale-110 duration-500'
             />
             <H4BioHeader>Larry Motuzis</H4BioHeader>
-            <BioText>
+            <BioText
+              id='motuzis-text'
+              className='xl:w-[1150px] xl:-bottom-24 xl:-left-[12.75rem]'
+            >
               Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
               Tempor voluptate mollit minim elit commodo non nulla minim id quis
               eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
@@ -123,15 +127,18 @@ const About = () => {
               Incididunt quis Lorem excepteur pariatur.
             </BioText>
           </BioContainer>
-          <BioContainer id='Murjas'>
+          <BioContainer id='murjas' className='group murjas-container'>
             <img
               src='/bioPics/Murjas-nobg.png'
               alt='image of Martin Murjas'
               width={130}
-              className='mx-auto drop-shadow-lg rounded-full group-hover:opacity-30'
+              className='mx-auto drop-shadow-lg rounded-full xl:group-hover:scale-110 duration-500'
             />
             <H4BioHeader>Martin Murjas</H4BioHeader>
-            <BioText>
+            <BioText
+              id='murjas-text'
+              className='xl:w-[1150px] xl:-bottom-24 xl:-right-[34.25rem]'
+            >
               As a natural problem-solver and lifelong learner, Martin has
               always been drawn to engineering, from machines to software. His
               curiosity and eagerness to make a difference drives him to
@@ -141,15 +148,21 @@ const About = () => {
               enhancing user experiences and improving processes.
             </BioText>
           </BioContainer>
-          <BioContainer id='Stoisolovich'>
+          <BioContainer
+            id='stoisolovich'
+            className='group stoisolovich-container'
+          >
             <img
               src='/bioPics/GenProfilePic.png'
               alt='image of Alex Stoisolovich'
               width={130}
-              className='mx-auto rounded-full group-hover:opacity-30'
+              className='mx-auto rounded-full xl:group-hover:scale-110 duration-500'
             />
             <H4BioHeader>Alex Stoisolovich</H4BioHeader>
-            <BioText>
+            <BioText
+              id='stoisolovich-text'
+              className='xl:w-[1150px] xl:-bottom-24 xl:-right-[16.5rem]'
+            >
               Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
               Tempor voluptate mollit minim elit commodo non nulla minim id quis
               eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
@@ -158,15 +171,18 @@ const About = () => {
               Incididunt quis Lorem excepteur pariatur.
             </BioText>
           </BioContainer>
-          <BioContainer id='Stoler'>
+          <BioContainer id='stoler' className='group stoler-container'>
             <img
               src='/bioPics/Stoler-nobg.png'
               alt='image of Adam Stoler'
               width={130}
-              className='mx-auto drop-shadow-lg rounded-full group-hover:opacity-30'
+              className='mx-auto drop-shadow-lg rounded-full xl:group-hover:scale-110 duration-500'
             />
             <H4BioHeader>Adam Stoler</H4BioHeader>
-            <BioText>
+            <BioText
+              id='stoler-text'
+              className='xl:w-[1150px] xl:-bottom-24 xl:-right-[3rem]'
+            >
               After traveling to almost 60 different countries and 46 U.S.
               states (and counting) as a guitarist to Grammy & Tony
               award-winning acts, Adam now applies his creative talents as a
