@@ -63,7 +63,10 @@ export const CodeEditor = ({ auth, solution, current }) => {
   const [isEvaluating, setIsEvaluating] = useState(false);
   const [evalCheck, setEvalCheck] = useState(false);
   const [remainingSeconds, setRemainingSeconds] = useState(TIMEOUT_SECONDS);
-  const [timeOutMessage, setTimeOutMessage] = useState("")
+  const [timeOutIntervalMessage, setTimeOutIntervalMessage] = useState("")
+  const [timeOutError, setTimeOutError] = useState(false)
+  const [timeOutMessage, setTimeOutMessage] = useState("Time Out Error!")
+
 
   function handleEditorDidMount(editor, monaco) {
     customTheme.colors['editor.background'] = '#ffffff';
@@ -116,11 +119,11 @@ export const CodeEditor = ({ auth, solution, current }) => {
   useInterval(
     () => {
       if (remainingSeconds === 0) {
+        setTimeOutError(true)
+        setTimeOutIntervalMessage("")
         setIsEvaluating(false);
-        setTimeOutMessage("")
-
       } else if (remainingSeconds <= 15) {
-        setTimeOutMessage(`Request will timeout in ${remainingSeconds} seconds`)
+        setTimeOutIntervalMessage(`Request will timeout in ${remainingSeconds} seconds`)
         setRemainingSeconds(remainingSeconds - 1);
       } else {
         setRemainingSeconds(remainingSeconds - 1);
@@ -130,6 +133,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
   ); 
 
   const onEvaluate = async () => {
+    setTimeOutError(false)
     setIsEvaluating(true);
     setRemainingSeconds(TIMEOUT_SECONDS);
 
@@ -161,7 +165,8 @@ export const CodeEditor = ({ auth, solution, current }) => {
   };
 
   const onResetCode = async () => {
-  
+    setTimeOutMessage("")
+    setTimeOutIntervalMessage("")
     setContextOutput([]);
     setConsoleOutput([]);
     
@@ -321,7 +326,8 @@ export const CodeEditor = ({ auth, solution, current }) => {
                 </EditorAndOutputDiv>
               </div>
             )}
-            { isEvaluating && timeOutMessage }
+            { isEvaluating && timeOutIntervalMessage }
+            { timeOutError && timeOutMessage }
           </EditorAndOutputDiv>
         </div>
       )}
