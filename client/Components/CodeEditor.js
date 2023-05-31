@@ -272,7 +272,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
           </EditorButton>
         </ButtonWrapper>
       )}
-      { isEvaluating ? timeOutMessage : "" }
+      { isEvaluating && timeOutMessage }
       {solutionCompletedDate ? null : (
         <div id='output-container' className='text-darkFont'>
           <EditorAndOutputDiv id='editor-output' className='pb-0'>
