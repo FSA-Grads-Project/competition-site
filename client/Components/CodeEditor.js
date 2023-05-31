@@ -29,6 +29,8 @@ import { openSubmitModal, openReopenProblemModal } from '../store/modal';
 import useEvaluateCode from '../hooks/useEvaluateCode';
 import useUploadUserSolution from '../hooks/useUploadUserSolution';
 import useResetCode from '../hooks/useResetCode';
+import useInterval from '../hooks/useInterval';
+const TIMEOUT_SECONDS = 30;
 
 export const CodeEditor = ({ auth, solution, current }) => {
   const dispatch = useDispatch();
@@ -60,6 +62,8 @@ export const CodeEditor = ({ auth, solution, current }) => {
   const [solutionPassed, setSolutionPassed] = useState(false);
   const [isEvaluating, setIsEvaluating] = useState(false);
   const [evalCheck, setEvalCheck] = useState(false);
+  const [remainingSeconds, setRemainingSeconds] = useState(TIMEOUT_SECONDS);
+  const [timeOutMessage, setTimeOutMessage] = useState("")
 
   function handleEditorDidMount(editor, monaco) {
     customTheme.colors['editor.background'] = '#ffffff';
@@ -109,8 +113,25 @@ export const CodeEditor = ({ auth, solution, current }) => {
     }
   }, [code]);
 
+  useInterval(
+    () => {
+      if (remainingSeconds === 0) {
+        setIsEvaluating(false);
+        setTimeOutMessage("")
+
+      } else if (remainingSeconds <= 15) {
+        setTimeOutMessage(`Request will timeout in ${remainingSeconds} seconds`)
+        setRemainingSeconds(remainingSeconds - 1);
+      } else {
+        setRemainingSeconds(remainingSeconds - 1);
+      }
+    },
+    setIsEvaluating ? 1000 : null // VERY IMPORTANT, must be 1000 or NULL
+  ); 
+
   const onEvaluate = async () => {
     setIsEvaluating(true);
+    setRemainingSeconds(TIMEOUT_SECONDS);
 
     const res = await useEvaluateCode(
       problem,
@@ -168,6 +189,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
   };
 
   // Monaco editor options
+
   const options = {
     minimap: { enabled: false },
     wordWrap: 'on',
@@ -234,6 +256,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
                 <AiOutlineClose />
               )}
             </EditorButton>
+            
           </div>
           <EditorButton
             onClick={onSubmit}
@@ -249,7 +272,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
           </EditorButton>
         </ButtonWrapper>
       )}
-
+      { timeOutMessage }
       {solutionCompletedDate ? null : (
         <div id='output-container' className='text-darkFont'>
           <EditorAndOutputDiv id='editor-output' className='pb-0'>
