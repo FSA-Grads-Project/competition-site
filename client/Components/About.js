@@ -91,8 +91,8 @@ const About = () => {
         >
           <BioContainer id='fraiha' className='group fraiha-container'>
             <img
-              src='/bioPics/GenProfilePic.png'
-              alt='image of Adam Stoler'
+              src='/bioPics/Fraiha-nobg.png'
+              alt='image of Alex Fraiha'
               width={130}
               className='mx-auto rounded-full xl:group-hover:scale-110 duration-500'
             />
