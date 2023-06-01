@@ -29,6 +29,8 @@ import { openSubmitModal, openReopenProblemModal } from '../store/modal';
 import useEvaluateCode from '../hooks/useEvaluateCode';
 import useUploadUserSolution from '../hooks/useUploadUserSolution';
 import useResetCode from '../hooks/useResetCode';
+import useInterval from '../hooks/useInterval';
+const TIMEOUT_SECONDS = 30;
 
 export const CodeEditor = ({ auth, solution, current }) => {
   const dispatch = useDispatch();
@@ -60,6 +62,11 @@ export const CodeEditor = ({ auth, solution, current }) => {
   const [solutionPassed, setSolutionPassed] = useState(false);
   const [isEvaluating, setIsEvaluating] = useState(false);
   const [evalCheck, setEvalCheck] = useState(false);
+  const [remainingSeconds, setRemainingSeconds] = useState(TIMEOUT_SECONDS);
+  const [timeOutIntervalMessage, setTimeOutIntervalMessage] = useState("")
+  const [timeOutError, setTimeOutError] = useState(false)
+  const [timeOutMessage, setTimeOutMessage] = useState("Time Out Error!")
+
 
   function handleEditorDidMount(editor, monaco) {
     customTheme.colors['editor.background'] = '#ffffff';
@@ -109,7 +116,28 @@ export const CodeEditor = ({ auth, solution, current }) => {
     }
   }, [code]);
 
+  useInterval(
+    () => {
+      if (remainingSeconds === 0) {
+        setTimeOutError(true)
+        setTimeOutIntervalMessage("")
+        setIsEvaluating(false);
+      } else if (remainingSeconds <= 15) {
+        setTimeOutIntervalMessage(`Request will timeout in ${remainingSeconds} seconds`)
+        setRemainingSeconds(remainingSeconds - 1);
+      } else {
+        setRemainingSeconds(remainingSeconds - 1);
+      }
+    },
+    setIsEvaluating ? 1000 : null // VERY IMPORTANT, must be 1000 or NULL
+  ); 
+
   const onEvaluate = async () => {
+    setRemainingSeconds(TIMEOUT_SECONDS);
+    setTimeOutError(false);
+    setTimeOutIntervalMessage("")
+    setContextOutput([]);
+    setConsoleOutput([]);
     setIsEvaluating(true);
 
     const res = await useEvaluateCode(
@@ -117,7 +145,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
       code,
       setContextOutput,
       setConsoleOutput
-    );
+    )
 
     if (auth.accessToken) {
       await useUploadUserSolution(code, res, 'eval');
@@ -140,7 +168,8 @@ export const CodeEditor = ({ auth, solution, current }) => {
   };
 
   const onResetCode = async () => {
-  
+    setTimeOutMessage("")
+    setTimeOutIntervalMessage("")
     setContextOutput([]);
     setConsoleOutput([]);
     
@@ -168,6 +197,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
   };
 
   // Monaco editor options
+
   const options = {
     minimap: { enabled: false },
     wordWrap: 'on',
@@ -234,6 +264,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
                 <AiOutlineClose />
               )}
             </EditorButton>
+            
           </div>
           <EditorButton
             onClick={onSubmit}
@@ -249,7 +280,6 @@ export const CodeEditor = ({ auth, solution, current }) => {
           </EditorButton>
         </ButtonWrapper>
       )}
-
       {solutionCompletedDate ? null : (
         <div id='output-container' className='text-darkFont'>
           <EditorAndOutputDiv id='editor-output' className='pb-0'>
@@ -299,6 +329,8 @@ export const CodeEditor = ({ auth, solution, current }) => {
                 </EditorAndOutputDiv>
               </div>
             )}
+            { isEvaluating && timeOutIntervalMessage }
+            { (!contextOutput.length && !consoleOutput.length) && timeOutError ? timeOutMessage : "" }
           </EditorAndOutputDiv>
         </div>
       )}
