@@ -30,7 +30,7 @@ import useEvaluateCode from '../hooks/useEvaluateCode';
 import useUploadUserSolution from '../hooks/useUploadUserSolution';
 import useResetCode from '../hooks/useResetCode';
 import useInterval from '../hooks/useInterval';
-const TIMEOUT_SECONDS = 30;
+const TIMEOUT_SECONDS = 5;
 
 export const CodeEditor = ({ auth, solution, current }) => {
   const dispatch = useDispatch();
@@ -122,7 +122,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
         setTimeOutError(true)
         setTimeOutIntervalMessage("")
         setIsEvaluating(false);
-      } else if (remainingSeconds <= 15) {
+      } else if (remainingSeconds <= 3) {
         setTimeOutIntervalMessage(`Request will timeout in ${remainingSeconds} seconds`)
         setRemainingSeconds(remainingSeconds - 1);
       } else {
@@ -133,16 +133,20 @@ export const CodeEditor = ({ auth, solution, current }) => {
   ); 
 
   const onEvaluate = async () => {
-    setTimeOutError(false)
-    setIsEvaluating(true);
     setRemainingSeconds(TIMEOUT_SECONDS);
+    setTimeOutError(false);
+    setTimeOutIntervalMessage("")
+    setContextOutput([]);
+    setConsoleOutput([]);
+    setIsEvaluating(true);
 
     const res = await useEvaluateCode(
       problem,
       code,
       setContextOutput,
       setConsoleOutput
-    );
+    )
+    console.log(res)
 
     if (auth.accessToken) {
       await useUploadUserSolution(code, res, 'eval');
@@ -327,7 +331,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
               </div>
             )}
             { isEvaluating && timeOutIntervalMessage }
-            { timeOutError && timeOutMessage }
+            { (!contextOutput.length && !consoleOutput.length) && timeOutError ? timeOutMessage : "" }
           </EditorAndOutputDiv>
         </div>
       )}
