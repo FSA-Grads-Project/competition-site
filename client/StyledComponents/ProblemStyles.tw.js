@@ -20,7 +20,7 @@ export const LeftDiv = tw.div`
     md:self-start
     lg:overflow-y-scroll
     lg:pr-5
-    lg:h-[calc(100vh-13rem)]
+    lg:h-[calc(100vh-13.5rem)]
 `;
 
 export const RightDiv = tw.div`
@@ -35,7 +35,6 @@ export const RightDiv = tw.div`
 export const ProblemTitle = tw.div`
     block
     mb-4
-    text-center
     lg:text-left
     font-playfair-sc
     font-black
@@ -45,10 +44,19 @@ export const ProblemTitle = tw.div`
     sm:text-3xl
 `;
 
-export const ProblemStatement = tw.div`
+export const ProblemStatement = tw.p`
     font-cormorant
     text-lg
     tracking-wide
+    whitespace-pre-line 
+    my-4
+    first-letter:text-5xl 
+    first-letter:font-bold 
+    first-letter:text-black
+    first-letter:mr-3
+    first-letter:mt-1
+    first-letter:float-left
+    first-letter:font-playfair
 `;
 
 export const SolutionTitleSpan = tw.span`
