@@ -30,7 +30,7 @@ import useEvaluateCode from '../hooks/useEvaluateCode';
 import useUploadUserSolution from '../hooks/useUploadUserSolution';
 import useResetCode from '../hooks/useResetCode';
 import useInterval from '../hooks/useInterval';
-const TIMEOUT_SECONDS = 5;
+const TIMEOUT_SECONDS = 30;
 
 export const CodeEditor = ({ auth, solution, current }) => {
   const dispatch = useDispatch();
@@ -122,7 +122,7 @@ export const CodeEditor = ({ auth, solution, current }) => {
         setTimeOutError(true)
         setTimeOutIntervalMessage("")
         setIsEvaluating(false);
-      } else if (remainingSeconds <= 3) {
+      } else if (remainingSeconds <= 15) {
         setTimeOutIntervalMessage(`Request will timeout in ${remainingSeconds} seconds`)
         setRemainingSeconds(remainingSeconds - 1);
       } else {
