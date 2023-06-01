@@ -146,7 +146,6 @@ export const CodeEditor = ({ auth, solution, current }) => {
       setContextOutput,
       setConsoleOutput
     )
-    console.log(res)
 
     if (auth.accessToken) {
       await useUploadUserSolution(code, res, 'eval');
