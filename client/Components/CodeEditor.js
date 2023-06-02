@@ -118,11 +118,11 @@ export const CodeEditor = ({ auth, solution, current }) => {
 
   useInterval(
     () => {
-      if (remainingSeconds === 0) {
+      if (remainingSeconds === 0 && isEvaluating) {
         setTimeOutError(true)
         setTimeOutIntervalMessage("")
         setIsEvaluating(false);
-      } else if (remainingSeconds <= 15) {
+      } else if (remainingSeconds <= 15 && isEvaluating) {
         setTimeOutIntervalMessage(`Request will timeout in ${remainingSeconds} seconds`)
         setRemainingSeconds(remainingSeconds - 1);
       } else {
