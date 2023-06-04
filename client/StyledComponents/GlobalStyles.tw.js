@@ -77,6 +77,8 @@ export const DarkButton = tw.button`
 	flex
 	flex-row
 	items-center
+	text-center
+	justify-center
 `;
 
 export const ButtonIcon = tw.img`
