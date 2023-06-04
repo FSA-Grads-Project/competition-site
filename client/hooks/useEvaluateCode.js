@@ -18,7 +18,7 @@ const useEvaluateCode = async (
     const res = await axios.post(`/api/evaluate/${problem.id}`, {
       code
     },{
-      signal: newAbortSignal(5000),
+      signal: newAbortSignal(30000),
     });
 
     if (res.data.contextOutput) {
