@@ -109,7 +109,7 @@ const About = () => {
           </BioContainer>
           <BioContainer id='motuzis' className='group motuzis-container'>
             <img
-              src='/bioPics/GenProfilePic.png'
+              src='/bioPics/Motuzis-nobg.png'
               alt='image of Larry Motuzis'
               width={130}
               className='mx-auto rounded-full xl:group-hover:scale-110 duration-500'
@@ -119,12 +119,13 @@ const About = () => {
               id='motuzis-text'
               className='xl:w-[1150px] xl:-bottom-24 xl:-left-[12.75rem]'
             >
-              Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
-              Tempor voluptate mollit minim elit commodo non nulla minim id quis
-              eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
-              ullamco nisi consectetur laborum commodo nulla do. Tempor
-              voluptate mollit minim elit commodo non nulla minim id quis eu.
-              Incididunt quis Lorem excepteur pariatur.
+              As a former college basketball player, Larry transitioned into
+              Software Engineering, applying the teamwork and discipline he
+              learned on the basketball court to coding. Larry tackles complex
+              problems with determination and delivers efficient software
+              solutions. His collaboration skills, honed from his sports
+              background, enhance his ability to work effectively with teams and
+              clients alike.
             </BioText>
           </BioContainer>
           <BioContainer id='murjas' className='group murjas-container'>
@@ -153,22 +154,21 @@ const About = () => {
             className='group stoisolovich-container'
           >
             <img
-              src='/bioPics/GenProfilePic.png'
-              alt='image of Alex Stoisolovich'
+              src='/bioPics/Stoisolovich-nobg.png'
+              alt='image of Alexander Stoisolovich'
               width={130}
               className='mx-auto rounded-full xl:group-hover:scale-110 duration-500'
             />
-            <H4BioHeader>Alex Stoisolovich</H4BioHeader>
+            <H4BioHeader>Alexander Stoisolovich</H4BioHeader>
             <BioText
               id='stoisolovich-text'
               className='xl:w-[1150px] xl:-bottom-24 xl:-right-[16.5rem]'
             >
-              Aliquip Lorem ullamco nisi consectetur laborum commodo nulla do.
-              Tempor voluptate mollit minim elit commodo non nulla minim id quis
-              eu. Incididunt quis Lorem excepteur pariatur. Aliquip Lorem
-              ullamco nisi consectetur laborum commodo nulla do. Tempor
-              voluptate mollit minim elit commodo non nulla minim id quis eu.
-              Incididunt quis Lorem excepteur pariatur.
+              An engineer with a background in material science and engineering,
+              Alexander is now a software developer working on connected devices
+              in the aerospace industry. When not building something, Alexander
+              is usually spending time with family, watching old movies, or
+              getting lost in the woods somewhere.
             </BioText>
           </BioContainer>
           <BioContainer id='stoler' className='group stoler-container'>
