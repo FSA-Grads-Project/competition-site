@@ -80,7 +80,7 @@ const About = () => {
           id='bio-flex-container'
           className='flex flex-wrap justify-evenly gap-x-16 xl:mb-20'
         >
-          <BioContainer id='fraiha' className='group fraiha-container'>
+          <BioContainer id='fraiha' className='group'>
             <HeadshotImg
               src='/bioPics/Fraiha-nobg.png'
               alt='image of Alex Fraiha'
@@ -97,7 +97,7 @@ const About = () => {
               possibilities of Elixir/Phoenix/LiveView.
             </BioText>
           </BioContainer>
-          <BioContainer id='motuzis' className='group motuzis-container'>
+          <BioContainer id='motuzis' className='group'>
             <HeadshotImg
               src='/bioPics/Motuzis-nobg.png'
               alt='image of Larry Motuzis'
@@ -117,7 +117,7 @@ const About = () => {
               clients alike.
             </BioText>
           </BioContainer>
-          <BioContainer id='murjas' className='group murjas-container'>
+          <BioContainer id='murjas' className='group'>
             <HeadshotImg
               src='/bioPics/Murjas-nobg.png'
               alt='image of Martin Murjas'
@@ -137,10 +137,7 @@ const About = () => {
               enhancing user experiences and improving processes.
             </BioText>
           </BioContainer>
-          <BioContainer
-            id='stoisolovich'
-            className='group stoisolovich-container'
-          >
+          <BioContainer id='stoisolovich' className='group'>
             <HeadshotImg
               src='/bioPics/Stoisolovich-nobg.png'
               alt='image of Alexander Stoisolovich'
@@ -160,7 +157,7 @@ const About = () => {
               getting lost in the woods somewhere.
             </BioText>
           </BioContainer>
-          <BioContainer id='stoler' className='group stoler-container'>
+          <BioContainer id='stoler' className='group'>
             <HeadshotImg
               src='/bioPics/Stoler-nobg.png'
               alt='image of Adam Stoler'

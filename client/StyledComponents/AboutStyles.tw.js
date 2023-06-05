@@ -71,12 +71,10 @@ export const BioContainer = tw.article`
 
 export const BioText = tw.p`
   font-cormorant
-  text-darkFont
   tracking-wider
   leading-relaxed
   text-left
   mb-4
-
   duration-300
   xl:absolute
   xl:hidden
