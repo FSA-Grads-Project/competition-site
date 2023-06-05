@@ -30,16 +30,7 @@ const Problem = connection.define("problem", {
       notEmpty: true,
     },
   },
-  hint1: {
-    type: Sequelize.TEXT,
-  },
-  hint2: {
-    type: Sequelize.TEXT,
-  },
-  hint3: {
-    type: Sequelize.TEXT,
-  },
-  hint4: {
+  hint: {
     type: Sequelize.TEXT,
   },
   startDate: {

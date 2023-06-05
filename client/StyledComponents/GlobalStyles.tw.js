@@ -1,4 +1,4 @@
-import tw from 'tailwind-styled-components';
+import tw from "tailwind-styled-components";
 
 export const DividerHr = tw.hr`		
 	border-t-2
@@ -77,39 +77,14 @@ export const DarkButton = tw.button`
 	flex
 	flex-row
 	items-center
+	text-center
+	justify-center
 `;
 
 export const ButtonIcon = tw.img`
 	p-2
 	w-10
 	h-10
-`;
-
-// modal background
-export const ModalBackground = tw.div`
-	w-full	
-	bg-darkFont
-	fixed
-	inset-0
-	flex
-	justify-center
-	items-center
-	backdrop-blur-sm
-	bg-opacity-60
-	z-10
-`;
-
-// Modal box container
-export const ModalBox = tw.div`
-	bg-darkBackground 
-	p-10 
-	px-15 
-	rounded-xl 
-	flex 
-	flex-col 
-	justify-center 
-	font-playfair 
-	items-center
 `;
 
 export const TitleWrapper = tw.div`
@@ -133,20 +108,24 @@ export const TabTitleDiv = tw.div`
 
 export const H3 = tw.h3`
 	text-xl 
-	font-playfair-sc 
+	font-playfair-sc
 	md:text-3xl
+	tracking-wider
 `;
 
 export const H4 = tw.h4`
 	text-xl 
 	font-playfair-sc 
 	md:text-2xl
+	tracking-wider
+	text-darkFont
 `;
 
 export const H5 = tw.h5`
 	text-lg 
-	font-playfair-sc 
+	font-cormorant-sc
 	md:text-xl
+	text-darkFont
 `;
 
 export const LeadingParagraph = tw.p`

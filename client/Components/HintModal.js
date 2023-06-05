@@ -3,11 +3,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Local imports
-import {
-  ModalBackground,
-  ModalBox,
-  DarkButton,
-} from '../StyledComponents/GlobalStyles.tw';
+import { DarkButton } from '../StyledComponents/GlobalStyles.tw';
+import { ModalBackground, ModalBox } from '../StyledComponents/ModalStyles.tw';
 import { closeHintModal } from '../store/modal';
 
 const HintModal = ({ hint }) => {
@@ -20,7 +17,7 @@ const HintModal = ({ hint }) => {
 
   return (
     <ModalBackground
-      id="hintModalBackground"
+      id='hintModalBackground'
       onClick={(ev) => {
         if (ev.target.id === 'hintModalBackground') {
           dispatch(closeHintModal());
@@ -29,11 +26,11 @@ const HintModal = ({ hint }) => {
     >
       <ModalBox>
         <>
-          <p className="text-center text-4xl font-black">Hint</p>
-          <p className="text-center text-xl p-2">{hint}</p>
-          <div className="flex">
+          <p className='text-center text-4xl font-black'>Hint</p>
+          <p className='text-center text-xl p-2'>{hint}</p>
+          <div className='flex'>
             <DarkButton
-              className="m-3"
+              className='m-3'
               onClick={() => {
                 dispatch(closeHintModal());
               }}

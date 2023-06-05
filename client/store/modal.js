@@ -1,13 +1,14 @@
 // System Library Imports
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const modalSlice = createSlice({
-  name: "modals",
+  name: 'modals',
   initialState: {
     loginModalOpen: false,
     submitModalOpen: false,
     hintModalOpen: false,
     initialLoginModalOpen: false,
+    accountUsernameModalOpen: false,
     reopenProblemModalOpen: false,
   },
   reducers: {
@@ -35,6 +36,12 @@ export const modalSlice = createSlice({
     closeInitialLoginModal: (state) => {
       state.initialLoginModalOpen = false;
     },
+    openAccountUsernameModal: (state) => {
+      state.accountUsernameModalOpen = true;
+    },
+    closeAccountUsernameModal: (state) => {
+      state.accountUsernameModalOpen = false;
+    },
     openReopenProblemModal: (state) => {
       state.reopenProblemModalOpen = true;
     },
@@ -55,6 +62,8 @@ export const {
   closeHintModal,
   openInitialLoginModal,
   closeInitialLoginModal,
+  openAccountUsernameModal,
+  closeAccountUsernameModal,
   openReopenProblemModal,
   closeReopenProblemModal,
 } = modalSlice.actions;

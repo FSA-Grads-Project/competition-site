@@ -30,8 +30,6 @@ import { AboutText } from './About';
 const Home = () => {
   const { problems, status } = useSelector((state) => state.problems);
 
-  console.log(problems);
-
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -1,6 +1,13 @@
 // System Library Imports
 import axios from "axios";
 
+function newAbortSignal(timeoutMs) {
+  const abortController = new AbortController();
+  setTimeout(() => abortController.abort(), timeoutMs || 0);
+
+  return abortController.signal;
+}
+
 const useEvaluateCode = async (
   problem,
   code,
@@ -9,7 +16,9 @@ const useEvaluateCode = async (
 ) => {
   try {
     const res = await axios.post(`/api/evaluate/${problem.id}`, {
-      code,
+      code
+    },{
+      signal: newAbortSignal(30000),
     });
 
     if (res.data.contextOutput) {
