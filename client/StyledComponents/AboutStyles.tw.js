@@ -31,13 +31,22 @@ export const H3SectionHeader = tw.h3`
   my-3
 `;
 
+export const HeadshotImg = tw.img`
+  mx-auto 
+  drop-shadow-md
+  rounded-full 
+  xl:group-hover:scale-110 
+  duration-300
+`;
+
 export const H4BioHeader = tw.h4`
   text-xl
   text-center
   font-playfair-sc
   my-2
   xl:group-hover:scale-110 
-  duration-500
+  duration-300
+  xl:w-[130px]
 `;
 
 export const Paragraph = tw.p`
@@ -65,11 +74,13 @@ export const BioText = tw.p`
   text-darkFont
   tracking-wider
   leading-relaxed
-  text-center
-  sm:text-left
+  text-left
   mb-4
-  xl:opacity-0 
-  xl:group-hover:opacity-100
+
   duration-300
-  xl:absolute 
+  xl:absolute
+  xl:hidden
+  xl:group-hover:block
 `;
+// xl:opacity-0
+// xl:group-hover:opacity-100

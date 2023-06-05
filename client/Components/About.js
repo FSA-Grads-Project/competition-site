@@ -9,6 +9,7 @@ import {
   BioContainer,
   H4BioHeader,
   BioText,
+  HeadshotImg,
 } from '../StyledComponents/AboutStyles.tw.js';
 
 // **  This is the "About the Dispatch" Text that gets reused in the Home Page  ** //
@@ -43,16 +44,6 @@ const AboutText = () => {
 };
 
 const About = () => {
-  // const [isHovered, setIsHovered] = useState(false);
-
-  // const handleMouseEnter = () => {
-  //   setIsHovered(true);
-  // };
-
-  // const handleMouseLeave = () => {
-  //   setIsHovered(false);
-  // };
-
   return (
     <>
       <MainFlexContainer id='About-text'>
@@ -90,16 +81,15 @@ const About = () => {
           className='flex flex-wrap justify-evenly gap-x-16 xl:mb-20'
         >
           <BioContainer id='fraiha' className='group fraiha-container'>
-            <img
+            <HeadshotImg
               src='/bioPics/Fraiha-nobg.png'
               alt='image of Alex Fraiha'
               width={130}
-              className='mx-auto rounded-full xl:group-hover:scale-110 duration-500'
             />
             <H4BioHeader>Alex Fraiha</H4BioHeader>
             <BioText
               id='fraiha-text'
-              className='xl:w-[1150px] xl:-bottom-[4.5rem]'
+              className='xl:w-[1150px] xl:-bottom-[4.5rem] xl:-left-[1.75rem]'
             >
               Alex, a former classroom teacher turned software engineer, is very
               interested in the collaborative aspects of engineering. Currently,
@@ -108,16 +98,15 @@ const About = () => {
             </BioText>
           </BioContainer>
           <BioContainer id='motuzis' className='group motuzis-container'>
-            <img
+            <HeadshotImg
               src='/bioPics/Motuzis-nobg.png'
               alt='image of Larry Motuzis'
               width={130}
-              className='mx-auto rounded-full xl:group-hover:scale-110 duration-500'
             />
             <H4BioHeader>Larry Motuzis</H4BioHeader>
             <BioText
               id='motuzis-text'
-              className='xl:w-[1150px] xl:-bottom-24 xl:-left-[12.75rem]'
+              className='xl:w-[1150px] xl:-bottom-24 xl:-left-[15.75rem]'
             >
               As a former college basketball player, Larry transitioned into
               Software Engineering, applying the teamwork and discipline he
@@ -129,11 +118,10 @@ const About = () => {
             </BioText>
           </BioContainer>
           <BioContainer id='murjas' className='group murjas-container'>
-            <img
+            <HeadshotImg
               src='/bioPics/Murjas-nobg.png'
               alt='image of Martin Murjas'
               width={130}
-              className='mx-auto drop-shadow-lg rounded-full xl:group-hover:scale-110 duration-500'
             />
             <H4BioHeader>Martin Murjas</H4BioHeader>
             <BioText
@@ -153,16 +141,17 @@ const About = () => {
             id='stoisolovich'
             className='group stoisolovich-container'
           >
-            <img
+            <HeadshotImg
               src='/bioPics/Stoisolovich-nobg.png'
               alt='image of Alexander Stoisolovich'
               width={130}
-              className='mx-auto rounded-full xl:group-hover:scale-110 duration-500'
             />
-            <H4BioHeader>Alexander Stoisolovich</H4BioHeader>
+            <H4BioHeader className='xl:w-40'>
+              Alexander Stoisolovich
+            </H4BioHeader>
             <BioText
               id='stoisolovich-text'
-              className='xl:w-[1150px] xl:-bottom-24 xl:-right-[16.5rem]'
+              className='xl:w-[1150px] xl:-bottom-[4.5rem] xl:-right-[18rem]'
             >
               An engineer with a background in material science and engineering,
               Alexander is now a software developer working on connected devices
@@ -172,16 +161,15 @@ const About = () => {
             </BioText>
           </BioContainer>
           <BioContainer id='stoler' className='group stoler-container'>
-            <img
+            <HeadshotImg
               src='/bioPics/Stoler-nobg.png'
               alt='image of Adam Stoler'
               width={130}
-              className='mx-auto drop-shadow-lg rounded-full xl:group-hover:scale-110 duration-500'
             />
             <H4BioHeader>Adam Stoler</H4BioHeader>
             <BioText
               id='stoler-text'
-              className='xl:w-[1150px] xl:-bottom-24 xl:-right-[3rem]'
+              className='xl:w-[1150px] xl:-bottom-24 xl:-right-[4rem]'
             >
               After traveling to almost 60 different countries and 46 U.S.
               states (and counting) as a guitarist to Grammy & Tony
