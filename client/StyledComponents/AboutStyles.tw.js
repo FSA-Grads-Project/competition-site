@@ -6,7 +6,7 @@ export const MainFlexContainer = tw.main`
   gap-x-20
   mt-5
   mx-7
-  sm:mx-16
+  sm:mx-16git
   md:mb-10
   md:flex-row
   text-darkFont
@@ -75,10 +75,10 @@ export const BioText = tw.p`
   leading-relaxed
   text-left
   mb-4
-  duration-300
   xl:absolute
   xl:hidden
   xl:group-hover:block
 `;
 // xl:opacity-0
 // xl:group-hover:opacity-100
+//duration-300
