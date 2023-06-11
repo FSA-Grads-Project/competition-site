@@ -1,39 +1,40 @@
 const Sequelize = require("sequelize");
+const { encryptEmail } = require("../server/services/encryption.services");
 
 const {
   connection,
   models: { User, Test, Result, Problem },
 } = require("../server/db");
 // const { RESULTS } = require("./seed-results");
-// const { USERS } = require("./seed-users");
+const { USERS } = require("./seed-users");
 
 const initialization = async () => {
   await connection.sync({ force: true });
 
-  // await Promise.all(USERS.map((user) => User.create(user)));
+  await Promise.all(USERS.map((user) => User.create(user)));
 
   const john = await User.create({
-    email: "john.lennon@hotmail.com",
+    email: encryptEmail("john.lennon@hotmail.com"),
     alias: "john",
   });
 
   const bob = await User.create({
-    email: "bob.hope@hotmail.com",
+    email: encryptEmail("bob.hope@hotmail.com"),
     alias: "bob",
   });
 
   const tim = await User.create({
-    email: "tim.armstrong@hotmail.com",
+    email: encryptEmail("tim.armstrong@hotmail.com"),
     alias: "tim",
   });
 
   const joe = await User.create({
-    email: "joe.schmoe@hotmail.com",
+    email: encryptEmail("joe.schmoe@hotmail.com"),
     alias: "joe",
   });
 
   const sam = await User.create({
-    email: "sam.clemens@hotmail.com",
+    email: encryptEmail("sam.clemens@hotmail.com"),
     alias: "sam",
   });
 

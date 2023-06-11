@@ -1,19 +1,27 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUser } from '../store/auth';
-import { openAccountUsernameModal } from '../store/modal';
-import { H3, H4, H5 } from '../StyledComponents/GlobalStyles.tw';
-import AccountUsernameModal from './AccountUsernameModal';
-import Leaderboard from './Leaderboard';
+import { fetchUser } from '../../../store/auth';
+import { openAccountUsernameModal } from '../../../store/modal';
+import { H3, H4, H5 } from '../../../StyledComponents/GlobalStyles.tw';
+import AccountUsernameModal from '../../AccountUsernameModal';
+import Leaderboard from '../../Leaderboard';
+import { useNavigate} from "react-router-dom";
+import Admin from './features/Admin.js'
 
 const Account = () => {
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.auth.user);
+  const {user, status, auth} = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchUser());
   }, []);
+
+  // redirect user to homepage if attemping to access account page without valid login
+  if (status === 'rejected' || status === 'fetchUserFailed'){
+    navigate('/')
+  }
 
   return (
     <>
@@ -45,7 +53,9 @@ const Account = () => {
           </div>
           <Leaderboard className='' />
         </section>
+        {auth.admin ? <Admin /> : null}
       </div>
+      
 
       {/* 
         TODO Admin Section if we can't safely load new problems in db

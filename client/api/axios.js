@@ -31,6 +31,8 @@ axiosProtected.interceptors.request.use(
     // Set accessToken header for the request
     request.headers["accessToken"] = token;
 
+    console.log('this ran')
+
     // Return the updated request to be executed
     return request;
   },
