@@ -52,7 +52,7 @@
 @media (min-width: 821px) {
   .header-grid {
     display: grid;
-    grid-template-columns: 125px auto 125px;
+    grid-template-columns: 150px auto 150px;
     grid-template-row: auto;
     place-content: space-between;
   }
