@@ -82,7 +82,7 @@ const About = () => {
         >
           <BioContainer id='fraiha' className='group'>
             <HeadshotImg
-              src='/bioPics/Fraiha-nobg.png'
+              src='/bioPics/Fraiha.png'
               alt='image of Alex Fraiha'
               width={130}
             />
@@ -99,7 +99,7 @@ const About = () => {
           </BioContainer>
           <BioContainer id='motuzis' className='group'>
             <HeadshotImg
-              src='/bioPics/Motuzis-nobg.png'
+              src='/bioPics/Motuzis.png'
               alt='image of Larry Motuzis'
               width={130}
             />
@@ -119,7 +119,7 @@ const About = () => {
           </BioContainer>
           <BioContainer id='murjas' className='group'>
             <HeadshotImg
-              src='/bioPics/Murjas-nobg.png'
+              src='/bioPics/Murjas.png'
               alt='image of Martin Murjas'
               width={130}
             />
@@ -139,7 +139,7 @@ const About = () => {
           </BioContainer>
           <BioContainer id='stoisolovich' className='group'>
             <HeadshotImg
-              src='/bioPics/Stoisolovich-nobg.png'
+              src='/bioPics/Stoisolovich.png'
               alt='image of Alexander Stoisolovich'
               width={130}
             />
@@ -159,7 +159,7 @@ const About = () => {
           </BioContainer>
           <BioContainer id='stoler' className='group'>
             <HeadshotImg
-              src='/bioPics/Stoler-nobg.png'
+              src='/bioPics/Stoler.png'
               alt='image of Adam Stoler'
               width={130}
             />
