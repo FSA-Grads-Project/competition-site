@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUser } from '../../../store/auth';
-import { openAccountUsernameModal } from '../../../store/modal';
-import { H3, H4, H5 } from '../../../StyledComponents/GlobalStyles.tw';
-import AccountUsernameModal from '../../AccountUsernameModal';
-import Leaderboard from '../../Leaderboard';
+import { fetchUser } from '/client/store/auth';
+import { openAccountUsernameModal } from '/client/store/modal';
+import { H3, H4, H5 } from '/client/StyledComponents/GlobalStyles.tw';
+import AccountUsernameModal from '/client/components/AccountUsernameModal';
+import Leaderboard from '/client/components/Leaderboard';
 import { useNavigate} from "react-router-dom";
-import Admin from './features/Admin.js'
+import AdminFeatures from './features/AdminFeatures.js'
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -53,25 +53,8 @@ const Account = () => {
           </div>
           <Leaderboard className='' />
         </section>
-        {auth.admin ? <Admin /> : null}
+        {auth.admin ? <AdminFeatures /> : null}
       </div>
-      
-
-      {/* 
-        TODO Admin Section if we can't safely load new problems in db
-        
-        <div id='admin-container' className='mx-16 my-10'>
-        <H4 className='text-center md:text-3xl my-6 font-cormorant-sc'>
-          Administrator
-        </H4>
-        <div
-          id='admin-flexContainer'
-          className='flex justify-around my-10 mx-16'
-        >
-          <H5>Create New Problem</H5>
-          <H5>Edit Problem</H5>
-        </div>
-      </div> */}
     </>
   );
 };

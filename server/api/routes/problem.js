@@ -1,8 +1,9 @@
 const {
-  models: { Result, Problem, User },
+  models: { Result, Problem, User, Test },
 } = require("../../db");
 const express = require("express");
 const router = express.Router();
+const Sequelize = require("sequelize");
 
 const { Op } = require("sequelize");
 
@@ -32,6 +33,25 @@ router.get("/", async (req, res, next) => {
           [Op.lte]: now,
         },
       },
+    });
+    res.json(problems);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+/* get full problem details for all problems*/
+router.get("/admin", verifyUser, async (req, res, next) => {
+  try {
+
+    if (!req.user.admin){
+      throw new Error('Unauthorized')
+    }
+
+    const problems = await Problem.findAll({
+      include: [{
+        model: Test
+      }]
     });
     res.json(problems);
   } catch (ex) {
@@ -131,8 +151,43 @@ router.get("/:id/results", async (req, res, next) => {
 /* create a new problem */
 router.post("/", verifyUser, async (req, res, next) => {
   try {
-    const problem = await Problem.create(req.body);
-    res.json(problem);
+    const user = req.user
+    if (!user.admin) throw new Error ('Not authorized to create new problems')
+
+    //Get the end date of the last problem
+    const maxEndDate = (await Problem.findOne({
+      attributes: [
+        [Sequelize.fn('max', Sequelize.col('endDate')), 'maxEndDate'],
+      ],
+    })).dataValues.maxEndDate;
+
+    //Logic to automate assigning start and end dates based on last end date
+    let newStartDate = new Date(maxEndDate)
+    newStartDate.setDate(newStartDate.getDate() + 1)
+    const currentDate = new Date()
+    newStartDate = new Date(new Date(Math.max(newStartDate, currentDate)).toISOString().split('T')[0])
+    const newEndDate = new Date(newStartDate)
+    newEndDate.setDate(newEndDate.getDate() + 31)
+
+    const newProblemData = req.body
+
+    // adds the start date and end dates from above to the req.body data
+    newProblemData.startDate = newStartDate
+    newProblemData.endDate = newEndDate
+
+    // creates new problem
+    const newProblem = await Problem.create(newProblemData)
+
+    // creates new tests for newly created problem
+    const newTests = await Test.create({problemId: newProblem.id, test: newProblemData.test})
+
+    // fetches all problems to return to front end
+    const problems = await Problem.findAll({
+      include: [{
+        model: Test
+      }]
+    });
+    res.json(problems);
   } catch (ex) {
     next(ex);
   }
@@ -141,9 +196,22 @@ router.post("/", verifyUser, async (req, res, next) => {
 /* update problem by id */
 router.put("/:id", verifyUser, async (req, res, next) => {
   try {
+
+    const user = req.user
+    if (!user.admin) throw new Error ('Not authorized to create new problems')
+
     const problem = await Problem.findByPk(req.params.id);
     await problem.update(req.body);
-    res.json(problem);
+
+    const test = await Test.findOne({where: {problemId: req.params.id}})
+    await test.update(req.body)
+
+    const problems = await Problem.findAll({
+      include: [{
+        model: Test
+      }]
+    });
+    res.json(problems);
   } catch (ex) {
     next(ex);
   }

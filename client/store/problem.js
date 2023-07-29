@@ -12,6 +12,14 @@ export const fetchProblems = createAsyncThunk(
   }
 );
 
+export const fetchProblemsAdmin = createAsyncThunk(
+  'problems/getProblemsAdmin',
+  async () => {
+    const response = await axiosProtected.get('/problems/admin')
+    return response.data.sort((a,b) => b.id - a.id)
+  }
+)
+
 export const fetchProblem = createAsyncThunk(
   "problems/getProblem",
   async (id) => {
@@ -34,6 +42,31 @@ export const fetchPreviousProblems = createAsyncThunk(
     }
   }
 );
+
+export const editProblem = createAsyncThunk(
+  'problems/editProblem',
+  async (problemData) => {
+    try {
+      console.log(problemData)
+      const response = await axiosProtected.put(`/problems/${problemData.id}`, problemData)
+
+      return response.data
+    } catch (err) {
+      console.log(err)
+      return err
+    }
+  }
+)
+
+export const createProblem = createAsyncThunk(
+  'problems/createProblem',
+  async(problemData) => {
+      console.log(problemData)
+      const response = await axiosProtected.post("/problems", problemData);
+
+      return response.data
+  }
+)
 
 // createSlice creates the action + reducer
 
@@ -60,18 +93,51 @@ export const problemSlice = createSlice({
     },
     [fetchProblems.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.problems = action.payload;
+      state.problems = action.payload.sort((a,b) => b.id - a.id);
+    },
+    [fetchProblemsAdmin.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [fetchProblemsAdmin.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.problems = action.payload.sort((a,b) => b.id - a.id);
+    },
+    [fetchProblemsAdmin.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = action.payload;
     },
     [fetchPreviousProblems.pending]: (state, action) => {
       state.status = "loading";
     },
     [fetchPreviousProblems.fulfilled]: (state, action) => {
       state.status = "succeeded";
-      state.previousProblems = action.payload;
+      state.previousProblems = action.payload.sort((a,b) => b.id - a.id);
     },
     [fetchPreviousProblems.rejected]: (state, action) => {
       state.status = "rejected";
       state.error = action.payload;
+    },
+    [editProblem.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [editProblem.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.problems = action.payload.sort((a,b) => b.id - a.id);
+    },
+    [editProblem.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = action.payload;
+    },
+    [createProblem.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [createProblem.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      state.problems = action.payload.sort((a,b) => b.id - a.id);
+    },
+    [createProblem.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.error = action.payload
     },
   },
 });

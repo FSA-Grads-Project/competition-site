@@ -20,6 +20,9 @@ export const ProblemPage = () => {
 
   const problem = useSelector((state) => state.problems?.problem);
   const current = problem?.current;
+
+  
+
   const pathname = useLocation().pathname;
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
@@ -37,7 +40,7 @@ export const ProblemPage = () => {
       let solutionResponse = {};
 
       // If we are logged in, check to see if started to solve this problem
-      if (auth.accessToken) {
+      if (auth.accessToken && problemResponse.payload) {
         solutionResponse = await dispatch(
           fetchSolution(problemResponse.payload.id)
         );

@@ -2,12 +2,13 @@
 import React from 'react'
 
 // Styled Component Imports
-import { H4, H5 } from '../../../../StyledComponents/GlobalStyles.tw';
+import { H4, H5 } from '/client/StyledComponents/GlobalStyles.tw';
 
 // Feature Imports
 import UserManagement from './UserManagement'
+import ProblemManagement from './ProblemManagement';
 
-const Admin = () => {
+const AdminFeatures = () => {
     return (
         <>
             <H4>Admin Controls</H4>
@@ -17,9 +18,10 @@ const Admin = () => {
             </div>
             <div>
                 <H5>Problem Management</H5>
+                <ProblemManagement />
             </div>
         </>
     )
 }
 
-export default Admin
+export default AdminFeatures

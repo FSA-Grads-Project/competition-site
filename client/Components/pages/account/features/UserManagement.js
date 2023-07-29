@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 
 // Store Imports
-import { fetchUsers, toggleUserAccess } from '../../../../store/user';
+import { fetchUsers, toggleUserAccess } from '/client/store/user';
 
-// Third Party Imports
-import { AiFillPlusSquare, AiFillMinusSquare } from 'react-icons/ai';
+// Styled Component Imports
+import { DarkButton } from '/client/StyledComponents/GlobalStyles.tw';
 
 const UserManagement = () => {
 
@@ -18,15 +18,25 @@ const UserManagement = () => {
       }, []);
 
     const [aliasFilter, setAliasFilter] = useState('')
+    const [user, setUser] = useState('')
 
-    const handleFilterChange = (ev) => {
-        setAliasFilter(ev.target.value)
+    const handleUserAccessChange = async (id, adminAccess) => {
+        await dispatch(toggleUserAccess(id))
     }
 
-    const handleUserAccessChange = (id, adminAccess) => {
-        // console.log('id: ', id)
-        // console.log('current admin access: ', adminAccess)
-        dispatch(toggleUserAccess(id))
+    // function to find user
+    const handleUserSearchClick = () => {
+
+        const foundUser = users.users.filter(user => user.alias.toUpperCase() === aliasFilter.toUpperCase())
+
+        if (foundUser[0]?.id === auth.auth.id){
+            setUser('Cannot Edit Your Own Permissions')
+        }
+        else if (foundUser.length === 1){
+            setUser(foundUser[0].id)
+        } else {
+            setUser('user not found')
+        }
     }
 
     if (users.status === 'loading'){
@@ -35,29 +45,23 @@ const UserManagement = () => {
 
     return (
         <div>
-            <h1>User Management Component</h1>
-            <input className='border my-2 text-center' placeholder='Enter Alias To Filter' onChange={(ev) => handleFilterChange(ev)}></input>
-            <div className='max-h-[10rem] w-full overflow-y-scroll'>
-                <div className='flex justify-center text-left'>
-                    <p className='w-[15rem]'>Alias</p>
-                    <p className='w-[8rem] text-center'>Admin Status</p>
-                </div>
-                
-                {users.users.filter(user => user.alias.includes(aliasFilter) && user.id !== auth.user.id).map(user => {
-                    {/* console.log(user) */}
-                    return (
-                        <div key={user.id} className='flex justify-center text-left'>
-                            <p className='w-[15rem]'>{user.alias}</p>
-                            <p className='w-[6rem]'>{user.admin.toString()}</p>
-                            {user.admin 
-                                ? <AiFillMinusSquare className='h-[2rem] w-[2rem]' onClick={() => handleUserAccessChange(user.id, user.admin)}/> 
-                                : <AiFillPlusSquare className='h-[2rem] w-[2rem]' onClick={() => handleUserAccessChange(user.id, user.admin)}/>
-                            }
-                        </div>
-                        
-                    )
-                })}
+            <h1>Add or Remove User Admin Access</h1>
+            <div className='flex justify-center'>
+                <input 
+                    className='border my-2 text-center' 
+                    placeholder='Enter Alias To Filter'
+                    value={aliasFilter}
+                    onChange={(ev) => {setAliasFilter(ev.target.value); setUser('')}}
+                ></input>
+                <DarkButton onClick={handleUserSearchClick}>Find User</DarkButton>
             </div>
+            {user ? 
+                <div className='flex justify-center'>
+                    {typeof user !== 'string' 
+                    ? <DarkButton onClick={() => {handleUserAccessChange(user)}}>{users.users.filter(elem => elem.id === user)[0].admin ? 'Remove' : 'Add'} Admin Privileges</DarkButton>
+                    : <p>{user}</p>}
+                </div> 
+                : null}
         </div>
     )
 }

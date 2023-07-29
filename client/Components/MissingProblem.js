@@ -5,7 +5,7 @@ const MissingProblem = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mx-7 xs:mx-16 mt-8 text-center">
       <p className="text-xl font-playfair-sc">
         Ooops...Looks like our team is suffering from writers block
       </p>

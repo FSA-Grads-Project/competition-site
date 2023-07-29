@@ -17,6 +17,8 @@ import {
 export const Problem = ({ current }) => {
   const { problem } = useSelector((state) => state.problems);
 
+  console.log(current)
+
   const dispatch = useDispatch();
   const onHint = () => {
     dispatch(openHintModal());

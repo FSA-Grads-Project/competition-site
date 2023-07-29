@@ -56,9 +56,6 @@ const getUserInfo = async (id_token, access_token, axios) => {
     }
   );
 
-  console.log('*******************')
-  console.log(res.data)
-
   return res.data;
 };
 
