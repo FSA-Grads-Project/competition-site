@@ -3,7 +3,7 @@ import Header from './Components/Header';
 import ProblemPage from './Components/ProblemPage';
 import { Route, Routes } from 'react-router-dom';
 import About from './Components/About';
-import Account from './Components/Account';
+import Account from './Components/pages/account/Account';
 import PreviousProblems from './Components/PreviousProblems';
 import Home from './Components/Home';
 import Login from './Components/Login';

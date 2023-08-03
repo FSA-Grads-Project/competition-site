@@ -45,6 +45,26 @@ router.put("/username", verifyUser, async (req, res, next) => {
   }
 });
 
+router.put('/toggleUserAccess/:id', verifyUser, async(req, res, next) => {
+  try{
+    if (req.user.admin){
+      const user = await User.findOne({
+        where: { id: req.params.id }
+      })
+
+      await user.update({admin: !user.admin})
+
+      const users = await User.findAll();
+
+      res.send(users)
+    } else {
+      throw new Error('User not authorized to change admin access')
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get("/username", verifyUser, async (req, res, next) => {
   try {
     res.json(req.user.alias);

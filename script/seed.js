@@ -1,39 +1,40 @@
 const Sequelize = require("sequelize");
+const { encryptEmail } = require("../server/services/encryption.services");
 
 const {
   connection,
   models: { User, Test, Result, Problem },
 } = require("../server/db");
 // const { RESULTS } = require("./seed-results");
-// const { USERS } = require("./seed-users");
+const { USERS } = require("./seed-users");
 
 const initialization = async () => {
   await connection.sync({ force: true });
 
-  // await Promise.all(USERS.map((user) => User.create(user)));
+  await Promise.all(USERS.map((user) => User.create(user)));
 
   const john = await User.create({
-    email: "john.lennon@hotmail.com",
+    email: encryptEmail("john.lennon@hotmail.com"),
     alias: "john",
   });
 
   const bob = await User.create({
-    email: "bob.hope@hotmail.com",
+    email: encryptEmail("bob.hope@hotmail.com"),
     alias: "bob",
   });
 
   const tim = await User.create({
-    email: "tim.armstrong@hotmail.com",
+    email: encryptEmail("tim.armstrong@hotmail.com"),
     alias: "tim",
   });
 
   const joe = await User.create({
-    email: "joe.schmoe@hotmail.com",
+    email: encryptEmail("joe.schmoe@hotmail.com"),
     alias: "joe",
   });
 
   const sam = await User.create({
-    email: "sam.clemens@hotmail.com",
+    email: encryptEmail("sam.clemens@hotmail.com"),
     alias: "sam",
   });
 
@@ -140,6 +141,7 @@ const initialization = async () => {
     statement: "Find the first null node in the linked list",
     blurb: "Find the first null node in the linked list",
     initialCode: "no starter code",
+    hint: 'initial hint',
     startDate: "2022-11-01 00:00:00",
     endDate: "2022-12-01 00:00:00",
     spaceWeight: 0.44,
@@ -152,6 +154,7 @@ const initialization = async () => {
     blurb:
       "In the heart of Silicon Valley, there stood a store called 'Null Node Nook.' The store was a programmer's paradise, filled with all sorts of resources and tools for solving complex programming problems. But its main attraction was the 'Null Node Lounge' - a cozy corner in the store where customers could gather and work together to solve one of the most challenging problems in graph theory: finding a null node.",
     initialCode: "no starter code",
+    hint: 'initial hint',
     startDate: "2022-12-01 00:00:00",
     endDate: "2023-01-01 00:00:00",
     spaceWeight: 0.44,
@@ -164,6 +167,7 @@ const initialization = async () => {
     blurb:
       "In the bustling city of Techville, there was a store that stood out from the rest - 'The Linked List Emporium.' The store was a programmer's paradise, filled to the brim with resources and tools for solving all sorts of programming problems. But its specialty was linked lists. The owner, a brilliant programmer named Max, had a particular passion for linked lists and had spent years perfecting his craft. His store was not just a place to buy programming resources - it was a community center where people from all walks of life could gather and share their love for linked lists.",
     initialCode: "no starter code",
+    hint: 'initial hint',
     startDate: "2023-01-01 00:00:00",
     endDate: "2023-02-01 00:00:00",
     spaceWeight: 0.44,
@@ -195,13 +199,28 @@ runSubmission()
     hint: `Sherman is a crazy cat that likes to climb the tallest outside
 branches of the tree.`,
     startDate: "2023-02-01 00:00:00",
-    endDate: "2023-07-01 00:00:00",
+    endDate: "2023-7-01 00:00:00",
     spaceWeight: 0.3,
     timeWeight: 0.6,
     numberOfLinesForReadOnly: 10,
   });
 
   const test1 = await Test.create({
+    test: `initial test`,
+    problemId: problem1.id
+  });
+
+  const test2 = await Test.create({
+    test: `initial test`,
+    problemId: problem2.id
+  });
+
+  const test3 = await Test.create({
+    test: `initial test`,
+    problemId: problem3.id
+  });
+
+  const test4 = await Test.create({
     test: `
 class Node {
   constructor(number, sherman = false) {
@@ -340,8 +359,8 @@ function runSubmission() {
 `,
   });
 
-  test1.problemId = problem4.id;
-  await test1.save();
+  test4.problemId = problem4.id;
+  await test4.save();
 
   result1.userId = john.id;
   result1.problemId = problem1.id;

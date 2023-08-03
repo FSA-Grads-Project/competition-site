@@ -10,6 +10,8 @@ export const modalSlice = createSlice({
     initialLoginModalOpen: false,
     accountUsernameModalOpen: false,
     reopenProblemModalOpen: false,
+    problemModalOpen: false,
+    problemModalId: 0
   },
   reducers: {
     openLoginModal: (state) => {
@@ -48,6 +50,13 @@ export const modalSlice = createSlice({
     closeReopenProblemModal: (state) => {
       state.reopenProblemModalOpen = false;
     },
+    openProblemModal: (state, action) => {
+      state.problemModalOpen = true;
+      state.problemModalId = action.payload
+    },
+    closeProblemModal: (state) => {
+      state.problemModalOpen = false;
+    },
   },
 });
 
@@ -66,4 +75,6 @@ export const {
   closeAccountUsernameModal,
   openReopenProblemModal,
   closeReopenProblemModal,
+  openProblemModal,
+  closeProblemModal
 } = modalSlice.actions;

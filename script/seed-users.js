@@ -18,7 +18,7 @@ USERS.push({
   initialLogin: false,
 });
 
-Array.from({ length: 10 }).forEach(() => USERS.push(createUser()));
+// Array.from({ length: 10 }).forEach(() => USERS.push(createUser()));
 
 module.exports = {
   USERS,

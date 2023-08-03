@@ -47,7 +47,7 @@ const Home = () => {
   return (
     <Main className='lg:h-[82.5rem]'>
       <LeftCol>
-        <Link to='/problem'>
+        <Link to={`/problem/${problems[0].id}`}>
           <div>
             <CurrImg src={`/problemImages/${problems[0].id}.png`} />
             <MainTitle className='text-[2.3rem]'>{problems[0].title}</MainTitle>
